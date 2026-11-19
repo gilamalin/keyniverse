@@ -1,26 +1,146 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Pretendard Variable", Pretendard, var(--font-geist-sans), var(--font-noto-sans-kr), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-heading: var(--font-sans);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-tested: var(--surface-tested);
+  --color-border-tested: var(--border-tested);
+  --color-sage: var(--sage);
+  --color-sand: var(--sand);
+  --color-coral: var(--coral);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root,
+.dark {
+  --background: #121413;
+  --foreground: #E4E6E1;
+  --card: #1A1D1B;
+  --card-foreground: #E4E6E1;
+  --popover: #1A1D1B;
+  --popover-foreground: #E4E6E1;
+  --surface-sunken: #151816;
+  --surface-elevated: #222623;
+  --surface-tested: #2C3832;
+  --border-tested: #466055;
+  --sage: #6B9080;
+  --sand: #D4A373;
+  --coral: #E06C75;
+  --primary: #6B9080;
+  --primary-foreground: #121413;
+  --secondary: #222623;
+  --secondary-foreground: #E4E6E1;
+  --muted: #222623;
+  --muted-foreground: #8F9691;
+  --accent: #222623;
+  --accent-foreground: #E4E6E1;
+  --destructive: #E06C75;
+  --border: #282D2A;
+  --input: #282D2A;
+  --ring: #6B9080;
+  --chart-1: #6B9080;
+  --chart-2: #D4A373;
+  --chart-3: #E06C75;
+  --chart-4: #8F9691;
+  --chart-5: #466055;
+  --radius: 0.625rem;
+  --sidebar: #1A1D1B;
+  --sidebar-foreground: #E4E6E1;
+  --sidebar-primary: #6B9080;
+  --sidebar-primary-foreground: #121413;
+  --sidebar-accent: #222623;
+  --sidebar-accent-foreground: #E4E6E1;
+  --sidebar-border: #282D2A;
+  --sidebar-ring: #6B9080;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.font-mono,
+.tabular-nums,
+.lab-metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+.lab-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(40, 45, 42, 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(40, 45, 42, 0.55) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Custom sleek dark scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121413;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #282D2A;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #383F3B;
 }
