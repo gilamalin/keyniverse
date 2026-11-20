@@ -1306,18 +1306,9 @@ function CommunityPostRow({
 }: CommunityPostRowProps) {
   const isNotice = post.category === "notice" || isPinnedNotice;
 
-  const categoryBadgeClass =
-    isNotice
-      ? "border-[#6B9080] bg-[#222623] font-bold text-[#6B9080]"
-      : post.category === "build"
-        ? "border-[#6B9080]/50 bg-[#222623] text-[#6B9080]"
-        : post.category === "diagnosis"
-          ? "border-[#282D2A] bg-[#222623] text-[#E4E6E1]"
-          : post.category === "vs"
-            ? "border-[#D4A373]/50 bg-[#222623] text-[#D4A373]"
-            : post.dealMeta?.status === "ended"
-              ? "border-[#282D2A] bg-[#151816] text-[#8F9691]"
-              : "border-[#6B9080]/50 bg-[#222623] text-[#6B9080]";
+  const categoryBadgeClass = isNotice
+    ? "border-[#6B9080] bg-[#222623] font-bold text-[#6B9080]"
+    : "border-[#282D2A] bg-[#151816] text-[#8F9691]";
 
   return (
     <div
@@ -1376,7 +1367,7 @@ function CommunityPostRow({
       {/* 780px 미만(min-[780px]:hidden) 전용 2번째 줄: 우측 하단에 '작성자 | 작성일 | 조회 : N | 추천 : N' */}
       <div className="flex items-center justify-end gap-1.5 text-[11px] font-normal text-[#8F9691] min-[780px]:hidden">
         {post.isMyPost && (
-          <span className="shrink-0 rounded bg-[#6B9080] px-1 py-0.5 font-mono text-[9px] font-bold text-[#121413]">
+          <span className="shrink-0 rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1 py-0.5 font-mono text-[9px] font-semibold text-[#6B9080]">
             MY
           </span>
         )}
@@ -1400,7 +1391,7 @@ function CommunityPostRow({
         {/* 작성자 (w-[116px] 우측 정렬) */}
         <div className="flex w-[116px] items-center justify-end gap-1.5 pr-2">
           {post.isMyPost && (
-            <span className="shrink-0 rounded bg-[#6B9080] px-1 py-0.5 font-mono text-[9px] font-bold text-[#121413]">
+            <span className="shrink-0 rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1 py-0.5 font-mono text-[9px] font-semibold text-[#6B9080]">
               MY
             </span>
           )}

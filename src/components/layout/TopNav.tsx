@@ -174,7 +174,7 @@ export function TopNav() {
                     "max-w-[72px] truncate font-mono text-xs font-semibold transition-colors lg:max-w-none",
                     isMyPage
                       ? "text-[#6B9080]"
-                      : "text-[#E4E6E1] hover:text-[#6B9080]"
+                      : "text-[#B8BFBA] hover:text-[#E4E6E1]"
                   )}
                 >
                   {session.nickname || "닉네임 설정"}

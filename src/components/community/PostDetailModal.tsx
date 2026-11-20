@@ -308,15 +308,7 @@ export function PostDetailModal({
   const categoryBadgeClass =
     post.category === "notice"
       ? "border-[#6B9080] bg-[#222623] font-bold text-[#6B9080]"
-      : post.category === "build"
-        ? "border-[#6B9080]/50 bg-[#222623] text-[#6B9080]"
-        : post.category === "diagnosis"
-          ? "border-[#282D2A] bg-[#222623] text-[#E4E6E1]"
-          : post.category === "vs"
-            ? "border-[#D4A373]/50 bg-[#222623] text-[#D4A373]"
-            : post.dealMeta?.status === "ended"
-              ? "border-[#282D2A] bg-[#151816] text-[#8F9691]"
-              : "border-[#6B9080]/50 bg-[#222623] text-[#6B9080]";
+      : "border-[#282D2A] bg-[#151816] text-[#8F9691]";
 
   const handleUpvoteClick = () => {
     if (!session) {
@@ -452,12 +444,12 @@ export function PostDetailModal({
             <button
               type="button"
               onClick={() => onOpenUserProfile(post.author)}
-              className="font-semibold text-[#E4E6E1] underline-offset-2 transition-colors hover:text-[#6B9080] hover:underline"
+              className="font-semibold text-[#B5BCB7] underline-offset-2 transition-colors hover:text-[#6B9080] hover:underline"
             >
               {post.author}
             </button>
             {post.isMyPost && (
-              <span className="rounded bg-[#6B9080] px-1.5 py-0.5 font-mono text-[10px] font-bold text-[#121413]">
+              <span className="rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#6B9080]">
                 MY
               </span>
             )}
