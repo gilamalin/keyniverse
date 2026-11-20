@@ -482,21 +482,23 @@ export function CommunityBoard() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* 1. 상단 페이지 헤더 (전 페이지 통일 규격) */}
-      <div className="border-b border-[#282D2A] pb-5">
-        <div className="mb-2 flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-md border border-[#6B9080]/40 bg-[#1A1D1B] px-2.5 py-0.5 font-mono text-xs font-semibold text-[#6B9080]">
-            <MessageSquare className="size-3.5" />
-            HARDWARE COMMUNITY LAB
-          </span>
+      {/* 1. 상단 페이지 헤더 (목록 화면에서만 표시 · 게시글 상세/작성 뷰에서는 시선 분산을 막기 위해 숨김) */}
+      {!selectedPost && !isWriteMode && (
+        <div className="border-b border-[#282D2A] pb-5">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-md border border-[#6B9080]/40 bg-[#1A1D1B] px-2.5 py-0.5 font-mono text-xs font-semibold text-[#6B9080]">
+              <MessageSquare className="size-3.5" />
+              HARDWARE COMMUNITY LAB
+            </span>
+          </div>
+          <h1 className="text-xl font-bold tracking-tight text-[#D5DBD6] sm:text-3xl">
+            KEYNIVERSE 공식 커뮤니티
+          </h1>
+          <p className="mt-1 text-sm text-[#8F9691]">
+            생각을 자유롭게 나누는 공간
+          </p>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-[#E4E6E1] sm:text-3xl">
-          KEYNIVERSE 공식 커뮤니티
-        </h1>
-        <p className="mt-1 text-sm text-[#8F9691]">
-          생각을 자유롭게 나누는 공간
-        </p>
-      </div>
+      )}
 
       {/* 2. 본문 레이아웃: 좌측 70% 메인 터미널 리스트 + 우측 320px Sticky 대시보드 사이드바 */}
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start">

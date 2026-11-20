@@ -442,7 +442,7 @@ export function PostDetailModal({
           </button>
         </div>
 
-        <h2 className="text-lg font-bold text-[#E4E6E1] sm:text-xl">
+        <h2 className="text-lg font-bold text-[#F4F6F2] sm:text-xl">
           {post.title}
         </h2>
 

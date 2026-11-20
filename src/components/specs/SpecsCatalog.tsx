@@ -228,7 +228,7 @@ export function SpecsCatalog({
             HARDWARE SPEC ARCHIVE
           </span>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-[#E4E6E1] sm:text-3xl">
+        <h1 className="text-xl font-bold tracking-tight text-[#D5DBD6] sm:text-3xl">
           스펙 도감
         </h1>
         <p className="mt-1 text-sm text-[#8F9691]">

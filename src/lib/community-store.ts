@@ -418,7 +418,7 @@ export function computeEffectiveCommunityPosts(
       ? state.dealStatusOverrides[post.id]
       : undefined;
     const extraComments = !isDbPost ? (state.addedComments[post.id] ?? []) : [];
-    const extraView = state.extraViews[post.id] ?? 0;
+    const extraView = !isDbPost ? (state.extraViews[post.id] ?? 0) : 0;
 
     const mergedComments = [...post.comments, ...extraComments]
       .filter((c) => !deletedCommentSet.has(c.id))
@@ -485,7 +485,44 @@ async function resolveCurrentUserId(): Promise<string | null> {
   return liveCommunityUserId;
 }
 
+const VIEWED_SESSION_STORAGE_KEY = "keyniverse_viewed_posts_session_v1";
+
+function markPostViewedInSession(postId: string): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const raw = window.sessionStorage.getItem(VIEWED_SESSION_STORAGE_KEY);
+    const viewed = new Set<string>(raw ? (JSON.parse(raw) as string[]) : []);
+    if (viewed.has(postId)) {
+      return false;
+    }
+    viewed.add(postId);
+    window.sessionStorage.setItem(
+      VIEWED_SESSION_STORAGE_KEY,
+      JSON.stringify(Array.from(viewed).slice(-200))
+    );
+    return true;
+  } catch {
+    return true;
+  }
+}
+
 export function incrementPostView(postId: string): void {
+  // 세션당 1회만 조회수 카운트 (F5/반복 클릭 조회수 복사 방지)
+  if (!markPostViewedInSession(postId)) return;
+
+  if (isSupabaseConfigured() && isUuid(postId)) {
+    liveSupabasePosts = liveSupabasePosts.map((p) =>
+      p.id === postId ? { ...p, views: (p.views ?? 1) + 1 } : p
+    );
+    notifyCommunityListeners();
+
+    const supabase = createSupabaseBrowserClient();
+    if (supabase) {
+      void supabase.rpc("increment_post_view", { target_post_id: postId });
+    }
+    return;
+  }
+
   const cur = readPersistedCommunityState();
   writePersistedCommunityState({
     ...cur,

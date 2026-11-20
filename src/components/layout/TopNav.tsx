@@ -114,7 +114,7 @@ export function TopNav() {
             <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-card text-sage transition-colors group-hover:border-sage group-hover:bg-surface-elevated">
               <Cpu className="size-5" />
             </div>
-            <span className="text-base font-bold tracking-wider text-foreground">
+            <span className="text-base font-bold tracking-wider text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
               KEYNIVERSE
             </span>
           </Link>

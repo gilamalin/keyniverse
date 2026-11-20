@@ -581,7 +581,7 @@ export function KeyboardTester() {
               HIGH-PRECISION KEYBOARD TEST
             </span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#E4E6E1] sm:text-3xl">
+          <h1 className="text-xl font-bold tracking-tight text-[#D5DBD6] sm:text-3xl">
             키보드 테스트
           </h1>
           <p className="mt-1 text-sm text-[#8F9691]">
