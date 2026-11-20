@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import {
@@ -8,7 +8,8 @@ import {
   getAuthModalState,
   getAuthStoreVersion,
   getServerAuthStoreVersion,
-  signInWithGoogleMock,
+  openAuthModal,
+  signInWithGoogle,
   subscribeAuthStore,
 } from "@/lib/auth-store";
 import { acquireBodyScrollLock } from "@/lib/body-scroll-lock";
@@ -50,9 +51,30 @@ export function AuthModal() {
     getAuthStoreVersion,
     getServerAuthStoreVersion
   );
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const { open, reason } =
     version > 0 ? getAuthModalState() : { open: false, reason: null };
+
+  // OAuth 콜백 오류(30일 재가입 쿨타임 등) 감지 시 로그인 모달에 안내 문구 자동 표시
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const authError = params.get("auth_error");
+    if (!authError) return;
+
+    if (authError === "withdrawn_cooldown") {
+      openAuthModal("탈퇴 후 30일간 같은 계정으로 재가입할 수 없습니다.");
+    } else {
+      openAuthModal("로그인 처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
+    }
+
+    params.delete("auth_error");
+    const nextSearch = params.toString();
+    const cleanUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ""}${window.location.hash}`;
+    window.history.replaceState({}, "", cleanUrl);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -72,6 +94,16 @@ export function AuthModal() {
   }, [open]);
 
   if (!open) return null;
+
+  const handleGoogleLogin = async () => {
+    setErrorMsg(null);
+    setLoading(true);
+    const res = await signInWithGoogle();
+    if (res.error) {
+      setErrorMsg("로그인 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -108,12 +140,21 @@ export function AuthModal() {
 
           <button
             type="button"
-            onClick={() => signInWithGoogleMock("보타니컬랩")}
-            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-[#6B9080] bg-[#222623] px-4 py-3 text-sm font-semibold text-[#E4E6E1] transition-colors hover:bg-[#6B9080] hover:text-[#121413]"
+            disabled={loading}
+            onClick={() => void handleGoogleLogin()}
+            className="flex w-full items-center justify-center gap-2.5 rounded-lg border border-[#6B9080] bg-[#222623] px-4 py-3 text-sm font-semibold text-[#E4E6E1] transition-colors hover:bg-[#6B9080] hover:text-[#121413] disabled:cursor-not-allowed disabled:opacity-60"
           >
             <GoogleGIcon className="size-4 shrink-0" />
-            <span>Google 계정으로 계속하기</span>
+            <span>
+              {loading ? "연결 중..." : "Google 계정으로 계속하기"}
+            </span>
           </button>
+
+          {errorMsg && (
+            <p className="mt-3 text-center text-xs font-medium text-[#E06C75]">
+              {errorMsg}
+            </p>
+          )}
 
           <p className="mt-4 text-center text-[11px] leading-relaxed text-[#8F9691]">
             계속 진행하면{" "}

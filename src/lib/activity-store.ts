@@ -1,8 +1,11 @@
 /**
- * 활동 포인트(적립/소모) & 신고 접수 경량 스토어
- * - 추후 Supabase `point_logs`, `reports` 테이블과 1:1 매핑되도록 설계
- * - `delta`는 양수(적립)와 음수(소모)를 모두 지원해 향후 포인트 소모처 추가 시 스키마 변경 불필요
+ * 활동 포인트(적립/소모) & 신고 접수 스토어
+ * - Supabase 연결 시 `point_logs`, `reports` 테이블과 실시간 동기화
+ * - 환경변수 미설정 시 localStorage fallback 유지
  */
+
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export interface PointLogEntry {
   id: string;
@@ -66,6 +69,10 @@ const DEFAULT_ACTIVITY_STATE: PersistedActivityState = {
 let activityStoreVersion = 1;
 const activityListeners = new Set<() => void>();
 
+let liveActivityUserId: string | null = null;
+let livePointLogs: PointLogEntry[] = [];
+let liveReports: ReportRecord[] = [];
+
 function notifyActivityListeners(): void {
   activityStoreVersion += 1;
   for (const listener of activityListeners) {
@@ -99,7 +106,7 @@ export function getServerActivityStoreVersion(): number {
   return 0;
 }
 
-function readActivityState(): PersistedActivityState {
+function readLocalActivityState(): PersistedActivityState {
   if (typeof window === "undefined") return DEFAULT_ACTIVITY_STATE;
   try {
     const raw = window.localStorage.getItem(ACTIVITY_STORAGE_KEY);
@@ -116,7 +123,7 @@ function readActivityState(): PersistedActivityState {
   }
 }
 
-function writeActivityState(next: PersistedActivityState): void {
+function writeLocalActivityState(next: PersistedActivityState): void {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(next));
@@ -134,14 +141,79 @@ function formatTodayDate(): string {
   return `${y}-${m}-${d}`;
 }
 
+export async function syncActivityFromSupabase(userId: string): Promise<void> {
+  if (!isSupabaseConfigured()) return;
+  const supabase = createSupabaseBrowserClient();
+  if (!supabase) return;
+
+  liveActivityUserId = userId;
+
+  const [{ data: ptRows }, { data: repRows }] = await Promise.all([
+    supabase
+      .from("point_logs")
+      .select("id, reason, delta, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(100),
+    supabase
+      .from("reports")
+      .select("target_type, target_id, reason, detail, created_at")
+      .eq("reporter_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(200),
+  ]);
+
+  if (Array.isArray(ptRows)) {
+    livePointLogs = ptRows.map((row) => ({
+      id: String(row.id),
+      reason: String(row.reason),
+      delta: Number(row.delta),
+      createdAt:
+        typeof row.created_at === "string"
+          ? row.created_at.slice(0, 10)
+          : formatTodayDate(),
+    }));
+  }
+
+  if (Array.isArray(repRows)) {
+    liveReports = repRows.map((row) => ({
+      targetKey: buildReportKey(
+        row.target_type as ReportTargetType,
+        String(row.target_id)
+      ),
+      targetType: row.target_type as ReportTargetType,
+      targetId: String(row.target_id),
+      reason: row.reason as ReportReason,
+      detail: row.detail ?? undefined,
+      createdAt:
+        typeof row.created_at === "string"
+          ? row.created_at.slice(0, 10)
+          : formatTodayDate(),
+    }));
+  }
+
+  notifyActivityListeners();
+}
+
+export function clearSyncedActivity(): void {
+  liveActivityUserId = null;
+  livePointLogs = [];
+  liveReports = [];
+  notifyActivityListeners();
+}
+
 export function readPointLogs(): PointLogEntry[] {
-  return readActivityState().pointLogs;
+  if (isSupabaseConfigured()) {
+    return livePointLogs;
+  }
+  return readLocalActivityState().pointLogs;
 }
 
 export function readTotalPoints(): number {
+  const logs = readPointLogs();
   return Math.max(
     0,
-    readActivityState().pointLogs.reduce((sum, entry) => sum + entry.delta, 0)
+    logs.reduce((sum, entry) => sum + entry.delta, 0)
   );
 }
 
@@ -150,14 +222,42 @@ export function readTotalPoints(): number {
  */
 export function recordPointTransaction(reason: string, delta: number): void {
   if (delta === 0) return;
-  const state = readActivityState();
+
   const entry: PointLogEntry = {
     id: `pt-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     reason,
     delta,
     createdAt: formatTodayDate(),
   };
-  writeActivityState({
+
+  if (isSupabaseConfigured()) {
+    livePointLogs = [entry, ...livePointLogs].slice(0, 100);
+    notifyActivityListeners();
+
+    const supabase = createSupabaseBrowserClient();
+    if (supabase) {
+      void (async () => {
+        let userId = liveActivityUserId;
+        if (!userId) {
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
+          userId = user?.id ?? null;
+          if (userId) liveActivityUserId = userId;
+        }
+        if (!userId) return;
+        await supabase.from("point_logs").insert({
+          user_id: userId,
+          reason,
+          delta,
+        });
+      })();
+    }
+    return;
+  }
+
+  const state = readLocalActivityState();
+  writeLocalActivityState({
     ...state,
     pointLogs: [entry, ...state.pointLogs].slice(0, 100),
   });
@@ -189,7 +289,10 @@ export function hasReportedTarget(
   targetId: string
 ): boolean {
   const key = buildReportKey(targetType, targetId);
-  return readActivityState().reports.some((r) => r.targetKey === key);
+  const reports = isSupabaseConfigured()
+    ? liveReports
+    : readLocalActivityState().reports;
+  return reports.some((r) => r.targetKey === key);
 }
 
 export function submitReport(params: {
@@ -199,8 +302,8 @@ export function submitReport(params: {
   detail?: string;
 }): { ok: boolean; alreadyReported?: boolean } {
   const key = buildReportKey(params.targetType, params.targetId);
-  const state = readActivityState();
-  if (state.reports.some((r) => r.targetKey === key)) {
+
+  if (hasReportedTarget(params.targetType, params.targetId)) {
     return { ok: false, alreadyReported: true };
   }
 
@@ -213,7 +316,36 @@ export function submitReport(params: {
     createdAt: formatTodayDate(),
   };
 
-  writeActivityState({
+  if (isSupabaseConfigured()) {
+    liveReports = [record, ...liveReports].slice(0, 200);
+    notifyActivityListeners();
+
+    const supabase = createSupabaseBrowserClient();
+    if (supabase) {
+      void (async () => {
+        let userId = liveActivityUserId;
+        if (!userId) {
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
+          userId = user?.id ?? null;
+          if (userId) liveActivityUserId = userId;
+        }
+        if (!userId) return;
+        await supabase.from("reports").insert({
+          reporter_id: userId,
+          target_type: params.targetType,
+          target_id: params.targetId,
+          reason: params.reason,
+          detail: record.detail ?? null,
+        });
+      })();
+    }
+    return { ok: true };
+  }
+
+  const state = readLocalActivityState();
+  writeLocalActivityState({
     ...state,
     reports: [record, ...state.reports].slice(0, 200),
   });

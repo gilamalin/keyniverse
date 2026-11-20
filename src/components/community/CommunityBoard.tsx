@@ -49,6 +49,7 @@ import {
   incrementPostView,
   selectVsPollOption,
   subscribeCommunityStore,
+  syncCommunityFromSupabase,
   toggleDealPostStatus,
   togglePostUpvote,
   updateCommunityComment,
@@ -207,6 +208,10 @@ export function CommunityBoard() {
     getServerAuthStoreVersion
   );
   const session = authVersion > 0 ? readGoogleSession() : null;
+
+  useEffect(() => {
+    void syncCommunityFromSupabase(session?.userId ?? null);
+  }, [session?.userId]);
 
   const verifiedStatus = useMemo(
     () =>

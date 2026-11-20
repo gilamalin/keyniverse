@@ -33,6 +33,7 @@ import {
   COMMENT_MAX_LENGTH,
   COMMENT_MAX_LINES,
   clampCommentDraftInput,
+  createEntityId,
   sanitizeCommentContent,
 } from "@/lib/community-store";
 import {
@@ -98,7 +99,7 @@ function formatNowTime(): string {
 }
 
 function getCurrentCommentId(): string {
-  return `cmt-local-${new Date().getTime()}-${Math.random().toString(36).slice(2, 6)}`;
+  return createEntityId("cmt");
 }
 
 function countLines(text: string): number {

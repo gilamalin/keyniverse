@@ -29,11 +29,13 @@ import {
   POST_MAX_LINES,
   POST_TITLE_MAX_LENGTH,
   countPostLines,
+  createEntityId,
   measurePostHtmlLength,
   sanitizePostContent,
   sanitizePostHtmlContent,
   sanitizePostTitle,
 } from "@/lib/community-store";
+import { uploadCommunityImage } from "@/lib/community-storage";
 import { cn } from "@/lib/utils";
 
 interface LatestSnapshotInfo {
@@ -305,7 +307,14 @@ export function PostWriteModal({
       const compressedList: CommunityImageAttachment[] = [];
       for (const file of files) {
         const compressed = await compressImageFile(file);
-        compressedList.push(compressed);
+        const uploadedUrl = await uploadCommunityImage(
+          compressed.dataUrl,
+          session?.userId
+        );
+        compressedList.push({
+          ...compressed,
+          dataUrl: uploadedUrl,
+        });
       }
 
       setAttachments((prev) => [...prev, ...compressedList]);
@@ -446,7 +455,7 @@ export function PostWriteModal({
     const nowMs = getCurrentTimestampMs();
 
     const newPost: CommunityPost = {
-      id: `post-local-${nowMs}`,
+      id: createEntityId("post"),
       category,
       title: sanitizedTitle,
       content: sanitizedText,

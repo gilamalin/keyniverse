@@ -1,8 +1,16 @@
 import { INITIAL_MICE, INITIAL_SWITCHES } from "@/data/specs-data";
 import {
+  clearSyncedUserVotes,
   readStoredVote,
   readVerificationProof,
+  syncUserVotesFromSupabase,
 } from "@/lib/spec-verification";
+import {
+  clearSyncedActivity,
+  syncActivityFromSupabase,
+} from "@/lib/activity-store";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export interface GoogleUserSession {
   userId: string;
@@ -10,6 +18,12 @@ export interface GoogleUserSession {
   email: string;
   provider: "google";
   signedInAt: string;
+  /** 최초 Google 가입 직후 profiles.nickname이 아직 비어 있는 경우 true */
+  needsNicknameSetup?: boolean;
+  /** 마지막 닉네임 변경 시각 (ISO 문자열, 최초 1회 오타 수정 전까지는 null) */
+  nicknameChangedAt?: string | null;
+  /** Supabase profiles.points 실시간 스냅샷 */
+  points?: number;
 }
 
 const AUTH_STORAGE_KEY = "keyniverse_google_auth_v1";
@@ -17,6 +31,9 @@ const AUTH_STORAGE_KEY = "keyniverse_google_auth_v1";
 let authStoreVersion = 1;
 let authModalOpenState = false;
 let authModalReasonState: string | null = null;
+let liveSupabaseSession: GoogleUserSession | null = null;
+let supabaseSyncInitialized = false;
+
 const authListeners = new Set<() => void>();
 
 function notifyAuthListeners(): void {
@@ -54,7 +71,46 @@ export function getServerAuthStoreVersion(): number {
 
 export const NICKNAME_MIN_LENGTH = 2;
 export const NICKNAME_MAX_LENGTH = 6;
+export const NICKNAME_COOLDOWN_DAYS = 30;
 const NICKNAME_ALLOWED_REGEX = /^[가-힣a-zA-Z0-9]+$/;
+
+/** 사칭 방지 예약어 및 기본 비속어 (소문자 기준 부분 일치 차단) */
+const RESERVED_NICKNAME_KEYWORDS = [
+  "관리자",
+  "운영자",
+  "어드민",
+  "admin",
+  "root",
+  "system",
+  "시스템",
+  "키니버스",
+  "공지",
+  "스태프",
+  "staff",
+  "매니저",
+  "탈퇴",
+  "master",
+  "시발",
+  "씨발",
+  "병신",
+  "개새끼",
+  "섹스",
+];
+
+/**
+ * 닉네임 재변경까지 남은 일수 계산 (0이면 변경 가능)
+ */
+export function getNicknameCooldownRemainingDays(
+  nicknameChangedAt?: string | null
+): number {
+  if (!nicknameChangedAt) return 0;
+  const changedMs = new Date(nicknameChangedAt).getTime();
+  if (Number.isNaN(changedMs)) return 0;
+  const unlockMs = changedMs + NICKNAME_COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
+  const remainingMs = unlockMs - Date.now();
+  if (remainingMs <= 0) return 0;
+  return Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
+}
 
 /**
  * 닉네임 유효성 검증:
@@ -72,26 +128,103 @@ export function validateNickname(raw: string): {
   if (/\s/.test(raw)) {
     return {
       valid: false,
-      error: "닉네임에 공백(스페이스)은 사용할 수 없습니다.",
+      error: "공백은 사용할 수 없습니다.",
     };
   }
   if (!NICKNAME_ALLOWED_REGEX.test(raw)) {
     return {
       valid: false,
-      error: "한글(완성형), 영문, 숫자만 사용할 수 있습니다. (특수기호·자모 단독 불가)",
+      error: "한글, 영문, 숫자만 사용할 수 있습니다.",
     };
   }
   if (raw.length < NICKNAME_MIN_LENGTH || raw.length > NICKNAME_MAX_LENGTH) {
     return {
       valid: false,
-      error: `닉네임은 ${NICKNAME_MIN_LENGTH}~${NICKNAME_MAX_LENGTH}자 이내로 입력해 주세요.`,
+      error: `${NICKNAME_MIN_LENGTH}~${NICKNAME_MAX_LENGTH}자로 입력해 주세요.`,
+    };
+  }
+  const lower = raw.toLowerCase();
+  if (RESERVED_NICKNAME_KEYWORDS.some((word) => lower.includes(word))) {
+    return {
+      valid: false,
+      error: "사용할 수 없는 닉네임입니다.",
     };
   }
   return { valid: true, error: null };
 }
 
+async function fetchAndCacheSupabaseSession(): Promise<void> {
+  const supabase = createSupabaseBrowserClient();
+  if (!supabase) return;
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    if (liveSupabaseSession !== null) {
+      liveSupabaseSession = null;
+      clearSyncedUserVotes();
+      clearSyncedActivity();
+      notifyAuthListeners();
+    }
+    return;
+  }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("nickname, email, points, nickname_changed_at")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const resolvedEmail = profile?.email || user.email || "";
+  const resolvedNickname = profile?.nickname ?? "";
+  const needsNicknameSetup = !profile?.nickname;
+
+  liveSupabaseSession = {
+    userId: user.id,
+    nickname: resolvedNickname,
+    email: resolvedEmail,
+    provider: "google",
+    signedInAt: user.last_sign_in_at ?? new Date().toISOString(),
+    needsNicknameSetup,
+    nicknameChangedAt: profile?.nickname_changed_at ?? null,
+    points: typeof profile?.points === "number" ? profile.points : 50,
+  };
+  notifyAuthListeners();
+
+  // 로그인 유저의 스펙 평가, 포인트 내역, 신고 내역 비동기 동기화
+  void Promise.all([
+    syncUserVotesFromSupabase(user.id),
+    syncActivityFromSupabase(user.id),
+  ]);
+}
+
+/**
+ * 앱 마운트 시 1회 호출되어 Supabase Auth 세션 및 profiles 테이블을 실시간 동기화
+ */
+export function initSupabaseAuthSync(): void {
+  if (typeof window === "undefined" || supabaseSyncInitialized) return;
+  if (!isSupabaseConfigured()) return;
+
+  const supabase = createSupabaseBrowserClient();
+  if (!supabase) return;
+
+  supabaseSyncInitialized = true;
+  void fetchAndCacheSupabaseSession();
+
+  supabase.auth.onAuthStateChange(() => {
+    void fetchAndCacheSupabaseSession();
+  });
+}
+
 export function readGoogleSession(): GoogleUserSession | null {
   if (typeof window === "undefined") return null;
+
+  if (isSupabaseConfigured()) {
+    return liveSupabaseSession;
+  }
+
   try {
     const raw = window.localStorage.getItem(AUTH_STORAGE_KEY);
     if (!raw) return null;
@@ -104,6 +237,35 @@ export function readGoogleSession(): GoogleUserSession | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * 실제 Google OAuth 로그인 (Supabase 환경변수가 없을 때만 Mock fallback)
+ */
+export async function signInWithGoogle(): Promise<{ error: string | null }> {
+  if (typeof window === "undefined") return { error: null };
+
+  if (isSupabaseConfigured()) {
+    const supabase = createSupabaseBrowserClient();
+    if (!supabase) return { error: "인증 클라이언트를 초기화할 수 없습니다." };
+
+    const redirectTo = `${window.location.origin}/auth/callback`;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo,
+      },
+    });
+
+    if (error) {
+      return { error: error.message };
+    }
+    return { error: null };
+  }
+
+  signInWithGoogleMock("보타니컬랩");
+  return { error: null };
 }
 
 export function signInWithGoogleMock(
@@ -134,6 +296,22 @@ export function signInWithGoogleMock(
   return session;
 }
 
+export async function signOutGoogle(): Promise<void> {
+  if (isSupabaseConfigured()) {
+    const supabase = createSupabaseBrowserClient();
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
+    liveSupabaseSession = null;
+    clearSyncedUserVotes();
+    clearSyncedActivity();
+    notifyAuthListeners();
+    return;
+  }
+
+  signOutGoogleMock();
+}
+
 export function signOutGoogleMock(): void {
   if (typeof window !== "undefined") {
     try {
@@ -143,6 +321,73 @@ export function signOutGoogleMock(): void {
     }
   }
   notifyAuthListeners();
+}
+
+export async function updateSessionNicknameAsync(
+  nextNickname: string
+): Promise<{ valid: boolean; error: string | null; session?: GoogleUserSession }> {
+  const check = validateNickname(nextNickname);
+  if (!check.valid) {
+    return { valid: false, error: check.error };
+  }
+
+  if (isSupabaseConfigured()) {
+    const supabase = createSupabaseBrowserClient();
+    if (!supabase || !liveSupabaseSession) {
+      return { valid: false, error: "로그인이 필요합니다." };
+    }
+
+    const isInitialSetup = Boolean(liveSupabaseSession.needsNicknameSetup);
+    if (!isInitialSetup && nextNickname === liveSupabaseSession.nickname) {
+      return { valid: true, error: null, session: liveSupabaseSession };
+    }
+
+    if (!isInitialSetup) {
+      const remaining = getNicknameCooldownRemainingDays(
+        liveSupabaseSession.nicknameChangedAt
+      );
+      if (remaining > 0) {
+        return {
+          valid: false,
+          error: `${remaining}일 후 변경할 수 있습니다.`,
+        };
+      }
+    }
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        nickname: nextNickname,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", liveSupabaseSession.userId);
+
+    if (error) {
+      if (error.code === "23505") {
+        return { valid: false, error: "이미 사용 중인 닉네임입니다." };
+      }
+      if (error.message?.includes("NICKNAME_COOLDOWN")) {
+        return {
+          valid: false,
+          error: `닉네임은 ${NICKNAME_COOLDOWN_DAYS}일마다 변경할 수 있습니다.`,
+        };
+      }
+      return { valid: false, error: "닉네임 저장 중 오류가 발생했습니다." };
+    }
+
+    liveSupabaseSession = {
+      ...liveSupabaseSession,
+      nickname: nextNickname,
+      needsNicknameSetup: false,
+      nicknameChangedAt: isInitialSetup
+        ? liveSupabaseSession.nicknameChangedAt ?? null
+        : new Date().toISOString(),
+    };
+    notifyAuthListeners();
+    return { valid: true, error: null, session: liveSupabaseSession };
+  }
+
+  return updateSessionNickname(nextNickname);
 }
 
 export function updateSessionNickname(
@@ -161,6 +406,7 @@ export function updateSessionNickname(
   const updated: GoogleUserSession = {
     ...current,
     nickname: nextNickname,
+    needsNicknameSetup: false,
   };
 
   if (typeof window !== "undefined") {
@@ -172,6 +418,24 @@ export function updateSessionNickname(
   }
   notifyAuthListeners();
   return { valid: true, error: null, session: updated };
+}
+
+export async function withdrawAccount(): Promise<{ error: string | null }> {
+  if (isSupabaseConfigured()) {
+    const supabase = createSupabaseBrowserClient();
+    if (supabase) {
+      const { error } = await supabase.rpc("delete_own_account");
+      if (error) {
+        return { error: "회원 탈퇴 처리 중 오류가 발생했습니다." };
+      }
+      await supabase.auth.signOut();
+    }
+    liveSupabaseSession = null;
+    clearSyncedUserVotes();
+    clearSyncedActivity();
+  }
+  withdrawAccountMock();
+  return { error: null };
 }
 
 export function withdrawAccountMock(): void {
@@ -253,32 +517,35 @@ export function getUserVerifiedBadgeStatus(): {
 
   for (const sw of INITIAL_SWITCHES) {
     const proof = readVerificationProof(sw.slug, "switch");
-    const vote = readStoredVote(sw.id);
-    if (proof || vote) {
+    if (proof && proof.kind === "switch") {
       verifiedCount += 1;
-      if (proof && proof.kind === "switch" && !latestSnapshot) {
-        latestSnapshot = {
-          deviceType: "keyboard",
-          deviceSlug: sw.slug,
-          deviceName: sw.name,
-          metricLabel: `무결점 확인 (${proof.totalKeyPresses}타 · 채터링 0회)`,
-        };
-      }
+      latestSnapshot = {
+        deviceType: "keyboard",
+        deviceSlug: sw.slug,
+        deviceName: sw.name,
+        metricLabel: `${proof.totalKeyPresses}타 무결점 인증`,
+      };
     }
   }
 
   for (const ms of INITIAL_MICE) {
     const proof = readVerificationProof(ms.slug, "mouse");
-    const vote = readStoredVote(ms.id);
-    if (proof || vote) {
+    if (proof && proof.kind === "mouse") {
       verifiedCount += 1;
-      if (proof && proof.kind === "mouse") {
-        latestSnapshot = {
-          deviceType: "mouse",
-          deviceSlug: ms.slug,
-          deviceName: ms.name,
-          metricLabel: `Peak ${proof.peakHz.toLocaleString()}Hz · 더블클릭 0회 (${proof.clickCount}클릭 검증)`,
-        };
+      latestSnapshot = {
+        deviceType: "mouse",
+        deviceSlug: ms.slug,
+        deviceName: ms.name,
+        metricLabel: `Peak ${proof.peakHz.toLocaleString()}Hz 무결점`,
+      };
+    }
+  }
+
+  if (verifiedCount === 0) {
+    for (const sw of INITIAL_SWITCHES) {
+      if (readStoredVote(sw.id)) {
+        verifiedCount += 1;
+        break;
       }
     }
   }

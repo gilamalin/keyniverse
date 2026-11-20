@@ -16,12 +16,14 @@ import {
 import {
   getAuthStoreVersion,
   getServerAuthStoreVersion,
+  initSupabaseAuthSync,
   openAuthModal,
   readGoogleSession,
-  signOutGoogleMock,
+  signOutGoogle,
   subscribeAuthStore,
 } from "@/lib/auth-store";
 import { AuthModal } from "@/components/auth/AuthModal";
+import { NicknameSetupModal } from "@/components/auth/NicknameSetupModal";
 import { cn } from "@/lib/utils";
 
 export function TopNav() {
@@ -36,6 +38,10 @@ export function TopNav() {
   );
 
   const session = authVersion > 0 ? readGoogleSession() : null;
+
+  useEffect(() => {
+    initSupabaseAuthSync();
+  }, []);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -171,11 +177,11 @@ export function TopNav() {
                       : "text-[#E4E6E1] hover:text-[#6B9080]"
                   )}
                 >
-                  {session.nickname}
+                  {session.nickname || "닉네임 설정"}
                 </Link>
                 <button
                   type="button"
-                  onClick={() => signOutGoogleMock()}
+                  onClick={() => void signOutGoogle()}
                   title="로그아웃"
                   aria-label="로그아웃"
                   className="inline-flex items-center gap-1 rounded border border-[#282D2A] bg-[#151816] px-1.5 py-0.5 text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#E06C75] hover:text-[#E06C75] lg:px-2"
@@ -280,8 +286,9 @@ export function TopNav() {
         </div>
       </header>
 
-      {/* 전역 Google 단일 로그인 모달 */}
+      {/* 전역 Google 단일 로그인 & 최초 닉네임 설정 모달 */}
       <AuthModal />
+      <NicknameSetupModal />
     </>
   );
 }

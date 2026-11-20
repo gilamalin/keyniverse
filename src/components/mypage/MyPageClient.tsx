@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -21,18 +21,20 @@ import { COMMUNITY_CATEGORY_SHORT_LABELS } from "@/types/community";
 import {
   NICKNAME_MAX_LENGTH,
   getAuthStoreVersion,
+  getNicknameCooldownRemainingDays,
   getServerAuthStoreVersion,
   openAuthModal,
   readGoogleSession,
   subscribeAuthStore,
-  updateSessionNickname,
-  withdrawAccountMock,
+  updateSessionNicknameAsync,
+  withdrawAccount,
 } from "@/lib/auth-store";
 import {
   computeEffectiveCommunityPosts,
   getCommunityStoreVersion,
   getServerCommunityStoreVersion,
   subscribeCommunityStore,
+  syncCommunityFromSupabase,
 } from "@/lib/community-store";
 import {
   StoredVerifiedVote,
@@ -58,7 +60,10 @@ export function MyPageClient() {
   const [editingNickname, setEditingNickname] = useState<boolean>(false);
   const [nicknameDraft, setNicknameDraft] = useState<string>("");
   const [nicknameError, setNicknameError] = useState<string | null>(null);
+  const [savingNickname, setSavingNickname] = useState<boolean>(false);
   const [withdrawModalOpen, setWithdrawModalOpen] = useState<boolean>(false);
+  const [withdrawing, setWithdrawing] = useState<boolean>(false);
+  const [withdrawError, setWithdrawError] = useState<string | null>(null);
 
   const authVersion = useSyncExternalStore(
     subscribeAuthStore,
@@ -82,6 +87,12 @@ export function MyPageClient() {
   );
 
   const session = authVersion > 0 ? readGoogleSession() : null;
+
+  useEffect(() => {
+    if (session?.userId) {
+      void syncCommunityFromSupabase(session.userId);
+    }
+  }, [session?.userId]);
 
   const { myPosts, myComments } = useMemo(() => {
     if (!session) return { myPosts: [], myComments: [] };
@@ -161,9 +172,13 @@ export function MyPageClient() {
     if (!session || activityVersion === 0) {
       return { totalPoints: 0, pointLogs: [] };
     }
+    const logs = readPointLogs();
     return {
-      totalPoints: readTotalPoints(),
-      pointLogs: readPointLogs(),
+      totalPoints:
+        logs.length > 0
+          ? readTotalPoints()
+          : (session.points ?? readTotalPoints()),
+      pointLogs: logs,
     };
   }, [session, activityVersion]);
 
@@ -174,9 +189,11 @@ export function MyPageClient() {
     setEditingNickname(true);
   };
 
-  const handleSaveNickname = (e: React.FormEvent) => {
+  const handleSaveNickname = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = updateSessionNickname(nicknameDraft);
+    setSavingNickname(true);
+    const res = await updateSessionNicknameAsync(nicknameDraft);
+    setSavingNickname(false);
     if (!res.valid) {
       setNicknameError(res.error);
       return;
@@ -185,8 +202,15 @@ export function MyPageClient() {
     setEditingNickname(false);
   };
 
-  const handleConfirmWithdraw = () => {
-    withdrawAccountMock();
+  const handleConfirmWithdraw = async () => {
+    setWithdrawError(null);
+    setWithdrawing(true);
+    const res = await withdrawAccount();
+    setWithdrawing(false);
+    if (res.error) {
+      setWithdrawError(res.error);
+      return;
+    }
     setWithdrawModalOpen(false);
     router.push("/");
   };
@@ -239,7 +263,7 @@ export function MyPageClient() {
           <div className="min-w-0 flex-1">
             {editingNickname ? (
               <form
-                onSubmit={handleSaveNickname}
+                onSubmit={(e) => void handleSaveNickname(e)}
                 className="flex flex-col gap-1.5"
               >
                 <div className="flex flex-wrap items-center gap-2">
@@ -260,10 +284,11 @@ export function MyPageClient() {
                   />
                   <button
                     type="submit"
-                    className="inline-flex h-8 items-center gap-1 rounded-lg border border-[#6B9080] bg-[#6B9080] px-3 text-xs font-bold text-[#121413] transition-colors hover:bg-[#7CA291]"
+                    disabled={savingNickname}
+                    className="inline-flex h-8 items-center gap-1 rounded-lg border border-[#6B9080] bg-[#6B9080] px-3 text-xs font-bold text-[#121413] transition-colors hover:bg-[#7CA291] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <Check className="size-3.5" />
-                    <span>저장</span>
+                    <span>{savingNickname ? "저장 중" : "저장"}</span>
                   </button>
                   <button
                     type="button"
@@ -287,14 +312,28 @@ export function MyPageClient() {
                 <h2 className="text-lg font-bold text-[#E4E6E1]">
                   {session.nickname}
                 </h2>
-                <button
-                  type="button"
-                  onClick={handleStartEditNickname}
-                  className="inline-flex items-center gap-1 rounded-md border border-[#282D2A] bg-[#151816] px-2 py-0.5 text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1]"
-                >
-                  <Pencil className="size-3" />
-                  <span>닉네임 변경</span>
-                </button>
+                {(() => {
+                  const remainingDays = getNicknameCooldownRemainingDays(
+                    session.nicknameChangedAt
+                  );
+                  if (remainingDays > 0) {
+                    return (
+                      <span className="rounded-md border border-[#282D2A] bg-[#151816] px-2 py-0.5 font-mono text-[11px] text-[#8F9691] tabular-nums">
+                        {remainingDays}일 후 변경 가능
+                      </span>
+                    );
+                  }
+                  return (
+                    <button
+                      type="button"
+                      onClick={handleStartEditNickname}
+                      className="inline-flex items-center gap-1 rounded-md border border-[#282D2A] bg-[#151816] px-2 py-0.5 text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1]"
+                    >
+                      <Pencil className="size-3" />
+                      <span>닉네임 변경</span>
+                    </button>
+                  );
+                })()}
               </div>
             )}
             <p className="mt-1 font-mono text-xs text-[#8F9691]">
@@ -563,23 +602,31 @@ export function MyPageClient() {
             </div>
 
             <p className="mb-4 text-xs leading-relaxed text-[#8F9691]">
-              탈퇴 시 계정 정보와 활동 내역이 삭제되며 복구할 수 없습니다.
+              탈퇴 시 계정 정보는 즉시 삭제되며, 30일간 같은 계정으로 재가입할 수 없습니다.
             </p>
+
+            {withdrawError && (
+              <p className="mb-3 text-xs font-medium text-[#E06C75]">
+                {withdrawError}
+              </p>
+            )}
 
             <div className="flex items-center justify-end gap-2">
               <button
                 type="button"
+                disabled={withdrawing}
                 onClick={() => setWithdrawModalOpen(false)}
-                className="rounded-lg border border-[#282D2A] bg-[#151816] px-3.5 py-1.5 text-xs font-semibold text-[#8F9691] transition-colors hover:text-[#E4E6E1]"
+                className="rounded-lg border border-[#282D2A] bg-[#151816] px-3.5 py-1.5 text-xs font-semibold text-[#8F9691] transition-colors hover:text-[#E4E6E1] disabled:opacity-50"
               >
                 취소
               </button>
               <button
                 type="button"
-                onClick={handleConfirmWithdraw}
-                className="rounded-lg border border-[#E06C75] bg-[#E06C75] px-4 py-1.5 text-xs font-bold text-[#121413] transition-colors hover:opacity-90"
+                disabled={withdrawing}
+                onClick={() => void handleConfirmWithdraw()}
+                className="rounded-lg border border-[#E06C75] bg-[#E06C75] px-4 py-1.5 text-xs font-bold text-[#121413] transition-colors hover:opacity-90 disabled:opacity-50"
               >
-                탈퇴하기
+                {withdrawing ? "처리 중..." : "탈퇴하기"}
               </button>
             </div>
           </div>

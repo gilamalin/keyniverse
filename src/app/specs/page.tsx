@@ -1,6 +1,9 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { SpecsCatalog } from "@/components/specs/SpecsCatalog";
+import { fetchCatalogSpecsFromSupabase } from "@/lib/specs-db";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "스위치 & 마우스 스펙 도감 | KEYNIVERSE",
@@ -8,7 +11,9 @@ export const metadata: Metadata = {
     "공식 스펙 시트 기반의 키보드 스위치 및 게이밍 마우스 다중 조건 실시간 필터 도감",
 };
 
-export default function SpecsPage() {
+export default async function SpecsPage() {
+  const { switches, mice } = await fetchCatalogSpecsFromSupabase();
+
   return (
     <Suspense
       fallback={
@@ -17,7 +22,7 @@ export default function SpecsPage() {
         </div>
       }
     >
-      <SpecsCatalog />
+      <SpecsCatalog initialSwitches={switches} initialMice={mice} />
     </Suspense>
   );
 }

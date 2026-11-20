@@ -9,6 +9,8 @@ import {
   TelemetryBadgeTone,
   VerifiedTelemetryLog,
 } from "@/types/specs";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export const KEYBOARD_MIN_KEY_PRESSES = 50;
 export const MOUSE_MIN_MOVE_SAMPLES = 1500;
@@ -231,8 +233,77 @@ export function readVerificationProof(
   }
 }
 
+let liveVoteUserId: string | null = null;
+const liveSupabaseVotes = new Map<string, StoredVerifiedVote>();
+
+function notifyVoteListeners(): void {
+  voteStoreVersion += 1;
+  for (const listener of voteListeners) {
+    listener();
+  }
+}
+
+export async function syncUserVotesFromSupabase(userId: string): Promise<void> {
+  if (!isSupabaseConfigured()) return;
+  const supabase = createSupabaseBrowserClient();
+  if (!supabase) return;
+
+  liveVoteUserId = userId;
+  const { data, error } = await supabase
+    .from("spec_votes")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error || !data) return;
+
+  liveSupabaseVotes.clear();
+  for (const row of data) {
+    const updatedAt =
+      typeof row.updated_at === "string"
+        ? row.updated_at.slice(0, 10)
+        : formatTodayDate();
+    if (row.kind === "switch") {
+      liveSupabaseVotes.set(row.device_id, {
+        kind: "switch",
+        deviceId: row.device_id,
+        slug: row.slug,
+        rating: row.rating,
+        pitch: (row.pitch as SwitchPitchChoice) ?? "high",
+        oneLineReview: row.one_line_review ?? undefined,
+        badgeText: "테스트 인증",
+        badgeTone: "sand",
+        updatedAt,
+      });
+    } else if (row.kind === "mouse") {
+      liveSupabaseVotes.set(row.device_id, {
+        kind: "mouse",
+        deviceId: row.device_id,
+        slug: row.slug,
+        rating: row.rating,
+        grip: (row.grip as MouseGripChoice) ?? "claw",
+        handSize: (row.hand_size as MouseHandSizeChoice) ?? "f9",
+        oneLineReview: row.one_line_review ?? undefined,
+        badgeText: "테스트 인증",
+        badgeTone: "sand",
+        updatedAt,
+      });
+    }
+  }
+  notifyVoteListeners();
+}
+
+export function clearSyncedUserVotes(): void {
+  liveVoteUserId = null;
+  liveSupabaseVotes.clear();
+  notifyVoteListeners();
+}
+
 export function readStoredVote(deviceId: string): StoredVerifiedVote | null {
   if (typeof window === "undefined") return null;
+
+  if (isSupabaseConfigured()) {
+    return liveSupabaseVotes.get(deviceId) ?? null;
+  }
 
   try {
     const raw = window.localStorage.getItem(getVoteStorageKey(deviceId));
@@ -276,20 +347,61 @@ export function getServerVoteStoreVersion(): number {
 
 export function saveStoredVote(vote: StoredVerifiedVote): void {
   if (typeof window === "undefined") return;
+
+  const normalizedVote: StoredVerifiedVote = {
+    ...vote,
+    badgeText: "테스트 인증",
+    badgeTone: "sand",
+    updatedAt: formatTodayDate(),
+  };
+
+  if (isSupabaseConfigured()) {
+    liveSupabaseVotes.set(vote.deviceId, normalizedVote);
+    notifyVoteListeners();
+
+    const supabase = createSupabaseBrowserClient();
+    const userId = liveVoteUserId;
+    if (supabase && userId) {
+      const payload =
+        normalizedVote.kind === "switch"
+          ? {
+              user_id: userId,
+              kind: "switch",
+              device_id: normalizedVote.deviceId,
+              slug: normalizedVote.slug,
+              rating: normalizedVote.rating,
+              pitch: normalizedVote.pitch,
+              grip: null,
+              hand_size: null,
+              one_line_review: normalizedVote.oneLineReview ?? null,
+              updated_at: new Date().toISOString(),
+            }
+          : {
+              user_id: userId,
+              kind: "mouse",
+              device_id: normalizedVote.deviceId,
+              slug: normalizedVote.slug,
+              rating: normalizedVote.rating,
+              pitch: null,
+              grip: normalizedVote.grip,
+              hand_size: normalizedVote.handSize,
+              one_line_review: normalizedVote.oneLineReview ?? null,
+              updated_at: new Date().toISOString(),
+            };
+
+      void supabase
+        .from("spec_votes")
+        .upsert(payload, { onConflict: "user_id,device_id" });
+    }
+    return;
+  }
+
   try {
     window.localStorage.setItem(
       getVoteStorageKey(vote.deviceId),
-      JSON.stringify({
-        ...vote,
-        badgeText: "⚡ 실측 인증",
-        badgeTone: "sand",
-        updatedAt: formatTodayDate(),
-      })
+      JSON.stringify(normalizedVote)
     );
-    voteStoreVersion += 1;
-    for (const listener of voteListeners) {
-      listener();
-    }
+    notifyVoteListeners();
   } catch {
     // Ignore storage quota errors
   }
@@ -297,12 +409,26 @@ export function saveStoredVote(vote: StoredVerifiedVote): void {
 
 export function deleteStoredVote(deviceId: string): void {
   if (typeof window === "undefined") return;
+
+  if (isSupabaseConfigured()) {
+    liveSupabaseVotes.delete(deviceId);
+    notifyVoteListeners();
+
+    const supabase = createSupabaseBrowserClient();
+    const userId = liveVoteUserId;
+    if (supabase && userId) {
+      void supabase
+        .from("spec_votes")
+        .delete()
+        .eq("user_id", userId)
+        .eq("device_id", deviceId);
+    }
+    return;
+  }
+
   try {
     window.localStorage.removeItem(getVoteStorageKey(deviceId));
-    voteStoreVersion += 1;
-    for (const listener of voteListeners) {
-      listener();
-    }
+    notifyVoteListeners();
   } catch {
     // Ignore storage errors
   }
