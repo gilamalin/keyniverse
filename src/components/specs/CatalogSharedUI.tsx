@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpDown,
   ChevronLeft,
@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
+import { acquireBodyScrollLock } from "@/lib/body-scroll-lock";
 import { cn } from "@/lib/utils";
 
 export const CATALOG_ITEMS_PER_PAGE = 12;
@@ -18,52 +19,140 @@ export const CATALOG_ITEMS_PER_PAGE = 12;
 interface CatalogSidebarShellProps {
   title: string;
   activeFilterCount: number;
+  resultCount: number;
   mobileFilterOpen: boolean;
+  onCloseMobileFilter: () => void;
   onResetFilters: () => void;
   children: React.ReactNode;
 }
 
 /**
- * 스펙 도감 전 카테고리(스위치 · 마우스 · 추후 기성품 키보드 등) 공용 좌측 Sticky 필터 사이드바 껍데기
+ * 스펙 도감 공용 필터 컨테이너
+ * - PC(lg 이상): 좌측 Sticky 사이드바
+ * - 모바일/태블릿(lg 미만): 독립 스크롤 오버레이 바텀시트 (배경 목록 높이 변화로 인한 화면 튐 차단)
  */
 export function CatalogSidebarShell({
   title,
   activeFilterCount,
+  resultCount,
   mobileFilterOpen,
+  onCloseMobileFilter,
   onResetFilters,
   children,
 }: CatalogSidebarShellProps) {
+  useEffect(() => {
+    if (!mobileFilterOpen) return;
+    const releaseLock = acquireBodyScrollLock();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCloseMobileFilter();
+    };
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      if (e.matches) onCloseMobileFilter();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    mql.addEventListener("change", handleMediaChange);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      mql.removeEventListener("change", handleMediaChange);
+      releaseLock();
+    };
+  }, [mobileFilterOpen, onCloseMobileFilter]);
+
   return (
-    <aside
-      className={cn(
-        "w-full rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-5.5rem)] lg:w-[280px] lg:shrink-0 lg:overflow-y-auto",
-        mobileFilterOpen ? "block" : "hidden"
-      )}
-    >
-      <div className="mb-3 flex items-center justify-between gap-2 border-b border-[#282D2A] pb-2.5 whitespace-nowrap">
-        <div className="flex items-center gap-1.5">
-          <Filter className="size-4 shrink-0 text-[#6B9080]" />
-          <h2 className="text-sm font-semibold text-[#E4E6E1]">{title}</h2>
-          {activeFilterCount > 0 && (
-            <span className="rounded bg-[#6B9080]/20 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#6B9080] tabular-nums">
-              {activeFilterCount}
-            </span>
-          )}
+    <>
+      {/* PC(lg 이상) 좌측 Sticky 사이드바 */}
+      <aside className="hidden w-[280px] shrink-0 rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto">
+        <div className="mb-3 flex items-center justify-between gap-2 border-b border-[#282D2A] pb-2.5 whitespace-nowrap">
+          <div className="flex items-center gap-1.5">
+            <Filter className="size-4 shrink-0 text-[#6B9080]" />
+            <h2 className="text-sm font-semibold text-[#E4E6E1]">{title}</h2>
+            {activeFilterCount > 0 && (
+              <span className="rounded bg-[#6B9080]/20 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#6B9080] tabular-nums">
+                {activeFilterCount}
+              </span>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={onResetFilters}
+            disabled={activeFilterCount === 0}
+            className="flex shrink-0 items-center gap-1 rounded-md border border-[#282D2A] bg-[#151816] px-2 py-1 text-xs font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1] disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <RotateCcw className="size-3" />
+            <span>초기화</span>
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={onResetFilters}
-          disabled={activeFilterCount === 0}
-          className="flex shrink-0 items-center gap-1 rounded-md border border-[#282D2A] bg-[#151816] px-2 py-1 text-xs font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1] disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          <RotateCcw className="size-3" />
-          <span>필터 초기화</span>
-        </button>
-      </div>
+        <div className="flex flex-col gap-3.5">{children}</div>
+      </aside>
 
-      <div className="flex flex-col gap-3.5">{children}</div>
-    </aside>
+      {/* 모바일/태블릿(lg 미만) 독립 스크롤 바텀시트 드로어 */}
+      {mobileFilterOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
+          className="fixed inset-0 z-50 flex items-end bg-black/65 backdrop-blur-[2px] lg:hidden"
+          onClick={onCloseMobileFilter}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex max-h-[84dvh] w-full flex-col overflow-hidden rounded-t-2xl border-t border-[#282D2A] bg-[#1A1D1B]"
+          >
+            {/* 드로어 상단 헤더 */}
+            <div className="flex shrink-0 items-center justify-between gap-2 border-b border-[#282D2A] bg-[#151816] px-4 py-3">
+              <div className="flex items-center gap-1.5">
+                <Filter className="size-4 shrink-0 text-[#6B9080]" />
+                <h2 className="text-sm font-semibold text-[#E4E6E1]">{title}</h2>
+                {activeFilterCount > 0 && (
+                  <span className="rounded bg-[#6B9080]/20 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#6B9080] tabular-nums">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={onResetFilters}
+                  disabled={activeFilterCount === 0}
+                  className="flex shrink-0 items-center gap-1 rounded-md border border-[#282D2A] bg-[#1A1D1B] px-2 py-1 text-xs font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <RotateCcw className="size-3" />
+                  <span>초기화</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={onCloseMobileFilter}
+                  aria-label="필터 닫기"
+                  className="flex size-7 items-center justify-center rounded-md border border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1]"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* 독립 스크롤 필터 본문 */}
+            <div className="flex-1 overflow-y-auto overscroll-contain p-4">
+              <div className="flex flex-col gap-3.5">{children}</div>
+            </div>
+
+            {/* 하단 고정 결과 보기 버튼 */}
+            <div className="shrink-0 border-t border-[#282D2A] bg-[#151816] p-3.5">
+              <button
+                type="button"
+                onClick={onCloseMobileFilter}
+                className="flex h-10 w-full items-center justify-center rounded-lg bg-[#6B9080] font-mono text-xs font-bold text-[#121413] tabular-nums transition-colors hover:bg-[#7CA291]"
+              >
+                {resultCount.toLocaleString()}개 결과 보기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

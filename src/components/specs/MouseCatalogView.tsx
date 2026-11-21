@@ -58,6 +58,7 @@ interface MouseCatalogViewProps {
   compareIds: string[];
   compareLimitNotice: boolean;
   mobileFilterOpen: boolean;
+  onCloseMobileFilter: () => void;
   onActiveFilterCountChange: (count: number) => void;
   onToggleCompare: (id: string) => void;
   onOpenDetail: (id: string) => void;
@@ -69,6 +70,7 @@ export function MouseCatalogView({
   compareIds,
   compareLimitNotice,
   mobileFilterOpen,
+  onCloseMobileFilter,
   onActiveFilterCountChange,
   onToggleCompare,
   onOpenDetail,
@@ -254,7 +256,9 @@ export function MouseCatalogView({
       <CatalogSidebarShell
         title="마우스 필터"
         activeFilterCount={activeFilterCount}
+        resultCount={filteredMice.length}
         mobileFilterOpen={mobileFilterOpen}
+        onCloseMobileFilter={onCloseMobileFilter}
         onResetFilters={resetFilters}
       >
         {/* 0. 제조사 (Brand) */}
@@ -453,7 +457,7 @@ export function MouseCatalogView({
       </CatalogSidebarShell>
 
       {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 마우스 스펙 카드 그리드 */}
-      <section className="flex min-w-0 flex-1 flex-col gap-4">
+      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[calc(100vh-5.5rem)]">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
           onSearchChange={(next) => {

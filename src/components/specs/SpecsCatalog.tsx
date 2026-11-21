@@ -305,6 +305,7 @@ export function SpecsCatalog({
           compareIds={compareIdsByTab.switches}
           compareLimitNotice={compareLimitNotice}
           mobileFilterOpen={mobileFilterOpen}
+          onCloseMobileFilter={() => setMobileFilterOpen(false)}
           onActiveFilterCountChange={handleSwitchFilterCount}
           onToggleCompare={(id) => toggleCompareItem(id, "switches")}
           onOpenDetail={(id) => setDetailItemId(id)}
@@ -316,6 +317,7 @@ export function SpecsCatalog({
           compareIds={compareIdsByTab.mice}
           compareLimitNotice={compareLimitNotice}
           mobileFilterOpen={mobileFilterOpen}
+          onCloseMobileFilter={() => setMobileFilterOpen(false)}
           onActiveFilterCountChange={handleMouseFilterCount}
           onToggleCompare={(id) => toggleCompareItem(id, "mice")}
           onOpenDetail={(id) => setDetailItemId(id)}

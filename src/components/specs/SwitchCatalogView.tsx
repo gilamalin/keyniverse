@@ -68,6 +68,7 @@ interface SwitchCatalogViewProps {
   compareIds: string[];
   compareLimitNotice: boolean;
   mobileFilterOpen: boolean;
+  onCloseMobileFilter: () => void;
   onActiveFilterCountChange: (count: number) => void;
   onToggleCompare: (id: string) => void;
   onOpenDetail: (id: string) => void;
@@ -79,6 +80,7 @@ export function SwitchCatalogView({
   compareIds,
   compareLimitNotice,
   mobileFilterOpen,
+  onCloseMobileFilter,
   onActiveFilterCountChange,
   onToggleCompare,
   onOpenDetail,
@@ -278,7 +280,9 @@ export function SwitchCatalogView({
       <CatalogSidebarShell
         title="스위치 필터"
         activeFilterCount={activeFilterCount}
+        resultCount={filteredSwitches.length}
         mobileFilterOpen={mobileFilterOpen}
+        onCloseMobileFilter={onCloseMobileFilter}
         onResetFilters={resetFilters}
       >
         {/* 0. 제조사 (Brand) */}
@@ -499,7 +503,7 @@ export function SwitchCatalogView({
       </CatalogSidebarShell>
 
       {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 스위치 스펙 카드 그리드 */}
-      <section className="flex min-w-0 flex-1 flex-col gap-4">
+      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[calc(100vh-5.5rem)]">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
           onSearchChange={(next) => {
