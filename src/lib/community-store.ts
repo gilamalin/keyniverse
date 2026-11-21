@@ -127,6 +127,11 @@ let liveSupabasePosts: CommunityPost[] = [];
 let liveSupabaseUpvotedIds = new Set<string>();
 let liveSupabaseVsChoices: Record<string, "A" | "B"> = {};
 let liveCommunityUserId: string | null = null;
+let hasSyncedCommunityFromSupabase = false;
+
+export function isCommunitySynced(): boolean {
+  return !isSupabaseConfigured() || hasSyncedCommunityFromSupabase;
+}
 
 function notifyCommunityListeners(): void {
   communityStoreVersion += 1;
@@ -311,6 +316,7 @@ export async function syncCommunityFromSupabase(
 
   liveSupabaseUpvotedIds = myUpvoted;
   liveSupabaseVsChoices = myVs;
+  hasSyncedCommunityFromSupabase = true;
   notifyCommunityListeners();
 }
 
@@ -819,6 +825,9 @@ export function createCommunityPost(newPost: CommunityPost): void {
       ? sanitizePostHtmlContent(newPost.contentHtml)
       : undefined,
   };
+
+  // 글 작성 직후 기본 조회수 1에 본인 첫 열람이 포함되므로, 같은 세션 내 재클릭 시 2로 중복 증가 방지
+  markPostViewedInSession(normalized.id);
 
   if (isSupabaseConfigured()) {
     liveSupabasePosts = [normalized, ...liveSupabasePosts];

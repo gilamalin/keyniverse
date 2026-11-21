@@ -23,6 +23,7 @@ import {
   getAuthStoreVersion,
   getNicknameCooldownRemainingDays,
   getServerAuthStoreVersion,
+  isAuthSessionResolved,
   openAuthModal,
   readGoogleSession,
   subscribeAuthStore,
@@ -214,6 +215,51 @@ export function MyPageClient() {
     setWithdrawModalOpen(false);
     router.push("/");
   };
+
+  const isCheckingAuth = authVersion === 0 || !isAuthSessionResolved();
+
+  if (isCheckingAuth) {
+    return (
+      <div
+        aria-busy="true"
+        aria-label="마이페이지 불러오는 중"
+        className="mx-auto flex max-w-4xl flex-col gap-6"
+      >
+        {/* 상단 페이지 헤더 스켈레톤 */}
+        <div className="border-b border-[#282D2A] pb-5">
+          <div className="mb-2 h-5 w-24 animate-pulse rounded-md bg-[#222623]" />
+          <div className="h-8 w-36 animate-pulse rounded bg-[#222623]" />
+          <div className="mt-2 h-4 w-48 animate-pulse rounded bg-[#1A1D1B]" />
+        </div>
+
+        {/* 프로필 요약 카드 스켈레톤 */}
+        <div className="rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 sm:p-5">
+          <div className="flex flex-col justify-between gap-3.5 min-[460px]:flex-row min-[460px]:items-center">
+            <div className="flex flex-col gap-2">
+              <div className="h-5 w-32 animate-pulse rounded bg-[#222623]" />
+              <div className="h-3.5 w-44 animate-pulse rounded bg-[#151816]" />
+            </div>
+            <div className="h-8 w-24 animate-pulse rounded-lg bg-[#222623]" />
+          </div>
+        </div>
+
+        {/* 활동 내역 탭 & 리스트 스켈레톤 */}
+        <div className="rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 sm:p-5">
+          <div className="mb-4 flex gap-2">
+            <div className="h-8 w-20 animate-pulse rounded-lg bg-[#222623]" />
+            <div className="h-8 w-20 animate-pulse rounded-lg bg-[#222623]" />
+            <div className="h-8 w-20 animate-pulse rounded-lg bg-[#222623]" />
+            <div className="h-8 w-20 animate-pulse rounded-lg bg-[#222623]" />
+          </div>
+          <div className="flex flex-col gap-2.5">
+            <div className="h-12 w-full animate-pulse rounded-lg bg-[#151816]" />
+            <div className="h-12 w-full animate-pulse rounded-lg bg-[#151816]" />
+            <div className="h-12 w-full animate-pulse rounded-lg bg-[#151816]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!session) {
     return (

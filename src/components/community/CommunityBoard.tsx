@@ -47,6 +47,7 @@ import {
   getCommunityStoreVersion,
   getServerCommunityStoreVersion,
   incrementPostView,
+  isCommunitySynced,
   selectVsPollOption,
   subscribeCommunityStore,
   syncCommunityFromSupabase,
@@ -259,6 +260,10 @@ export function CommunityBoard() {
   );
 
   const isWriteMode = modeParam === "write" && Boolean(session);
+  const isLoadingSelectedPost =
+    Boolean(postParam) &&
+    !selectedPost &&
+    (communityVersion === 0 || !isCommunitySynced());
 
   // 도감 장비 슬러그 -> 이름·탭 매핑 테이블
   const deviceLookupMap = useMemo(() => {
@@ -482,8 +487,8 @@ export function CommunityBoard() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* 1. 상단 페이지 헤더 (목록 화면에서만 표시 · 게시글 상세/작성 뷰에서는 시선 분산을 막기 위해 숨김) */}
-      {!selectedPost && !isWriteMode && (
+      {/* 1. 상단 페이지 헤더 (목록 화면에서만 표시 · 게시글 상세/로딩/작성 뷰에서는 시선 분산을 막기 위해 숨김) */}
+      {!selectedPost && !isLoadingSelectedPost && !isWriteMode && (
         <div className="border-b border-[#282D2A] pb-5">
           <div className="mb-2 flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-md border border-[#6B9080]/40 bg-[#1A1D1B] px-2.5 py-0.5 font-mono text-xs font-semibold text-[#6B9080]">
@@ -553,6 +558,33 @@ export function CommunityBoard() {
             />
           ) : (
             <>
+              {/* 게시글 상세 로딩 스켈레톤 (새로고침 시 DB 동기화 전 목록이 위로 튀는 현상 방지) */}
+              {isLoadingSelectedPost && (
+                <div
+                  aria-busy="true"
+                  aria-label="게시글 불러오는 중"
+                  className="flex w-full flex-col overflow-hidden rounded-xl border border-[#282D2A] bg-[#1A1D1B]"
+                >
+                  <div className="border-b border-[#282D2A] bg-[#151816] px-5 py-4">
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="h-5 w-16 animate-pulse rounded bg-[#222623]" />
+                      <div className="h-7 w-20 animate-pulse rounded-lg bg-[#222623]" />
+                    </div>
+                    <div className="h-6 w-2/3 animate-pulse rounded bg-[#222623]" />
+                    <div className="mt-3 flex items-center justify-between border-t border-[#282D2A] pt-2.5">
+                      <div className="h-3.5 w-20 animate-pulse rounded bg-[#222623]" />
+                      <div className="h-3.5 w-32 animate-pulse rounded bg-[#222623]" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-3 p-5">
+                    <div className="h-4 w-full animate-pulse rounded bg-[#222623]" />
+                    <div className="h-4 w-5/6 animate-pulse rounded bg-[#222623]" />
+                    <div className="h-4 w-2/3 animate-pulse rounded bg-[#222623]" />
+                    <div className="mt-2 h-24 w-full animate-pulse rounded-xl bg-[#151816]" />
+                  </div>
+                </div>
+              )}
+
               {/* 게시글 상세 뷰 (선택된 글이 있을 때 상단에 표시되고, 바로 아래에 전체 글 목록이 이어서 표시됨) */}
               {selectedPost && (
                 <PostDetailModal

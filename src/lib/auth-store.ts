@@ -33,6 +33,11 @@ let authModalOpenState = false;
 let authModalReasonState: string | null = null;
 let liveSupabaseSession: GoogleUserSession | null = null;
 let supabaseSyncInitialized = false;
+let hasResolvedAuthSession = false;
+
+export function isAuthSessionResolved(): boolean {
+  return !isSupabaseConfigured() || hasResolvedAuthSession;
+}
 
 const authListeners = new Set<() => void>();
 
@@ -162,10 +167,15 @@ async function fetchAndCacheSupabaseSession(): Promise<void> {
   } = await supabase.auth.getUser();
 
   if (!user) {
+    const needsNotify =
+      !hasResolvedAuthSession || liveSupabaseSession !== null;
+    hasResolvedAuthSession = true;
     if (liveSupabaseSession !== null) {
       liveSupabaseSession = null;
       clearSyncedUserVotes();
       clearSyncedActivity();
+    }
+    if (needsNotify) {
       notifyAuthListeners();
     }
     return;
@@ -191,9 +201,8 @@ async function fetchAndCacheSupabaseSession(): Promise<void> {
     nicknameChangedAt: profile?.nickname_changed_at ?? null,
     points: typeof profile?.points === "number" ? profile.points : 50,
   };
+  hasResolvedAuthSession = true;
   notifyAuthListeners();
-
-  // 로그인 유저의 스펙 평가, 포인트 내역, 신고 내역 비동기 동기화
   void Promise.all([
     syncUserVotesFromSupabase(user.id),
     syncActivityFromSupabase(user.id),
