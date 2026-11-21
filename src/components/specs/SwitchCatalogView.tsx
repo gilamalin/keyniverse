@@ -109,6 +109,10 @@ export function SwitchCatalogView({
   const [sortOption, setSortOption] = useState<SwitchSortOption>("rating_desc");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  const onFilterMutated = () => {
+    setCurrentPage(1);
+  };
+
   // 전달받은 스위치 목록에서 제조사(Brand) 동적 추출 (하드코딩 제거)
   const availableBrands = useMemo(
     () => Array.from(new Set(switches.map((sw) => sw.brand))),
@@ -121,12 +125,14 @@ export function SwitchCatalogView({
         ? prev.filter((item) => item !== brand)
         : [...prev, brand]
     );
+    onFilterMutated();
   };
 
   const toggleCategory = (cat: SwitchCategory) => {
     setSelectedCategories((prev) =>
       prev.includes(cat) ? prev.filter((item) => item !== cat) : [...prev, cat]
     );
+    onFilterMutated();
   };
 
   const resetFilters = () => {
@@ -139,7 +145,7 @@ export function SwitchCatalogView({
     setSpringLengthFilter("all");
     setMaterialKeyword("ALL");
     setSearchQuery("");
-    setCurrentPage(1);
+    onFilterMutated();
   };
 
   const activeFilterCount = useMemo(() => {
@@ -358,7 +364,10 @@ export function SwitchCatalogView({
             max={FORCE_MAX}
             step={1}
             value={forceRange}
-            onChange={setForceRange}
+            onChange={(next) => {
+              setForceRange(next);
+              onFilterMutated();
+            }}
             midLabel="45gf (표준)"
           />
         </div>
@@ -374,7 +383,10 @@ export function SwitchCatalogView({
             allowDecimals
             fixedDecimals={1}
             value={strokeRange}
-            onChange={setStrokeRange}
+            onChange={(next) => {
+              setStrokeRange(next);
+              onFilterMutated();
+            }}
             midLabel="3.4mm"
           />
         </div>
@@ -393,11 +405,12 @@ export function SwitchCatalogView({
               <button
                 key={opt.id}
                 type="button"
-                onClick={() =>
+                onClick={() => {
                   setSpringLengthFilter(
                     opt.id as "all" | "long_20_plus" | "under_20"
-                  )
-                }
+                  );
+                  onFilterMutated();
+                }}
                 className={cn(
                   "rounded-md border py-1 font-mono text-xs font-medium transition-colors tabular-nums",
                   springLengthFilter === opt.id
@@ -421,7 +434,10 @@ export function SwitchCatalogView({
               <button
                 key={mat}
                 type="button"
-                onClick={() => setMaterialKeyword(mat)}
+                onClick={() => {
+                  setMaterialKeyword(mat);
+                  onFilterMutated();
+                }}
                 className={cn(
                   "rounded-md border px-2 py-1 font-mono text-xs font-medium transition-colors",
                   materialKeyword === mat
@@ -450,9 +466,10 @@ export function SwitchCatalogView({
                 <button
                   key={opt.id}
                   type="button"
-                  onClick={() =>
-                    setLubeFilter(opt.id as "all" | "lubed" | "unlubed")
-                  }
+                  onClick={() => {
+                    setLubeFilter(opt.id as "all" | "lubed" | "unlubed");
+                    onFilterMutated();
+                  }}
                   className={cn(
                     "rounded-md border py-1 text-center text-xs font-medium transition-colors",
                     lubeFilter === opt.id
@@ -485,7 +502,7 @@ export function SwitchCatalogView({
                   type="button"
                   onClick={() => {
                     setPinFilter(opt.id);
-                    setCurrentPage(1);
+                    onFilterMutated();
                   }}
                   className={cn(
                     "rounded-md border py-1 text-center font-mono text-[11px] font-medium transition-colors tabular-nums",
@@ -503,7 +520,7 @@ export function SwitchCatalogView({
       </CatalogSidebarShell>
 
       {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 스위치 스펙 카드 그리드 */}
-      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[calc(100vh+120px)]">
+      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[1360px]">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
           onSearchChange={(next) => {

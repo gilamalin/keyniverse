@@ -62,7 +62,7 @@ export function CatalogSidebarShell({
   return (
     <>
       {/* PC(lg 이상) 좌측 Sticky 사이드바 */}
-      <aside className="hidden w-[280px] shrink-0 rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto">
+      <aside className="hidden w-[280px] shrink-0 rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:overscroll-contain">
         <div className="mb-3 flex items-center justify-between gap-2 border-b border-[#282D2A] pb-2.5 whitespace-nowrap">
           <div className="flex items-center gap-1.5">
             <Filter className="size-4 shrink-0 text-[#6B9080]" />

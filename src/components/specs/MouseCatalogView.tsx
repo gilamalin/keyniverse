@@ -95,6 +95,10 @@ export function MouseCatalogView({
   const [sortOption, setSortOption] = useState<MouseSortOption>("rating_desc");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  const onFilterMutated = () => {
+    setCurrentPage(1);
+  };
+
   // 전달받은 마우스 목록에서 제조사(Brand) 동적 추출 (하드코딩 제거)
   const availableBrands = useMemo(
     () => Array.from(new Set(mice.map((ms) => ms.brand))),
@@ -107,12 +111,14 @@ export function MouseCatalogView({
         ? prev.filter((item) => item !== brand)
         : [...prev, brand]
     );
+    onFilterMutated();
   };
 
   const togglePollingRate = (hz: MousePollingHz) => {
     setSelectedPollingRates((prev) =>
       prev.includes(hz) ? prev.filter((item) => item !== hz) : [...prev, hz]
     );
+    onFilterMutated();
   };
 
   const resetFilters = () => {
@@ -124,7 +130,7 @@ export function MouseCatalogView({
     setMouseSwitchFilter("all");
     setSensorKeyword("ALL");
     setSearchQuery("");
-    setCurrentPage(1);
+    onFilterMutated();
   };
 
   const activeFilterCount = useMemo(() => {
@@ -338,7 +344,10 @@ export function MouseCatalogView({
             max={WEIGHT_MAX}
             step={1}
             value={weightRange}
-            onChange={setWeightRange}
+            onChange={(next) => {
+              setWeightRange(next);
+              onFilterMutated();
+            }}
             midLabel="60g"
           />
         </div>
@@ -357,7 +366,10 @@ export function MouseCatalogView({
               <button
                 key={opt.id}
                 type="button"
-                onClick={() => setShapeFilter(opt.id as "all" | MouseShape)}
+                onClick={() => {
+                  setShapeFilter(opt.id as "all" | MouseShape);
+                  onFilterMutated();
+                }}
                 className={cn(
                   "rounded-md border py-1 text-xs font-medium transition-colors",
                   shapeFilter === opt.id
@@ -385,9 +397,10 @@ export function MouseCatalogView({
               <button
                 key={opt.id}
                 type="button"
-                onClick={() =>
-                  setConnectionFilter(opt.id as "all" | MouseConnection)
-                }
+                onClick={() => {
+                  setConnectionFilter(opt.id as "all" | MouseConnection);
+                  onFilterMutated();
+                }}
                 className={cn(
                   "rounded-md border py-1 text-xs font-medium transition-colors",
                   connectionFilter === opt.id
@@ -415,9 +428,10 @@ export function MouseCatalogView({
               <button
                 key={opt.id}
                 type="button"
-                onClick={() =>
-                  setMouseSwitchFilter(opt.id as "all" | MouseSwitchType)
-                }
+                onClick={() => {
+                  setMouseSwitchFilter(opt.id as "all" | MouseSwitchType);
+                  onFilterMutated();
+                }}
                 className={cn(
                   "rounded-md border py-1 text-xs font-medium transition-colors",
                   mouseSwitchFilter === opt.id
@@ -441,7 +455,10 @@ export function MouseCatalogView({
               <button
                 key={sen}
                 type="button"
-                onClick={() => setSensorKeyword(sen)}
+                onClick={() => {
+                  setSensorKeyword(sen);
+                  onFilterMutated();
+                }}
                 className={cn(
                   "rounded-md border px-2 py-1 font-mono text-xs font-medium transition-colors",
                   sensorKeyword === sen
@@ -457,7 +474,7 @@ export function MouseCatalogView({
       </CatalogSidebarShell>
 
       {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 마우스 스펙 카드 그리드 */}
-      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[calc(100vh+120px)]">
+      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[1360px]">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
           onSearchChange={(next) => {
