@@ -928,14 +928,13 @@ export function CommunityBoard() {
                     onClick={() => setCurrentPage(Math.max(1, safePage - 1))}
                     aria-label="이전 페이지"
                     className={cn(
-                      "inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors",
+                      "flex size-7 shrink-0 items-center justify-center rounded-md border transition-colors",
                       safePage <= 1
                         ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691]/40"
                         : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
                     )}
                   >
                     <ChevronLeft className="size-3.5" />
-                    <span>이전</span>
                   </button>
 
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -967,13 +966,12 @@ export function CommunityBoard() {
                     }
                     aria-label="다음 페이지"
                     className={cn(
-                      "inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors",
+                      "flex size-7 shrink-0 items-center justify-center rounded-md border transition-colors",
                       safePage >= totalPages
                         ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691]/40"
                         : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
                     )}
                   >
-                    <span>다음</span>
                     <ChevronRight className="size-3.5" />
                   </button>
                 </div>

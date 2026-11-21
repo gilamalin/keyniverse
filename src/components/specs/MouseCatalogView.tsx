@@ -457,7 +457,7 @@ export function MouseCatalogView({
       </CatalogSidebarShell>
 
       {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 마우스 스펙 카드 그리드 */}
-      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[calc(100vh-5.5rem)]">
+      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[calc(100vh+120px)]">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
           onSearchChange={(next) => {

@@ -466,14 +466,13 @@ export function CatalogPagination({
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         aria-label="이전 페이지"
         className={cn(
-          "inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors",
+          "flex size-7 shrink-0 items-center justify-center rounded-md border transition-colors",
           currentPage <= 1
             ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691]/40"
             : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
         )}
       >
         <ChevronLeft className="size-3.5" />
-        <span>이전</span>
       </button>
 
       {pages.map((item, idx) =>
@@ -507,13 +506,12 @@ export function CatalogPagination({
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         aria-label="다음 페이지"
         className={cn(
-          "inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors",
+          "flex size-7 shrink-0 items-center justify-center rounded-md border transition-colors",
           currentPage >= totalPages
             ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691]/40"
             : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
         )}
       >
-        <span>다음</span>
         <ChevronRight className="size-3.5" />
       </button>
     </nav>
