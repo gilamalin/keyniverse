@@ -389,9 +389,14 @@ export function saveStoredVote(vote: StoredVerifiedVote): void {
               updated_at: new Date().toISOString(),
             };
 
-      void supabase
-        .from("spec_votes")
-        .upsert(payload, { onConflict: "user_id,device_id" });
+      void (async () => {
+        const { error } = await supabase
+          .from("spec_votes")
+          .upsert(payload, { onConflict: "user_id,device_id" });
+        if (error) {
+          console.error("[KEYNIVERSE] saveStoredVote failed:", error);
+        }
+      })();
     }
     return;
   }
@@ -417,11 +422,16 @@ export function deleteStoredVote(deviceId: string): void {
     const supabase = createSupabaseBrowserClient();
     const userId = liveVoteUserId;
     if (supabase && userId) {
-      void supabase
-        .from("spec_votes")
-        .delete()
-        .eq("user_id", userId)
-        .eq("device_id", deviceId);
+      void (async () => {
+        const { error } = await supabase
+          .from("spec_votes")
+          .delete()
+          .eq("user_id", userId)
+          .eq("device_id", deviceId);
+        if (error) {
+          console.error("[KEYNIVERSE] deleteStoredVote failed:", error);
+        }
+      })();
     }
     return;
   }

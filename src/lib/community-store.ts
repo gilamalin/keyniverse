@@ -518,7 +518,14 @@ export function incrementPostView(postId: string): void {
 
     const supabase = createSupabaseBrowserClient();
     if (supabase) {
-      void supabase.rpc("increment_post_view", { target_post_id: postId });
+      void (async () => {
+        const { error } = await supabase.rpc("increment_post_view", {
+          target_post_id: postId,
+        });
+        if (error) {
+          console.error("[KEYNIVERSE] increment_post_view failed:", error);
+        }
+      })();
     }
     return;
   }
@@ -646,10 +653,18 @@ export function toggleDealPostStatus(
 
     const supabase = createSupabaseBrowserClient();
     if (supabase && nextDealMeta) {
-      void supabase
-        .from("posts")
-        .update({ deal_meta: nextDealMeta, updated_at: new Date().toISOString() })
-        .eq("id", postId);
+      void (async () => {
+        const { error } = await supabase
+          .from("posts")
+          .update({
+            deal_meta: nextDealMeta,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", postId);
+        if (error) {
+          console.error("[KEYNIVERSE] toggleDealPostStatus failed:", error);
+        }
+      })();
     }
     return;
   }
@@ -735,14 +750,19 @@ export function updateCommunityComment(
 
     const supabase = createSupabaseBrowserClient();
     if (supabase) {
-      void supabase
-        .from("comments")
-        .update({
-          content: sanitized,
-          is_edited: true,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", commentId);
+      void (async () => {
+        const { error } = await supabase
+          .from("comments")
+          .update({
+            content: sanitized,
+            is_edited: true,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", commentId);
+        if (error) {
+          console.error("[KEYNIVERSE] updateCommunityComment failed:", error);
+        }
+      })();
     }
     return;
   }
@@ -769,7 +789,15 @@ export function deleteCommunityComment(commentId: string): void {
 
     const supabase = createSupabaseBrowserClient();
     if (supabase) {
-      void supabase.from("comments").delete().eq("id", commentId);
+      void (async () => {
+        const { error } = await supabase
+          .from("comments")
+          .delete()
+          .eq("id", commentId);
+        if (error) {
+          console.error("[KEYNIVERSE] deleteCommunityComment failed:", error);
+        }
+      })();
     }
     return;
   }
@@ -860,37 +888,42 @@ export function updateCommunityPost(
 
     const supabase = createSupabaseBrowserClient();
     if (supabase) {
-      void supabase
-        .from("posts")
-        .update({
-          ...(normalizedPatch.category !== undefined
-            ? { category: normalizedPatch.category }
-            : {}),
-          ...(normalizedPatch.title !== undefined
-            ? { title: normalizedPatch.title }
-            : {}),
-          ...(normalizedPatch.content !== undefined
-            ? { content: normalizedPatch.content }
-            : {}),
-          ...(normalizedPatch.contentHtml !== undefined
-            ? { content_html: normalizedPatch.contentHtml ?? null }
-            : {}),
-          ...(normalizedPatch.taggedDeviceSlugs !== undefined
-            ? { tagged_device_slugs: normalizedPatch.taggedDeviceSlugs }
-            : {}),
-          ...(normalizedPatch.buildMeta !== undefined
-            ? { build_meta: normalizedPatch.buildMeta ?? null }
-            : {}),
-          ...(normalizedPatch.vsMeta !== undefined
-            ? { vs_meta: normalizedPatch.vsMeta ?? null }
-            : {}),
-          ...(normalizedPatch.dealMeta !== undefined
-            ? { deal_meta: normalizedPatch.dealMeta ?? null }
-            : {}),
-          is_edited: true,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", postId);
+      void (async () => {
+        const { error } = await supabase
+          .from("posts")
+          .update({
+            ...(normalizedPatch.category !== undefined
+              ? { category: normalizedPatch.category }
+              : {}),
+            ...(normalizedPatch.title !== undefined
+              ? { title: normalizedPatch.title }
+              : {}),
+            ...(normalizedPatch.content !== undefined
+              ? { content: normalizedPatch.content }
+              : {}),
+            ...(normalizedPatch.contentHtml !== undefined
+              ? { content_html: normalizedPatch.contentHtml ?? null }
+              : {}),
+            ...(normalizedPatch.taggedDeviceSlugs !== undefined
+              ? { tagged_device_slugs: normalizedPatch.taggedDeviceSlugs }
+              : {}),
+            ...(normalizedPatch.buildMeta !== undefined
+              ? { build_meta: normalizedPatch.buildMeta ?? null }
+              : {}),
+            ...(normalizedPatch.vsMeta !== undefined
+              ? { vs_meta: normalizedPatch.vsMeta ?? null }
+              : {}),
+            ...(normalizedPatch.dealMeta !== undefined
+              ? { deal_meta: normalizedPatch.dealMeta ?? null }
+              : {}),
+            is_edited: true,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", postId);
+        if (error) {
+          console.error("[KEYNIVERSE] updateCommunityPost failed:", error);
+        }
+      })();
     }
     return;
   }
@@ -920,7 +953,15 @@ export function deleteCommunityPost(postId: string): void {
 
     const supabase = createSupabaseBrowserClient();
     if (supabase) {
-      void supabase.from("posts").delete().eq("id", postId);
+      void (async () => {
+        const { error } = await supabase
+          .from("posts")
+          .delete()
+          .eq("id", postId);
+        if (error) {
+          console.error("[KEYNIVERSE] deleteCommunityPost failed:", error);
+        }
+      })();
     }
     return;
   }
