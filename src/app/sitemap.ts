@@ -40,14 +40,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const switchRoutes: MetadataRoute.Sitemap = INITIAL_SWITCHES.map((sw) => ({
-    url: `${SITE_URL}/specs?tab=switches&open=${encodeURIComponent(sw.slug)}`,
+    url: `${SITE_URL}/specs?tab=switches&amp;open=${encodeURIComponent(sw.slug)}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
   const mouseRoutes: MetadataRoute.Sitemap = INITIAL_MICE.map((ms) => ({
-    url: `${SITE_URL}/specs?tab=mice&open=${encodeURIComponent(ms.slug)}`,
+    url: `${SITE_URL}/specs?tab=mice&amp;open=${encodeURIComponent(ms.slug)}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: 0.6,
