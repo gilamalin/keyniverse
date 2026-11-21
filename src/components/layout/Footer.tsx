@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Cpu } from "lucide-react";
+import { KeyniverseLogo } from "@/components/layout/KeyniverseLogo";
 
 export function Footer() {
   return (
@@ -12,10 +12,10 @@ export function Footer() {
               href="/"
               className="group inline-flex items-center gap-2 focus:outline-none"
             >
-              <div className="flex size-7 items-center justify-center rounded-md border border-[#282D2A] bg-[#1A1D1B] text-[#6B9080] transition-colors group-hover:border-[#6B9080] group-hover:bg-[#222623]">
-                <Cpu className="size-4" />
+              <div className="flex size-7 items-center justify-center rounded-md border border-[#282D2A] bg-[#1A1D1B] transition-colors group-hover:border-[#6B9080] group-hover:bg-[#222623]">
+                <KeyniverseLogo className="size-5" />
               </div>
-              <span className="text-sm font-bold tracking-wider text-[#E4E6E1]">
+              <span className="text-sm font-bold tracking-wider text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
                 KEYNIVERSE
               </span>
             </Link>

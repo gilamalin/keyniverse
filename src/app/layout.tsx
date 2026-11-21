@@ -22,9 +22,41 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KEYNIVERSE | 8K 게이밍 기어 정밀 계측 연구소",
+  metadataBase: new URL("https://keyniverse.vercel.app"),
+  title: {
+    default: "KEYNIVERSE | 게이밍 키보드·마우스 커뮤니티 & 스펙 연구소",
+    template: "%s",
+  },
   description:
-    "고정밀 키보드 채터링·동시입력(NKRO) 테스트 및 8K 마우스 폴링레이트·더블클릭 진단 웹 유틸리티",
+    "게이밍 키보드 스위치·마우스 스펙 도감, 8K 폴링레이트·채터링 정밀 웹 테스트, 하드웨어 공식 커뮤니티 KEYNIVERSE",
+  keywords: [
+    "KEYNIVERSE",
+    "키니버스",
+    "게이밍 마우스 스펙",
+    "키보드 스위치 도감",
+    "자석축 스위치",
+    "키보드 채터링 테스트",
+    "마우스 8K 폴링레이트 테스트",
+    "마우스 더블클릭 테스트",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "/",
+    siteName: "KEYNIVERSE",
+    title: "KEYNIVERSE | 게이밍 키보드·마우스 커뮤니티 & 스펙 연구소",
+    description:
+      "스위치 61종 · 마우스 40종 스펙 도감, 8K 폴링레이트·채터링 정밀 테스트, 하드웨어 커뮤니티",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KEYNIVERSE | 게이밍 키보드·마우스 커뮤니티 & 스펙 연구소",
+    description:
+      "스위치 61종 · 마우스 40종 스펙 도감, 8K 폴링레이트·채터링 정밀 테스트, 하드웨어 커뮤니티",
+  },
 };
 
 export default function RootLayout({

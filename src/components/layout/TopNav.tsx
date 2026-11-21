@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   BookOpen,
-  Cpu,
   Keyboard,
   LogOut,
   Menu,
@@ -13,6 +12,7 @@ import {
   Mouse,
   X,
 } from "lucide-react";
+import { KeyniverseLogo } from "@/components/layout/KeyniverseLogo";
 import {
   getAuthStoreVersion,
   getServerAuthStoreVersion,
@@ -111,8 +111,8 @@ export function TopNav() {
             onClick={() => setMobileMenuOpen(false)}
             className="group flex shrink-0 items-center gap-2.5 focus:outline-none"
           >
-            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-card text-sage transition-colors group-hover:border-sage group-hover:bg-surface-elevated">
-              <Cpu className="size-5" />
+            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-card transition-colors group-hover:border-sage group-hover:bg-surface-elevated">
+              <KeyniverseLogo className="size-7" />
             </div>
             <span className="text-base font-bold tracking-wider text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
               KEYNIVERSE
