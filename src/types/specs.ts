@@ -24,7 +24,13 @@ export const SWITCH_CATEGORY_LABELS: Record<SwitchCategory, string> = {
   magnetic: "자석축",
 };
 
-export type SpringType = "1단" | "2단" | null;
+export type SpringType = "1단" | "2단" | "3단" | null;
+
+export type SwitchPinCount = 0 | 2 | 3 | 5;
+
+export function formatSwitchPins(pins: SwitchPinCount): string {
+  return pins === 0 ? "무핀" : `${pins}핀`;
+}
 
 export interface SwitchMaterials {
   top: string;
@@ -112,8 +118,8 @@ export interface SwitchSpec {
   materials: SwitchMaterials;
   /** 공장 윤활 여부 */
   factoryLubed: boolean;
-  /** 핀 방식 (3핀 / 5핀) */
-  pins: 3 | 5;
+  /** 핀 방식 (무핀 / 2핀 / 3핀 / 5핀) */
+  pins: SwitchPinCount;
   /** 외부 이미지 대신 스위치 단면 그래픽을 표현하기 위한 컬러 조합 */
   colorway: SwitchColorway;
   /** 정형화된 체감 투표 및 실측 인증 로그 데이터 */

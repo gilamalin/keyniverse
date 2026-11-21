@@ -3,13 +3,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { Check, Star } from "lucide-react";
 import {
+  formatSwitchPins,
   SWITCH_CATEGORY_LABELS,
   SwitchCategory,
   SwitchCommunityData,
+  SwitchPinCount,
   SwitchSpec,
 } from "@/types/specs";
 import { SwitchCrossSectionIcon } from "@/components/specs/SpecVisuals";
 import {
+  CATALOG_ITEMS_PER_PAGE,
+  CatalogPagination,
   CatalogSearchSortBar,
   CatalogSidebarShell,
   CatalogSortOption,
@@ -95,12 +99,13 @@ export function SwitchCatalogView({
   const [lubeFilter, setLubeFilter] = useState<"all" | "lubed" | "unlubed">(
     "all"
   );
-  const [pinFilter, setPinFilter] = useState<"all" | 3 | 5>("all");
+  const [pinFilter, setPinFilter] = useState<"all" | SwitchPinCount>("all");
   const [springLengthFilter, setSpringLengthFilter] = useState<
     "all" | "long_20_plus" | "under_20"
   >("all");
   const [materialKeyword, setMaterialKeyword] = useState<string>("ALL");
   const [sortOption, setSortOption] = useState<SwitchSortOption>("rating_desc");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // 전달받은 스위치 목록에서 제조사(Brand) 동적 추출 (하드코딩 제거)
   const availableBrands = useMemo(
@@ -132,6 +137,7 @@ export function SwitchCatalogView({
     setSpringLengthFilter("all");
     setMaterialKeyword("ALL");
     setSearchQuery("");
+    setCurrentPage(1);
   };
 
   const activeFilterCount = useMemo(() => {
@@ -248,6 +254,23 @@ export function SwitchCatalogView({
     sortOption,
     communities,
   ]);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredSwitches.length / CATALOG_ITEMS_PER_PAGE)
+  );
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedSwitches = useMemo(() => {
+    const startIdx = (safePage - 1) * CATALOG_ITEMS_PER_PAGE;
+    return filteredSwitches.slice(startIdx, startIdx + CATALOG_ITEMS_PER_PAGE);
+  }, [filteredSwitches, safePage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
@@ -443,18 +466,25 @@ export function SwitchCatalogView({
             <span className="mb-1.5 block text-xs font-semibold text-[#E4E6E1]">
               핀 방식
             </span>
-            <div className="grid grid-cols-3 gap-1">
-              {[
-                { id: "all", label: "전체" },
-                { id: 5, label: "5핀" },
-                { id: 3, label: "3핀" },
-              ].map((opt) => (
+            <div className="grid grid-cols-5 gap-1">
+              {(
+                [
+                  { id: "all", label: "전체" },
+                  { id: 5, label: "5핀" },
+                  { id: 3, label: "3핀" },
+                  { id: 2, label: "2핀" },
+                  { id: 0, label: "무핀" },
+                ] as Array<{ id: "all" | SwitchPinCount; label: string }>
+              ).map((opt) => (
                 <button
                   key={String(opt.id)}
                   type="button"
-                  onClick={() => setPinFilter(opt.id as "all" | 3 | 5)}
+                  onClick={() => {
+                    setPinFilter(opt.id);
+                    setCurrentPage(1);
+                  }}
                   className={cn(
-                    "rounded-md border py-1 text-center font-mono text-xs font-medium transition-colors tabular-nums",
+                    "rounded-md border py-1 text-center font-mono text-[11px] font-medium transition-colors tabular-nums",
                     pinFilter === opt.id
                       ? "border-[#6B9080] bg-[#222623] text-[#E4E6E1]"
                       : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:text-[#E4E6E1]"
@@ -472,13 +502,19 @@ export function SwitchCatalogView({
       <section className="flex min-w-0 flex-1 flex-col gap-4">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
+          onSearchChange={(next) => {
+            setSearchQuery(next);
+            setCurrentPage(1);
+          }}
           searchPlaceholder="스위치명, 브랜드(HMX, 체리, 게이트론), 소재(POM, LY) 검색..."
           totalCount={filteredSwitches.length}
           sortAriaLabel="스위치 정렬 기준"
           sortValue={sortOption}
           sortOptions={SWITCH_SORT_OPTIONS}
-          onSortChange={setSortOption}
+          onSortChange={(next) => {
+            setSortOption(next);
+            setCurrentPage(1);
+          }}
         />
 
         {compareLimitNotice && (
@@ -492,22 +528,24 @@ export function SwitchCatalogView({
         {filteredSwitches.length === 0 ? (
           <EmptyFilterState onReset={resetFilters} />
         ) : (
-          <div
-            className={cn(
-              "grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-4",
-              compareIds.length > 0 && "pb-20"
-            )}
-          >
-            {filteredSwitches.map((sw) => (
-              <SwitchSpecCard
-                key={sw.id}
-                spec={sw}
-                community={communities[sw.id] ?? sw.community}
-                isCompared={compareIds.includes(sw.id)}
-                onToggleCompare={() => onToggleCompare(sw.id)}
-                onOpenDetail={() => onOpenDetail(sw.id)}
-              />
-            ))}
+          <div className={cn("flex flex-col gap-4", compareIds.length > 0 && "pb-20")}>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-4">
+              {paginatedSwitches.map((sw) => (
+                <SwitchSpecCard
+                  key={sw.id}
+                  spec={sw}
+                  community={communities[sw.id] ?? sw.community}
+                  isCompared={compareIds.includes(sw.id)}
+                  onToggleCompare={() => onToggleCompare(sw.id)}
+                  onOpenDetail={() => onOpenDetail(sw.id)}
+                />
+              ))}
+            </div>
+            <CatalogPagination
+              currentPage={safePage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
         )}
       </section>
@@ -584,7 +622,7 @@ function SwitchSpecCard({
               <span className="text-[#8F9691]">({community.reviewCount})</span>
             </span>
             <span className="rounded bg-[#151816] px-1.5 py-0.5 font-mono text-[10px] text-[#8F9691] tabular-nums">
-              {spec.pins}핀
+              {formatSwitchPins(spec.pins)}
             </span>
             <span className="rounded bg-[#151816] px-1.5 py-0.5 text-[10px] text-[#8F9691]">
               {spec.factoryLubed ? "공장 윤활" : "비윤활"}

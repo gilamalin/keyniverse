@@ -1,9 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpDown, Filter, RotateCcw, Search, X } from "lucide-react";
+import {
+  ArrowUpDown,
+  ChevronLeft,
+  ChevronRight,
+  Filter,
+  RotateCcw,
+  Search,
+  X,
+} from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
+
+export const CATALOG_ITEMS_PER_PAGE = 12;
 
 interface CatalogSidebarShellProps {
   title: string;
@@ -327,5 +337,96 @@ export function RangeSliderWithInputs({
         </span>
       </div>
     </div>
+  );
+}
+
+interface CatalogPaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+export function CatalogPagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: CatalogPaginationProps) {
+  if (totalPages <= 1) return null;
+
+  const pages: Array<number | "ellipsis"> = [];
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i += 1) pages.push(i);
+  } else {
+    pages.push(1);
+    if (currentPage > 3) pages.push("ellipsis");
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+    for (let i = start; i <= end; i += 1) pages.push(i);
+    if (currentPage < totalPages - 2) pages.push("ellipsis");
+    pages.push(totalPages);
+  }
+
+  return (
+    <nav
+      aria-label="스펙 목록 페이지 이동"
+      className="flex items-center justify-center gap-1.5 rounded-xl border border-[#282D2A] bg-[#1A1D1B] px-3 py-2.5 font-mono text-xs tabular-nums"
+    >
+      <button
+        type="button"
+        disabled={currentPage <= 1}
+        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+        aria-label="이전 페이지"
+        className={cn(
+          "inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors",
+          currentPage <= 1
+            ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691]/40"
+            : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
+        )}
+      >
+        <ChevronLeft className="size-3.5" />
+        <span>이전</span>
+      </button>
+
+      {pages.map((item, idx) =>
+        item === "ellipsis" ? (
+          <span
+            key={`ellipsis-${idx}`}
+            className="px-1 text-xs text-[#8F9691]"
+          >
+            …
+          </span>
+        ) : (
+          <button
+            key={item}
+            type="button"
+            onClick={() => onPageChange(item)}
+            className={cn(
+              "flex h-7 min-w-7 items-center justify-center rounded-md border px-2 text-xs font-semibold transition-colors",
+              item === currentPage
+                ? "border-[#6B9080] bg-[#222623] text-[#E4E6E1]"
+                : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080]/50 hover:text-[#E4E6E1]"
+            )}
+          >
+            {item}
+          </button>
+        )
+      )}
+
+      <button
+        type="button"
+        disabled={currentPage >= totalPages}
+        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+        aria-label="다음 페이지"
+        className={cn(
+          "inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors",
+          currentPage >= totalPages
+            ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691]/40"
+            : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
+        )}
+      >
+        <span>다음</span>
+        <ChevronRight className="size-3.5" />
+      </button>
+    </nav>
   );
 }

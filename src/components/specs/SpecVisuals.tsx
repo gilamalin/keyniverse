@@ -1,11 +1,11 @@
 "use client";
 
-import { MouseShape, SwitchColorway } from "@/types/specs";
+import { MouseShape, SwitchColorway, SwitchPinCount } from "@/types/specs";
 import { cn } from "@/lib/utils";
 
 interface SwitchCrossSectionIconProps {
   colorway: SwitchColorway;
-  pins: 3 | 5;
+  pins: SwitchPinCount;
   className?: string;
 }
 
@@ -72,11 +72,24 @@ export function SwitchCrossSectionIcon({
           strokeWidth="1.2"
         />
 
-        {/* 중앙 기둥 및 양옆 가이드 핀 (3핀 vs 5핀) */}
-        <rect x="21.5" y="37.5" width="5" height="6" rx="1.5" fill={colorway.bottomHex} />
-        <rect x="14.5" y="37.5" width="2" height="5" rx="0.5" fill="#D4A373" />
-        <rect x="31.5" y="37.5" width="2" height="5" rx="0.5" fill="#D4A373" />
-        {pins === 5 && (
+        {/* 하단 핀 구조 (무핀 / 2핀 / 3핀 / 5핀) */}
+        {pins !== 0 && (
+          <rect
+            x="21.5"
+            y="37.5"
+            width="5"
+            height="6"
+            rx="1.5"
+            fill={colorway.bottomHex}
+          />
+        )}
+        {(pins === 3 || pins === 5) && (
+          <>
+            <rect x="14.5" y="37.5" width="2" height="5" rx="0.5" fill="#D4A373" />
+            <rect x="31.5" y="37.5" width="2" height="5" rx="0.5" fill="#D4A373" />
+          </>
+        )}
+        {(pins === 2 || pins === 5) && (
           <>
             <rect
               x="17.8"

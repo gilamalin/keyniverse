@@ -178,7 +178,10 @@ export async function fetchCatalogSpecsFromSupabase(): Promise<{
           stem: row.material_stem,
         },
         factoryLubed: row.factory_lubed,
-        pins: row.pins === 3 ? 3 : 5,
+        pins:
+          row.pins === 0 || row.pins === 2 || row.pins === 3 || row.pins === 5
+            ? row.pins
+            : 5,
         colorway: {
           topHex: row.color_top_hex,
           bottomHex: row.color_bottom_hex,

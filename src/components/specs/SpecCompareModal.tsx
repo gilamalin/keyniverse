@@ -12,6 +12,7 @@ import {
   SpecTabType,
   SwitchCommunityData,
   SwitchSpec,
+  formatSwitchPins,
 } from "@/types/specs";
 import { MIN_SAMPLE_THRESHOLD } from "@/lib/spec-verification";
 import { acquireBodyScrollLock } from "@/lib/body-scroll-lock";
@@ -642,7 +643,9 @@ function SwitchCompareTable({
           {switches.map((sw) => (
             <td key={sw.id} className={cn(DATA_CELL, "text-[#E4E6E1]")}>
               {sw.factoryLubed ? "윤활" : "비윤활"} ·{" "}
-              <span className="font-mono tabular-nums">{sw.pins}핀</span>
+              <span className="font-mono tabular-nums">
+                {formatSwitchPins(sw.pins)}
+              </span>
             </td>
           ))}
         </tr>

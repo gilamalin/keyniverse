@@ -14,6 +14,8 @@ import {
 } from "@/types/specs";
 import { MouseSilhouetteIcon } from "@/components/specs/SpecVisuals";
 import {
+  CATALOG_ITEMS_PER_PAGE,
+  CatalogPagination,
   CatalogSearchSortBar,
   CatalogSidebarShell,
   CatalogSortOption,
@@ -89,6 +91,7 @@ export function MouseCatalogView({
   >("all");
   const [sensorKeyword, setSensorKeyword] = useState<string>("ALL");
   const [sortOption, setSortOption] = useState<MouseSortOption>("rating_desc");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // 전달받은 마우스 목록에서 제조사(Brand) 동적 추출 (하드코딩 제거)
   const availableBrands = useMemo(
@@ -119,6 +122,7 @@ export function MouseCatalogView({
     setMouseSwitchFilter("all");
     setSensorKeyword("ALL");
     setSearchQuery("");
+    setCurrentPage(1);
   };
 
   const activeFilterCount = useMemo(() => {
@@ -226,6 +230,23 @@ export function MouseCatalogView({
     sortOption,
     communities,
   ]);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredMice.length / CATALOG_ITEMS_PER_PAGE)
+  );
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedMice = useMemo(() => {
+    const startIdx = (safePage - 1) * CATALOG_ITEMS_PER_PAGE;
+    return filteredMice.slice(startIdx, startIdx + CATALOG_ITEMS_PER_PAGE);
+  }, [filteredMice, safePage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
@@ -435,13 +456,19 @@ export function MouseCatalogView({
       <section className="flex min-w-0 flex-1 flex-col gap-4">
         <CatalogSearchSortBar
           searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
+          onSearchChange={(next) => {
+            setSearchQuery(next);
+            setCurrentPage(1);
+          }}
           searchPlaceholder="마우스명, 브랜드(Razer, 지슈라, Lamzu), 센서(PAW3950) 검색..."
           totalCount={filteredMice.length}
           sortAriaLabel="마우스 정렬 기준"
           sortValue={sortOption}
           sortOptions={MOUSE_SORT_OPTIONS}
-          onSortChange={setSortOption}
+          onSortChange={(next) => {
+            setSortOption(next);
+            setCurrentPage(1);
+          }}
         />
 
         {compareLimitNotice && (
@@ -455,22 +482,24 @@ export function MouseCatalogView({
         {filteredMice.length === 0 ? (
           <EmptyFilterState onReset={resetFilters} />
         ) : (
-          <div
-            className={cn(
-              "grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-4",
-              compareIds.length > 0 && "pb-20"
-            )}
-          >
-            {filteredMice.map((ms) => (
-              <MouseSpecCard
-                key={ms.id}
-                spec={ms}
-                community={communities[ms.id] ?? ms.community}
-                isCompared={compareIds.includes(ms.id)}
-                onToggleCompare={() => onToggleCompare(ms.id)}
-                onOpenDetail={() => onOpenDetail(ms.id)}
-              />
-            ))}
+          <div className={cn("flex flex-col gap-4", compareIds.length > 0 && "pb-20")}>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(275px,1fr))] gap-4">
+              {paginatedMice.map((ms) => (
+                <MouseSpecCard
+                  key={ms.id}
+                  spec={ms}
+                  community={communities[ms.id] ?? ms.community}
+                  isCompared={compareIds.includes(ms.id)}
+                  onToggleCompare={() => onToggleCompare(ms.id)}
+                  onOpenDetail={() => onOpenDetail(ms.id)}
+                />
+              ))}
+            </div>
+            <CatalogPagination
+              currentPage={safePage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
         )}
       </section>

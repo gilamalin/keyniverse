@@ -39,6 +39,7 @@ import {
   SwitchCommunityData,
   SwitchPitchChoice,
   SwitchSpec,
+  formatSwitchPins,
 } from "@/types/specs";
 import {
   KEYBOARD_MIN_KEY_PRESSES,
@@ -339,7 +340,11 @@ export function SpecDetailModal({
                     label="공장 윤활"
                     value={switchSpec.factoryLubed ? "윤활" : "비윤활"}
                   />
-                  <SpecRow label="핀" value={`${switchSpec.pins}핀`} mono />
+                  <SpecRow
+                    label="핀"
+                    value={formatSwitchPins(switchSpec.pins)}
+                    mono
+                  />
                 </div>
               </div>
             ) : (
