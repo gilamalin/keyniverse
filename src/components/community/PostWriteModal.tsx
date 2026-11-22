@@ -220,10 +220,13 @@ export function PostWriteModal({
   );
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const initializedPostIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     const el = editorRef.current;
     if (!el || !editingPost) return;
+    if (initializedPostIdRef.current === editingPost.id) return;
+    initializedPostIdRef.current = editingPost.id;
     if (editingPost.contentHtml) {
       el.innerHTML = editingPost.contentHtml;
     } else if (editingPost.content) {
