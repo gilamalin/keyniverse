@@ -24,6 +24,20 @@ export interface GoogleUserSession {
   nicknameChangedAt?: string | null;
   /** Supabase profiles.points 실시간 스냅샷 */
   points?: number;
+  /** 권한 ('user' | 'admin') */
+  role?: "user" | "admin";
+  /** 활동 정지 만료 시각 (ISO 문자열) */
+  bannedUntil?: string | null;
+}
+
+export function isSessionAdmin(session: GoogleUserSession | null): boolean {
+  return session?.role === "admin";
+}
+
+export function isSessionBanned(session: GoogleUserSession | null): boolean {
+  if (!session?.bannedUntil) return false;
+  const untilMs = new Date(session.bannedUntil).getTime();
+  return !Number.isNaN(untilMs) && untilMs > Date.now();
 }
 
 const AUTH_STORAGE_KEY = "keyniverse_google_auth_v1";
@@ -183,7 +197,7 @@ async function fetchAndCacheSupabaseSession(): Promise<void> {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("nickname, email, points, nickname_changed_at")
+    .select("nickname, email, points, nickname_changed_at, role, banned_until")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -200,6 +214,8 @@ async function fetchAndCacheSupabaseSession(): Promise<void> {
     needsNicknameSetup,
     nicknameChangedAt: profile?.nickname_changed_at ?? null,
     points: typeof profile?.points === "number" ? profile.points : 50,
+    role: profile?.role === "admin" ? "admin" : "user",
+    bannedUntil: profile?.banned_until ?? null,
   };
   hasResolvedAuthSession = true;
   notifyAuthListeners();

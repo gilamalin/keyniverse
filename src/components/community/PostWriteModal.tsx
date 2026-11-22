@@ -23,7 +23,11 @@ import {
   CommunityImageAttachment,
   CommunityPost,
 } from "@/types/community";
-import { GoogleUserSession } from "@/lib/auth-store";
+import {
+  GoogleUserSession,
+  isSessionAdmin,
+  isSessionBanned,
+} from "@/lib/auth-store";
 import {
   POST_HTML_MAX_LENGTH,
   POST_MAX_LINES,
@@ -373,6 +377,11 @@ export function PostWriteModal({
       setErrorMsg("게시글 제목을 입력해 주세요.");
       return;
     }
+    if (isSessionBanned(session)) {
+      setErrorMsg("현재 활동 정지 상태에서는 게시글을 작성할 수 없습니다.");
+      return;
+    }
+
     if (!rawText && attachments.length === 0) {
       setErrorMsg("게시글 본문 내용을 입력하거나 이미지를 첨부해 주세요.");
       return;
@@ -457,6 +466,7 @@ export function PostWriteModal({
     const newPost: CommunityPost = {
       id: createEntityId("post"),
       category,
+      noticeScope: category === "notice" ? "all" : undefined,
       title: sanitizedTitle,
       content: sanitizedText,
       contentHtml: sanitizedHtml,
@@ -535,9 +545,16 @@ export function PostWriteModal({
           <span className="mb-1.5 block text-xs font-semibold text-[#E4E6E1]">
             게시판
           </span>
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+          <div
+            className={cn(
+              "grid grid-cols-2 gap-1.5",
+              isSessionAdmin(session) ? "sm:grid-cols-5" : "sm:grid-cols-4"
+            )}
+          >
             {(
-              ["diagnosis", "build", "vs", "deal"] as CommunityCategory[]
+              (isSessionAdmin(session)
+                ? ["notice", "diagnosis", "build", "vs", "deal"]
+                : ["diagnosis", "build", "vs", "deal"]) as CommunityCategory[]
             ).map((cat) => (
               <button
                 key={cat}
@@ -554,6 +571,11 @@ export function PostWriteModal({
               </button>
             ))}
           </div>
+          {isSessionBanned(session) && (
+            <p className="mt-2 rounded-lg border border-[#E06C75]/50 bg-[#151816] px-3 py-2 text-xs text-[#E06C75]">
+              현재 활동 정지 상태에서는 게시글을 작성할 수 없습니다.
+            </p>
+          )}
         </div>
 
         {/* 게시글 제목 (최대 80자 제한 + 연속 공백 자동 압축) */}

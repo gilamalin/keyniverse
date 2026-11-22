@@ -56,7 +56,7 @@ export default function OpenGraphImage() {
             style={{
               fontSize: "74px",
               fontWeight: 800,
-              letterSpacing: "0.06em",
+              letterSpacing: "0.01em",
               color: "#F4F6F2",
               lineHeight: 1.05,
             }}

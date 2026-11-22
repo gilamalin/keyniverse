@@ -10,6 +10,7 @@ import {
   Menu,
   MessageSquare,
   Mouse,
+  Shield,
   X,
 } from "lucide-react";
 import { KeyniverseLogo } from "@/components/layout/KeyniverseLogo";
@@ -114,9 +115,14 @@ export function TopNav() {
             <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-card transition-colors group-hover:border-sage group-hover:bg-surface-elevated">
               <KeyniverseLogo className="size-7" />
             </div>
-            <span className="text-base font-bold tracking-wider text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
-              KEYNIVERSE
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-base font-bold tracking-tight text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
+                KEYNIVERSE
+              </span>
+              <span className="rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 py-0.5 font-mono text-[9px] leading-none font-semibold tracking-wider text-[#6B9080]">
+                BETA
+              </span>
+            </div>
           </Link>
 
           {/* 우측 통합 영역: 데스크톱(880px+) 메뉴 + 상시 노출 로그인/프로필 + 모바일(880px 미만) 햄버거 팝오버 */}
@@ -166,6 +172,22 @@ export function TopNav() {
                   isMyPage ? "border-[#6B9080]" : "border-[#282D2A]"
                 )}
               >
+                {session.role === "admin" && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    title="관리자"
+                    aria-label="관리자"
+                    className={cn(
+                      "flex size-6 shrink-0 items-center justify-center rounded border transition-colors",
+                      pathname.startsWith("/admin")
+                        ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
+                        : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#6B9080]"
+                    )}
+                  >
+                    <Shield className="size-3.5" />
+                  </Link>
+                )}
                 <Link
                   href="/mypage"
                   onClick={() => setMobileMenuOpen(false)}

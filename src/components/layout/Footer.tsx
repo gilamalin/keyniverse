@@ -15,8 +15,11 @@ export function Footer() {
               <div className="flex size-7 items-center justify-center rounded-md border border-[#282D2A] bg-[#1A1D1B] transition-colors group-hover:border-[#6B9080] group-hover:bg-[#222623]">
                 <KeyniverseLogo className="size-5" />
               </div>
-              <span className="text-sm font-bold tracking-wider text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
+              <span className="text-sm font-bold tracking-tight text-[#C9CFCB] transition-colors group-hover:text-[#E4E6E1]">
                 KEYNIVERSE
+              </span>
+              <span className="rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1 py-0.5 font-mono text-[9px] leading-none font-semibold tracking-wider text-[#6B9080]">
+                BETA
               </span>
             </Link>
             <span className="text-[#282D2A]" aria-hidden="true">

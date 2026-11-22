@@ -27,7 +27,12 @@ import {
   CommunityComment,
   CommunityPost,
 } from "@/types/community";
-import { GoogleUserSession, openAuthModal } from "@/lib/auth-store";
+import {
+  GoogleUserSession,
+  isSessionAdmin,
+  isSessionBanned,
+  openAuthModal,
+} from "@/lib/auth-store";
 import {
   COMMENT_CLAMP_LINES,
   COMMENT_MAX_LENGTH,
@@ -467,18 +472,21 @@ export function PostDetailModal({
             <span>·</span>
             <span>조회 {(post.views ?? 42).toLocaleString()}</span>
 
-            {post.isMyPost && post.category !== "notice" && (
+            {((post.isMyPost && post.category !== "notice") ||
+              isSessionAdmin(session)) && (
               <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => onEditPost(post.id)}
-                  title="내 게시글 수정"
-                  aria-label="내 게시글 수정"
-                  className="inline-flex items-center gap-1 rounded border border-[#282D2A] bg-[#1A1D1B] px-2 py-1 font-sans text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
-                >
-                  <Pencil className="size-3 text-[#6B9080]" />
-                  <span>수정</span>
-                </button>
+                {post.isMyPost && (
+                  <button
+                    type="button"
+                    onClick={() => onEditPost(post.id)}
+                    title="내 게시글 수정"
+                    aria-label="내 게시글 수정"
+                    className="inline-flex items-center gap-1 rounded border border-[#282D2A] bg-[#1A1D1B] px-2 py-1 font-sans text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
+                  >
+                    <Pencil className="size-3 text-[#6B9080]" />
+                    <span>수정</span>
+                  </button>
+                )}
 
                 <button
                   type="button"
@@ -489,8 +497,8 @@ export function PostDetailModal({
                       title: post.title,
                     })
                   }
-                  title="내 게시글 삭제"
-                  aria-label="내 게시글 삭제"
+                  title={post.isMyPost ? "내 게시글 삭제" : "관리자 게시글 삭제"}
+                  aria-label={post.isMyPost ? "내 게시글 삭제" : "관리자 게시글 삭제"}
                   className="inline-flex items-center gap-1 rounded border border-[#282D2A] bg-[#1A1D1B] px-2 py-1 font-sans text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#E06C75] hover:text-[#E06C75]"
                 >
                   <Trash2 className="size-3.5 text-[#E06C75]" />
@@ -912,26 +920,46 @@ export function PostDetailModal({
                               </button>
                             </>
                           ) : (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (!session) {
-                                  openAuthModal(
-                                    "신고는 로그인 후 이용할 수 있습니다."
-                                  );
-                                  return;
-                                }
-                                setReportTarget({
-                                  targetType: isReply ? "reply" : "comment",
-                                  targetId: cmt.id,
-                                });
-                              }}
-                              title={isReply ? "답글 신고" : "댓글 신고"}
-                              aria-label={isReply ? "답글 신고" : "댓글 신고"}
-                              className="flex h-5 w-5 shrink-0 items-center justify-center rounded text-[#E06C75]/75 transition-colors hover:text-[#E06C75]"
-                            >
-                              <Siren className="size-3.5" />
-                            </button>
+                            <>
+                              {isSessionAdmin(session) && (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setConfirmDeleteTarget({
+                                      kind: "comment",
+                                      commentId: cmt.id,
+                                      isReply,
+                                      preview: cmt.content.slice(0, 40),
+                                    })
+                                  }
+                                  title="관리자 댓글 삭제"
+                                  aria-label="관리자 댓글 삭제"
+                                  className="flex h-5 w-5 shrink-0 items-center justify-center rounded text-[#8F9691] transition-colors hover:text-[#E06C75]"
+                                >
+                                  <Trash2 className="size-3.5" />
+                                </button>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (!session) {
+                                    openAuthModal(
+                                      "신고는 로그인 후 이용할 수 있습니다."
+                                    );
+                                    return;
+                                  }
+                                  setReportTarget({
+                                    targetType: isReply ? "reply" : "comment",
+                                    targetId: cmt.id,
+                                  });
+                                }}
+                                title={isReply ? "답글 신고" : "댓글 신고"}
+                                aria-label={isReply ? "답글 신고" : "댓글 신고"}
+                                className="flex h-5 w-5 shrink-0 items-center justify-center rounded text-[#E06C75]/75 transition-colors hover:text-[#E06C75]"
+                              >
+                                <Siren className="size-3.5" />
+                              </button>
+                            </>
                           )}
                         </div>
                       </div>
@@ -1108,16 +1136,16 @@ export function PostDetailModal({
                 </span>
                 <button
                   type="submit"
-                  disabled={!commentText.trim()}
+                  disabled={!commentText.trim() || isSessionBanned(session)}
                   className={cn(
                     "inline-flex shrink-0 items-center gap-1.5 rounded-md border px-3.5 py-1 text-xs font-bold whitespace-nowrap transition-colors",
-                    commentText.trim()
+                    commentText.trim() && !isSessionBanned(session)
                       ? "border-[#6B9080] bg-[#6B9080] text-[#121413] hover:bg-[#7CA291]"
                       : "cursor-not-allowed border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] opacity-60"
                   )}
                 >
                   <Send className="size-3" />
-                  <span>등록</span>
+                  <span>{isSessionBanned(session) ? "정지됨" : "등록"}</span>
                 </button>
               </div>
             </form>
