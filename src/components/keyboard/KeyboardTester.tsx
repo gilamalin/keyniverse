@@ -218,12 +218,18 @@ export function KeyboardTester() {
       });
     };
 
-    const finalizeKeyRelease = (code: string, releaseTime: number) => {
+    const finalizeKeyRelease = (
+      code: string,
+      releaseTime: number,
+      isSynthetic = false
+    ) => {
       const entry = pressedDownAtRef.current.get(code);
       if (!entry) return;
 
       const holdMs = Math.max(0, releaseTime - entry.downAt);
-      lastUpAtRef.current.set(code, releaseTime);
+      if (!isSynthetic) {
+        lastUpAtRef.current.set(code, releaseTime);
+      }
       pressedDownAtRef.current.delete(code);
 
       setKeyStates((prev) => {
@@ -259,7 +265,7 @@ export function KeyboardTester() {
         return;
       }
 
-      const now = performance.now();
+      const now = e.timeStamp > 0 ? e.timeStamp : performance.now();
       const prevUp = lastUpAtRef.current.get(code);
       const intervalMs = prevUp !== undefined ? Math.max(0, now - prevUp) : null;
       const isChatter =
@@ -313,7 +319,7 @@ export function KeyboardTester() {
         }
         const timerId = window.setTimeout(() => {
           imeTimeoutRef.current.delete(code);
-          finalizeKeyRelease(code, performance.now());
+          finalizeKeyRelease(code, performance.now(), true);
         }, 150);
         imeTimeoutRef.current.set(code, timerId);
       }
@@ -332,7 +338,7 @@ export function KeyboardTester() {
         imeTimeoutRef.current.delete(code);
       }
 
-      const now = performance.now();
+      const now = e.timeStamp > 0 ? e.timeStamp : performance.now();
 
       if (pressedDownAtRef.current.has(code)) {
         finalizeKeyRelease(code, now);

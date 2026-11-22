@@ -668,7 +668,8 @@ export function MouseTester() {
 
     if (buttonDownAtRef.current.has(e.button)) return;
 
-    const now = performance.now();
+    const now =
+      e.nativeEvent.timeStamp > 0 ? e.nativeEvent.timeStamp : performance.now();
     const prevUp = buttonLastUpAtRef.current.get(e.button);
     const intervalMs = prevUp !== undefined ? Math.max(0, now - prevUp) : null;
     const isFault =
@@ -709,6 +710,35 @@ export function MouseTester() {
     );
   };
 
+  const finalizeSwitchRelease = useCallback(
+    (button: number, releaseTime: number) => {
+      const entry = buttonDownAtRef.current.get(button);
+      if (!entry) return;
+
+      const holdMs = Math.max(0, releaseTime - entry.downAt);
+      buttonLastUpAtRef.current.set(button, releaseTime);
+      buttonDownAtRef.current.delete(button);
+
+      setSwitchStates((prev) => {
+        const current = prev[button];
+        if (!current) return prev;
+        return {
+          ...prev,
+          [button]: {
+            ...current,
+            isPressed: false,
+            lastHoldMs: holdMs,
+          },
+        };
+      });
+
+      setSwitchLogs((prev) =>
+        prev.map((log) => (log.id === entry.logId ? { ...log, holdMs } : log))
+      );
+    },
+    []
+  );
+
   const handleSwitchMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -717,30 +747,9 @@ export function MouseTester() {
       lastSideClickAtRef.current = performance.now();
     }
 
-    const entry = buttonDownAtRef.current.get(e.button);
-    if (!entry) return;
-
-    const now = performance.now();
-    const holdMs = Math.max(0, now - entry.downAt);
-    buttonLastUpAtRef.current.set(e.button, now);
-    buttonDownAtRef.current.delete(e.button);
-
-    setSwitchStates((prev) => {
-      const current = prev[e.button];
-      if (!current) return prev;
-      return {
-        ...prev,
-        [e.button]: {
-          ...current,
-          isPressed: false,
-          lastHoldMs: holdMs,
-        },
-      };
-    });
-
-    setSwitchLogs((prev) =>
-      prev.map((log) => (log.id === entry.logId ? { ...log, holdMs } : log))
-    );
+    const now =
+      e.nativeEvent.timeStamp > 0 ? e.nativeEvent.timeStamp : performance.now();
+    finalizeSwitchRelease(e.button, now);
   };
 
   const releaseAllSwitchButtons = useCallback(() => {
@@ -756,9 +765,19 @@ export function MouseTester() {
   }, []);
 
   useEffect(() => {
+    const handleGlobalMouseUp = (e: MouseEvent) => {
+      if (!buttonDownAtRef.current.has(e.button)) return;
+      const now = e.timeStamp > 0 ? e.timeStamp : performance.now();
+      finalizeSwitchRelease(e.button, now);
+    };
+
+    window.addEventListener("mouseup", handleGlobalMouseUp);
     window.addEventListener("blur", releaseAllSwitchButtons);
-    return () => window.removeEventListener("blur", releaseAllSwitchButtons);
-  }, [releaseAllSwitchButtons]);
+    return () => {
+      window.removeEventListener("mouseup", handleGlobalMouseUp);
+      window.removeEventListener("blur", releaseAllSwitchButtons);
+    };
+  }, [finalizeSwitchRelease, releaseAllSwitchButtons]);
 
   const totalSwitchFaults = useMemo(
     () =>
