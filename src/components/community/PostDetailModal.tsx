@@ -475,12 +475,13 @@ export function PostDetailModal({
             {((post.isMyPost && post.category !== "notice") ||
               isSessionAdmin(session)) && (
               <div className="flex items-center gap-1.5">
-                {post.isMyPost && (
+                {(post.isMyPost ||
+                  (isSessionAdmin(session) && post.category === "notice")) && (
                   <button
                     type="button"
                     onClick={() => onEditPost(post.id)}
-                    title="내 게시글 수정"
-                    aria-label="내 게시글 수정"
+                    title="게시글 수정"
+                    aria-label="게시글 수정"
                     className="inline-flex items-center gap-1 rounded border border-[#282D2A] bg-[#1A1D1B] px-2 py-1 font-sans text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
                   >
                     <Pencil className="size-3 text-[#6B9080]" />

@@ -377,10 +377,12 @@ export function computeEffectiveCommunityPosts(
 } {
   if (!isClientReady) {
     return {
-      posts: INITIAL_COMMUNITY_POSTS.map((p) => ({
-        ...p,
-        views: getBaseViewCount(p),
-      })),
+      posts: isSupabaseConfigured()
+        ? []
+        : INITIAL_COMMUNITY_POSTS.map((p) => ({
+            ...p,
+            views: getBaseViewCount(p),
+          })),
       upvotedPostIds: new Set<string>(),
       vsChoices: {},
     };
@@ -399,17 +401,13 @@ export function computeEffectiveCommunityPosts(
     ...liveSupabaseVsChoices,
   };
 
-  // Supabase DB 게시글(UUID)을 최상단에 배치하고, 로컬 전용 게시글과 초기 더미 게시글을 중복 없이 합침
+  // Supabase 연동 시 실제 DB 게시글만 표시 (더미 게시글 제거)
   const dbPostIds = new Set(liveSupabasePosts.map((p) => p.id));
-  const localCustomPosts = isSupabaseConfigured()
-    ? state.customPosts.filter((p) => !isUuid(p.id) && !dbPostIds.has(p.id))
-    : state.customPosts;
-
-  const rawAll = [
-    ...liveSupabasePosts,
-    ...localCustomPosts,
-    ...INITIAL_COMMUNITY_POSTS,
-  ].filter((p) => !deletedPostSet.has(p.id));
+  const rawAll = isSupabaseConfigured()
+    ? [...liveSupabasePosts].filter((p) => !deletedPostSet.has(p.id))
+    : [...state.customPosts, ...INITIAL_COMMUNITY_POSTS].filter(
+        (p) => !deletedPostSet.has(p.id)
+      );
 
   const merged = rawAll.map((rawPost) => {
     const isDbPost = dbPostIds.has(rawPost.id);
@@ -903,6 +901,16 @@ export function updateCommunityPost(
           .update({
             ...(normalizedPatch.category !== undefined
               ? { category: normalizedPatch.category }
+              : {}),
+            ...(normalizedPatch.category !== undefined ||
+            normalizedPatch.noticeScope !== undefined
+              ? {
+                  notice_scope:
+                    normalizedPatch.category &&
+                    normalizedPatch.category !== "notice"
+                      ? null
+                      : (normalizedPatch.noticeScope ?? null),
+                }
               : {}),
             ...(normalizedPatch.title !== undefined
               ? { title: normalizedPatch.title }

@@ -173,6 +173,11 @@ export function PostWriteModal({
       : []
   );
 
+  // 0) [공지사항] 전용 노출 게시판 범위 (관리자 전용)
+  const [noticeScope, setNoticeScope] = useState<
+    "all" | "diagnosis" | "build" | "vs" | "deal"
+  >(editingPost?.noticeScope ?? "all");
+
   // 1) [빌드/셋업] 전용 필드
   const [boardName, setBoardName] = useState<string>(
     editingPost?.buildMeta?.boardName ?? ""
@@ -418,6 +423,7 @@ export function PostWriteModal({
     if (isEditMode && editingPost && onUpdatePost) {
       onUpdatePost(editingPost.id, {
         category,
+        noticeScope: category === "notice" ? noticeScope : undefined,
         title: sanitizedTitle,
         content: sanitizedText,
         contentHtml: sanitizedHtml,
@@ -466,7 +472,7 @@ export function PostWriteModal({
     const newPost: CommunityPost = {
       id: createEntityId("post"),
       category,
-      noticeScope: category === "notice" ? "all" : undefined,
+      noticeScope: category === "notice" ? noticeScope : undefined,
       title: sanitizedTitle,
       content: sanitizedText,
       contentHtml: sanitizedHtml,
@@ -571,6 +577,38 @@ export function PostWriteModal({
               </button>
             ))}
           </div>
+          {isSessionAdmin(session) && category === "notice" && (
+            <div className="mt-3 rounded-lg border border-[#282D2A] bg-[#151816] p-3">
+              <span className="mb-1.5 block text-xs font-semibold text-[#E4E6E1]">
+                공지 고정 게시판
+              </span>
+              <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-5">
+                {(
+                  [
+                    { id: "all", label: "전체" },
+                    { id: "diagnosis", label: "자유 게시판" },
+                    { id: "build", label: "빌드/셋업" },
+                    { id: "vs", label: "투표" },
+                    { id: "deal", label: "특가/드랍" },
+                  ] as const
+                ).map((scope) => (
+                  <button
+                    key={scope.id}
+                    type="button"
+                    onClick={() => setNoticeScope(scope.id)}
+                    className={cn(
+                      "rounded-md border py-1.5 text-xs font-semibold transition-colors",
+                      noticeScope === scope.id
+                        ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
+                        : "border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] hover:text-[#E4E6E1]"
+                    )}
+                  >
+                    {scope.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           {isSessionBanned(session) && (
             <p className="mt-2 rounded-lg border border-[#E06C75]/50 bg-[#151816] px-3 py-2 text-xs text-[#E06C75]">
               현재 활동 정지 상태에서는 게시글을 작성할 수 없습니다.

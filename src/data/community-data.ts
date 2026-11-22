@@ -1,12 +1,12 @@
 import { CommunityPost, InFeedNativeSponsor } from "@/types/community";
 
 export const IN_FEED_SPONSOR_ITEM: InFeedNativeSponsor = {
-  id: "sponsor-swagkey-2026",
+  id: "sponsor-sample-infeed",
   badgeLabel: "[AD]",
-  title: "스웨그키 2026 신규 리니어 특주축 3종 입고 및 샘플러 이벤트",
-  specChip: "HMX 신금형 · 45gf · 22mm",
-  ctaLabel: "공식 스토어 · 310원/개 ↗",
-  href: "/specs?tab=switches",
+  title: "[예시] 브랜드 신제품 · 공제 인피드 스폰서 영역",
+  specChip: "PARTNER SAMPLE",
+  ctaLabel: "제휴 문의 ↗",
+  href: "/policy?tab=partnership",
 };
 
 export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [

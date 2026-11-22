@@ -28,39 +28,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#E4E6E1"
     },
     "community": {
-      "ratingAvg": 4.8,
-      "reviewCount": 28,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 2,
-        "mid": 6,
-        "high": 20
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-1",
-          "createdAt": "2026-11-15",
-          "rating": 5,
-          "structuredSummary": "순정 윤활 상태가 깔끔하고 하이피치 클래키 소리가 시원하게 잘 올라옵니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        },
-        {
-          "id": "log-sw-2",
-          "createdAt": "2026-11-12",
-          "rating": 5,
-          "structuredSummary": "스템 흔들림이 적고 22mm 롱스프링 반발력이 경쾌해서 장시간 타건도 편합니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        },
-        {
-          "id": "log-sw-3",
-          "createdAt": "2026-11-10",
-          "rating": 4,
-          "structuredSummary": "PC 보강판에 쓰면 적당히 정제된 미들~하이피치라 호불호가 적어요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -89,31 +64,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#F2D0A9"
     },
     "community": {
-      "ratingAvg": 4.9,
-      "reviewCount": 22,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 2,
-        "mid": 9,
-        "high": 11
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-4",
-          "createdAt": "2026-11-14",
-          "rating": 5,
-          "structuredSummary": "LY 스템 특유의 매끄러운 슬라이딩과 맑은 도각임이 인상적입니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        },
-        {
-          "id": "log-sw-5",
-          "createdAt": "2026-11-11",
-          "rating": 5,
-          "structuredSummary": "압력이 가벼워 손가락 피로도가 낮고 공장 윤활 편차가 거의 없어요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -142,23 +100,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#C99E93"
     },
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 19,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 15,
-        "mid": 3,
-        "high": 1
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-6",
-          "createdAt": "2026-11-13",
-          "rating": 5,
-          "structuredSummary": "묵직하고 차분한 로우피치 음색이라 폼떡 빌드와 궁합이 정말 좋습니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -187,23 +136,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#3E4340"
     },
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 25,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 19,
-        "mid": 5,
-        "high": 1
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-7",
-          "createdAt": "2026-11-09",
-          "rating": 5,
-          "structuredSummary": "따로 윤활할 필요 없이 깊고 묵직한 로우피치 타건음을 바로 즐길 수 있습니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -232,23 +172,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#181A19"
     },
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 3,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 1,
-        "mid": 2,
+        "low": 0,
+        "mid": 0,
         "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-8",
-          "createdAt": "2026-11-08",
-          "rating": 5,
-          "structuredSummary": "구흑 대비 서걱임이 크게 줄었고 순정 상태에서도 클래식한 타건감이 살아있어요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -277,23 +208,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#D4A373"
     },
     "community": {
-      "ratingAvg": 4.8,
-      "reviewCount": 21,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 14,
-        "mid": 6,
-        "high": 1
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-9",
-          "createdAt": "2026-11-11",
-          "rating": 5,
-          "structuredSummary": "상단에서 바로 걸리는 둥글고 확실한 구분감 덕분에 택타일 끝판왕 느낌입니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -322,23 +244,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#F0C4B3"
     },
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 30,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 22,
-        "mid": 7,
-        "high": 1
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-10",
-          "createdAt": "2026-11-14",
-          "rating": 5,
-          "structuredSummary": "사무실에서 눈치 안 보고 쓸 수 있을 만큼 정숙하고 가격 대비 완성도가 높아요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -367,23 +280,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#C7E0AE"
     },
     "community": {
-      "ratingAvg": 4.5,
-      "reviewCount": 2,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 2,
+        "low": 0,
         "mid": 0,
         "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-11",
-          "createdAt": "2026-11-12",
-          "rating": 5,
-          "structuredSummary": "가벼운 저소음 택타일이라 조용한 환경에서도 적당한 걸림감을 느낄 수 있어요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -412,23 +316,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#6B9080"
     },
     "community": {
-      "ratingAvg": 4.8,
-      "reviewCount": 4,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
         "low": 0,
-        "mid": 1,
-        "high": 3
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-12",
-          "createdAt": "2026-11-06",
-          "rating": 5,
-          "structuredSummary": "클릭바 특유의 찰칵거리는 타건감이 독보적이라 가끔 치면 스트레스가 확 풀립니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -457,23 +352,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#A8C6C7"
     },
     "community": {
-      "ratingAvg": 4.6,
-      "reviewCount": 16,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 4,
-        "mid": 9,
-        "high": 3
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-13",
-          "createdAt": "2026-11-14",
-          "rating": 5,
-          "structuredSummary": "V1 대비 유격이 확실히 줄었고 래피드 트리거 0.1mm 세팅에서도 오입력이 없어요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -502,23 +388,14 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "stemHex": "#DCE8E1"
     },
     "community": {
-      "ratingAvg": 4.9,
-      "reviewCount": 24,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "pitchVotes": {
-        "low": 2,
-        "mid": 7,
-        "high": 15
+        "low": 0,
+        "mid": 0,
+        "high": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-sw-14",
-          "createdAt": "2026-11-15",
-          "rating": 5,
-          "structuredSummary": "하단이 막힌 구조라 자석축인데도 일반 커스텀 기계식처럼 맑은 소리가 납니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2344,37 +2221,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Razer 3세대",
     "colorAccentHex": "#6B9080",
     "community": {
-      "ratingAvg": 4.9,
-      "reviewCount": 34,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 7,
-        "claw": 22,
-        "finger": 5
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 2,
-        "f9": 12,
-        "f10": 16,
-        "f11_plus": 4
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-1",
-          "createdAt": "2026-11-15",
-          "rating": 5,
-          "structuredSummary": "코팅이 손에 착 감기고 54g 무게 밸런스가 완벽해서 클로 그립에 딱 맞습니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        },
-        {
-          "id": "log-ms-2",
-          "createdAt": "2026-11-14",
-          "rating": 5,
-          "structuredSummary": "8K 무선 안정성이 뛰어나고 기본 피트 슬라이딩도 별도 교체 없이 충분해요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2397,37 +2257,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "LIGHTFORCE",
     "colorAccentHex": "#8F9691",
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 40,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 13,
-        "claw": 20,
-        "finger": 7
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 5,
-        "f9": 18,
-        "f10": 13,
-        "f11_plus": 4
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-3",
-          "createdAt": "2026-11-14",
-          "rating": 5,
-          "structuredSummary": "무난한 감자 쉘이라 어떤 그립으로 잡아도 적응이 빠르고 배터리가 오래 갑니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        },
-        {
-          "id": "log-ms-4",
-          "createdAt": "2026-11-12",
-          "rating": 4,
-          "structuredSummary": "클릭압이 전작보다 살짝 묵직하지만 광학 스위치라 더블클릭 걱정이 없네요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2450,29 +2293,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Razer 3세대",
     "colorAccentHex": "#6B9080",
     "community": {
-      "ratingAvg": 4.8,
-      "reviewCount": 25,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 16,
-        "claw": 8,
-        "finger": 1
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 1,
-        "f9": 4,
-        "f10": 12,
-        "f11_plus": 8
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-5",
-          "createdAt": "2026-11-11",
-          "rating": 5,
-          "structuredSummary": "큰 손 팜 그립 기준 손바닥을 빈틈없이 받쳐줘서 장시간 FPS에도 손목이 편해요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2495,29 +2329,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Omron",
     "colorAccentHex": "#D4A373",
     "community": {
-      "ratingAvg": 4.8,
-      "reviewCount": 18,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 2,
-        "claw": 10,
-        "finger": 6
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 1,
-        "f9": 6,
-        "f10": 8,
-        "f11_plus": 3
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-6",
-          "createdAt": "2026-11-13",
-          "rating": 5,
-          "structuredSummary": "마그네슘 쉘 42g 초경량인데도 유격 없이 단단하고 옴론 광학 클릭감이 경쾌합니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2540,29 +2365,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Omron",
     "colorAccentHex": "#6B9080",
     "community": {
-      "ratingAvg": 4.9,
-      "reviewCount": 20,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 4,
-        "claw": 12,
-        "finger": 4
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 2,
-        "f9": 9,
-        "f10": 8,
-        "f11_plus": 1
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-7",
-          "createdAt": "2026-11-15",
-          "rating": 5,
-          "structuredSummary": "47g 가벼운 무게에 호불호 없는 대칭형 쉘이라 지슈라에서 넘어가기 딱 좋네요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2585,29 +2401,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Omron",
     "colorAccentHex": "#D4A373",
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 16,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 1,
-        "claw": 8,
-        "finger": 7
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 5,
-        "f9": 8,
-        "f10": 3,
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
         "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-8",
-          "createdAt": "2026-11-11",
-          "rating": 5,
-          "structuredSummary": "38g 체감 무게가 압도적이고 작은 쉘이라 핑거팁으로 미세 에임 잡기 편합니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2630,29 +2437,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Kailh GX",
     "colorAccentHex": "#8F9691",
     "community": {
-      "ratingAvg": 4.9,
-      "reviewCount": 26,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 1,
-        "claw": 17,
-        "finger": 8
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 6,
-        "f9": 13,
-        "f10": 6,
-        "f11_plus": 1
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-9",
-          "createdAt": "2026-11-13",
-          "rating": 5,
-          "structuredSummary": "유선이지만 케이블이 가볍고 Kailh GX 클릭 응답 속도가 정말 빠릿합니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2675,29 +2473,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Raesha",
     "colorAccentHex": "#6B9080",
     "community": {
-      "ratingAvg": 4.8,
-      "reviewCount": 4,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
         "palm": 0,
-        "claw": 2,
-        "finger": 2
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 2,
-        "f9": 2,
+        "f1_f8": 0,
+        "f9": 0,
         "f10": 0,
         "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-10",
-          "createdAt": "2026-11-07",
-          "rating": 5,
-          "structuredSummary": "낮은 앞코와 아담한 사이즈 덕분에 작은 손 클로·핑거 그립에 잘 맞습니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2720,29 +2509,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Huano 핑크닷",
     "colorAccentHex": "#8F9691",
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 3,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 1,
-        "claw": 2,
+        "palm": 0,
+        "claw": 0,
         "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 1,
-        "f9": 2,
+        "f1_f8": 0,
+        "f9": 0,
         "f10": 0,
         "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-11",
-          "createdAt": "2026-11-08",
-          "rating": 5,
-          "structuredSummary": "백시 특유의 쫀득한 클릭감과 단단한 빌드 퀄리티가 60g 무게감을 잊게 해줍니다.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {
@@ -2765,29 +2545,20 @@ export const INITIAL_MICE: MouseSpec[] = [
     "switchModel": "Huano 블루쉘 핑크닷",
     "colorAccentHex": "#8F9691",
     "community": {
-      "ratingAvg": 4.7,
-      "reviewCount": 15,
+      "ratingAvg": 0,
+      "reviewCount": 0,
       "gripVotes": {
-        "palm": 2,
-        "claw": 11,
-        "finger": 2
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
       },
       "handSizeVotes": {
-        "f1_f8": 2,
-        "f9": 8,
-        "f10": 4,
-        "f11_plus": 1
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
       },
-      "telemetryLogs": [
-        {
-          "id": "log-ms-12",
-          "createdAt": "2026-11-09",
-          "rating": 5,
-          "structuredSummary": "양옆이 오목하게 파여 있어 엄지·약지 고정이 확실하고 클로 그립 안정감이 높아요.",
-          "badgeText": "⚡ 실측 인증",
-          "badgeTone": "sand"
-        }
-      ]
+      "telemetryLogs": []
     }
   },
   {

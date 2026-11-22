@@ -260,10 +260,9 @@ export function CommunityBoard() {
   );
 
   const isWriteMode = modeParam === "write" && Boolean(session);
+  const isCommunityLoading = communityVersion === 0 || !isCommunitySynced();
   const isLoadingSelectedPost =
-    Boolean(postParam) &&
-    !selectedPost &&
-    (communityVersion === 0 || !isCommunitySynced());
+    Boolean(postParam) && !selectedPost && isCommunityLoading;
 
   // 도감 장비 슬러그 -> 이름·탭 매핑 테이블
   const deviceLookupMap = useMemo(() => {
@@ -277,33 +276,60 @@ export function CommunityBoard() {
     return map;
   }, []);
 
-  // 우측 위젯 1: 인기글 TOP 5 (공지글을 제외한 일반 게시글 중 추천수 기준 상위 5개)
+  // 우측 위젯 1: 인기글 (최근 7일 내 일반 게시글 우선 → 5개 미만이면 전체 기간으로 보충)
   const popularTopPosts = useMemo(() => {
-    return effectivePosts
-      .filter((p) => p.category !== "notice")
-      .sort(
-        (a, b) =>
-          b.upvotes - a.upvotes ||
-          (b.views ?? 0) - (a.views ?? 0) ||
-          b.sortTimestamp - a.sortTimestamp
-      )
-      .slice(0, 5);
+    const nonNotice = effectivePosts.filter((p) => p.category !== "notice");
+    const byPopularity = (a: CommunityPost, b: CommunityPost) =>
+      b.upvotes - a.upvotes ||
+      (b.views ?? 0) - (a.views ?? 0) ||
+      b.sortTimestamp - a.sortTimestamp;
+
+    const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+    const latestTs = nonNotice.reduce(
+      (max, p) => Math.max(max, p.sortTimestamp),
+      0
+    );
+    const recentCutoff = latestTs > 0 ? latestTs - sevenDaysMs : 0;
+
+    const recentSorted = nonNotice
+      .filter((p) => p.sortTimestamp >= recentCutoff)
+      .sort(byPopularity);
+    if (recentSorted.length >= 5) {
+      return recentSorted.slice(0, 5);
+    }
+
+    const recentIds = new Set(recentSorted.map((p) => p.id));
+    const olderSorted = nonNotice
+      .filter((p) => !recentIds.has(p.id))
+      .sort(byPopularity);
+    return [...recentSorted, ...olderSorted].slice(0, 5);
   }, [effectivePosts]);
 
-  // 우측 위젯 2: 금주의 핫 VS 매치업 (가장 총 투표수가 많은 VS 게시글)
+  // 우측 위젯 2: 인기 투표 (최근 7일 내 VS 게시글 우선 → 없으면 전체 기간 중 최다 투표)
   const featuredVsPost = useMemo(() => {
     const vsPosts = effectivePosts.filter(
       (p) => p.category === "vs" && p.vsMeta
     );
-    return (
-      vsPosts.sort((a, b) => {
-        const totalA =
-          (a.vsMeta?.optionAVotes ?? 0) + (a.vsMeta?.optionBVotes ?? 0);
-        const totalB =
-          (b.vsMeta?.optionAVotes ?? 0) + (b.vsMeta?.optionBVotes ?? 0);
-        return totalB - totalA;
-      })[0] ?? null
+    if (vsPosts.length === 0) return null;
+
+    const byVotes = (a: CommunityPost, b: CommunityPost) => {
+      const totalA =
+        (a.vsMeta?.optionAVotes ?? 0) + (a.vsMeta?.optionBVotes ?? 0);
+      const totalB =
+        (b.vsMeta?.optionAVotes ?? 0) + (b.vsMeta?.optionBVotes ?? 0);
+      return totalB - totalA || b.sortTimestamp - a.sortTimestamp;
+    };
+
+    const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+    const latestTs = vsPosts.reduce(
+      (max, p) => Math.max(max, p.sortTimestamp),
+      0
     );
+    const recentVs = vsPosts.filter(
+      (p) => p.sortTimestamp >= latestTs - sevenDaysMs
+    );
+    const pool = recentVs.length > 0 ? recentVs : vsPosts;
+    return [...pool].sort(byVotes)[0] ?? null;
   }, [effectivePosts]);
 
   // 카테고리별 게시글 개수 집계
@@ -729,7 +755,22 @@ export function CommunityBoard() {
                   </Link>
 
                   {/* 일반 게시글 리스트 (1줄 고정 가로 행 · 제목만 온전히 표시) */}
-                  {paginatedPosts.length === 0 ? (
+                  {isCommunityLoading ? (
+                    <div className="divide-y divide-[#282D2A]" aria-busy="true">
+                      {Array.from({ length: 5 }).map((_, idx) => (
+                        <div
+                          key={`row-skeleton-${idx}`}
+                          className="flex items-center justify-between gap-3 px-3.5 py-3"
+                        >
+                          <div className="flex min-w-0 flex-1 items-center gap-2.5">
+                            <div className="h-5 w-[48px] shrink-0 animate-pulse rounded bg-[#222623]" />
+                            <div className="h-4 w-2/3 animate-pulse rounded bg-[#222623]" />
+                          </div>
+                          <div className="hidden h-3.5 w-36 animate-pulse rounded bg-[#151816] min-[780px]:block" />
+                        </div>
+                      ))}
+                    </div>
+                  ) : paginatedPosts.length === 0 ? (
                     <div className="px-6 py-14 text-center text-xs text-[#8F9691]">
                       조건에 일치하는 커뮤니티 게시글이 없습니다.
                     </div>
@@ -988,120 +1029,139 @@ export function CommunityBoard() {
               <div className="flex items-center gap-1.5">
                 <TrendingUp className="size-4 text-[#D4A373]" />
                 <h2 className="text-xs font-bold text-[#E4E6E1]">
-                  인기글 TOP 5
+                  인기글
                 </h2>
               </div>
             </div>
 
             <div className="flex-1 divide-y divide-[#282D2A] rounded-lg border border-[#282D2A] bg-[#151816]">
-              {popularTopPosts.map((item, idx) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => handleOpenPost(item.id)}
-                  className="group flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-xs whitespace-nowrap transition-colors hover:bg-[#222623]"
-                >
-                  <div className="flex min-w-0 flex-1 items-center gap-2">
-                    <span
-                      className={cn(
-                        "w-4 shrink-0 font-mono text-[11px] font-bold tabular-nums",
-                        idx === 0 ? "text-[#D4A373]" : "text-[#6B9080]"
-                      )}
-                    >
-                      0{idx + 1}
-                    </span>
-                    <span className="truncate font-medium text-[#E4E6E1] group-hover:text-[#6B9080]">
-                      {item.title}
-                    </span>
-                  </div>
+              {popularTopPosts.length === 0 ? (
+                <div className="px-3 py-6 text-center text-xs text-[#8F9691]">
+                  등록된 인기글이 없습니다.
+                </div>
+              ) : (
+                popularTopPosts.map((item, idx) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleOpenPost(item.id)}
+                    className="group flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-xs whitespace-nowrap transition-colors hover:bg-[#222623]"
+                  >
+                    <div className="flex min-w-0 flex-1 items-center gap-2">
+                      <span
+                        className={cn(
+                          "w-4 shrink-0 font-mono text-[11px] font-bold tabular-nums",
+                          idx === 0 ? "text-[#D4A373]" : "text-[#6B9080]"
+                        )}
+                      >
+                        0{idx + 1}
+                      </span>
+                      <span className="truncate font-medium text-[#E4E6E1] group-hover:text-[#6B9080]">
+                        {item.title}
+                      </span>
+                    </div>
 
-                  <span className="shrink-0 font-mono text-[11px] font-semibold text-[#D4A373] tabular-nums">
-                    {item.upvotes}
-                  </span>
-                </button>
-              ))}
+                    <span className="shrink-0 font-mono text-[11px] font-semibold text-[#D4A373] tabular-nums">
+                      {item.upvotes}
+                    </span>
+                  </button>
+                ))
+              )}
             </div>
           </div>
 
-          {/* 위젯 2: 금주의 핫 VS 매치업 미리보기 */}
-          {featuredVsPost && featuredVsPost.vsMeta && (
-            <div className="flex flex-col rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4">
-              <div className="mb-3 flex items-center border-b border-[#282D2A] pb-2.5">
-                <div className="flex items-center gap-1.5">
-                  <Swords className="size-4 text-[#6B9080]" />
-                  <h2 className="text-xs font-bold text-[#E4E6E1]">
-                    금주의 핫 VS 매치업
-                  </h2>
-                </div>
+          {/* 위젯 2: 인기 투표 미리보기 */}
+          <div className="flex flex-col rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4">
+            <div className="mb-3 flex items-center border-b border-[#282D2A] pb-2.5">
+              <div className="flex items-center gap-1.5">
+                <Swords className="size-4 text-[#6B9080]" />
+                <h2 className="text-xs font-bold text-[#E4E6E1]">인기 투표</h2>
               </div>
-
-              <p className="mb-3 line-clamp-1 text-xs font-medium text-[#E4E6E1]">
-                {featuredVsPost.title}
-              </p>
-
-              {(() => {
-                const aVotes = featuredVsPost.vsMeta.optionAVotes;
-                const bVotes = featuredVsPost.vsMeta.optionBVotes;
-                const total = Math.max(1, aVotes + bVotes);
-                const aPct = Math.round((aVotes / total) * 100);
-                const bPct = 100 - aPct;
-
-                return (
-                  <div className="flex flex-1 flex-col justify-between rounded-lg border border-[#282D2A] bg-[#151816] p-3">
-                    <div>
-                      <div className="mb-2 flex items-center justify-between gap-2 text-xs whitespace-nowrap">
-                        <span className="truncate font-semibold text-[#6B9080]">
-                          {featuredVsPost.vsMeta.optionAName}
-                        </span>
-                        <span className="font-mono text-[11px] font-bold text-[#6B9080] tabular-nums">
-                          {aPct}% ({aVotes}표)
-                        </span>
-                      </div>
-
-                      {/* 매트 2-톤 대결 비율 바 (#6B9080 vs #D4A373) */}
-                      <div className="my-2 flex h-2 w-full overflow-hidden rounded-full bg-[#282D2A]">
-                        <div
-                          className="h-full bg-[#6B9080]"
-                          style={{ width: `${aPct}%` }}
-                        />
-                        <div className="h-full w-[2px] shrink-0 bg-[#121413]" />
-                        <div
-                          className="h-full flex-1 bg-[#D4A373]"
-                          style={{ width: `${bPct}%` }}
-                        />
-                      </div>
-
-                      <div className="mt-2 flex items-center justify-between gap-2 text-xs whitespace-nowrap">
-                        <span className="truncate font-semibold text-[#D4A373]">
-                          {featuredVsPost.vsMeta.optionBName}
-                        </span>
-                        <span className="font-mono text-[11px] font-bold text-[#D4A373] tabular-nums">
-                          {bPct}% ({bVotes}표)
-                        </span>
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => handleOpenPost(featuredVsPost.id)}
-                      className="mt-3 w-full rounded-md border border-[#282D2A] bg-[#222623] py-1.5 text-center text-[11px] font-semibold text-[#E4E6E1] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
-                    >
-                      투표 참여 →
-                    </button>
-                  </div>
-                );
-              })()}
             </div>
-          )}
 
-          {/* 위젯 3: 우측 사이드바 하단 '다크 매트 스펙 카드형' AD 배너 슬롯 (640~1023px에서는 하단 가로형 배너) */}
+            {featuredVsPost && featuredVsPost.vsMeta ? (
+              <>
+                <p className="mb-3 line-clamp-1 text-xs font-medium text-[#E4E6E1]">
+                  {featuredVsPost.title}
+                </p>
+
+                {(() => {
+                  const aVotes = featuredVsPost.vsMeta.optionAVotes;
+                  const bVotes = featuredVsPost.vsMeta.optionBVotes;
+                  const sum = aVotes + bVotes;
+                  const aPct = sum === 0 ? 50 : Math.round((aVotes / sum) * 100);
+                  const bPct = 100 - aPct;
+
+                  return (
+                    <div className="flex flex-1 flex-col justify-between rounded-lg border border-[#282D2A] bg-[#151816] p-3">
+                      <div>
+                        <div className="mb-2 flex items-center justify-between gap-2 text-xs whitespace-nowrap">
+                          <span className="truncate font-semibold text-[#6B9080]">
+                            {featuredVsPost.vsMeta.optionAName}
+                          </span>
+                          <span className="font-mono text-[11px] font-bold text-[#6B9080] tabular-nums">
+                            {aPct}% ({aVotes}표)
+                          </span>
+                        </div>
+
+                        {/* 매트 2-톤 대결 비율 바 (#6B9080 vs #D4A373) */}
+                        <div className="my-2 flex h-2 w-full overflow-hidden rounded-full bg-[#282D2A]">
+                          <div
+                            className="h-full bg-[#6B9080]"
+                            style={{ width: `${aPct}%` }}
+                          />
+                          <div className="h-full w-[2px] shrink-0 bg-[#121413]" />
+                          <div
+                            className="h-full flex-1 bg-[#D4A373]"
+                            style={{ width: `${bPct}%` }}
+                          />
+                        </div>
+
+                        <div className="mt-2 flex items-center justify-between gap-2 text-xs whitespace-nowrap">
+                          <span className="truncate font-semibold text-[#D4A373]">
+                            {featuredVsPost.vsMeta.optionBName}
+                          </span>
+                          <span className="font-mono text-[11px] font-bold text-[#D4A373] tabular-nums">
+                            {bPct}% ({bVotes}표)
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleOpenPost(featuredVsPost.id)}
+                        className="mt-3 w-full rounded-md border border-[#282D2A] bg-[#222623] py-1.5 text-center text-[11px] font-semibold text-[#E4E6E1] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
+                      >
+                        투표 참여 →
+                      </button>
+                    </div>
+                  );
+                })()}
+              </>
+            ) : (
+              <div className="flex flex-1 flex-col items-center justify-center gap-3 rounded-lg border border-[#282D2A] bg-[#151816] px-3 py-6 text-center">
+                <p className="text-xs text-[#8F9691]">
+                  진행 중인 투표가 없습니다.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleOpenWritePage}
+                  className="rounded-md border border-[#282D2A] bg-[#222623] px-3 py-1.5 text-[11px] font-semibold text-[#E4E6E1] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
+                >
+                  투표 만들기 →
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* 위젯 3: 우측 사이드바 하단 스폰서 배너 예시 슬롯 */}
           <div className="rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 sm:col-span-2 lg:col-span-1">
             <div className="mb-3 flex items-center justify-between">
-              <span className="rounded border border-[#D4A373]/40 bg-[#222623] px-2 py-0.5 font-mono text-[10px] font-semibold text-[#D4A373]">
-                GROUP BUY DROP
-              </span>
-              <span className="font-mono text-[10px] tracking-wider text-[#8F9691]">
+              <span className="rounded border border-[#D4A373]/60 bg-[#D4A373]/15 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-[#D4A373]">
                 SPONSORED AD
+              </span>
+              <span className="rounded border border-[#282D2A] bg-[#151816] px-1.5 py-0.5 font-mono text-[9px] font-medium tracking-wider text-[#8F9691]">
+                SAMPLE
               </span>
             </div>
 
@@ -1119,35 +1179,35 @@ export function CommunityBoard() {
                 />
                 <div className="min-w-0 flex-1">
                   <h3 className="truncate text-sm font-bold text-[#E4E6E1]">
-                    GEON × HMX 보타니컬 리니어
+                    파트너 스폰서 카드 예시
                   </h3>
                   <p className="truncate font-mono text-[11px] text-[#8F9691]">
-                    Botanical Edition Custom Switch
+                    Partner Product Showcase
                   </p>
                 </div>
               </div>
 
-              {/* 핵심 스펙 요약 2줄 (1줄 고정 테이블) */}
+              {/* 안내 요약 2줄 */}
               <div className="divide-y divide-[#282D2A] rounded-lg border border-[#282D2A] bg-[#151816] text-xs md:w-[248px] md:shrink-0 lg:w-full">
                 <div className="flex items-center justify-between gap-2 px-3 py-1.5 whitespace-nowrap">
-                  <span className="text-[#8F9691]">스펙 요약</span>
-                  <span className="font-mono font-semibold text-[#E4E6E1] tabular-nums">
-                    45gf / 52gf · 3.5mm (22mm)
+                  <span className="text-[#8F9691]">노출 위치</span>
+                  <span className="font-mono font-semibold text-[#E4E6E1]">
+                    커뮤니티 사이드바
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-2 px-3 py-1.5 whitespace-nowrap">
-                  <span className="text-[#8F9691]">공제 단가 · 일정</span>
-                  <span className="font-mono font-semibold text-[#D4A373] tabular-nums">
-                    320원/개 · 11.24 마감
+                  <span className="text-[#8F9691]">대상</span>
+                  <span className="font-mono font-semibold text-[#D4A373]">
+                    키보드·마우스 브랜드
                   </span>
                 </div>
               </div>
 
               <Link
-                href="/specs?tab=switches"
+                href="/policy?tab=partnership"
                 className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-[#282D2A] bg-[#222623] px-3.5 py-2 text-xs font-semibold whitespace-nowrap text-[#E4E6E1] transition-colors hover:border-[#6B9080] hover:text-[#6B9080] sm:col-span-2 md:w-auto md:shrink-0 lg:w-full"
               >
-                <span>파트너 스토어 바로가기</span>
+                <span>광고/제휴 안내</span>
                 <ArrowUpRight className="size-3.5" />
               </Link>
             </div>
