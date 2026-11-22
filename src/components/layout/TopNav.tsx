@@ -5,12 +5,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   BookOpen,
+  Coins,
   Keyboard,
   LogOut,
   Menu,
   MessageSquare,
   Mouse,
   Shield,
+  User,
   X,
 } from "lucide-react";
 import { KeyniverseLogo } from "@/components/layout/KeyniverseLogo";
@@ -23,6 +25,13 @@ import {
   signOutGoogle,
   subscribeAuthStore,
 } from "@/lib/auth-store";
+import {
+  getActivityStoreVersion,
+  getServerActivityStoreVersion,
+  readPointLogs,
+  readTotalPoints,
+  subscribeActivityStore,
+} from "@/lib/activity-store";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { NicknameSetupModal } from "@/components/auth/NicknameSetupModal";
 import { cn } from "@/lib/utils";
@@ -30,51 +39,75 @@ import { cn } from "@/lib/utils";
 export function TopNav() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState<boolean>(false);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
+  const profileContainerRef = useRef<HTMLDivElement | null>(null);
 
   const authVersion = useSyncExternalStore(
     subscribeAuthStore,
     getAuthStoreVersion,
     getServerAuthStoreVersion
   );
+  const activityVersion = useSyncExternalStore(
+    subscribeActivityStore,
+    getActivityStoreVersion,
+    getServerActivityStoreVersion
+  );
 
   const session = authVersion > 0 ? readGoogleSession() : null;
+  const displayPoints =
+    session && activityVersion > 0
+      ? readPointLogs().length > 0
+        ? readTotalPoints()
+        : (session.points ?? readTotalPoints())
+      : (session?.points ?? 0);
 
   useEffect(() => {
     initSupabaseAuthSync();
   }, []);
 
   useEffect(() => {
-    if (!mobileMenuOpen) return;
+    if (!mobileMenuOpen && !profileMenuOpen) return;
 
-    const handleMouseDown = (e: MouseEvent) => {
+    const handlePointerDown = (e: PointerEvent) => {
+      const target = e.target as Node;
       if (
+        mobileMenuOpen &&
         menuContainerRef.current &&
-        !menuContainerRef.current.contains(e.target as Node)
+        !menuContainerRef.current.contains(target)
       ) {
         setMobileMenuOpen(false);
+      }
+      if (
+        profileMenuOpen &&
+        profileContainerRef.current &&
+        !profileContainerRef.current.contains(target)
+      ) {
+        setProfileMenuOpen(false);
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMobileMenuOpen(false);
+        setProfileMenuOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("pointerdown", handlePointerDown);
     window.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, profileMenuOpen]);
 
   const isCommunity = pathname === "/" || pathname.startsWith("/community");
   const isSpecs = pathname.startsWith("/specs");
   const isKeyboard = pathname.startsWith("/keyboard");
   const isMouse = pathname.startsWith("/mouse");
   const isMyPage = pathname.startsWith("/mypage");
+  const isAdmin = pathname.startsWith("/admin");
 
   const navItems = [
     {
@@ -106,11 +139,14 @@ export function TopNav() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
           <Link
             href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="group flex shrink-0 items-center gap-2.5 focus:outline-none"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setProfileMenuOpen(false);
+            }}
+            className="group flex shrink-0 items-center gap-2 focus:outline-none sm:gap-2.5"
           >
             <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-card transition-colors group-hover:border-sage group-hover:bg-surface-elevated">
               <KeyniverseLogo className="size-7" />
@@ -153,12 +189,13 @@ export function TopNav() {
               <div className="mx-1 h-5 w-px bg-border" />
             </nav>
 
-            {/* 상시 노출 로그인 / 유저 프로필 영역 (모바일에서는 햄버거 버튼 바로 왼쪽에 위치) */}
+            {/* 상시 노출 로그인 / 원형 프로필 아바타 드롭다운 */}
             {!session ? (
               <button
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
+                  setProfileMenuOpen(false);
                   openAuthModal();
                 }}
                 className="flex h-9 shrink-0 items-center justify-center rounded-lg border border-[#282D2A] bg-[#222623] px-3.5 text-xs font-semibold whitespace-nowrap text-[#E4E6E1] transition-colors hover:border-[#6B9080] hover:text-white"
@@ -166,51 +203,108 @@ export function TopNav() {
                 <span>로그인</span>
               </button>
             ) : (
-              <div
-                className={cn(
-                  "flex h-9 shrink-0 items-center gap-1.5 rounded-lg border bg-[#1A1D1B] px-2.5 whitespace-nowrap transition-colors lg:gap-2",
-                  isMyPage ? "border-[#6B9080]" : "border-[#282D2A]"
-                )}
-              >
-                {session.role === "admin" && (
-                  <Link
-                    href="/admin"
-                    onClick={() => setMobileMenuOpen(false)}
-                    title="관리자"
-                    aria-label="관리자"
-                    className={cn(
-                      "flex size-6 shrink-0 items-center justify-center rounded border transition-colors",
-                      pathname.startsWith("/admin")
-                        ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
-                        : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080] hover:text-[#6B9080]"
-                    )}
-                  >
-                    <Shield className="size-3.5" />
-                  </Link>
-                )}
-                <Link
-                  href="/mypage"
-                  onClick={() => setMobileMenuOpen(false)}
-                  title="마이페이지"
-                  className={cn(
-                    "max-w-[72px] truncate font-mono text-xs font-semibold transition-colors lg:max-w-none",
-                    isMyPage
-                      ? "text-[#6B9080]"
-                      : "text-[#B8BFBA] hover:text-[#E4E6E1]"
-                  )}
-                >
-                  {session.nickname || "닉네임 설정"}
-                </Link>
+              <div ref={profileContainerRef} className="relative shrink-0">
                 <button
                   type="button"
-                  onClick={() => void signOutGoogle()}
-                  title="로그아웃"
-                  aria-label="로그아웃"
-                  className="inline-flex items-center gap-1 rounded border border-[#282D2A] bg-[#151816] px-1.5 py-0.5 text-[11px] font-medium text-[#8F9691] transition-colors hover:border-[#E06C75] hover:text-[#E06C75] lg:px-2"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setProfileMenuOpen((prev) => !prev);
+                  }}
+                  aria-label="내 프로필 메뉴"
+                  aria-expanded={profileMenuOpen}
+                  aria-haspopup="menu"
+                  className={cn(
+                    "flex size-9 items-center justify-center rounded-full border transition-colors",
+                    profileMenuOpen || isMyPage || isAdmin
+                      ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
+                      : "border-[#282D2A] bg-[#1A1D1B] text-[#B8BFBA] hover:border-[#6B9080] hover:text-[#E4E6E1]"
+                  )}
                 >
-                  <LogOut className="size-3" />
-                  <span className="hidden lg:inline">로그아웃</span>
+                  <User className="size-4" />
                 </button>
+
+                {/* 원형 프로필 팝오버 (우측 정렬 · 150ms ease-out · 닫힘 시 pointer-events-none) */}
+                <div
+                  role="menu"
+                  aria-hidden={!profileMenuOpen}
+                  className={cn(
+                    "absolute top-full right-0 z-50 mt-2 w-52 origin-top-right rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-2 shadow-xl transition-all duration-150 ease-out",
+                    profileMenuOpen
+                      ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+                      : "pointer-events-none -translate-y-1 scale-95 opacity-0"
+                  )}
+                >
+                  {/* 상단 요약: 닉네임 + 보유 포인트 */}
+                  <div className="mb-1.5 rounded-lg border border-[#282D2A] bg-[#151816] px-3 py-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="truncate text-xs font-bold text-[#E4E6E1]">
+                        {session.nickname || "닉네임 설정"}
+                      </span>
+                      {session.role === "admin" && (
+                        <span className="shrink-0 rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 py-0.5 font-mono text-[9px] leading-none font-semibold text-[#6B9080]">
+                          ADMIN
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-1.5 flex items-center gap-1 font-mono text-[11px] font-semibold text-[#D4A373] tabular-nums">
+                      <Coins className="size-3 shrink-0" />
+                      <span>{displayPoints.toLocaleString()} P</span>
+                    </div>
+                  </div>
+
+                  {/* 메뉴 항목 */}
+                  <div className="flex flex-col gap-1">
+                    <Link
+                      href="/mypage"
+                      role="menuitem"
+                      tabIndex={profileMenuOpen ? 0 : -1}
+                      onClick={() => setProfileMenuOpen(false)}
+                      className={cn(
+                        "flex items-center gap-2 rounded-lg border px-2.5 py-2 text-xs font-medium transition-colors",
+                        isMyPage
+                          ? "border-[#6B9080] bg-[#222623] text-[#E4E6E1]"
+                          : "border-transparent text-[#C9CFCB] hover:border-[#282D2A] hover:bg-[#222623] hover:text-[#E4E6E1]"
+                      )}
+                    >
+                      <User className="size-3.5 text-[#6B9080]" />
+                      <span>마이페이지</span>
+                    </Link>
+
+                    {session.role === "admin" && (
+                      <Link
+                        href="/admin"
+                        role="menuitem"
+                        tabIndex={profileMenuOpen ? 0 : -1}
+                        onClick={() => setProfileMenuOpen(false)}
+                        className={cn(
+                          "flex items-center gap-2 rounded-lg border px-2.5 py-2 text-xs font-medium transition-colors",
+                          isAdmin
+                            ? "border-[#6B9080] bg-[#222623] text-[#E4E6E1]"
+                            : "border-transparent text-[#C9CFCB] hover:border-[#282D2A] hover:bg-[#222623] hover:text-[#E4E6E1]"
+                        )}
+                      >
+                        <Shield className="size-3.5 text-[#6B9080]" />
+                        <span>관리자 대시보드</span>
+                      </Link>
+                    )}
+
+                    <div className="my-1 border-t border-[#282D2A]" />
+
+                    <button
+                      type="button"
+                      role="menuitem"
+                      tabIndex={profileMenuOpen ? 0 : -1}
+                      onClick={() => {
+                        setProfileMenuOpen(false);
+                        void signOutGoogle();
+                      }}
+                      className="flex w-full items-center gap-2 rounded-lg border border-transparent px-2.5 py-2 text-left text-xs font-medium text-[#8F9691] transition-colors hover:border-[#E06C75]/40 hover:bg-[#222623] hover:text-[#E06C75]"
+                    >
+                      <LogOut className="size-3.5" />
+                      <span>로그아웃</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -218,7 +312,10 @@ export function TopNav() {
             <div ref={menuContainerRef} className="relative min-[880px]:hidden">
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                onClick={() => {
+                  setProfileMenuOpen(false);
+                  setMobileMenuOpen((prev) => !prev);
+                }}
                 aria-label={mobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
                 aria-expanded={mobileMenuOpen}
                 aria-haspopup="menu"
