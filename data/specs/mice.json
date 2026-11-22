@@ -8,7 +8,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 127.1, "width": 63.9, "height": 39.9 },
+    "dimensionsMm": {
+      "length": 127.1,
+      "width": 63.9,
+      "height": 39.9
+    },
     "weightGrams": 54,
     "sensor": "Focus Pro 35K Gen-2",
     "switchType": "optical",
@@ -24,7 +28,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 125.0, "width": 63.5, "height": 40.0 },
+    "dimensionsMm": {
+      "length": 125,
+      "width": 63.5,
+      "height": 40
+    },
     "weightGrams": 60,
     "sensor": "HERO 2",
     "switchType": "optical",
@@ -40,7 +48,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 128.0, "width": 68.0, "height": 44.0 },
+    "dimensionsMm": {
+      "length": 128,
+      "width": 68,
+      "height": 44
+    },
     "weightGrams": 63,
     "sensor": "Focus Pro 30K",
     "switchType": "optical",
@@ -56,7 +68,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 126.0, "width": 65.0, "height": 39.0 },
+    "dimensionsMm": {
+      "length": 126,
+      "width": 65,
+      "height": 39
+    },
     "weightGrams": 42,
     "sensor": "PAW3950 HS",
     "switchType": "optical",
@@ -72,7 +88,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 124.0, "width": 64.0, "height": 40.0 },
+    "dimensionsMm": {
+      "length": 124,
+      "width": 64,
+      "height": 40
+    },
     "weightGrams": 47,
     "sensor": "PAW3950",
     "switchType": "optical",
@@ -88,7 +108,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 118.2, "width": 62.4, "height": 38.8 },
+    "dimensionsMm": {
+      "length": 118.2,
+      "width": 62.4,
+      "height": 38.8
+    },
     "weightGrams": 38,
     "sensor": "PAW3950 Ultra",
     "switchType": "optical",
@@ -104,7 +128,11 @@
     "maxPollingHz": 8000,
     "connection": "wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 118.2, "width": 60.5, "height": 37.2 },
+    "dimensionsMm": {
+      "length": 118.2,
+      "width": 60.5,
+      "height": 37.2
+    },
     "weightGrams": 50.5,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -120,7 +148,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 115.6, "width": 60.6, "height": 36.7 },
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 60.6,
+      "height": 36.7
+    },
     "weightGrams": 51,
     "sensor": "PAW3395",
     "switchType": "optical",
@@ -136,7 +168,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 119.0, "width": 60.5, "height": 37.0 },
+    "dimensionsMm": {
+      "length": 119,
+      "width": 60.5,
+      "height": 37
+    },
     "weightGrams": 60,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -152,7 +188,11 @@
     "maxPollingHz": 1000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 123.0, "width": 61.5, "height": 38.0 },
+    "dimensionsMm": {
+      "length": 123,
+      "width": 61.5,
+      "height": 38
+    },
     "weightGrams": 60,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -168,7 +208,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 125.8, "width": 67.7, "height": 43.9 },
+    "dimensionsMm": {
+      "length": 125.8,
+      "width": 67.7,
+      "height": 43.9
+    },
     "weightGrams": 60,
     "sensor": "HERO 2",
     "switchType": "optical",
@@ -184,7 +228,11 @@
     "maxPollingHz": 1000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 125.0, "width": 63.5, "height": 40.0 },
+    "dimensionsMm": {
+      "length": 125,
+      "width": 63.5,
+      "height": 40
+    },
     "weightGrams": 63,
     "sensor": "HERO 25K",
     "switchType": "mechanical",
@@ -200,7 +248,11 @@
     "maxPollingHz": 1000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 116.6, "width": 62.1, "height": 38.2 },
+    "dimensionsMm": {
+      "length": 116.6,
+      "width": 62.1,
+      "height": 38.2
+    },
     "weightGrams": 99,
     "sensor": "HERO 12K",
     "switchType": "mechanical",
@@ -216,7 +268,11 @@
     "maxPollingHz": 1000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 131.4, "width": 79.2, "height": 41.1 },
+    "dimensionsMm": {
+      "length": 131.4,
+      "width": 79.2,
+      "height": 41.1
+    },
     "weightGrams": 106,
     "sensor": "HERO 25K",
     "switchType": "optical",
@@ -232,7 +288,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 122.2, "width": 64.8, "height": 41.3 },
+    "dimensionsMm": {
+      "length": 122.2,
+      "width": 64.8,
+      "height": 41.3
+    },
     "weightGrams": 55,
     "sensor": "Focus X 26K",
     "switchType": "optical",
@@ -248,7 +308,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 126.7, "width": 66.2, "height": 37.8 },
+    "dimensionsMm": {
+      "length": 126.7,
+      "width": 66.2,
+      "height": 37.8
+    },
     "weightGrams": 58,
     "sensor": "Focus Pro 30K",
     "switchType": "optical",
@@ -264,7 +328,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 119.6, "width": 62.5, "height": 38.1 },
+    "dimensionsMm": {
+      "length": 119.6,
+      "width": 62.5,
+      "height": 38.1
+    },
     "weightGrams": 77,
     "sensor": "Focus Pro 30K",
     "switchType": "optical",
@@ -280,7 +348,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 130.0, "width": 75.4, "height": 42.5 },
+    "dimensionsMm": {
+      "length": 130,
+      "width": 75.4,
+      "height": 42.5
+    },
     "weightGrams": 112,
     "sensor": "Focus Pro 35K Gen-2",
     "switchType": "optical",
@@ -296,7 +368,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 122.2, "width": 66.1, "height": 43.0 },
+    "dimensionsMm": {
+      "length": 122.2,
+      "width": 66.1,
+      "height": 43
+    },
     "weightGrams": 55,
     "sensor": "PAW3395",
     "switchType": "optical",
@@ -312,7 +388,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 115.6, "width": 62.0, "height": 38.0 },
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 62,
+      "height": 38
+    },
     "weightGrams": 52,
     "sensor": "PAW3395",
     "switchType": "optical",
@@ -328,7 +408,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 120.4, "width": 65.0, "height": 39.0 },
+    "dimensionsMm": {
+      "length": 120.4,
+      "width": 65,
+      "height": 39
+    },
     "weightGrams": 54,
     "sensor": "PAW3395",
     "switchType": "optical",
@@ -344,7 +428,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 115.6, "width": 61.0, "height": 36.6 },
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 61,
+      "height": 36.6
+    },
     "weightGrams": 35,
     "sensor": "XS-1 (PAW3950)",
     "switchType": "optical",
@@ -360,7 +448,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 117.0, "width": 63.0, "height": 37.0 },
+    "dimensionsMm": {
+      "length": 117,
+      "width": 63,
+      "height": 37
+    },
     "weightGrams": 51,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -376,7 +468,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 119.0, "width": 65.0, "height": 42.0 },
+    "dimensionsMm": {
+      "length": 119,
+      "width": 65,
+      "height": 42
+    },
     "weightGrams": 52,
     "sensor": "PAW3395",
     "switchType": "optical",
@@ -392,7 +488,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 119.0, "width": 62.0, "height": 38.0 },
+    "dimensionsMm": {
+      "length": 119,
+      "width": 62,
+      "height": 38
+    },
     "weightGrams": 45,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -408,7 +508,11 @@
     "maxPollingHz": 1000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 123.0, "width": 65.0, "height": 42.0 },
+    "dimensionsMm": {
+      "length": 123,
+      "width": 65,
+      "height": 42
+    },
     "weightGrams": 77,
     "sensor": "PAW3370",
     "switchType": "mechanical",
@@ -424,7 +528,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 125.0, "width": 64.0, "height": 36.0 },
+    "dimensionsMm": {
+      "length": 125,
+      "width": 64,
+      "height": 36
+    },
     "weightGrams": 65,
     "sensor": "PAW3950",
     "switchType": "mechanical",
@@ -440,7 +548,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 121.0, "width": 63.0, "height": 39.0 },
+    "dimensionsMm": {
+      "length": 121,
+      "width": 63,
+      "height": 39
+    },
     "weightGrams": 65,
     "sensor": "PAW3950",
     "switchType": "mechanical",
@@ -456,7 +568,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 122.0, "width": 64.0, "height": 38.0 },
+    "dimensionsMm": {
+      "length": 122,
+      "width": 64,
+      "height": 38
+    },
     "weightGrams": 65,
     "sensor": "PAW3950",
     "switchType": "mechanical",
@@ -472,7 +588,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 120.0, "width": 63.0, "height": 36.0 },
+    "dimensionsMm": {
+      "length": 120,
+      "width": 63,
+      "height": 36
+    },
     "weightGrams": 69,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -488,7 +608,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 117.5, "width": 66.0, "height": 43.0 },
+    "dimensionsMm": {
+      "length": 117.5,
+      "width": 66,
+      "height": 43
+    },
     "weightGrams": 73,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -504,7 +628,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "ergonomic",
-    "dimensionsMm": { "length": 120.0, "width": 64.0, "height": 41.0 },
+    "dimensionsMm": {
+      "length": 120,
+      "width": 64,
+      "height": 41
+    },
     "weightGrams": 60,
     "sensor": "PAW3950",
     "switchType": "mechanical",
@@ -520,7 +648,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 122.1, "width": 65.8, "height": 38.5 },
+    "dimensionsMm": {
+      "length": 122.1,
+      "width": 65.8,
+      "height": 38.5
+    },
     "weightGrams": 61.5,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -536,7 +668,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 116.0, "width": 58.0, "height": 35.0 },
+    "dimensionsMm": {
+      "length": 116,
+      "width": 58,
+      "height": 35
+    },
     "weightGrams": 34,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -552,7 +688,11 @@
     "maxPollingHz": 4000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 120.6, "width": 64.0, "height": 37.8 },
+    "dimensionsMm": {
+      "length": 120.6,
+      "width": 64,
+      "height": 37.8
+    },
     "weightGrams": 54,
     "sensor": "PAW3395",
     "switchType": "mechanical",
@@ -568,7 +708,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 120.1, "width": 63.2, "height": 38.1 },
+    "dimensionsMm": {
+      "length": 120.1,
+      "width": 63.2,
+      "height": 38.1
+    },
     "weightGrams": 36,
     "sensor": "PAW3950",
     "switchType": "optical",
@@ -584,7 +728,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 118.0, "width": 63.0, "height": 38.0 },
+    "dimensionsMm": {
+      "length": 118,
+      "width": 63,
+      "height": 38
+    },
     "weightGrams": 36,
     "sensor": "PAW3950",
     "switchType": "optical",
@@ -600,7 +748,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 127.0, "width": 64.0, "height": 40.0 },
+    "dimensionsMm": {
+      "length": 127,
+      "width": 64,
+      "height": 40
+    },
     "weightGrams": 54,
     "sensor": "PAW3950",
     "switchType": "optical",
@@ -616,7 +768,11 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 119.0, "width": 59.0, "height": 37.3 },
+    "dimensionsMm": {
+      "length": 119,
+      "width": 59,
+      "height": 37.3
+    },
     "weightGrams": 39,
     "sensor": "PAW3395",
     "switchType": "optical",
@@ -632,11 +788,815 @@
     "maxPollingHz": 8000,
     "connection": "wireless_wired",
     "shape": "symmetrical",
-    "dimensionsMm": { "length": 118.0, "width": 61.0, "height": 38.0 },
+    "dimensionsMm": {
+      "length": 118,
+      "width": 61,
+      "height": 38
+    },
     "weightGrams": 40,
     "sensor": "PAW3395",
     "switchType": "optical",
     "switchModel": "Omron",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-mchose-a7-pro",
+    "slug": "mchose-a7-pro",
+    "name": "MCHOSE A7 Pro",
+    "nameEn": "MCHOSE A7 Pro 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 125.8,
+      "width": 63.2,
+      "height": 39.8
+    },
+    "weightGrams": 59,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-mchose-a7-ultra",
+    "slug": "mchose-a7-ultra",
+    "name": "MCHOSE A7 Ultra",
+    "nameEn": "MCHOSE A7 Ultra 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 125.8,
+      "width": 63.2,
+      "height": 39.8
+    },
+    "weightGrams": 59,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-mchose-l7-pro",
+    "slug": "mchose-l7-pro",
+    "name": "MCHOSE L7 Pro",
+    "nameEn": "MCHOSE L7 Pro 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 60.6,
+      "height": 36
+    },
+    "weightGrams": 39,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-mchose-l7-ultra",
+    "slug": "mchose-l7-ultra",
+    "name": "MCHOSE L7 Ultra",
+    "nameEn": "MCHOSE L7 Ultra 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 60.6,
+      "height": 36
+    },
+    "weightGrams": 39,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-mchose-g3-ultra",
+    "slug": "mchose-g3-ultra",
+    "name": "MCHOSE G3 Ultra",
+    "nameEn": "MCHOSE G3 Ultra 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 116.5,
+      "width": 62.9,
+      "height": 38.2
+    },
+    "weightGrams": 64,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Omron 100M",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-zaopin-z1-pro",
+    "slug": "zaopin-z1-pro",
+    "name": "Zaopin Z1 Pro",
+    "nameEn": "Zaopin Z1 Pro 4K",
+    "brand": "Zaopin",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 110,
+      "width": 62,
+      "height": 38.5
+    },
+    "weightGrams": 46,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-zaopin-z2",
+    "slug": "zaopin-z2",
+    "name": "Zaopin Z2 (핫스왑)",
+    "nameEn": "Zaopin Z2 4K Hot-Swap",
+    "brand": "Zaopin",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 123,
+      "width": 64,
+      "height": 39.5
+    },
+    "weightGrams": 65,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "TTC 골드 60M (핫스왑)",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-zaopin-zpw",
+    "slug": "zaopin-zpw",
+    "name": "Zaopin ZPW Max",
+    "nameEn": "Zaopin ZPW Max 8K",
+    "brand": "Zaopin",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 121,
+      "width": 63,
+      "height": 38
+    },
+    "weightGrams": 47,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-waizowl-ogm-pro-v2",
+    "slug": "waizowl-ogm-pro-v2",
+    "name": "Waizowl OGM Pro V2",
+    "nameEn": "Waizowl OGM Pro V2 8K",
+    "brand": "Waizowl",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 121,
+      "width": 66,
+      "height": 40
+    },
+    "weightGrams": 49,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-waizowl-ogm-cloud",
+    "slug": "waizowl-ogm-cloud",
+    "name": "Waizowl OGM Cloud",
+    "nameEn": "Waizowl OGM Cloud 4K",
+    "brand": "Waizowl",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 126,
+      "width": 68,
+      "height": 38
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-incott-g23-pro",
+    "slug": "incott-g23-pro",
+    "name": "Incott G23 Pro (핫스왑)",
+    "nameEn": "Incott G23 Pro 8K Hot-Swap",
+    "brand": "Incott",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 126,
+      "width": 63.5,
+      "height": 40
+    },
+    "weightGrams": 65,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano (핫스왑)",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-incott-ghero-pro",
+    "slug": "incott-ghero-pro",
+    "name": "Incott GHERO Pro",
+    "nameEn": "Incott GHERO Pro 8K",
+    "brand": "Incott",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 118,
+      "width": 65,
+      "height": 39.5
+    },
+    "weightGrams": 66,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-rawm-sa-sh01-pro",
+    "slug": "rawm-sa-sh01-pro",
+    "name": "RAWM SA-SH01 Pro",
+    "nameEn": "RAWM SA-SH01 Pro 8K",
+    "brand": "RAWM",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 117.6,
+      "width": 61.2,
+      "height": 38
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano (핫스왑)",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-rawm-mh01-pro",
+    "slug": "rawm-mh01-pro",
+    "name": "RAWM MH01 Pro",
+    "nameEn": "RAWM MH01 Pro 8K",
+    "brand": "RAWM",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 126,
+      "width": 63.5,
+      "height": 40
+    },
+    "weightGrams": 65,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano (핫스왑)",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-darmoshark-m3-pro",
+    "slug": "darmoshark-m3-pro",
+    "name": "Darmoshark M3 Pro",
+    "nameEn": "Darmoshark M3 Pro 4K",
+    "brand": "Darmoshark",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 129,
+      "width": 66,
+      "height": 39
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "TTC 골드 60M",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-darmoshark-m3-micro",
+    "slug": "darmoshark-m3-micro",
+    "name": "Darmoshark M3 Micro",
+    "nameEn": "Darmoshark M3 Micro 4K",
+    "brand": "Darmoshark",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 105.5,
+      "width": 54.6,
+      "height": 33.5
+    },
+    "weightGrams": 42,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-kysona-m600",
+    "slug": "kysona-m600",
+    "name": "Kysona M600",
+    "nameEn": "Kysona M600 Wireless",
+    "brand": "Kysona",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 118,
+      "width": 62,
+      "height": 40
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-scyrox-v6",
+    "slug": "scyrox-v6",
+    "name": "Scyrox V6",
+    "nameEn": "Scyrox V6 8K",
+    "brand": "Scyrox",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 119,
+      "width": 61,
+      "height": 40
+    },
+    "weightGrams": 40,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-vxe-r1-se-plus",
+    "slug": "vxe-r1-se-plus",
+    "name": "VXE R1 SE+",
+    "nameEn": "VXE Dragonfly R1 SE+",
+    "brand": "VXE",
+    "maxPollingHz": 2000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.6,
+      "width": 64,
+      "height": 37.8
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395 SE",
+    "switchType": "mechanical",
+    "switchModel": "Huano 화이트닷",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-vxe-r1-pro",
+    "slug": "vxe-r1-pro",
+    "name": "VXE R1 Pro",
+    "nameEn": "VXE Dragonfly R1 Pro",
+    "brand": "VXE",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.6,
+      "width": 64,
+      "height": 37.8
+    },
+    "weightGrams": 48,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 빙매 핑크닷",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-vxe-mad-r",
+    "slug": "vxe-mad-r",
+    "name": "VXE MAD R",
+    "nameEn": "VXE MAD R 8K",
+    "brand": "VXE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.1,
+      "width": 63.2,
+      "height": 38.1
+    },
+    "weightGrams": 36,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-atk-z1-ultra",
+    "slug": "atk-z1-ultra",
+    "name": "ATK Z1 울트라",
+    "nameEn": "ATK Blazing Sky Z1 Ultra",
+    "brand": "ATK",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 122.5,
+      "width": 66.8,
+      "height": 42.4
+    },
+    "weightGrams": 57,
+    "sensor": "PAW3950 Ultra",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-atk-a9-ultra",
+    "slug": "atk-a9-ultra",
+    "name": "ATK A9 울트라",
+    "nameEn": "ATK Dragonfly A9 Ultra",
+    "brand": "ATK",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 125,
+      "width": 64,
+      "height": 40
+    },
+    "weightGrams": 53,
+    "sensor": "PAW3950 Ultra",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-asus-rog-harpe-ace",
+    "slug": "asus-rog-harpe-ace",
+    "name": "ASUS ROG 하프 에이스",
+    "nameEn": "ASUS ROG Harpe Ace Aim Lab",
+    "brand": "ASUS ROG",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 127.5,
+      "width": 63.7,
+      "height": 39.6
+    },
+    "weightGrams": 54,
+    "sensor": "ROG AimPoint 36K",
+    "switchType": "mechanical",
+    "switchModel": "ROG 70M",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-asus-rog-keris-ii-ace",
+    "slug": "asus-rog-keris-ii-ace",
+    "name": "ASUS ROG 케리스 II 에이스",
+    "nameEn": "ASUS ROG Keris II Ace",
+    "brand": "ASUS ROG",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 121,
+      "width": 67,
+      "height": 42
+    },
+    "weightGrams": 54,
+    "sensor": "ROG AimPoint Pro 42K",
+    "switchType": "optical",
+    "switchModel": "ROG Optical 100M",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-asus-rog-harpe-ace-mini",
+    "slug": "asus-rog-harpe-ace-mini",
+    "name": "ASUS ROG 하프 에이스 미니",
+    "nameEn": "ASUS ROG Harpe Ace Mini",
+    "brand": "ASUS ROG",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 117,
+      "width": 63,
+      "height": 37
+    },
+    "weightGrams": 49,
+    "sensor": "ROG AimPoint Pro 42K",
+    "switchType": "optical",
+    "switchModel": "ROG Optical 100M",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-finalmouse-ulx-lion",
+    "slug": "finalmouse-ulx-lion",
+    "name": "Finalmouse ULX (미디엄/라이언)",
+    "nameEn": "Finalmouse UltralightX Lion",
+    "brand": "Finalmouse",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 121.3,
+      "width": 56.8,
+      "height": 37
+    },
+    "weightGrams": 35,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Omron 20M",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-gwolves-hts-plus-4k",
+    "slug": "gwolves-hts-plus-4k",
+    "name": "G-Wolves HTS Plus 4K",
+    "nameEn": "G-Wolves HTS Plus 4K",
+    "brand": "G-Wolves",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 117,
+      "width": 61,
+      "height": 40
+    },
+    "weightGrams": 46,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Zippy",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-gwolves-hsk-pro-4k",
+    "slug": "gwolves-hsk-pro-4k",
+    "name": "G-Wolves HSK Pro 4K (핑거팁)",
+    "nameEn": "G-Wolves HSK Pro 4K",
+    "brand": "G-Wolves",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 91,
+      "width": 55,
+      "height": 29
+    },
+    "weightGrams": 29,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Zippy",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-steelseries-aerox-3-wireless",
+    "slug": "steelseries-aerox-3-wireless",
+    "name": "SteelSeries 에어로스 3 무선",
+    "nameEn": "SteelSeries Aerox 3 Wireless",
+    "brand": "SteelSeries",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.5,
+      "width": 67,
+      "height": 38
+    },
+    "weightGrams": 68,
+    "sensor": "TrueMove Air",
+    "switchType": "mechanical",
+    "switchModel": "TTC 골든 마이크로",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-corsair-m75-air",
+    "slug": "corsair-m75-air",
+    "name": "Corsair M75 AIR 무선",
+    "nameEn": "Corsair M75 AIR Wireless",
+    "brand": "Corsair",
+    "maxPollingHz": 2000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 128,
+      "width": 65,
+      "height": 41.6
+    },
+    "weightGrams": 60,
+    "sensor": "Marksman 26K",
+    "switchType": "optical",
+    "switchModel": "Corsair Optical",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-pulsar-x2v2-medium",
+    "slug": "pulsar-x2v2-medium",
+    "name": "Pulsar X2V2 (미디엄)",
+    "nameEn": "Pulsar X2V2 Medium",
+    "brand": "Pulsar",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.4,
+      "width": 63,
+      "height": 38
+    },
+    "weightGrams": 53,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Raesha",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-pulsar-xlite-v3-mini",
+    "slug": "pulsar-xlite-v3-mini",
+    "name": "Pulsar Xlite V3 미니",
+    "nameEn": "Pulsar Xlite V3 Mini",
+    "brand": "Pulsar",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 63.4,
+      "height": 40.7
+    },
+    "weightGrams": 52,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Raesha",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-pulsar-feinmann-f01",
+    "slug": "pulsar-feinmann-f01",
+    "name": "Pulsar 파인만 F01 (마그네슘)",
+    "nameEn": "Pulsar Feinmann F01 8K",
+    "brand": "Pulsar",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 118.6,
+      "width": 65.3,
+      "height": 41.7
+    },
+    "weightGrams": 46,
+    "sensor": "XS-1 (PAW3950)",
+    "switchType": "optical",
+    "switchModel": "Kailh Optical",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-lamzu-atlantis-og-v2-4k",
+    "slug": "lamzu-atlantis-og-v2-4k",
+    "name": "Lamzu 아틀란티스 OG V2 4K",
+    "nameEn": "Lamzu Atlantis OG V2 4K",
+    "brand": "Lamzu",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 123,
+      "width": 66,
+      "height": 38
+    },
+    "weightGrams": 57,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-lamzu-paro",
+    "slug": "lamzu-paro",
+    "name": "Lamzu 파로 (8K)",
+    "nameEn": "Lamzu Paro 8K",
+    "brand": "Lamzu",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 120,
+      "width": 65,
+      "height": 40
+    },
+    "weightGrams": 48,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#6B9080"
+  },
+  {
+    "id": "ms-wlmouse-beast-x",
+    "slug": "wlmouse-beast-x",
+    "name": "WLMouse 비스트 X (미디엄)",
+    "nameEn": "WLMouse Beast X 8K",
+    "brand": "WLMouse",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 122,
+      "width": 62,
+      "height": 37
+    },
+    "weightGrams": 39,
+    "sensor": "PAW3950 HS",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-wlmouse-sword-x",
+    "slug": "wlmouse-sword-x",
+    "name": "WLMouse 소드 X",
+    "nameEn": "WLMouse Sword X 8K",
+    "brand": "WLMouse",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 123,
+      "width": 67,
+      "height": 42
+    },
+    "weightGrams": 47,
+    "sensor": "PAW3950 HS",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373"
+  },
+  {
+    "id": "ms-zowie-ec3-cw",
+    "slug": "zowie-ec3-cw",
+    "name": "ZOWIE EC3-CW",
+    "nameEn": "BenQ ZOWIE EC3-CW",
+    "brand": "ZOWIE",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 119,
+      "width": 64,
+      "height": 41
+    },
+    "weightGrams": 76,
+    "sensor": "PAW3370",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블랙쉘 블루닷",
+    "colorAccentHex": "#8F9691"
+  },
+  {
+    "id": "ms-razer-orochi-v2",
+    "slug": "razer-orochi-v2",
+    "name": "Razer 오로치 V2",
+    "nameEn": "Razer Orochi V2",
+    "brand": "Razer",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 108,
+      "width": 60,
+      "height": 38
+    },
+    "weightGrams": 60,
+    "sensor": "Razer 5G 18K",
+    "switchType": "mechanical",
+    "switchModel": "Razer 2세대 기계식",
     "colorAccentHex": "#6B9080"
   }
 ]

@@ -113,9 +113,12 @@ export function SwitchCatalogView({
     setCurrentPage(1);
   };
 
-  // 전달받은 스위치 목록에서 제조사(Brand) 동적 추출 (하드코딩 제거)
+  // 전달받은 스위치 목록에서 제조사(Brand) 동적 추출 및 알파벳순 정렬
   const availableBrands = useMemo(
-    () => Array.from(new Set(switches.map((sw) => sw.brand))),
+    () =>
+      Array.from(new Set(switches.map((sw) => sw.brand))).sort((a, b) =>
+        a.localeCompare(b, "en")
+      ),
     [switches]
   );
 
@@ -301,25 +304,27 @@ export function SwitchCatalogView({
               다중 선택
             </span>
           </div>
-          <div className="flex flex-wrap gap-1">
-            {availableBrands.map((brand) => {
-              const active = selectedBrands.includes(brand);
-              return (
-                <button
-                  key={brand}
-                  type="button"
-                  onClick={() => toggleBrand(brand)}
-                  className={cn(
-                    "rounded-md border px-2 py-1 font-mono text-xs font-medium transition-colors",
-                    active
-                      ? "border-[#6B9080] bg-[#222623] text-[#E4E6E1]"
-                      : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080]/50 hover:text-[#E4E6E1]"
-                  )}
-                >
-                  {brand}
-                </button>
-              );
-            })}
+          <div className="max-h-32 overflow-y-auto rounded-lg border border-[#282D2A]/70 bg-[#151816]/50 p-1.5">
+            <div className="flex flex-wrap gap-1">
+              {availableBrands.map((brand) => {
+                const active = selectedBrands.includes(brand);
+                return (
+                  <button
+                    key={brand}
+                    type="button"
+                    onClick={() => toggleBrand(brand)}
+                    className={cn(
+                      "rounded-md border px-2 py-1 font-mono text-xs font-medium transition-colors",
+                      active
+                        ? "border-[#6B9080] bg-[#222623] text-[#E4E6E1]"
+                        : "border-[#282D2A] bg-[#151816] text-[#8F9691] hover:border-[#6B9080]/50 hover:text-[#E4E6E1]"
+                    )}
+                  >
+                    {brand}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 

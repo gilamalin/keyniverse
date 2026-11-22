@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     siteName: "KEYNIVERSE",
     title: "KEYNIVERSE | 게이밍 키보드·마우스 커뮤니티 & 스펙 연구소",
     description:
-      "스위치 61종 · 마우스 40종 스펙 도감, 8K 폴링레이트·채터링 정밀 테스트, 하드웨어 커뮤니티",
+      "스위치 120여 종 · 마우스 80종 스펙 도감, 8K 폴링레이트·채터링 정밀 테스트, 하드웨어 커뮤니티",
   },
   twitter: {
     card: "summary_large_image",
     title: "KEYNIVERSE | 게이밍 키보드·마우스 커뮤니티 & 스펙 연구소",
     description:
-      "스위치 61종 · 마우스 40종 스펙 도감, 8K 폴링레이트·채터링 정밀 테스트, 하드웨어 커뮤니티",
+      "스위치 120여 종 · 마우스 80종 스펙 도감, 8K 폴링레이트·채터링 정밀 테스트, 하드웨어 커뮤니티",
   },
 };
 

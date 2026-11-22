@@ -82,7 +82,7 @@ export default function OpenGraphImage() {
               marginTop: "36px",
             }}
           >
-            {["61+ Switches", "40+ Mice", "NKRO & Chatter", "8K Polling"].map(
+            {["120+ Switches", "80+ Mice", "NKRO & Chatter", "8K Polling"].map(
               (chip) => (
                 <div
                   key={chip}

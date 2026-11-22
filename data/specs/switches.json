@@ -12,10 +12,18 @@
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon (PA66)", "stem": "POM (롱폴)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon (PA66)",
+      "stem": "POM (롱폴)"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#8D86C9", "bottomHex": "#5C5470", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#8D86C9",
+      "bottomHex": "#5C5470",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-hmx-cheese",
@@ -26,14 +34,22 @@
     "category": "linear",
     "operatingForceGf": 43,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "LY" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D4A373", "bottomHex": "#C68B59", "stemHex": "#F2D0A9" }
+    "colorway": {
+      "topHex": "#D4A373",
+      "bottomHex": "#C68B59",
+      "stemHex": "#F2D0A9"
+    }
   },
   {
     "id": "sw-bsun-rosewood",
@@ -48,10 +64,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 21,
     "springType": "1단",
-    "materials": { "top": "PC (혼합)", "bottom": "Nylon", "stem": "LY" },
+    "materials": {
+      "top": "PC (혼합)",
+      "bottom": "Nylon",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#8C5853", "bottomHex": "#593837", "stemHex": "#C99E93" }
+    "colorway": {
+      "topHex": "#8C5853",
+      "bottomHex": "#593837",
+      "stemHex": "#C99E93"
+    }
   },
   {
     "id": "sw-gateron-oil-king",
@@ -62,14 +86,22 @@
     "category": "linear",
     "operatingForceGf": 55,
     "bottomOutForceGf": 65,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Ink Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Ink Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#2A2D2B", "bottomHex": "#1E201F", "stemHex": "#3E4340" }
+    "colorway": {
+      "topHex": "#2A2D2B",
+      "bottomHex": "#1E201F",
+      "stemHex": "#3E4340"
+    }
   },
   {
     "id": "sw-cherry-mx2a-black",
@@ -80,14 +112,22 @@
     "category": "linear",
     "operatingForceGf": 60,
     "bottomOutForceGf": null,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 18.5,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#181A19" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#181A19"
+    }
   },
   {
     "id": "sw-gazzew-boba-u4t",
@@ -98,14 +138,22 @@
     "category": "tactile",
     "operatingForceGf": 50,
     "bottomOutForceGf": 62,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.4,
     "springLengthMm": 19,
     "springType": "1단",
-    "materials": { "top": "Gazzew Blend", "bottom": "Gazzew Blend", "stem": "POM (롱폴)" },
+    "materials": {
+      "top": "Gazzew Blend",
+      "bottom": "Gazzew Blend",
+      "stem": "POM (롱폴)"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D8D4C8", "bottomHex": "#C5C0B2", "stemHex": "#D4A373" }
+    "colorway": {
+      "topHex": "#D8D4C8",
+      "bottomHex": "#C5C0B2",
+      "stemHex": "#D4A373"
+    }
   },
   {
     "id": "sw-outemu-silent-peach-v3",
@@ -116,14 +164,22 @@
     "category": "silent_linear",
     "operatingForceGf": 40,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.3,
     "springLengthMm": 21,
     "springType": "1단",
-    "materials": { "top": "PA66", "bottom": "PA66", "stem": "POM + 실리콘 댐퍼" },
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "POM + 실리콘 댐퍼"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D99B82", "bottomHex": "#C7826B", "stemHex": "#F0C4B3" }
+    "colorway": {
+      "topHex": "#D99B82",
+      "bottomHex": "#C7826B",
+      "stemHex": "#F0C4B3"
+    }
   },
   {
     "id": "sw-outemu-silent-lime-v3",
@@ -138,10 +194,18 @@
     "totalTravelMm": 3.3,
     "springLengthMm": 21,
     "springType": "1단",
-    "materials": { "top": "PA66", "bottom": "PA66", "stem": "POM + 실리콘 댐퍼" },
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "POM + 실리콘 댐퍼"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#9AB87A", "bottomHex": "#7A9A5B", "stemHex": "#C7E0AE" }
+    "colorway": {
+      "topHex": "#9AB87A",
+      "bottomHex": "#7A9A5B",
+      "stemHex": "#C7E0AE"
+    }
   },
   {
     "id": "sw-kailh-box-jade",
@@ -156,10 +220,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 15,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM (박스 구조)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (박스 구조)"
+    },
     "factoryLubed": false,
     "pins": 3,
-    "colorway": { "topHex": "#C5D1CC", "bottomHex": "#D9DBD8", "stemHex": "#6B9080" }
+    "colorway": {
+      "topHex": "#C5D1CC",
+      "bottomHex": "#D9DBD8",
+      "stemHex": "#6B9080"
+    }
   },
   {
     "id": "sw-wooting-lekker-l45-v2",
@@ -171,13 +243,21 @@
     "operatingForceGf": 30,
     "bottomOutForceGf": 45,
     "preTravelMm": 0.1,
-    "totalTravelMm": 4.0,
+    "totalTravelMm": 4,
     "springLengthMm": 19.5,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 2,
-    "colorway": { "topHex": "#7A9E9F", "bottomHex": "#3A4E4F", "stemHex": "#A8C6C7" }
+    "colorway": {
+      "topHex": "#7A9E9F",
+      "bottomHex": "#3A4E4F",
+      "stemHex": "#A8C6C7"
+    }
   },
   {
     "id": "sw-gateron-magnetic-jade",
@@ -192,10 +272,18 @@
     "totalTravelMm": 3.5,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon (PA66)", "stem": "POM (막힌 하단)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon (PA66)",
+      "stem": "POM (막힌 하단)"
+    },
     "factoryLubed": true,
     "pins": 2,
-    "colorway": { "topHex": "#88B39E", "bottomHex": "#4E7363", "stemHex": "#DCE8E1" }
+    "colorway": {
+      "topHex": "#88B39E",
+      "bottomHex": "#4E7363",
+      "stemHex": "#DCE8E1"
+    }
   },
   {
     "id": "sw-hmx-cloud",
@@ -206,14 +294,22 @@
     "category": "linear",
     "operatingForceGf": 42,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.9,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "LY" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D9DFDE", "bottomHex": "#B9C4C2", "stemHex": "#F4F6F2" }
+    "colorway": {
+      "topHex": "#D9DFDE",
+      "bottomHex": "#B9C4C2",
+      "stemHex": "#F4F6F2"
+    }
   },
   {
     "id": "sw-hmx-xinhai",
@@ -224,14 +320,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.4,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "Nylon", "stem": "POK (롱폴)" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "Nylon",
+      "stem": "POK (롱폴)"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#4A5C6A", "bottomHex": "#2C3943", "stemHex": "#9BA8AB" }
+    "colorway": {
+      "topHex": "#4A5C6A",
+      "bottomHex": "#2C3943",
+      "stemHex": "#9BA8AB"
+    }
   },
   {
     "id": "sw-hmx-canglan-v2",
@@ -242,14 +346,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.8,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "Nylon", "stem": "LY" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "Nylon",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#5E819D", "bottomHex": "#3C586E", "stemHex": "#C8DCE8" }
+    "colorway": {
+      "topHex": "#5E819D",
+      "bottomHex": "#3C586E",
+      "stemHex": "#C8DCE8"
+    }
   },
   {
     "id": "sw-hmx-sunset-gleam",
@@ -260,14 +372,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.8,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "T5" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "T5"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#C97A63", "bottomHex": "#8F4F3E", "stemHex": "#E8B8A2" }
+    "colorway": {
+      "topHex": "#C97A63",
+      "bottomHex": "#8F4F3E",
+      "stemHex": "#E8B8A2"
+    }
   },
   {
     "id": "sw-hmx-macchiato",
@@ -278,14 +398,22 @@
     "category": "linear",
     "operatingForceGf": 42,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "LY" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#B08968", "bottomHex": "#7F5539", "stemHex": "#EDE0D4" }
+    "colorway": {
+      "topHex": "#B08968",
+      "bottomHex": "#7F5539",
+      "stemHex": "#EDE0D4"
+    }
   },
   {
     "id": "sw-hmx-deep-navy",
@@ -296,14 +424,22 @@
     "category": "linear",
     "operatingForceGf": 50,
     "bottomOutForceGf": 58,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "POM" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#2C3E50", "bottomHex": "#1B2631", "stemHex": "#7F8C8D" }
+    "colorway": {
+      "topHex": "#2C3E50",
+      "bottomHex": "#1B2631",
+      "stemHex": "#7F8C8D"
+    }
   },
   {
     "id": "sw-hmx-caramel-pudding",
@@ -314,14 +450,22 @@
     "category": "linear",
     "operatingForceGf": 42,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "POM" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D4A373", "bottomHex": "#9C6644", "stemHex": "#FAEDCD" }
+    "colorway": {
+      "topHex": "#D4A373",
+      "bottomHex": "#9C6644",
+      "stemHex": "#FAEDCD"
+    }
   },
   {
     "id": "sw-hmx-sonja",
@@ -332,14 +476,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "LY" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#C8A2C8", "bottomHex": "#7A5C7A", "stemHex": "#EFE5EF" }
+    "colorway": {
+      "topHex": "#C8A2C8",
+      "bottomHex": "#7A5C7A",
+      "stemHex": "#EFE5EF"
+    }
   },
   {
     "id": "sw-hmx-jelly",
@@ -350,14 +502,22 @@
     "category": "linear",
     "operatingForceGf": 42,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "PA66", "stem": "T5" },
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "T5"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#A3C4BC", "bottomHex": "#6B9080", "stemHex": "#E4EFE9" }
+    "colorway": {
+      "topHex": "#A3C4BC",
+      "bottomHex": "#6B9080",
+      "stemHex": "#E4EFE9"
+    }
   },
   {
     "id": "sw-hmx-snow-crash",
@@ -368,14 +528,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "1단",
-    "materials": { "top": "PA12", "bottom": "PA66", "stem": "LY" },
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#CBD5D0", "bottomHex": "#7A8B84", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#CBD5D0",
+      "bottomHex": "#7A8B84",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-cherry-mx2a-red",
@@ -386,14 +554,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 60,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 18.5,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#C85A5A" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#C85A5A"
+    }
   },
   {
     "id": "sw-cherry-mx2a-brown",
@@ -404,14 +580,22 @@
     "category": "tactile",
     "operatingForceGf": 45,
     "bottomOutForceGf": 55,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 18.5,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#7A5238" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#7A5238"
+    }
   },
   {
     "id": "sw-cherry-mx2a-silent-red",
@@ -426,10 +610,18 @@
     "totalTravelMm": 3.7,
     "springLengthMm": 18.5,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM + 댐퍼" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM + 댐퍼"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#D98A8A" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#D98A8A"
+    }
   },
   {
     "id": "sw-cherry-mx2a-speed-silver",
@@ -444,10 +636,18 @@
     "totalTravelMm": 3.4,
     "springLengthMm": 18.5,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#B8BFBA" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#B8BFBA"
+    }
   },
   {
     "id": "sw-cherry-mx2a-blue",
@@ -459,13 +659,21 @@
     "operatingForceGf": 50,
     "bottomOutForceGf": 60,
     "preTravelMm": 2.2,
-    "totalTravelMm": 4.0,
+    "totalTravelMm": 4,
     "springLengthMm": 18.5,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": false,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#4B86B4" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#4B86B4"
+    }
   },
   {
     "id": "sw-cherry-mx-ergo-clear",
@@ -476,14 +684,22 @@
     "category": "tactile",
     "operatingForceGf": 40,
     "bottomOutForceGf": 55,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 15,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#313533", "bottomHex": "#232625", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#232625",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-cherry-mx-nixie",
@@ -494,14 +710,22 @@
     "category": "linear",
     "operatingForceGf": 63.5,
     "bottomOutForceGf": 80,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 15,
     "springType": "1단",
-    "materials": { "top": "PC (Milky)", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC (Milky)",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D4D8D5", "bottomHex": "#232625", "stemHex": "#181A19" }
+    "colorway": {
+      "topHex": "#D4D8D5",
+      "bottomHex": "#232625",
+      "stemHex": "#181A19"
+    }
   },
   {
     "id": "sw-gateron-baby-kangaroo-2",
@@ -512,14 +736,22 @@
     "category": "tactile",
     "operatingForceGf": 59,
     "bottomOutForceGf": 67,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.4,
     "springLengthMm": 22,
     "springType": "2단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D4DDD8", "bottomHex": "#8FA89B", "stemHex": "#D4A373" }
+    "colorway": {
+      "topHex": "#D4DDD8",
+      "bottomHex": "#8FA89B",
+      "stemHex": "#D4A373"
+    }
   },
   {
     "id": "sw-gateron-baby-raccoon-2",
@@ -530,14 +762,22 @@
     "category": "linear",
     "operatingForceGf": 55,
     "bottomOutForceGf": 63,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#C7C3BE", "bottomHex": "#8E877F", "stemHex": "#5E5A55" }
+    "colorway": {
+      "topHex": "#C7C3BE",
+      "bottomHex": "#8E877F",
+      "stemHex": "#5E5A55"
+    }
   },
   {
     "id": "sw-gateron-quinn",
@@ -548,14 +788,22 @@
     "category": "tactile",
     "operatingForceGf": 59,
     "bottomOutForceGf": 67,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.4,
     "springLengthMm": 22,
     "springType": "2단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#38343E", "bottomHex": "#26232B", "stemHex": "#B35C6E" }
+    "colorway": {
+      "topHex": "#38343E",
+      "bottomHex": "#26232B",
+      "stemHex": "#B35C6E"
+    }
   },
   {
     "id": "sw-gateron-ink-black-v2",
@@ -566,14 +814,22 @@
     "category": "linear",
     "operatingForceGf": 60,
     "bottomOutForceGf": 70,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 15,
     "springType": "1단",
-    "materials": { "top": "Ink Housing", "bottom": "Ink Housing", "stem": "POM" },
+    "materials": {
+      "top": "Ink Housing",
+      "bottom": "Ink Housing",
+      "stem": "POM"
+    },
     "factoryLubed": false,
     "pins": 5,
-    "colorway": { "topHex": "#333634", "bottomHex": "#242725", "stemHex": "#1C1E1D" }
+    "colorway": {
+      "topHex": "#333634",
+      "bottomHex": "#242725",
+      "stemHex": "#1C1E1D"
+    }
   },
   {
     "id": "sw-gateron-milky-yellow-pro",
@@ -584,14 +840,22 @@
     "category": "linear",
     "operatingForceGf": 50,
     "bottomOutForceGf": 62,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 15,
     "springType": "1단",
-    "materials": { "top": "Nylon (Milky)", "bottom": "Nylon (Milky)", "stem": "POM" },
+    "materials": {
+      "top": "Nylon (Milky)",
+      "bottom": "Nylon (Milky)",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#DCDAD3", "bottomHex": "#C8C5BC", "stemHex": "#E2B95B" }
+    "colorway": {
+      "topHex": "#DCDAD3",
+      "bottomHex": "#C8C5BC",
+      "stemHex": "#E2B95B"
+    }
   },
   {
     "id": "sw-gateron-smoothie",
@@ -602,14 +866,22 @@
     "category": "linear",
     "operatingForceGf": 40,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 22,
     "springType": "2단",
-    "materials": { "top": "POM", "bottom": "POM", "stem": "POM" },
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#E6ECE8", "bottomHex": "#CBD8D0", "stemHex": "#88B09E" }
+    "colorway": {
+      "topHex": "#E6ECE8",
+      "bottomHex": "#CBD8D0",
+      "stemHex": "#88B09E"
+    }
   },
   {
     "id": "sw-gateron-zero-degree",
@@ -624,10 +896,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM + 실리콘 패드" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 패드"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D2DCE0", "bottomHex": "#A4B8C2", "stemHex": "#EFF4F6" }
+    "colorway": {
+      "topHex": "#D2DCE0",
+      "bottomHex": "#A4B8C2",
+      "stemHex": "#EFF4F6"
+    }
   },
   {
     "id": "sw-gateron-magnetic-jade-pro",
@@ -642,10 +922,18 @@
     "totalTravelMm": 3.5,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "PA66", "stem": "POM (막힌 하단)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
     "factoryLubed": true,
     "pins": 2,
-    "colorway": { "topHex": "#6B9080", "bottomHex": "#3E5B4E", "stemHex": "#DCE8E1" }
+    "colorway": {
+      "topHex": "#6B9080",
+      "bottomHex": "#3E5B4E",
+      "stemHex": "#DCE8E1"
+    }
   },
   {
     "id": "sw-vertex-v1",
@@ -656,14 +944,22 @@
     "category": "linear",
     "operatingForceGf": 50,
     "bottomOutForceGf": 62,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "Nylon", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#2F3230", "bottomHex": "#202221", "stemHex": "#8F9691" }
+    "colorway": {
+      "topHex": "#2F3230",
+      "bottomHex": "#202221",
+      "stemHex": "#8F9691"
+    }
   },
   {
     "id": "sw-leobog-graywood-v4",
@@ -678,10 +974,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "2단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#9BA3A0", "bottomHex": "#5E6663", "stemHex": "#CFD6D3" }
+    "colorway": {
+      "topHex": "#9BA3A0",
+      "bottomHex": "#5E6663",
+      "stemHex": "#CFD6D3"
+    }
   },
   {
     "id": "sw-leobog-reaper",
@@ -696,10 +1000,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#C8A96A", "bottomHex": "#8C7040", "stemHex": "#E8D5A8" }
+    "colorway": {
+      "topHex": "#C8A96A",
+      "bottomHex": "#8C7040",
+      "stemHex": "#E8D5A8"
+    }
   },
   {
     "id": "sw-leobog-nimbus-v3",
@@ -714,10 +1026,18 @@
     "totalTravelMm": 3.7,
     "springLengthMm": 20,
     "springType": "2단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#8DA7B8", "bottomHex": "#546F80", "stemHex": "#DCE6EC" }
+    "colorway": {
+      "topHex": "#8DA7B8",
+      "bottomHex": "#546F80",
+      "stemHex": "#DCE6EC"
+    }
   },
   {
     "id": "sw-ktt-kang-white-v3",
@@ -729,13 +1049,21 @@
     "operatingForceGf": 43,
     "bottomOutForceGf": 58,
     "preTravelMm": 1.9,
-    "totalTravelMm": 4.0,
+    "totalTravelMm": 4,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 3,
-    "colorway": { "topHex": "#DCDFD9", "bottomHex": "#C6CBC4", "stemHex": "#F4F6F2" }
+    "colorway": {
+      "topHex": "#DCDFD9",
+      "bottomHex": "#C6CBC4",
+      "stemHex": "#F4F6F2"
+    }
   },
   {
     "id": "sw-ktt-sea-salt-lemon",
@@ -747,31 +1075,47 @@
     "operatingForceGf": 45,
     "bottomOutForceGf": 53,
     "preTravelMm": 1.9,
-    "totalTravelMm": 4.0,
+    "totalTravelMm": 4,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 3,
-    "colorway": { "topHex": "#98C1D9", "bottomHex": "#6B9BB8", "stemHex": "#E8D985" }
+    "colorway": {
+      "topHex": "#98C1D9",
+      "bottomHex": "#6B9BB8",
+      "stemHex": "#E8D985"
+    }
   },
   {
     "id": "sw-keygeek-y3",
     "slug": "keygeek-y3",
-    "name": "키긱 Y3",
-    "nameEn": "Keygeek Y3 Linear",
+    "name": "키긱 MZ Y3",
+    "nameEn": "Keygeek MZ Y3 Linear",
     "brand": "Keygeek",
     "category": "linear",
     "operatingForceGf": 48,
     "bottomOutForceGf": 55,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PA66", "bottom": "PA66", "stem": "M3 (혼합)" },
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "M3 (혼합)"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#4B453F", "bottomHex": "#332E2A", "stemHex": "#C5B49A" }
+    "colorway": {
+      "topHex": "#4B453F",
+      "bottomHex": "#332E2A",
+      "stemHex": "#C5B49A"
+    }
   },
   {
     "id": "sw-keygeek-oat",
@@ -782,14 +1126,22 @@
     "category": "linear",
     "operatingForceGf": 40,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PA66", "bottom": "PA66", "stem": "U4" },
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "U4"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D9CEB8", "bottomHex": "#B8AA90", "stemHex": "#F0E8D8" }
+    "colorway": {
+      "topHex": "#D9CEB8",
+      "bottomHex": "#B8AA90",
+      "stemHex": "#F0E8D8"
+    }
   },
   {
     "id": "sw-swk-neon",
@@ -800,14 +1152,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 55,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 22,
     "springType": "2단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM (롱폴)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#7F8F9F", "bottomHex": "#4D5D6E", "stemHex": "#D4A373" }
+    "colorway": {
+      "topHex": "#7F8F9F",
+      "bottomHex": "#4D5D6E",
+      "stemHex": "#D4A373"
+    }
   },
   {
     "id": "sw-bsun-raw-linear",
@@ -818,14 +1178,22 @@
     "category": "linear",
     "operatingForceGf": 45,
     "bottomOutForceGf": 50,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "LY" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "LY"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D6D8D5", "bottomHex": "#A6ACA8", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#D6D8D5",
+      "bottomHex": "#A6ACA8",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-bsun-bunny",
@@ -836,14 +1204,22 @@
     "category": "linear",
     "operatingForceGf": 42,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.6,
     "springLengthMm": 22,
     "springType": "2단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#E3D5CA", "bottomHex": "#C7B2A3", "stemHex": "#F5EBE0" }
+    "colorway": {
+      "topHex": "#E3D5CA",
+      "bottomHex": "#C7B2A3",
+      "stemHex": "#F5EBE0"
+    }
   },
   {
     "id": "sw-ttc-gold-pink-v2",
@@ -854,14 +1230,22 @@
     "category": "linear",
     "operatingForceGf": 37,
     "bottomOutForceGf": 47,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 3,
-    "colorway": { "topHex": "#E0B1B8", "bottomHex": "#C98D96", "stemHex": "#E8C5B0" }
+    "colorway": {
+      "topHex": "#E0B1B8",
+      "bottomHex": "#C98D96",
+      "stemHex": "#E8C5B0"
+    }
   },
   {
     "id": "sw-ttc-frozen-silent-v2",
@@ -872,14 +1256,22 @@
     "category": "silent_linear",
     "operatingForceGf": 39,
     "bottomOutForceGf": 48,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.5,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "PC", "stem": "POM + 실리콘 댐퍼" },
+    "materials": {
+      "top": "PC",
+      "bottom": "PC",
+      "stem": "POM + 실리콘 댐퍼"
+    },
     "factoryLubed": true,
     "pins": 3,
-    "colorway": { "topHex": "#DCE6EB", "bottomHex": "#BACDD6", "stemHex": "#F4F8FA" }
+    "colorway": {
+      "topHex": "#DCE6EB",
+      "bottomHex": "#BACDD6",
+      "stemHex": "#F4F8FA"
+    }
   },
   {
     "id": "sw-ttc-magneto",
@@ -894,10 +1286,18 @@
     "totalTravelMm": 3.5,
     "springLengthMm": 21,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM (박스 구조)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (박스 구조)"
+    },
     "factoryLubed": true,
     "pins": 2,
-    "colorway": { "topHex": "#6B8FA3", "bottomHex": "#3D5A6B", "stemHex": "#A8C6D6" }
+    "colorway": {
+      "topHex": "#6B8FA3",
+      "bottomHex": "#3D5A6B",
+      "stemHex": "#A8C6D6"
+    }
   },
   {
     "id": "sw-akko-v3-cream-yellow-pro",
@@ -908,14 +1308,22 @@
     "category": "linear",
     "operatingForceGf": 50,
     "bottomOutForceGf": 58,
-    "preTravelMm": 2.0,
+    "preTravelMm": 2,
     "totalTravelMm": 3.3,
     "springLengthMm": 18,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#E3D29C", "bottomHex": "#C7B270", "stemHex": "#F2E6BE" }
+    "colorway": {
+      "topHex": "#E3D29C",
+      "bottomHex": "#C7B270",
+      "stemHex": "#F2E6BE"
+    }
   },
   {
     "id": "sw-akko-v3-piano-pro",
@@ -930,10 +1338,18 @@
     "totalTravelMm": 3.1,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#2E3130", "bottomHex": "#1F2221", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#2E3130",
+      "bottomHex": "#1F2221",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-kailh-box-white-v2",
@@ -948,10 +1364,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 19,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM (박스 구조)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (박스 구조)"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#D4D8D5", "bottomHex": "#3A3E3C", "stemHex": "#F4F6F2" }
+    "colorway": {
+      "topHex": "#D4D8D5",
+      "bottomHex": "#3A3E3C",
+      "stemHex": "#F4F6F2"
+    }
   },
   {
     "id": "sw-kailh-deep-sea-silent-pro",
@@ -966,10 +1390,18 @@
     "totalTravelMm": 3.6,
     "springLengthMm": 18,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM + 실리콘 댐퍼" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
     "factoryLubed": true,
     "pins": 3,
-    "colorway": { "topHex": "#5E7B8F", "bottomHex": "#314654", "stemHex": "#C4D6E0" }
+    "colorway": {
+      "topHex": "#5E7B8F",
+      "bottomHex": "#314654",
+      "stemHex": "#C4D6E0"
+    }
   },
   {
     "id": "sw-alpaca-v2",
@@ -980,14 +1412,22 @@
     "category": "linear",
     "operatingForceGf": 55,
     "bottomOutForceGf": 62,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": 15,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "Nylon", "stem": "POM" },
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 5,
-    "colorway": { "topHex": "#303331", "bottomHex": "#202221", "stemHex": "#C9A2A6" }
+    "colorway": {
+      "topHex": "#303331",
+      "bottomHex": "#202221",
+      "stemHex": "#C9A2A6"
+    }
   },
   {
     "id": "sw-geon-raw-he",
@@ -1002,10 +1442,18 @@
     "totalTravelMm": 3.4,
     "springLengthMm": 18,
     "springType": "1단",
-    "materials": { "top": "PA66", "bottom": "PA66", "stem": "POM (막힌 하단)" },
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
     "factoryLubed": true,
     "pins": 2,
-    "colorway": { "topHex": "#C9CFCB", "bottomHex": "#8F9691", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-owlab-ti-he",
@@ -1020,10 +1468,18 @@
     "totalTravelMm": 3.4,
     "springLengthMm": 20,
     "springType": "1단",
-    "materials": { "top": "PC", "bottom": "PA66", "stem": "POM (막힌 하단)" },
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
     "factoryLubed": true,
     "pins": 2,
-    "colorway": { "topHex": "#7E868C", "bottomHex": "#4B5257", "stemHex": "#C8CFD4" }
+    "colorway": {
+      "topHex": "#7E868C",
+      "bottomHex": "#4B5257",
+      "stemHex": "#C8CFD4"
+    }
   },
   {
     "id": "sw-topre-45g",
@@ -1035,13 +1491,21 @@
     "operatingForceGf": 45,
     "bottomOutForceGf": 55,
     "preTravelMm": 2.2,
-    "totalTravelMm": 4.0,
+    "totalTravelMm": 4,
     "springLengthMm": null,
     "springType": null,
-    "materials": { "top": "POM (슬라이더)", "bottom": "러버돔 + 코니컬 스프링", "stem": "POM" },
+    "materials": {
+      "top": "POM (슬라이더)",
+      "bottom": "러버돔 + 코니컬 스프링",
+      "stem": "POM"
+    },
     "factoryLubed": false,
     "pins": 0,
-    "colorway": { "topHex": "#3A3E3C", "bottomHex": "#262A28", "stemHex": "#8F9691" }
+    "colorway": {
+      "topHex": "#3A3E3C",
+      "bottomHex": "#262A28",
+      "stemHex": "#8F9691"
+    }
   },
   {
     "id": "sw-topre-30g",
@@ -1053,13 +1517,21 @@
     "operatingForceGf": 30,
     "bottomOutForceGf": 38,
     "preTravelMm": 2.2,
-    "totalTravelMm": 4.0,
+    "totalTravelMm": 4,
     "springLengthMm": null,
     "springType": null,
-    "materials": { "top": "POM (슬라이더)", "bottom": "러버돔 + 코니컬 스프링", "stem": "POM" },
+    "materials": {
+      "top": "POM (슬라이더)",
+      "bottom": "러버돔 + 코니컬 스프링",
+      "stem": "POM"
+    },
     "factoryLubed": false,
     "pins": 0,
-    "colorway": { "topHex": "#4D5350", "bottomHex": "#2C302E", "stemHex": "#B8BFBA" }
+    "colorway": {
+      "topHex": "#4D5350",
+      "bottomHex": "#2C302E",
+      "stemHex": "#B8BFBA"
+    }
   },
   {
     "id": "sw-niz-35g",
@@ -1070,14 +1542,22 @@
     "category": "electro_capacitive",
     "operatingForceGf": 35,
     "bottomOutForceGf": 45,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": null,
     "springType": null,
-    "materials": { "top": "POM (MX 호환 슬라이더)", "bottom": "실리콘 러버돔 + 스프링", "stem": "POM" },
+    "materials": {
+      "top": "POM (MX 호환 슬라이더)",
+      "bottom": "실리콘 러버돔 + 스프링",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 0,
-    "colorway": { "topHex": "#C9CFCB", "bottomHex": "#7A827D", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#7A827D",
+      "stemHex": "#E4E6E1"
+    }
   },
   {
     "id": "sw-niz-45g",
@@ -1088,13 +1568,1581 @@
     "category": "electro_capacitive",
     "operatingForceGf": 45,
     "bottomOutForceGf": 55,
-    "preTravelMm": 2.0,
-    "totalTravelMm": 4.0,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
     "springLengthMm": null,
     "springType": null,
-    "materials": { "top": "POM (MX 호환 슬라이더)", "bottom": "실리콘 러버돔 + 스프링", "stem": "POM" },
+    "materials": {
+      "top": "POM (MX 호환 슬라이더)",
+      "bottom": "실리콘 러버돔 + 스프링",
+      "stem": "POM"
+    },
     "factoryLubed": true,
     "pins": 0,
-    "colorway": { "topHex": "#B5BCB7", "bottomHex": "#666E69", "stemHex": "#E4E6E1" }
+    "colorway": {
+      "topHex": "#B5BCB7",
+      "bottomHex": "#666E69",
+      "stemHex": "#E4E6E1"
+    }
+  },
+  {
+    "id": "sw-hansung-deep-blue",
+    "slug": "hansung-deep-blue",
+    "name": "한성 딥블루",
+    "nameEn": "Hansung Deep Blue Linear",
+    "brand": "Hansung",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3C5A78",
+      "bottomHex": "#24394E",
+      "stemHex": "#89B0D0"
+    }
+  },
+  {
+    "id": "sw-hansung-deep-green",
+    "slug": "hansung-deep-green",
+    "name": "한성 딥그린",
+    "nameEn": "Hansung Deep Green Linear",
+    "brand": "Hansung",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3E6B5C",
+      "bottomHex": "#26473C",
+      "stemHex": "#88B8A8"
+    }
+  },
+  {
+    "id": "sw-hansung-snow",
+    "slug": "hansung-snow",
+    "name": "한성 스노우",
+    "nameEn": "Hansung Snow Linear",
+    "brand": "Hansung",
+    "category": "linear",
+    "operatingForceGf": 38,
+    "bottomOutForceGf": 45,
+    "preTravelMm": 1.8,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#DCE2E0",
+      "bottomHex": "#B8C2BF",
+      "stemHex": "#F4F6F2"
+    }
+  },
+  {
+    "id": "sw-hansung-silent-deep-blue",
+    "slug": "hansung-silent-deep-blue",
+    "name": "한성 저소음 딥블루",
+    "nameEn": "Hansung Silent Deep Blue",
+    "brand": "Hansung",
+    "category": "silent_linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#486888",
+      "bottomHex": "#2A4056",
+      "stemHex": "#A4C4E0"
+    }
+  },
+  {
+    "id": "sw-hansung-silent-deep-green",
+    "slug": "hansung-silent-deep-green",
+    "name": "한성 저소음 딥그린",
+    "nameEn": "Hansung Silent Deep Green",
+    "brand": "Hansung",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#4B7869",
+      "bottomHex": "#2E4F44",
+      "stemHex": "#9EC8B9"
+    }
+  },
+  {
+    "id": "sw-monstargear-silent-seasalt",
+    "slug": "monstargear-silent-seasalt",
+    "name": "몬스타기어 저소음 바다소금",
+    "nameEn": "Monstargear Silent Sea Salt",
+    "brand": "Monstargear",
+    "category": "silent_linear",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#89B4C4",
+      "bottomHex": "#557D8C",
+      "stemHex": "#E4EFEF"
+    }
+  },
+  {
+    "id": "sw-monstargear-midnight",
+    "slug": "monstargear-midnight",
+    "name": "몬스타기어 미드나잇",
+    "nameEn": "Monstargear Midnight Linear",
+    "brand": "Monstargear",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#2B2F3A",
+      "bottomHex": "#1C1F26",
+      "stemHex": "#6B7C93"
+    }
+  },
+  {
+    "id": "sw-monstargear-ninja",
+    "slug": "monstargear-ninja",
+    "name": "몬스타기어 닌자",
+    "nameEn": "Monstargear Ninja Linear",
+    "brand": "Monstargear",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 1.9,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#303332",
+      "bottomHex": "#1E201F",
+      "stemHex": "#C85A5A"
+    }
+  },
+  {
+    "id": "sw-monstargear-cream",
+    "slug": "monstargear-cream",
+    "name": "몬스타기어 크림",
+    "nameEn": "Monstargear Cream Linear",
+    "brand": "Monstargear",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.7,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#E3DAC9",
+      "bottomHex": "#C7BCAA",
+      "stemHex": "#F4EFE6"
+    }
+  },
+  {
+    "id": "sw-keygeek-briny",
+    "slug": "keygeek-briny",
+    "name": "키긱 브라이니 (창해)",
+    "nameEn": "Keygeek Briny Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 52,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "U4 (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#4D7C8A",
+      "bottomHex": "#2F515C",
+      "stemHex": "#B5D3DC"
+    }
+  },
+  {
+    "id": "sw-keygeek-blue-cheese",
+    "slug": "keygeek-blue-cheese",
+    "name": "키긱 블루 치즈",
+    "nameEn": "Keygeek Blue Cheese Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "M3"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6E8FA8",
+      "bottomHex": "#466378",
+      "stemHex": "#E6D29E"
+    }
+  },
+  {
+    "id": "sw-keygeek-b1",
+    "slug": "keygeek-b1",
+    "name": "키긱 B1",
+    "nameEn": "Keygeek B1 Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3B403D",
+      "bottomHex": "#252927",
+      "stemHex": "#8F9691"
+    }
+  },
+  {
+    "id": "sw-keygeek-strawberry-bunny",
+    "slug": "keygeek-strawberry-bunny",
+    "name": "키긱 스트로베리 버니",
+    "nameEn": "Keygeek Strawberry Bunny",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "U4"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D99AA5",
+      "bottomHex": "#A86974",
+      "stemHex": "#F4DCE0"
+    }
+  },
+  {
+    "id": "sw-keygeek-lila",
+    "slug": "keygeek-lila",
+    "name": "키긱 릴라",
+    "nameEn": "Keygeek Lila Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#9F8BB8",
+      "bottomHex": "#6C5B82",
+      "stemHex": "#E0D6EB"
+    }
+  },
+  {
+    "id": "sw-hmx-windlight",
+    "slug": "hmx-windlight",
+    "name": "HMX 윈드라이트",
+    "nameEn": "HMX Windlight Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#B8D0D8",
+      "bottomHex": "#7C9CA8",
+      "stemHex": "#EBF4F7"
+    }
+  },
+  {
+    "id": "sw-hmx-raw",
+    "slug": "hmx-raw",
+    "name": "HMX RAW (로우)",
+    "nameEn": "HMX RAW Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 52,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    }
+  },
+  {
+    "id": "sw-hmx-yogurt",
+    "slug": "hmx-yogurt",
+    "name": "HMX 요거트",
+    "nameEn": "HMX Yogurt Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "T5"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#E8E4DC",
+      "bottomHex": "#CFC8BC",
+      "stemHex": "#F7F5F0"
+    }
+  },
+  {
+    "id": "sw-hmx-eva",
+    "slug": "hmx-eva",
+    "name": "HMX 에바 (Eva)",
+    "nameEn": "HMX Eva Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6D5B8E",
+      "bottomHex": "#483A63",
+      "stemHex": "#7FB069"
+    }
+  },
+  {
+    "id": "sw-hmx-violet",
+    "slug": "hmx-violet",
+    "name": "HMX 바이올렛",
+    "nameEn": "HMX Violet Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7B689E",
+      "bottomHex": "#51426E",
+      "stemHex": "#C9BCE0"
+    }
+  },
+  {
+    "id": "sw-hmx-jasmine",
+    "slug": "hmx-jasmine",
+    "name": "HMX 자스민",
+    "nameEn": "HMX Jasmine Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D4DFC7",
+      "bottomHex": "#9BB08A",
+      "stemHex": "#F0F5EA"
+    }
+  },
+  {
+    "id": "sw-bsun-strawberry-wine",
+    "slug": "bsun-strawberry-wine",
+    "name": "BSUN 딸기와인",
+    "nameEn": "BSUN Strawberry Wine",
+    "brand": "BSUN",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#9E4F5E",
+      "bottomHex": "#6B2E3B",
+      "stemHex": "#E3B5BE"
+    }
+  },
+  {
+    "id": "sw-bsun-tomcat",
+    "slug": "bsun-tomcat",
+    "name": "BSUN 톰캣",
+    "nameEn": "BSUN Tomcat Linear",
+    "brand": "BSUN",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 52,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "Nylon",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6C757D",
+      "bottomHex": "#495057",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-bsun-anemone",
+    "slug": "bsun-anemone",
+    "name": "BSUN 아네모네",
+    "nameEn": "BSUN Anemone Linear",
+    "brand": "BSUN",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C78B9C",
+      "bottomHex": "#8C5868",
+      "stemHex": "#F0DCE2"
+    }
+  },
+  {
+    "id": "sw-bsun-raw-tactile",
+    "slug": "bsun-raw-tactile",
+    "name": "BSUN 로우 택타일",
+    "nameEn": "BSUN Raw Tactile",
+    "brand": "BSUN",
+    "category": "tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-swk-ghost-dragon",
+    "slug": "swk-ghost-dragon",
+    "name": "SWK 고스트 드래곤",
+    "nameEn": "SWK Ghost Dragon",
+    "brand": "SWK",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#CFD6D3",
+      "bottomHex": "#88948F",
+      "stemHex": "#6B9080"
+    }
+  },
+  {
+    "id": "sw-swk-catmint",
+    "slug": "swk-catmint",
+    "name": "SWK 캣민트",
+    "nameEn": "SWK Catmint Linear",
+    "brand": "SWK",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#95B8A8",
+      "bottomHex": "#5D8272",
+      "stemHex": "#E0EFE8"
+    }
+  },
+  {
+    "id": "sw-swk-ginger-milk",
+    "slug": "swk-ginger-milk",
+    "name": "SWK 진저 밀크",
+    "nameEn": "SWK Ginger Milk",
+    "brand": "SWK",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D6C2A5",
+      "bottomHex": "#A68E6E",
+      "stemHex": "#F2E9DC"
+    }
+  },
+  {
+    "id": "sw-haimu-heartbeat",
+    "slug": "haimu-heartbeat",
+    "name": "하이무 하트비트 (저소음)",
+    "nameEn": "Haimu Heart Beat Silent Linear",
+    "brand": "Haimu",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (리프 댐핑)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C95B6B",
+      "bottomHex": "#8C3442",
+      "stemHex": "#F0C4CC"
+    }
+  },
+  {
+    "id": "sw-haimu-whisper",
+    "slug": "haimu-whisper",
+    "name": "하이무 위스퍼 (저소음 택타일)",
+    "nameEn": "Haimu Whisper Silent Tactile",
+    "brand": "Haimu",
+    "category": "silent_tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (리프 댐핑)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#B8BFBA",
+      "bottomHex": "#7A827D",
+      "stemHex": "#E4E6E1"
+    }
+  },
+  {
+    "id": "sw-lichicx-raw-silent",
+    "slug": "lichicx-raw-silent",
+    "name": "리칙스 로우 사일런트",
+    "nameEn": "Lichicx Raw Silent Linear",
+    "brand": "Lichicx",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.7,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM (무실리콘 저소음)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    }
+  },
+  {
+    "id": "sw-lichicx-lucy",
+    "slug": "lichicx-lucy",
+    "name": "리칙스 루시 (저소음)",
+    "nameEn": "Lichicx Lucy Silent Linear",
+    "brand": "Lichicx",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.7,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (무실리콘 저소음)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#8DA3B8",
+      "bottomHex": "#556A80",
+      "stemHex": "#DCE6F0"
+    }
+  },
+  {
+    "id": "sw-ws-morandi",
+    "slug": "ws-morandi",
+    "name": "WS 모란디",
+    "nameEn": "Wuque Studio Morandi Linear",
+    "brand": "Wuque Studio",
+    "category": "linear",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 18,
+    "springType": "2단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "UPE (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#8E9AAF",
+      "bottomHex": "#5E697D",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-ws-heavy-tactile",
+    "slug": "ws-heavy-tactile",
+    "name": "WS 헤비 택타일",
+    "nameEn": "Wuque Studio Heavy Tactile",
+    "brand": "Wuque Studio",
+    "category": "tactile",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 70,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.3,
+    "springLengthMm": 15,
+    "springType": "2단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#495057",
+      "bottomHex": "#2B3035",
+      "stemHex": "#6B9080"
+    }
+  },
+  {
+    "id": "sw-ws-silent-linear",
+    "slug": "ws-silent-linear",
+    "name": "WS 사일런트 리니어",
+    "nameEn": "Wuque Studio Silent Linear",
+    "brand": "Wuque Studio",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 63.5,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM (리프 댐핑)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3C4240",
+      "bottomHex": "#252927",
+      "stemHex": "#8F9691"
+    }
+  },
+  {
+    "id": "sw-leobog-seiya",
+    "slug": "leobog-seiya",
+    "name": "레오보그 경해축 (세이야)",
+    "nameEn": "LEOBOG Seiya Linear",
+    "brand": "LEOBOG",
+    "category": "linear",
+    "operatingForceGf": 37,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 1.8,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6B90A8",
+      "bottomHex": "#3E5C70",
+      "stemHex": "#C8DCE8"
+    }
+  },
+  {
+    "id": "sw-leobog-star-vector",
+    "slug": "leobog-star-vector",
+    "name": "레오보그 스타벡터",
+    "nameEn": "LEOBOG Star Vector",
+    "brand": "LEOBOG",
+    "category": "linear",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 1.8,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#5B6480",
+      "bottomHex": "#353C52",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-leobog-ice-soul",
+    "slug": "leobog-ice-soul",
+    "name": "레오보그 아이스소울 (택타일)",
+    "nameEn": "LEOBOG Ice Soul Tactile",
+    "brand": "LEOBOG",
+    "category": "tactile",
+    "operatingForceGf": 30,
+    "bottomOutForceGf": 45,
+    "preTravelMm": 1.7,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#A8C6D6",
+      "bottomHex": "#6D8FA3",
+      "stemHex": "#E8F4FA"
+    }
+  },
+  {
+    "id": "sw-leobog-ice-vein",
+    "slug": "leobog-ice-vein",
+    "name": "레오보그 빙맥축 (아이스베인)",
+    "nameEn": "LEOBOG Ice Vein Linear",
+    "brand": "LEOBOG",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 1.5,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7FA6BA",
+      "bottomHex": "#4E7285",
+      "stemHex": "#D8EBF5"
+    }
+  },
+  {
+    "id": "sw-mmd-princess-v3",
+    "slug": "mmd-princess-v3",
+    "name": "MMD 프린세스 V3 (45g)",
+    "nameEn": "MMD Princess V3 Linear",
+    "brand": "MMD",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D4A3A8",
+      "bottomHex": "#A37075",
+      "stemHex": "#F2DCE0"
+    }
+  },
+  {
+    "id": "sw-mmd-holy-panda-v3",
+    "slug": "mmd-holy-panda-v3",
+    "name": "MMD 홀리판다 V3",
+    "nameEn": "MMD Holy Panda V3 Tactile",
+    "brand": "MMD",
+    "category": "tactile",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#DCDAD3",
+      "bottomHex": "#C2BFB6",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-ciy-asura",
+    "slug": "ciy-asura",
+    "name": "CIY 아수라 (택타일)",
+    "nameEn": "CIY Asura Tactile",
+    "brand": "CIY",
+    "category": "tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 62,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#8C4A52",
+      "bottomHex": "#592A30",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-kailh-bcp",
+    "slug": "kailh-bcp",
+    "name": "카일 BCP (블랙 체리 파이)",
+    "nameEn": "Kailh Black Cherry Pie",
+    "brand": "Kailh",
+    "category": "linear",
+    "operatingForceGf": 57,
+    "bottomOutForceGf": 63.5,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#2E3130",
+      "bottomHex": "#1E201F",
+      "stemHex": "#A84A4A"
+    }
+  },
+  {
+    "id": "sw-kailh-deep-sea-whale",
+    "slug": "kailh-deep-sea-whale",
+    "name": "카일 딥씨 사일런트 웨일 (택타일)",
+    "nameEn": "Kailh Deep Sea Silent Pro Whale",
+    "brand": "Kailh",
+    "category": "silent_tactile",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 3,
+    "colorway": {
+      "topHex": "#4D6A80",
+      "bottomHex": "#2B3F4F",
+      "stemHex": "#A8C6D6"
+    }
+  },
+  {
+    "id": "sw-kailh-cocoa",
+    "slug": "kailh-cocoa",
+    "name": "카일 코코아",
+    "nameEn": "Kailh Cocoa Linear",
+    "brand": "Kailh",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7A5948",
+      "bottomHex": "#4F382C",
+      "stemHex": "#C9A895"
+    }
+  },
+  {
+    "id": "sw-ttc-ace",
+    "slug": "ttc-ace",
+    "name": "TTC 에이스",
+    "nameEn": "TTC ACE Linear",
+    "brand": "TTC",
+    "category": "linear",
+    "operatingForceGf": 53,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 19,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#222524",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-ttc-speed-silver-v2",
+    "slug": "ttc-speed-silver-v2",
+    "name": "TTC 스피드 실버 V2",
+    "nameEn": "TTC Speed Silver V2",
+    "brand": "TTC",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 1.08,
+    "totalTravelMm": 3.4,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 3,
+    "colorway": {
+      "topHex": "#C4C9C7",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    }
+  },
+  {
+    "id": "sw-ttc-kom-king",
+    "slug": "ttc-kom-king",
+    "name": "TTC 자석축 만자왕 (KOM)",
+    "nameEn": "TTC King of Magnetic",
+    "brand": "TTC",
+    "category": "magnetic",
+    "operatingForceGf": 35,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#8C9EA8",
+      "bottomHex": "#4E616B",
+      "stemHex": "#DCE6EB"
+    }
+  },
+  {
+    "id": "sw-akko-v3-lavender-purple-pro",
+    "slug": "akko-v3-lavender-purple-pro",
+    "name": "아코 V3 라벤더 퍼플 프로",
+    "nameEn": "Akko V3 Lavender Purple Pro",
+    "brand": "Akko",
+    "category": "tactile",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 1.9,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#9F8BB8",
+      "bottomHex": "#6B5A82",
+      "stemHex": "#DDD2EB"
+    }
+  },
+  {
+    "id": "sw-akko-penguin-silent",
+    "slug": "akko-penguin-silent",
+    "name": "아코 펭귄 저소음 (택타일)",
+    "nameEn": "Akko Penguin Silent Tactile",
+    "brand": "Akko",
+    "category": "silent_tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.3,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#313538",
+      "bottomHex": "#202326",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-akko-astrolink-he",
+    "slug": "akko-astrolink-he",
+    "name": "아코 아스트로링크 HE (자석축)",
+    "nameEn": "Akko Astrolink Magnetic",
+    "brand": "Akko",
+    "category": "magnetic",
+    "operatingForceGf": 36,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 3.4,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#7A8CA8",
+      "bottomHex": "#485870",
+      "stemHex": "#CBD6E6"
+    }
+  },
+  {
+    "id": "sw-durock-black-lotus",
+    "slug": "durock-black-lotus",
+    "name": "듀록 블랙 로터스",
+    "nameEn": "Durock Black Lotus Linear",
+    "brand": "Durock",
+    "category": "linear",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 63.5,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 19.5,
+    "springType": "1단",
+    "materials": {
+      "top": "PC (혼합)",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#2C2F30",
+      "bottomHex": "#1C1E1F",
+      "stemHex": "#7A5C7A"
+    }
+  },
+  {
+    "id": "sw-durock-dolphin-silent",
+    "slug": "durock-dolphin-silent",
+    "name": "듀록 돌핀 저소음",
+    "nameEn": "Durock Dolphin Silent Linear",
+    "brand": "Durock",
+    "category": "silent_linear",
+    "operatingForceGf": 48,
+    "bottomOutForceGf": 62,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#B8C4CC",
+      "bottomHex": "#82919C",
+      "stemHex": "#5E7B8F"
+    }
+  },
+  {
+    "id": "sw-durock-t1",
+    "slug": "durock-t1",
+    "name": "듀록 T1 (67g 택타일)",
+    "nameEn": "Durock T1 Tactile 67g",
+    "brand": "Durock",
+    "category": "tactile",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 67,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#363A38",
+      "bottomHex": "#242725",
+      "stemHex": "#4E7363"
+    }
+  },
+  {
+    "id": "sw-novelkeys-cream",
+    "slug": "novelkeys-cream",
+    "name": "노블키즈 NK 크림",
+    "nameEn": "NovelKeys Cream Linear",
+    "brand": "NovelKeys",
+    "category": "linear",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 70,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
+    "factoryLubed": false,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#E3DAC9",
+      "bottomHex": "#CFC4B0",
+      "stemHex": "#F2EBE0"
+    }
+  },
+  {
+    "id": "sw-c3-tangerine-62g",
+    "slug": "c3-tangerine-62g",
+    "name": "C3 탠저린 (62g)",
+    "nameEn": "C³Equalz Tangerine 62g",
+    "brand": "C³Equalz",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 62,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "UHMWPE",
+      "bottom": "UHMWPE",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D98A4E",
+      "bottomHex": "#B56A32",
+      "stemHex": "#88B06B"
+    }
+  },
+  {
+    "id": "sw-drop-holy-panda-x",
+    "slug": "drop-holy-panda-x",
+    "name": "드롭 홀리판다 X",
+    "nameEn": "Drop + Gateron Holy Panda X",
+    "brand": "Drop",
+    "category": "tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 16,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#222524",
+      "stemHex": "#D9CBB8"
+    }
+  },
+  {
+    "id": "sw-gateron-melodic",
+    "slug": "gateron-melodic",
+    "name": "게이트론 멜로딕 (클릭)",
+    "nameEn": "Gateron Melodic Clicky",
+    "brand": "Gateron",
+    "category": "clicky",
+    "operatingForceGf": 60,
+    "bottomOutForceGf": 67,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (클릭 리프)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7BA8B8",
+      "bottomHex": "#4E7887",
+      "stemHex": "#D4A373"
+    }
+  },
+  {
+    "id": "sw-gateron-jupiter-banana",
+    "slug": "gateron-jupiter-banana",
+    "name": "게이트론 주피터 바나나",
+    "nameEn": "Gateron Jupiter Banana Tactile",
+    "brand": "Gateron",
+    "category": "tactile",
+    "operatingForceGf": 59,
+    "bottomOutForceGf": 67,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.4,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D9D6CE",
+      "bottomHex": "#B8B4AA",
+      "stemHex": "#E2C068"
+    }
+  },
+  {
+    "id": "sw-gateron-magnetic-jade-gaming",
+    "slug": "gateron-magnetic-jade-gaming",
+    "name": "게이트론 매그네틱 제이드 게이밍",
+    "nameEn": "Gateron Magnetic Jade Gaming",
+    "brand": "Gateron",
+    "category": "magnetic",
+    "operatingForceGf": 36,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#6B9080",
+      "bottomHex": "#3C574B",
+      "stemHex": "#E4E6E1"
+    }
+  },
+  {
+    "id": "sw-wooting-lekker-l60-v2",
+    "slug": "wooting-lekker-l60-v2",
+    "name": "우팅 렉커 L60 V2",
+    "nameEn": "Wooting Lekker L60 V2",
+    "brand": "Wooting",
+    "category": "magnetic",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 4,
+    "springLengthMm": 19.5,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#D4A373",
+      "bottomHex": "#5C4733",
+      "stemHex": "#F2D0A9"
+    }
   }
 ]

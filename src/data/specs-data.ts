@@ -1517,8 +1517,8 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
   {
     "id": "sw-keygeek-y3",
     "slug": "keygeek-y3",
-    "name": "키긱 Y3",
-    "nameEn": "Keygeek Y3 Linear",
+    "name": "키긱 MZ Y3",
+    "nameEn": "Keygeek MZ Y3 Linear",
     "brand": "Keygeek",
     "category": "linear",
     "operatingForceGf": 48,
@@ -2186,6 +2186,2166 @@ export const INITIAL_SWITCHES: SwitchSpec[] = [
       "topHex": "#B5BCB7",
       "bottomHex": "#666E69",
       "stemHex": "#E4E6E1"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hansung-deep-blue",
+    "slug": "hansung-deep-blue",
+    "name": "한성 딥블루",
+    "nameEn": "Hansung Deep Blue Linear",
+    "brand": "Hansung",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3C5A78",
+      "bottomHex": "#24394E",
+      "stemHex": "#89B0D0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hansung-deep-green",
+    "slug": "hansung-deep-green",
+    "name": "한성 딥그린",
+    "nameEn": "Hansung Deep Green Linear",
+    "brand": "Hansung",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3E6B5C",
+      "bottomHex": "#26473C",
+      "stemHex": "#88B8A8"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hansung-snow",
+    "slug": "hansung-snow",
+    "name": "한성 스노우",
+    "nameEn": "Hansung Snow Linear",
+    "brand": "Hansung",
+    "category": "linear",
+    "operatingForceGf": 38,
+    "bottomOutForceGf": 45,
+    "preTravelMm": 1.8,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#DCE2E0",
+      "bottomHex": "#B8C2BF",
+      "stemHex": "#F4F6F2"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hansung-silent-deep-blue",
+    "slug": "hansung-silent-deep-blue",
+    "name": "한성 저소음 딥블루",
+    "nameEn": "Hansung Silent Deep Blue",
+    "brand": "Hansung",
+    "category": "silent_linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#486888",
+      "bottomHex": "#2A4056",
+      "stemHex": "#A4C4E0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hansung-silent-deep-green",
+    "slug": "hansung-silent-deep-green",
+    "name": "한성 저소음 딥그린",
+    "nameEn": "Hansung Silent Deep Green",
+    "brand": "Hansung",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#4B7869",
+      "bottomHex": "#2E4F44",
+      "stemHex": "#9EC8B9"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-monstargear-silent-seasalt",
+    "slug": "monstargear-silent-seasalt",
+    "name": "몬스타기어 저소음 바다소금",
+    "nameEn": "Monstargear Silent Sea Salt",
+    "brand": "Monstargear",
+    "category": "silent_linear",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#89B4C4",
+      "bottomHex": "#557D8C",
+      "stemHex": "#E4EFEF"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-monstargear-midnight",
+    "slug": "monstargear-midnight",
+    "name": "몬스타기어 미드나잇",
+    "nameEn": "Monstargear Midnight Linear",
+    "brand": "Monstargear",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#2B2F3A",
+      "bottomHex": "#1C1F26",
+      "stemHex": "#6B7C93"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-monstargear-ninja",
+    "slug": "monstargear-ninja",
+    "name": "몬스타기어 닌자",
+    "nameEn": "Monstargear Ninja Linear",
+    "brand": "Monstargear",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 1.9,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#303332",
+      "bottomHex": "#1E201F",
+      "stemHex": "#C85A5A"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-monstargear-cream",
+    "slug": "monstargear-cream",
+    "name": "몬스타기어 크림",
+    "nameEn": "Monstargear Cream Linear",
+    "brand": "Monstargear",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.7,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#E3DAC9",
+      "bottomHex": "#C7BCAA",
+      "stemHex": "#F4EFE6"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-keygeek-briny",
+    "slug": "keygeek-briny",
+    "name": "키긱 브라이니 (창해)",
+    "nameEn": "Keygeek Briny Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 52,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "U4 (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#4D7C8A",
+      "bottomHex": "#2F515C",
+      "stemHex": "#B5D3DC"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-keygeek-blue-cheese",
+    "slug": "keygeek-blue-cheese",
+    "name": "키긱 블루 치즈",
+    "nameEn": "Keygeek Blue Cheese Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "M3"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6E8FA8",
+      "bottomHex": "#466378",
+      "stemHex": "#E6D29E"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-keygeek-b1",
+    "slug": "keygeek-b1",
+    "name": "키긱 B1",
+    "nameEn": "Keygeek B1 Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PA66",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3B403D",
+      "bottomHex": "#252927",
+      "stemHex": "#8F9691"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-keygeek-strawberry-bunny",
+    "slug": "keygeek-strawberry-bunny",
+    "name": "키긱 스트로베리 버니",
+    "nameEn": "Keygeek Strawberry Bunny",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "U4"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D99AA5",
+      "bottomHex": "#A86974",
+      "stemHex": "#F4DCE0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-keygeek-lila",
+    "slug": "keygeek-lila",
+    "name": "키긱 릴라",
+    "nameEn": "Keygeek Lila Linear",
+    "brand": "Keygeek",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#9F8BB8",
+      "bottomHex": "#6C5B82",
+      "stemHex": "#E0D6EB"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hmx-windlight",
+    "slug": "hmx-windlight",
+    "name": "HMX 윈드라이트",
+    "nameEn": "HMX Windlight Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#B8D0D8",
+      "bottomHex": "#7C9CA8",
+      "stemHex": "#EBF4F7"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hmx-raw",
+    "slug": "hmx-raw",
+    "name": "HMX RAW (로우)",
+    "nameEn": "HMX RAW Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 52,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hmx-yogurt",
+    "slug": "hmx-yogurt",
+    "name": "HMX 요거트",
+    "nameEn": "HMX Yogurt Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "T5"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#E8E4DC",
+      "bottomHex": "#CFC8BC",
+      "stemHex": "#F7F5F0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hmx-eva",
+    "slug": "hmx-eva",
+    "name": "HMX 에바 (Eva)",
+    "nameEn": "HMX Eva Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6D5B8E",
+      "bottomHex": "#483A63",
+      "stemHex": "#7FB069"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hmx-violet",
+    "slug": "hmx-violet",
+    "name": "HMX 바이올렛",
+    "nameEn": "HMX Violet Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7B689E",
+      "bottomHex": "#51426E",
+      "stemHex": "#C9BCE0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-hmx-jasmine",
+    "slug": "hmx-jasmine",
+    "name": "HMX 자스민",
+    "nameEn": "HMX Jasmine Linear",
+    "brand": "HMX",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D4DFC7",
+      "bottomHex": "#9BB08A",
+      "stemHex": "#F0F5EA"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-bsun-strawberry-wine",
+    "slug": "bsun-strawberry-wine",
+    "name": "BSUN 딸기와인",
+    "nameEn": "BSUN Strawberry Wine",
+    "brand": "BSUN",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#9E4F5E",
+      "bottomHex": "#6B2E3B",
+      "stemHex": "#E3B5BE"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-bsun-tomcat",
+    "slug": "bsun-tomcat",
+    "name": "BSUN 톰캣",
+    "nameEn": "BSUN Tomcat Linear",
+    "brand": "BSUN",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 52,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "Nylon",
+      "stem": "LY"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6C757D",
+      "bottomHex": "#495057",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-bsun-anemone",
+    "slug": "bsun-anemone",
+    "name": "BSUN 아네모네",
+    "nameEn": "BSUN Anemone Linear",
+    "brand": "BSUN",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C78B9C",
+      "bottomHex": "#8C5868",
+      "stemHex": "#F0DCE2"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-bsun-raw-tactile",
+    "slug": "bsun-raw-tactile",
+    "name": "BSUN 로우 택타일",
+    "nameEn": "BSUN Raw Tactile",
+    "brand": "BSUN",
+    "category": "tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-swk-ghost-dragon",
+    "slug": "swk-ghost-dragon",
+    "name": "SWK 고스트 드래곤",
+    "nameEn": "SWK Ghost Dragon",
+    "brand": "SWK",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#CFD6D3",
+      "bottomHex": "#88948F",
+      "stemHex": "#6B9080"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-swk-catmint",
+    "slug": "swk-catmint",
+    "name": "SWK 캣민트",
+    "nameEn": "SWK Catmint Linear",
+    "brand": "SWK",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#95B8A8",
+      "bottomHex": "#5D8272",
+      "stemHex": "#E0EFE8"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-swk-ginger-milk",
+    "slug": "swk-ginger-milk",
+    "name": "SWK 진저 밀크",
+    "nameEn": "SWK Ginger Milk",
+    "brand": "SWK",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D6C2A5",
+      "bottomHex": "#A68E6E",
+      "stemHex": "#F2E9DC"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-haimu-heartbeat",
+    "slug": "haimu-heartbeat",
+    "name": "하이무 하트비트 (저소음)",
+    "nameEn": "Haimu Heart Beat Silent Linear",
+    "brand": "Haimu",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (리프 댐핑)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C95B6B",
+      "bottomHex": "#8C3442",
+      "stemHex": "#F0C4CC"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-haimu-whisper",
+    "slug": "haimu-whisper",
+    "name": "하이무 위스퍼 (저소음 택타일)",
+    "nameEn": "Haimu Whisper Silent Tactile",
+    "brand": "Haimu",
+    "category": "silent_tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (리프 댐핑)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#B8BFBA",
+      "bottomHex": "#7A827D",
+      "stemHex": "#E4E6E1"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-lichicx-raw-silent",
+    "slug": "lichicx-raw-silent",
+    "name": "리칙스 로우 사일런트",
+    "nameEn": "Lichicx Raw Silent Linear",
+    "brand": "Lichicx",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.7,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM (무실리콘 저소음)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#C9CFCB",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-lichicx-lucy",
+    "slug": "lichicx-lucy",
+    "name": "리칙스 루시 (저소음)",
+    "nameEn": "Lichicx Lucy Silent Linear",
+    "brand": "Lichicx",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.7,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (무실리콘 저소음)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#8DA3B8",
+      "bottomHex": "#556A80",
+      "stemHex": "#DCE6F0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ws-morandi",
+    "slug": "ws-morandi",
+    "name": "WS 모란디",
+    "nameEn": "Wuque Studio Morandi Linear",
+    "brand": "Wuque Studio",
+    "category": "linear",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 18,
+    "springType": "2단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "UPE (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#8E9AAF",
+      "bottomHex": "#5E697D",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ws-heavy-tactile",
+    "slug": "ws-heavy-tactile",
+    "name": "WS 헤비 택타일",
+    "nameEn": "Wuque Studio Heavy Tactile",
+    "brand": "Wuque Studio",
+    "category": "tactile",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 70,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.3,
+    "springLengthMm": 15,
+    "springType": "2단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#495057",
+      "bottomHex": "#2B3035",
+      "stemHex": "#6B9080"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ws-silent-linear",
+    "slug": "ws-silent-linear",
+    "name": "WS 사일런트 리니어",
+    "nameEn": "Wuque Studio Silent Linear",
+    "brand": "Wuque Studio",
+    "category": "silent_linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 63.5,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM (리프 댐핑)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#3C4240",
+      "bottomHex": "#252927",
+      "stemHex": "#8F9691"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-leobog-seiya",
+    "slug": "leobog-seiya",
+    "name": "레오보그 경해축 (세이야)",
+    "nameEn": "LEOBOG Seiya Linear",
+    "brand": "LEOBOG",
+    "category": "linear",
+    "operatingForceGf": 37,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 1.8,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#6B90A8",
+      "bottomHex": "#3E5C70",
+      "stemHex": "#C8DCE8"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-leobog-star-vector",
+    "slug": "leobog-star-vector",
+    "name": "레오보그 스타벡터",
+    "nameEn": "LEOBOG Star Vector",
+    "brand": "LEOBOG",
+    "category": "linear",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 1.8,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#5B6480",
+      "bottomHex": "#353C52",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-leobog-ice-soul",
+    "slug": "leobog-ice-soul",
+    "name": "레오보그 아이스소울 (택타일)",
+    "nameEn": "LEOBOG Ice Soul Tactile",
+    "brand": "LEOBOG",
+    "category": "tactile",
+    "operatingForceGf": 30,
+    "bottomOutForceGf": 45,
+    "preTravelMm": 1.7,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#A8C6D6",
+      "bottomHex": "#6D8FA3",
+      "stemHex": "#E8F4FA"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-leobog-ice-vein",
+    "slug": "leobog-ice-vein",
+    "name": "레오보그 빙맥축 (아이스베인)",
+    "nameEn": "LEOBOG Ice Vein Linear",
+    "brand": "LEOBOG",
+    "category": "linear",
+    "operatingForceGf": 42,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 1.5,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7FA6BA",
+      "bottomHex": "#4E7285",
+      "stemHex": "#D8EBF5"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-mmd-princess-v3",
+    "slug": "mmd-princess-v3",
+    "name": "MMD 프린세스 V3 (45g)",
+    "nameEn": "MMD Princess V3 Linear",
+    "brand": "MMD",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D4A3A8",
+      "bottomHex": "#A37075",
+      "stemHex": "#F2DCE0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-mmd-holy-panda-v3",
+    "slug": "mmd-holy-panda-v3",
+    "name": "MMD 홀리판다 V3",
+    "nameEn": "MMD Holy Panda V3 Tactile",
+    "brand": "MMD",
+    "category": "tactile",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#DCDAD3",
+      "bottomHex": "#C2BFB6",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ciy-asura",
+    "slug": "ciy-asura",
+    "name": "CIY 아수라 (택타일)",
+    "nameEn": "CIY Asura Tactile",
+    "brand": "CIY",
+    "category": "tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 62,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#8C4A52",
+      "bottomHex": "#592A30",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-kailh-bcp",
+    "slug": "kailh-bcp",
+    "name": "카일 BCP (블랙 체리 파이)",
+    "nameEn": "Kailh Black Cherry Pie",
+    "brand": "Kailh",
+    "category": "linear",
+    "operatingForceGf": 57,
+    "bottomOutForceGf": 63.5,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "Nylon",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#2E3130",
+      "bottomHex": "#1E201F",
+      "stemHex": "#A84A4A"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-kailh-deep-sea-whale",
+    "slug": "kailh-deep-sea-whale",
+    "name": "카일 딥씨 사일런트 웨일 (택타일)",
+    "nameEn": "Kailh Deep Sea Silent Pro Whale",
+    "brand": "Kailh",
+    "category": "silent_tactile",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 3,
+    "colorway": {
+      "topHex": "#4D6A80",
+      "bottomHex": "#2B3F4F",
+      "stemHex": "#A8C6D6"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-kailh-cocoa",
+    "slug": "kailh-cocoa",
+    "name": "카일 코코아",
+    "nameEn": "Kailh Cocoa Linear",
+    "brand": "Kailh",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.6,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7A5948",
+      "bottomHex": "#4F382C",
+      "stemHex": "#C9A895"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ttc-ace",
+    "slug": "ttc-ace",
+    "name": "TTC 에이스",
+    "nameEn": "TTC ACE Linear",
+    "brand": "TTC",
+    "category": "linear",
+    "operatingForceGf": 53,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 19,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#222524",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ttc-speed-silver-v2",
+    "slug": "ttc-speed-silver-v2",
+    "name": "TTC 스피드 실버 V2",
+    "nameEn": "TTC Speed Silver V2",
+    "brand": "TTC",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 53,
+    "preTravelMm": 1.08,
+    "totalTravelMm": 3.4,
+    "springLengthMm": 20,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 3,
+    "colorway": {
+      "topHex": "#C4C9C7",
+      "bottomHex": "#8F9691",
+      "stemHex": "#E4E6E1"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-ttc-kom-king",
+    "slug": "ttc-kom-king",
+    "name": "TTC 자석축 만자왕 (KOM)",
+    "nameEn": "TTC King of Magnetic",
+    "brand": "TTC",
+    "category": "magnetic",
+    "operatingForceGf": 35,
+    "bottomOutForceGf": 48,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 21,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#8C9EA8",
+      "bottomHex": "#4E616B",
+      "stemHex": "#DCE6EB"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-akko-v3-lavender-purple-pro",
+    "slug": "akko-v3-lavender-purple-pro",
+    "name": "아코 V3 라벤더 퍼플 프로",
+    "nameEn": "Akko V3 Lavender Purple Pro",
+    "brand": "Akko",
+    "category": "tactile",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 55,
+    "preTravelMm": 1.9,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#9F8BB8",
+      "bottomHex": "#6B5A82",
+      "stemHex": "#DDD2EB"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-akko-penguin-silent",
+    "slug": "akko-penguin-silent",
+    "name": "아코 펭귄 저소음 (택타일)",
+    "nameEn": "Akko Penguin Silent Tactile",
+    "brand": "Akko",
+    "category": "silent_tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 65,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.3,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PA12",
+      "bottom": "PA66",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#313538",
+      "bottomHex": "#202326",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-akko-astrolink-he",
+    "slug": "akko-astrolink-he",
+    "name": "아코 아스트로링크 HE (자석축)",
+    "nameEn": "Akko Astrolink Magnetic",
+    "brand": "Akko",
+    "category": "magnetic",
+    "operatingForceGf": 36,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 3.4,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#7A8CA8",
+      "bottomHex": "#485870",
+      "stemHex": "#CBD6E6"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-durock-black-lotus",
+    "slug": "durock-black-lotus",
+    "name": "듀록 블랙 로터스",
+    "nameEn": "Durock Black Lotus Linear",
+    "brand": "Durock",
+    "category": "linear",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 63.5,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 19.5,
+    "springType": "1단",
+    "materials": {
+      "top": "PC (혼합)",
+      "bottom": "Nylon",
+      "stem": "POM (롱폴)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#2C2F30",
+      "bottomHex": "#1C1E1F",
+      "stemHex": "#7A5C7A"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-durock-dolphin-silent",
+    "slug": "durock-dolphin-silent",
+    "name": "듀록 돌핀 저소음",
+    "nameEn": "Durock Dolphin Silent Linear",
+    "brand": "Durock",
+    "category": "silent_linear",
+    "operatingForceGf": 48,
+    "bottomOutForceGf": 62,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM + 실리콘 댐퍼"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#B8C4CC",
+      "bottomHex": "#82919C",
+      "stemHex": "#5E7B8F"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-durock-t1",
+    "slug": "durock-t1",
+    "name": "듀록 T1 (67g 택타일)",
+    "nameEn": "Durock T1 Tactile 67g",
+    "brand": "Durock",
+    "category": "tactile",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 67,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#363A38",
+      "bottomHex": "#242725",
+      "stemHex": "#4E7363"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-novelkeys-cream",
+    "slug": "novelkeys-cream",
+    "name": "노블키즈 NK 크림",
+    "nameEn": "NovelKeys Cream Linear",
+    "brand": "NovelKeys",
+    "category": "linear",
+    "operatingForceGf": 55,
+    "bottomOutForceGf": 70,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "POM",
+      "bottom": "POM",
+      "stem": "POM"
+    },
+    "factoryLubed": false,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#E3DAC9",
+      "bottomHex": "#CFC4B0",
+      "stemHex": "#F2EBE0"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-c3-tangerine-62g",
+    "slug": "c3-tangerine-62g",
+    "name": "C3 탠저린 (62g)",
+    "nameEn": "C³Equalz Tangerine 62g",
+    "brand": "C³Equalz",
+    "category": "linear",
+    "operatingForceGf": 45,
+    "bottomOutForceGf": 62,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 15,
+    "springType": "1단",
+    "materials": {
+      "top": "UHMWPE",
+      "bottom": "UHMWPE",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D98A4E",
+      "bottomHex": "#B56A32",
+      "stemHex": "#88B06B"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-drop-holy-panda-x",
+    "slug": "drop-holy-panda-x",
+    "name": "드롭 홀리판다 X",
+    "nameEn": "Drop + Gateron Holy Panda X",
+    "brand": "Drop",
+    "category": "tactile",
+    "operatingForceGf": 50,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.8,
+    "springLengthMm": 16,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#313533",
+      "bottomHex": "#222524",
+      "stemHex": "#D9CBB8"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-gateron-melodic",
+    "slug": "gateron-melodic",
+    "name": "게이트론 멜로딕 (클릭)",
+    "nameEn": "Gateron Melodic Clicky",
+    "brand": "Gateron",
+    "category": "clicky",
+    "operatingForceGf": 60,
+    "bottomOutForceGf": 67,
+    "preTravelMm": 2,
+    "totalTravelMm": 4,
+    "springLengthMm": 18,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM (클릭 리프)"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#7BA8B8",
+      "bottomHex": "#4E7887",
+      "stemHex": "#D4A373"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-gateron-jupiter-banana",
+    "slug": "gateron-jupiter-banana",
+    "name": "게이트론 주피터 바나나",
+    "nameEn": "Gateron Jupiter Banana Tactile",
+    "brand": "Gateron",
+    "category": "tactile",
+    "operatingForceGf": 59,
+    "bottomOutForceGf": 67,
+    "preTravelMm": 2,
+    "totalTravelMm": 3.4,
+    "springLengthMm": 22,
+    "springType": "2단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 5,
+    "colorway": {
+      "topHex": "#D9D6CE",
+      "bottomHex": "#B8B4AA",
+      "stemHex": "#E2C068"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-gateron-magnetic-jade-gaming",
+    "slug": "gateron-magnetic-jade-gaming",
+    "name": "게이트론 매그네틱 제이드 게이밍",
+    "nameEn": "Gateron Magnetic Jade Gaming",
+    "brand": "Gateron",
+    "category": "magnetic",
+    "operatingForceGf": 36,
+    "bottomOutForceGf": 50,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 3.5,
+    "springLengthMm": 20,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "PA66",
+      "stem": "POM (막힌 하단)"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#6B9080",
+      "bottomHex": "#3C574B",
+      "stemHex": "#E4E6E1"
+    },
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "pitchVotes": {
+        "low": 0,
+        "mid": 0,
+        "high": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "sw-wooting-lekker-l60-v2",
+    "slug": "wooting-lekker-l60-v2",
+    "name": "우팅 렉커 L60 V2",
+    "nameEn": "Wooting Lekker L60 V2",
+    "brand": "Wooting",
+    "category": "magnetic",
+    "operatingForceGf": 40,
+    "bottomOutForceGf": 60,
+    "preTravelMm": 0.1,
+    "totalTravelMm": 4,
+    "springLengthMm": 19.5,
+    "springType": "1단",
+    "materials": {
+      "top": "PC",
+      "bottom": "Nylon",
+      "stem": "POM"
+    },
+    "factoryLubed": true,
+    "pins": 2,
+    "colorway": {
+      "topHex": "#D4A373",
+      "bottomHex": "#5C4733",
+      "stemHex": "#F2D0A9"
     },
     "community": {
       "ratingAvg": 0,
@@ -3623,6 +5783,1446 @@ export const INITIAL_MICE: MouseSpec[] = [
     "sensor": "PAW3395",
     "switchType": "optical",
     "switchModel": "Omron",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-mchose-a7-pro",
+    "slug": "mchose-a7-pro",
+    "name": "MCHOSE A7 Pro",
+    "nameEn": "MCHOSE A7 Pro 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 125.8,
+      "width": 63.2,
+      "height": 39.8
+    },
+    "weightGrams": 59,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-mchose-a7-ultra",
+    "slug": "mchose-a7-ultra",
+    "name": "MCHOSE A7 Ultra",
+    "nameEn": "MCHOSE A7 Ultra 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 125.8,
+      "width": 63.2,
+      "height": 39.8
+    },
+    "weightGrams": 59,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-mchose-l7-pro",
+    "slug": "mchose-l7-pro",
+    "name": "MCHOSE L7 Pro",
+    "nameEn": "MCHOSE L7 Pro 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 60.6,
+      "height": 36
+    },
+    "weightGrams": 39,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-mchose-l7-ultra",
+    "slug": "mchose-l7-ultra",
+    "name": "MCHOSE L7 Ultra",
+    "nameEn": "MCHOSE L7 Ultra 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 60.6,
+      "height": 36
+    },
+    "weightGrams": 39,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-mchose-g3-ultra",
+    "slug": "mchose-g3-ultra",
+    "name": "MCHOSE G3 Ultra",
+    "nameEn": "MCHOSE G3 Ultra 8K",
+    "brand": "MCHOSE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 116.5,
+      "width": 62.9,
+      "height": 38.2
+    },
+    "weightGrams": 64,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Omron 100M",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-zaopin-z1-pro",
+    "slug": "zaopin-z1-pro",
+    "name": "Zaopin Z1 Pro",
+    "nameEn": "Zaopin Z1 Pro 4K",
+    "brand": "Zaopin",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 110,
+      "width": 62,
+      "height": 38.5
+    },
+    "weightGrams": 46,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-zaopin-z2",
+    "slug": "zaopin-z2",
+    "name": "Zaopin Z2 (핫스왑)",
+    "nameEn": "Zaopin Z2 4K Hot-Swap",
+    "brand": "Zaopin",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 123,
+      "width": 64,
+      "height": 39.5
+    },
+    "weightGrams": 65,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "TTC 골드 60M (핫스왑)",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-zaopin-zpw",
+    "slug": "zaopin-zpw",
+    "name": "Zaopin ZPW Max",
+    "nameEn": "Zaopin ZPW Max 8K",
+    "brand": "Zaopin",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 121,
+      "width": 63,
+      "height": 38
+    },
+    "weightGrams": 47,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-waizowl-ogm-pro-v2",
+    "slug": "waizowl-ogm-pro-v2",
+    "name": "Waizowl OGM Pro V2",
+    "nameEn": "Waizowl OGM Pro V2 8K",
+    "brand": "Waizowl",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 121,
+      "width": 66,
+      "height": 40
+    },
+    "weightGrams": 49,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-waizowl-ogm-cloud",
+    "slug": "waizowl-ogm-cloud",
+    "name": "Waizowl OGM Cloud",
+    "nameEn": "Waizowl OGM Cloud 4K",
+    "brand": "Waizowl",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 126,
+      "width": 68,
+      "height": 38
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-incott-g23-pro",
+    "slug": "incott-g23-pro",
+    "name": "Incott G23 Pro (핫스왑)",
+    "nameEn": "Incott G23 Pro 8K Hot-Swap",
+    "brand": "Incott",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 126,
+      "width": 63.5,
+      "height": 40
+    },
+    "weightGrams": 65,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano (핫스왑)",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-incott-ghero-pro",
+    "slug": "incott-ghero-pro",
+    "name": "Incott GHERO Pro",
+    "nameEn": "Incott GHERO Pro 8K",
+    "brand": "Incott",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 118,
+      "width": 65,
+      "height": 39.5
+    },
+    "weightGrams": 66,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-rawm-sa-sh01-pro",
+    "slug": "rawm-sa-sh01-pro",
+    "name": "RAWM SA-SH01 Pro",
+    "nameEn": "RAWM SA-SH01 Pro 8K",
+    "brand": "RAWM",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 117.6,
+      "width": 61.2,
+      "height": 38
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano (핫스왑)",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-rawm-mh01-pro",
+    "slug": "rawm-mh01-pro",
+    "name": "RAWM MH01 Pro",
+    "nameEn": "RAWM MH01 Pro 8K",
+    "brand": "RAWM",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 126,
+      "width": 63.5,
+      "height": 40
+    },
+    "weightGrams": 65,
+    "sensor": "PAW3950",
+    "switchType": "mechanical",
+    "switchModel": "Huano (핫스왑)",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-darmoshark-m3-pro",
+    "slug": "darmoshark-m3-pro",
+    "name": "Darmoshark M3 Pro",
+    "nameEn": "Darmoshark M3 Pro 4K",
+    "brand": "Darmoshark",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 129,
+      "width": 66,
+      "height": 39
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "TTC 골드 60M",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-darmoshark-m3-micro",
+    "slug": "darmoshark-m3-micro",
+    "name": "Darmoshark M3 Micro",
+    "nameEn": "Darmoshark M3 Micro 4K",
+    "brand": "Darmoshark",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 105.5,
+      "width": 54.6,
+      "height": 33.5
+    },
+    "weightGrams": 42,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-kysona-m600",
+    "slug": "kysona-m600",
+    "name": "Kysona M600",
+    "nameEn": "Kysona M600 Wireless",
+    "brand": "Kysona",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 118,
+      "width": 62,
+      "height": 40
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-scyrox-v6",
+    "slug": "scyrox-v6",
+    "name": "Scyrox V6",
+    "nameEn": "Scyrox V6 8K",
+    "brand": "Scyrox",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 119,
+      "width": 61,
+      "height": 40
+    },
+    "weightGrams": 40,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-vxe-r1-se-plus",
+    "slug": "vxe-r1-se-plus",
+    "name": "VXE R1 SE+",
+    "nameEn": "VXE Dragonfly R1 SE+",
+    "brand": "VXE",
+    "maxPollingHz": 2000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.6,
+      "width": 64,
+      "height": 37.8
+    },
+    "weightGrams": 55,
+    "sensor": "PAW3395 SE",
+    "switchType": "mechanical",
+    "switchModel": "Huano 화이트닷",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-vxe-r1-pro",
+    "slug": "vxe-r1-pro",
+    "name": "VXE R1 Pro",
+    "nameEn": "VXE Dragonfly R1 Pro",
+    "brand": "VXE",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.6,
+      "width": 64,
+      "height": 37.8
+    },
+    "weightGrams": 48,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 빙매 핑크닷",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-vxe-mad-r",
+    "slug": "vxe-mad-r",
+    "name": "VXE MAD R",
+    "nameEn": "VXE MAD R 8K",
+    "brand": "VXE",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.1,
+      "width": 63.2,
+      "height": 38.1
+    },
+    "weightGrams": 36,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-atk-z1-ultra",
+    "slug": "atk-z1-ultra",
+    "name": "ATK Z1 울트라",
+    "nameEn": "ATK Blazing Sky Z1 Ultra",
+    "brand": "ATK",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 122.5,
+      "width": 66.8,
+      "height": 42.4
+    },
+    "weightGrams": 57,
+    "sensor": "PAW3950 Ultra",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-atk-a9-ultra",
+    "slug": "atk-a9-ultra",
+    "name": "ATK A9 울트라",
+    "nameEn": "ATK Dragonfly A9 Ultra",
+    "brand": "ATK",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 125,
+      "width": 64,
+      "height": 40
+    },
+    "weightGrams": 53,
+    "sensor": "PAW3950 Ultra",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-asus-rog-harpe-ace",
+    "slug": "asus-rog-harpe-ace",
+    "name": "ASUS ROG 하프 에이스",
+    "nameEn": "ASUS ROG Harpe Ace Aim Lab",
+    "brand": "ASUS ROG",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 127.5,
+      "width": 63.7,
+      "height": 39.6
+    },
+    "weightGrams": 54,
+    "sensor": "ROG AimPoint 36K",
+    "switchType": "mechanical",
+    "switchModel": "ROG 70M",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-asus-rog-keris-ii-ace",
+    "slug": "asus-rog-keris-ii-ace",
+    "name": "ASUS ROG 케리스 II 에이스",
+    "nameEn": "ASUS ROG Keris II Ace",
+    "brand": "ASUS ROG",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 121,
+      "width": 67,
+      "height": 42
+    },
+    "weightGrams": 54,
+    "sensor": "ROG AimPoint Pro 42K",
+    "switchType": "optical",
+    "switchModel": "ROG Optical 100M",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-asus-rog-harpe-ace-mini",
+    "slug": "asus-rog-harpe-ace-mini",
+    "name": "ASUS ROG 하프 에이스 미니",
+    "nameEn": "ASUS ROG Harpe Ace Mini",
+    "brand": "ASUS ROG",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 117,
+      "width": 63,
+      "height": 37
+    },
+    "weightGrams": 49,
+    "sensor": "ROG AimPoint Pro 42K",
+    "switchType": "optical",
+    "switchModel": "ROG Optical 100M",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-finalmouse-ulx-lion",
+    "slug": "finalmouse-ulx-lion",
+    "name": "Finalmouse ULX (미디엄/라이언)",
+    "nameEn": "Finalmouse UltralightX Lion",
+    "brand": "Finalmouse",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 121.3,
+      "width": 56.8,
+      "height": 37
+    },
+    "weightGrams": 35,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Omron 20M",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-gwolves-hts-plus-4k",
+    "slug": "gwolves-hts-plus-4k",
+    "name": "G-Wolves HTS Plus 4K",
+    "nameEn": "G-Wolves HTS Plus 4K",
+    "brand": "G-Wolves",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 117,
+      "width": 61,
+      "height": 40
+    },
+    "weightGrams": 46,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Zippy",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-gwolves-hsk-pro-4k",
+    "slug": "gwolves-hsk-pro-4k",
+    "name": "G-Wolves HSK Pro 4K (핑거팁)",
+    "nameEn": "G-Wolves HSK Pro 4K",
+    "brand": "G-Wolves",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 91,
+      "width": 55,
+      "height": 29
+    },
+    "weightGrams": 29,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Zippy",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-steelseries-aerox-3-wireless",
+    "slug": "steelseries-aerox-3-wireless",
+    "name": "SteelSeries 에어로스 3 무선",
+    "nameEn": "SteelSeries Aerox 3 Wireless",
+    "brand": "SteelSeries",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.5,
+      "width": 67,
+      "height": 38
+    },
+    "weightGrams": 68,
+    "sensor": "TrueMove Air",
+    "switchType": "mechanical",
+    "switchModel": "TTC 골든 마이크로",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-corsair-m75-air",
+    "slug": "corsair-m75-air",
+    "name": "Corsair M75 AIR 무선",
+    "nameEn": "Corsair M75 AIR Wireless",
+    "brand": "Corsair",
+    "maxPollingHz": 2000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 128,
+      "width": 65,
+      "height": 41.6
+    },
+    "weightGrams": 60,
+    "sensor": "Marksman 26K",
+    "switchType": "optical",
+    "switchModel": "Corsair Optical",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-pulsar-x2v2-medium",
+    "slug": "pulsar-x2v2-medium",
+    "name": "Pulsar X2V2 (미디엄)",
+    "nameEn": "Pulsar X2V2 Medium",
+    "brand": "Pulsar",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 120.4,
+      "width": 63,
+      "height": 38
+    },
+    "weightGrams": 53,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Raesha",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-pulsar-xlite-v3-mini",
+    "slug": "pulsar-xlite-v3-mini",
+    "name": "Pulsar Xlite V3 미니",
+    "nameEn": "Pulsar Xlite V3 Mini",
+    "brand": "Pulsar",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 115.6,
+      "width": 63.4,
+      "height": 40.7
+    },
+    "weightGrams": 52,
+    "sensor": "PAW3395",
+    "switchType": "optical",
+    "switchModel": "Raesha",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-pulsar-feinmann-f01",
+    "slug": "pulsar-feinmann-f01",
+    "name": "Pulsar 파인만 F01 (마그네슘)",
+    "nameEn": "Pulsar Feinmann F01 8K",
+    "brand": "Pulsar",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 118.6,
+      "width": 65.3,
+      "height": 41.7
+    },
+    "weightGrams": 46,
+    "sensor": "XS-1 (PAW3950)",
+    "switchType": "optical",
+    "switchModel": "Kailh Optical",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-lamzu-atlantis-og-v2-4k",
+    "slug": "lamzu-atlantis-og-v2-4k",
+    "name": "Lamzu 아틀란티스 OG V2 4K",
+    "nameEn": "Lamzu Atlantis OG V2 4K",
+    "brand": "Lamzu",
+    "maxPollingHz": 4000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 123,
+      "width": 66,
+      "height": 38
+    },
+    "weightGrams": 57,
+    "sensor": "PAW3395",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블루쉘 핑크닷",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-lamzu-paro",
+    "slug": "lamzu-paro",
+    "name": "Lamzu 파로 (8K)",
+    "nameEn": "Lamzu Paro 8K",
+    "brand": "Lamzu",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 120,
+      "width": 65,
+      "height": 40
+    },
+    "weightGrams": 48,
+    "sensor": "PAW3950",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#6B9080",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-wlmouse-beast-x",
+    "slug": "wlmouse-beast-x",
+    "name": "WLMouse 비스트 X (미디엄)",
+    "nameEn": "WLMouse Beast X 8K",
+    "brand": "WLMouse",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 122,
+      "width": 62,
+      "height": 37
+    },
+    "weightGrams": 39,
+    "sensor": "PAW3950 HS",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-wlmouse-sword-x",
+    "slug": "wlmouse-sword-x",
+    "name": "WLMouse 소드 X",
+    "nameEn": "WLMouse Sword X 8K",
+    "brand": "WLMouse",
+    "maxPollingHz": 8000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 123,
+      "width": 67,
+      "height": 42
+    },
+    "weightGrams": 47,
+    "sensor": "PAW3950 HS",
+    "switchType": "optical",
+    "switchModel": "Omron",
+    "colorAccentHex": "#D4A373",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-zowie-ec3-cw",
+    "slug": "zowie-ec3-cw",
+    "name": "ZOWIE EC3-CW",
+    "nameEn": "BenQ ZOWIE EC3-CW",
+    "brand": "ZOWIE",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "ergonomic",
+    "dimensionsMm": {
+      "length": 119,
+      "width": 64,
+      "height": 41
+    },
+    "weightGrams": 76,
+    "sensor": "PAW3370",
+    "switchType": "mechanical",
+    "switchModel": "Huano 블랙쉘 블루닷",
+    "colorAccentHex": "#8F9691",
+    "community": {
+      "ratingAvg": 0,
+      "reviewCount": 0,
+      "gripVotes": {
+        "palm": 0,
+        "claw": 0,
+        "finger": 0
+      },
+      "handSizeVotes": {
+        "f1_f8": 0,
+        "f9": 0,
+        "f10": 0,
+        "f11_plus": 0
+      },
+      "telemetryLogs": []
+    }
+  },
+  {
+    "id": "ms-razer-orochi-v2",
+    "slug": "razer-orochi-v2",
+    "name": "Razer 오로치 V2",
+    "nameEn": "Razer Orochi V2",
+    "brand": "Razer",
+    "maxPollingHz": 1000,
+    "connection": "wireless_wired",
+    "shape": "symmetrical",
+    "dimensionsMm": {
+      "length": 108,
+      "width": 60,
+      "height": 38
+    },
+    "weightGrams": 60,
+    "sensor": "Razer 5G 18K",
+    "switchType": "mechanical",
+    "switchModel": "Razer 2세대 기계식",
     "colorAccentHex": "#6B9080",
     "community": {
       "ratingAvg": 0,
