@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 
 type PolicyTab = "terms" | "privacy" | "partnership";
 
-const PARTNER_EMAIL = "partner@keyniverse.kr";
+const CONTACT_EMAIL = "keyniverse.official@gmail.com";
 
 export function PolicyViewer() {
   const router = useRouter();
@@ -34,7 +34,7 @@ export function PolicyViewer() {
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(PARTNER_EMAIL);
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
       setCopiedEmail(true);
       window.setTimeout(() => setCopiedEmail(false), 2200);
     } catch {
@@ -44,7 +44,7 @@ export function PolicyViewer() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* 1. 상단 페이지 헤더 (전 페이지 통일 규격) */}
+      {/* 1. 상단 페이지 헤더 */}
       <div className="flex flex-col justify-between gap-4 border-b border-[#282D2A] pb-5 sm:flex-row sm:items-end">
         <div>
           <div className="mb-2 flex items-center gap-2">
@@ -53,11 +53,11 @@ export function PolicyViewer() {
               POLICY &amp; PARTNERSHIP
             </span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#E4E6E1] sm:text-3xl">
-            KEYNIVERSE 약관 · 개인정보 · 제휴 안내
+          <h1 className="text-xl font-bold tracking-tight text-[#D5DBD6] sm:text-3xl">
+            약관 · 개인정보 · 제휴 안내
           </h1>
           <p className="mt-1 text-sm text-[#8F9691]">
-            서비스 이용약관, Google 단일 인증 개인정보처리방침 및 공식 파트너십·광고 문의를 안내합니다.
+            서비스 이용약관, 개인정보처리방침 및 공식 제휴 문의
           </p>
         </div>
 
@@ -108,52 +108,60 @@ export function PolicyViewer() {
               KEYNIVERSE 서비스 이용약관
             </h2>
             <p className="mt-1 font-mono text-xs text-[#8F9691] tabular-nums">
-              시행일자: 2026. 11. 16
+              시행일자: 2026. 11. 22 · BETA 운영 기준
             </p>
           </div>
 
           <div className="flex flex-col gap-5 text-xs leading-relaxed text-[#8F9691] sm:text-sm">
             <section>
               <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
-                제1조 (목적)
+                제1조 (목적 및 베타 서비스 안내)
               </h3>
               <p>
-                본 약관은 KEYNIVERSE(이하 &ldquo;서비스&rdquo;)가 제공하는 키보드·마우스 하드웨어 커뮤니티, 스펙 도감 데이터베이스 및 웹 브라우저 기반 입력 테스트 서비스의 이용 조건과 운영 기준을 규정함을 목적으로 합니다.
+                본 약관은 KEYNIVERSE(이하 &ldquo;서비스&rdquo;)가 제공하는 키보드·마우스 하드웨어 커뮤니티, 스펙 도감 및 웹 기반 입력 테스트 서비스의 이용 조건과 운영 기준을 규정합니다. 현재 서비스는 BETA 단계로 운영 중이며, 기능 개선 및 안정화를 위해 사전 안내 후 일부 기능이 변경될 수 있습니다.
               </p>
             </section>
 
             <section>
               <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
-                제2조 (계정 인증 및 보안)
+                제2조 (계정 인증 · 닉네임 · 탈퇴 정책)
               </h3>
-              <p>
-                서비스는 다계정 생성을 통한 여론·투표 조작 및 매크로 도배를 방지하기 위해 Google OAuth 2.0 기반 단일 소셜 로그인 방식을 채택합니다. 회원은 본인의 Google 계정을 안전하게 관리할 책임이 있으며, 타인의 계정을 도용할 수 없습니다.
-              </p>
+              <ul className="list-disc space-y-1 pl-5">
+                <li>
+                  서비스는 다계정 여론·투표 조작 및 도배를 방지하기 위해 Google OAuth 2.0 기반 단일 소셜 로그인 방식을 채택합니다.
+                </li>
+                <li>
+                  닉네임은 한글·영문·숫자 2~6자로 설정할 수 있으며, 운영진 사칭 예약어 및 비속어는 사용할 수 없습니다. 최초 설정 후 오타 수정을 위한 1회 변경 이후에는 <strong className="text-[#E4E6E1]">30일 간격</strong>으로 변경이 제한됩니다.
+                </li>
+                <li>
+                  탈퇴 후 재가입을 반복하는 어뷰징을 방지하기 위해 회원 탈퇴 시 동일 계정의 재가입은 <strong className="text-[#E4E6E1]">30일간 제한</strong>됩니다.
+                </li>
+              </ul>
             </section>
 
             <section>
               <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
-                제3조 (커뮤니티 게시물 운영 기준)
+                제3조 (커뮤니티 게시물 운영 및 이용 제한)
               </h3>
               <p>
-                회원이 작성한 게시글, 댓글, 투표, 첨부 이미지의 저작권은 작성자 본인에게 귀속됩니다. 단, 다음 각 호에 해당하는 게시물은 사전 통보 없이 삭제되거나 계정 이용이 제한될 수 있습니다.
+                회원이 작성한 게시글, 댓글, 투표, 첨부 이미지의 저작권은 작성자 본인에게 귀속됩니다. 단, 아래 행위에 해당하는 경우 사전 통보 없이 게시물이 삭제되거나 계정 활동이 일정 기간(1일·7일·30일) 또는 영구 제한될 수 있습니다.
               </p>
               <ul className="mt-2 list-disc space-y-1 pl-5">
                 <li>타 회원 또는 특정 집단에 대한 욕설, 비방, 명예훼손 게시물</li>
-                <li>사전 협의되지 않은 상업적 홍보, 바이럴 마케팅, 제휴 수익(어필리에이트) 링크 도배</li>
-                <li>음란물, 불법 촬영물 또는 저작권을 침해하는 이미지 첨부</li>
+                <li>사전 협의되지 않은 상업적 홍보, 바이럴 마케팅, 제휴 수익 링크 도배</li>
+                <li>음란물, 불법 촬영물 또는 타인의 저작권을 침해하는 이미지 첨부</li>
                 <li>자동화 매크로·스크립트를 이용한 투표 및 추천수 조작 행위</li>
               </ul>
             </section>
 
             <section>
               <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
-                제4조 (웹 테스트 계측 수치 및 스펙 도감 데이터의 면책)
+                제4조 (웹 테스트 수치 및 스펙 도감 데이터의 면책)
               </h3>
               <p>
-                1. 서비스 내 키보드 채터링·동시입력 테스트 및 마우스 8K 폴링레이트·더블클릭 테스트는 사용자의 OS, 웹 브라우저 환경, USB 포트 절전 설정에 따라 오차가 발생할 수 있으므로 하드웨어 불량 여부를 확정하는 법적·공식 감정서로 사용될 수 없습니다.
+                1. 키보드 채터링·동시입력 테스트 및 마우스 8K 폴링레이트·더블클릭 테스트는 사용자의 OS, 웹 브라우저, USB 포트 환경에 따라 오차가 발생할 수 있으므로 하드웨어 불량 여부를 확정하는 공식 감정서로 사용될 수 없습니다.
                 <br />
-                2. 스펙 도감(/specs)에 기재된 키압(gf), 스트로크(mm), 무게(g), 치수 데이터는 제조사 공식 발표 제원을 기준으로 제공되며, 제조사 금형 리비전(Revision) 및 배치에 따라 실물과 미세한 편차가 있을 수 있습니다.
+                2. 스펙 도감에 기재된 키압(gf), 스트로크(mm), 무게(g), 치수 데이터는 제조사 공식 발표 제원을 기준으로 제공되며, 제조사 리비전 및 생산 배치에 따라 실물과 미세한 편차가 있을 수 있습니다.
               </p>
             </section>
           </div>
@@ -167,7 +175,7 @@ export function PolicyViewer() {
               KEYNIVERSE 개인정보처리방침
             </h2>
             <p className="mt-1 font-mono text-xs text-[#8F9691] tabular-nums">
-              시행일자: 2026. 11. 16 · Google OAuth 2.0 단일 인증 기준
+              시행일자: 2026. 11. 22 · Google OAuth 2.0 단일 인증 기준
             </p>
           </div>
 
@@ -177,11 +185,11 @@ export function PolicyViewer() {
                 1. 개인정보의 수집 항목 및 수집 방법 (비밀번호 미수집 원칙)
               </h3>
               <p>
-                KEYNIVERSE는 자체 회원가입 폼이나 비밀번호를 일절 수집·저장하지 않으며, 오직 Google OAuth 2.0 단일 소셜 로그인을 통해 아래의 최소 식별 정보만 제공받습니다.
+                KEYNIVERSE는 자체 비밀번호를 일절 수집·저장하지 않으며, Google OAuth 2.0 소셜 로그인을 통해 아래의 최소 정보만 수집합니다.
               </p>
               <div className="mt-2.5 rounded-lg border border-[#282D2A] bg-[#151816] p-3.5 font-mono text-xs text-[#E4E6E1]">
-                • 수집 항목: Google 계정 고유 식별자(UID), 이메일 주소, 커뮤니티 표시 닉네임
-                <br />• 수집하지 않는 항목: 비밀번호, 주민등록번호, 전화번호, 실물 주소
+                • 수집 항목: Google 계정 고유 식별자(UID), 이메일 주소, 커뮤니티 닉네임
+                <br />• 미수집 항목: 비밀번호, 주민등록번호, 전화번호, 실물 주소
               </div>
             </section>
 
@@ -191,27 +199,62 @@ export function PolicyViewer() {
               </h3>
               <ul className="list-disc space-y-1 pl-5">
                 <li>커뮤니티 게시글·댓글 작성자 식별 및 본인 게시물 수정·삭제 권한 확인</li>
-                <li>스펙 도감 체감 투표 및 커뮤니티 양자택일 투표의 1인 1회 참여 제한(다계정 어뷰징 방지)</li>
-                <li>약관 위반 및 불법 도배 계정에 대한 서비스 이용 제한 조치</li>
+                <li>스펙 도감 평가 및 커뮤니티 투표의 1인 1회 참여 보장(다계정 어뷰징 방지)</li>
+                <li>신고 접수 처리 및 약관 위반 계정에 대한 이용 제한 조치</li>
               </ul>
             </section>
 
             <section>
               <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
-                3. 브라우저 로컬 스토리지(localStorage) 활용 안내
+                3. 쿠키(Cookie) 및 브라우저 저장소 활용 안내
               </h3>
               <p>
-                서비스는 원활한 사용자 경험을 위해 사용자 브라우저의 로컬 스토리지(`localStorage`)에 키보드/마우스 테스트 인증 통과 상태 및 로그인 세션을 저장합니다. 사용자는 언제든지 브라우저 설정 또는 로그아웃 버튼을 통해 로컬 데이터를 초기화할 수 있습니다.
+                서비스는 로그인 세션 유지를 위해 인증 쿠키(Cookie)를 사용하며, 게시글 조회수 중복 집계 방지를 위해 브라우저 세션 저장소(sessionStorage), 키보드·마우스 테스트 인증 기록 유지를 위해 로컬 저장소(localStorage)를 활용합니다. 사용자는 브라우저 설정 또는 로그아웃을 통해 언제든 삭제할 수 있습니다.
               </p>
             </section>
 
             <section>
               <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
-                4. 개인정보의 보유 기간 및 파기 절차
+                4. 개인정보의 보유 기간, 탈퇴 처리 및 파기 절차
+              </h3>
+              <ul className="list-disc space-y-1 pl-5">
+                <li>
+                  회원 개인정보(계정 정보·프로필·이메일)는 회원 탈퇴 요청 시 지체 없이 영구 파기됩니다.
+                </li>
+                <li>
+                  단, 탈퇴 후 반복 재가입을 통한 포인트·투표 어뷰징을 방지하기 위해 원본 복원이 불가능한 <strong className="text-[#E4E6E1]">단방향 암호화 해시값(SHA-256)</strong>만 탈퇴일로부터 <strong className="text-[#E4E6E1]">30일간</strong> 보관 후 자동 만료됩니다.
+                </li>
+                <li>
+                  탈퇴 시 기존에 작성된 커뮤니티 게시글 및 댓글은 토론 흐름과 신고 기록 보존을 위해 작성자명이 <strong className="text-[#E4E6E1]">&lsquo;탈퇴한 사용자&rsquo;</strong>로 익명화되어 유지됩니다. 삭제를 원하는 게시물은 탈퇴 전 직접 삭제해 주세요.
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
+                5. 클라우드 인프라 및 국외 처리 위탁
               </h3>
               <p>
-                회원의 개인정보는 원칙적으로 회원 탈퇴 시까지 보유·이용되며, 회원이 계정 연동 해제 또는 탈퇴를 요청할 경우 지체 없이 복구 불가능한 방법으로 영구 파기합니다.
+                서비스는 안정적인 운영을 위해 글로벌 클라우드 인프라인 <strong className="text-[#E4E6E1]">Vercel Inc.</strong>(웹 호스팅) 및 <strong className="text-[#E4E6E1]">Supabase Inc.</strong>(데이터베이스·인증·이미지 스토리지)를 통해 데이터를 처리·보관합니다.
               </p>
+            </section>
+
+            <section>
+              <h3 className="mb-1.5 font-bold text-[#E4E6E1]">
+                6. 개인정보 보호 문의처
+              </h3>
+              <p>
+                개인정보 열람·삭제 요청 및 관련 문의는 아래 공식 운영 이메일로 접수해 주시면 확인 후 신속히 안내해 드립니다.
+              </p>
+              <div className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-[#282D2A] bg-[#151816] px-3 py-1.5 font-mono text-xs font-semibold text-[#6B9080]">
+                <Mail className="size-3.5" />
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="hover:underline"
+                >
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
             </section>
           </div>
         </article>
@@ -221,10 +264,10 @@ export function PolicyViewer() {
         <article className="rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-6 text-sm leading-relaxed text-[#E4E6E1]">
           <div className="mb-5 border-b border-[#282D2A] pb-4">
             <h2 className="text-lg font-bold text-[#E4E6E1]">
-              공식 광고 · 스토어 파트너십 · 도감 DB 등재 문의
+              공식 광고 · 스토어 파트너십 · 스펙 도감 등재 문의
             </h2>
             <p className="mt-1 text-xs text-[#8F9691]">
-              커스텀 키보드·스위치·게이밍 마우스 브랜드 및 국내외 공식 벤더/스토어와의 제휴를 환영합니다.
+              커스텀 키보드·스위치·게이밍 마우스 브랜드 및 국내외 공식 스토어와의 제휴를 환영합니다.
             </p>
           </div>
 
@@ -238,7 +281,7 @@ export function PolicyViewer() {
                 커뮤니티 최상단 인피드 [AD] 스폰서 행
               </h3>
               <p className="mt-1.5 text-xs leading-relaxed text-[#8F9691]">
-                메인 홈(`/`) 게시글 목록 최상단에 고정 노출되는 1줄 네이티브 배너입니다. 사이트 고유의 차콜 &amp; 세이지 감성을 해치지 않으면서 신규 특주축 입고, 공동구매(Group Buy), 할인 이벤트를 가장 높은 주목도로 전달합니다.
+                커뮤니티 게시글 목록 상단에 고정 노출되는 1줄 네이티브 배너입니다. 사이트 디자인 톤을 해치지 않으면서 신규 스위치 입고, 공동구매(Group Buy), 특가 이벤트를 자연스럽게 전달합니다.
               </p>
             </div>
 
@@ -248,10 +291,10 @@ export function PolicyViewer() {
                 SLOT 02 · SIDEBAR SPEC CARD AD
               </span>
               <h3 className="mt-2 text-sm font-bold text-[#E4E6E1]">
-                우측 사이드바 다크 매트 스펙 카드 배너
+                우측 사이드바 스펙 카드 배너
               </h3>
               <p className="mt-1.5 text-xs leading-relaxed text-[#8F9691]">
-                커뮤니티 목록·상세·글쓰기 모든 화면 우측에 상시 고정(Sticky)되는 스펙 요약형 배너입니다. 제품 도트 그래픽과 핵심 스펙(키압/무게), 공제 단가 및 파트너 스토어 직결 버튼을 제공합니다.
+                커뮤니티 목록·상세·글쓰기 화면 우측에 상시 노출되는 스펙 요약형 배너입니다. 제품 핵심 제원(키압·무게), 공제 일정 및 공식 스토어 바로가기 버튼을 함께 제공합니다.
               </p>
             </div>
           </div>
@@ -260,18 +303,21 @@ export function PolicyViewer() {
           <div className="mt-4 flex flex-col justify-between gap-4 rounded-xl border border-[#282D2A] bg-[#151816] p-4 sm:flex-row sm:items-center">
             <div>
               <h3 className="text-sm font-bold text-[#E4E6E1]">
-                광고 구좌 문의 및 신규 장비 스펙 도감(/specs) 등재 요청
+                광고 구좌 문의 및 신규 장비 스펙 도감 등재 요청
               </h3>
               <p className="mt-1 text-xs text-[#8F9691]">
-                제조사 공식 데이터시트와 함께 아래 이메일로 문의해 주시면 담당팀에서 빠르게 회신드립니다.
+                제조사 공식 스펙 시트와 함께 아래 이메일로 문의해 주시면 확인 후 회신드립니다.
               </p>
             </div>
 
-            <div className="flex shrink-0 items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-3 py-2 font-mono text-xs font-semibold text-[#D4A373]">
+            <div className="flex flex-wrap shrink-0 items-center gap-2">
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-3 py-2 font-mono text-xs font-semibold text-[#D4A373] transition-colors hover:border-[#D4A373]/60"
+              >
                 <Mail className="size-3.5" />
-                {PARTNER_EMAIL}
-              </span>
+                <span>{CONTACT_EMAIL}</span>
+              </a>
               <button
                 type="button"
                 onClick={() => void handleCopyEmail()}
