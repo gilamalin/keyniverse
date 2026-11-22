@@ -204,20 +204,29 @@ export async function syncCommunityFromSupabase(
     liveCommunityUserId = user?.id ?? null;
   }
 
-  const [{ data: postRows }, { data: commentRows }, { data: vsRows }] =
-    await Promise.all([
-      supabase
-        .from("posts")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(100),
-      supabase
-        .from("comments")
-        .select("*")
-        .order("created_at", { ascending: true })
-        .limit(500),
-      supabase.from("vs_votes").select("post_id, user_id, choice"),
-    ]);
+  const [
+    { data: postRows },
+    { data: commentRows },
+    { data: vsRows },
+    { data: adminIdRows },
+  ] = await Promise.all([
+    supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(100),
+    supabase
+      .from("comments")
+      .select("*")
+      .order("created_at", { ascending: true })
+      .limit(500),
+    supabase.from("vs_votes").select("post_id, user_id, choice"),
+    supabase.rpc("get_admin_author_ids"),
+  ]);
+
+  const adminAuthorIdSet = new Set<string>(
+    Array.isArray(adminIdRows) ? adminIdRows.map((id) => String(id)) : []
+  );
 
   let myUpvoted = new Set<string>();
   const myVs: Record<string, "A" | "B"> = {};
@@ -258,6 +267,9 @@ export async function syncCommunityFromSupabase(
         id: String(row.id),
         author: String(row.author_nickname),
         authorVerified: Boolean(row.author_verified),
+        authorIsAdmin: Boolean(
+          row.author_id && adminAuthorIdSet.has(String(row.author_id))
+        ),
         content: String(row.content),
         createdAt: formatDbTimestamp(String(row.created_at)),
         isMyComment: Boolean(
@@ -289,6 +301,9 @@ export async function syncCommunityFromSupabase(
         contentHtml: row.content_html ? String(row.content_html) : undefined,
         author: String(row.author_nickname),
         authorVerified: Boolean(row.author_verified),
+        authorIsAdmin: Boolean(
+          row.author_id && adminAuthorIdSet.has(String(row.author_id))
+        ),
         upvotes: Number(row.upvotes ?? 0),
         views: Number(row.views ?? 1),
         createdAt: formatDbTimestamp(createdIso),

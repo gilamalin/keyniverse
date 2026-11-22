@@ -479,6 +479,7 @@ export function PostWriteModal({
       attachments: attachments.length > 0 ? attachments : undefined,
       author: session.nickname,
       authorVerified: isVerifiedTester,
+      authorIsAdmin: isSessionAdmin(session),
       upvotes: 0,
       views: 1,
       createdAt: formatNowClock(),

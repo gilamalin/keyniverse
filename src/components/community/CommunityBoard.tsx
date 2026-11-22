@@ -1461,7 +1461,14 @@ function CommunityPostRow({
             MY
           </span>
         )}
-        <span className="truncate font-normal text-[#8F9691]">
+        <span
+          className={cn(
+            "truncate",
+            post.authorIsAdmin
+              ? "font-semibold text-[#6B9080]"
+              : "font-normal text-[#8F9691]"
+          )}
+        >
           {post.author}
         </span>
         <span className="font-mono text-[#282D2A]">·</span>
@@ -1485,7 +1492,14 @@ function CommunityPostRow({
               MY
             </span>
           )}
-          <span className="truncate font-sans text-xs font-normal text-[#8F9691]">
+          <span
+            className={cn(
+              "truncate font-sans text-xs",
+              post.authorIsAdmin
+                ? "font-semibold text-[#6B9080]"
+                : "font-normal text-[#8F9691]"
+            )}
+          >
             {post.author}
           </span>
         </div>

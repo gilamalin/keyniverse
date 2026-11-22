@@ -9,6 +9,7 @@ import {
   clearSyncedActivity,
   syncActivityFromSupabase,
 } from "@/lib/activity-store";
+import { syncCommunityFromSupabase } from "@/lib/community-store";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
@@ -409,6 +410,7 @@ export async function updateSessionNicknameAsync(
         : new Date().toISOString(),
     };
     notifyAuthListeners();
+    void syncCommunityFromSupabase(liveSupabaseSession.userId);
     return { valid: true, error: null, session: liveSupabaseSession };
   }
 

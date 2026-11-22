@@ -35,6 +35,7 @@ export interface CommunityComment {
   id: string;
   author: string;
   authorVerified: boolean;
+  authorIsAdmin?: boolean;
   content: string;
   createdAt: string;
   isMyComment?: boolean;
@@ -98,6 +99,8 @@ export interface CommunityPost {
   author: string;
   /** Phase 1 테스터 통과 이력이 있는 유저 여부 ('⚡ 실측러' 배지 표시) */
   authorVerified: boolean;
+  /** 관리자 작성자 여부 (닉네임 포레스트 세이지 색상 표시) */
+  authorIsAdmin?: boolean;
   upvotes: number;
   views?: number;
   createdAt: string; // 예: "14:25", "11.16"

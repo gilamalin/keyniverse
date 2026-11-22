@@ -343,6 +343,7 @@ export function PostDetailModal({
       id: getCurrentCommentId(),
       author: session.nickname,
       authorVerified: isVerifiedTester,
+      authorIsAdmin: isSessionAdmin(session),
       content: sanitized,
       createdAt: formatNowTime(),
       isMyComment: true,
@@ -368,6 +369,7 @@ export function PostDetailModal({
       id: getCurrentCommentId(),
       author: session.nickname,
       authorVerified: isVerifiedTester,
+      authorIsAdmin: isSessionAdmin(session),
       content: sanitized,
       createdAt: formatNowTime(),
       isMyComment: true,
@@ -449,7 +451,12 @@ export function PostDetailModal({
             <button
               type="button"
               onClick={() => onOpenUserProfile(post.author)}
-              className="font-semibold text-[#B5BCB7] underline-offset-2 transition-colors hover:text-[#6B9080] hover:underline"
+              className={cn(
+                "font-semibold underline-offset-2 transition-colors hover:underline",
+                post.authorIsAdmin
+                  ? "text-[#6B9080] hover:text-[#88B09E]"
+                  : "text-[#B5BCB7] hover:text-[#6B9080]"
+              )}
             >
               {post.author}
             </button>
@@ -798,13 +805,18 @@ export function PostDetailModal({
                           <button
                             type="button"
                             onClick={() => onOpenUserProfile(cmt.author)}
-                            className="shrink-0 font-semibold text-[#E4E6E1] underline-offset-2 transition-colors hover:text-[#6B9080] hover:underline"
+                            className={cn(
+                              "shrink-0 font-semibold underline-offset-2 transition-colors hover:underline",
+                              cmt.authorIsAdmin
+                                ? "text-[#6B9080] hover:text-[#88B09E]"
+                                : "text-[#C9CFCB] hover:text-[#6B9080]"
+                            )}
                           >
                             {cmt.author}
                           </button>
 
                           {cmt.isMyComment && (
-                            <span className="shrink-0 rounded bg-[#6B9080] px-1.5 py-0.5 font-mono text-[10px] font-bold text-[#121413]">
+                            <span className="shrink-0 rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#6B9080]">
                               MY
                             </span>
                           )}
