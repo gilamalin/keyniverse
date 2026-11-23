@@ -408,13 +408,13 @@ export function TopNav() {
                             <div
                               key={item.id}
                               className={cn(
-                                "flex items-start gap-2 px-3 py-2.5 transition-colors hover:bg-[#222623]/70",
+                                "flex items-center gap-2 px-3 py-2.5 transition-colors hover:bg-[#222623]/70",
                                 !item.isRead && "bg-[#6B9080]/[0.05]"
                               )}
                             >
                               <span
                                 className={cn(
-                                  "mt-1.5 size-1.5 shrink-0 rounded-full",
+                                  "size-1.5 shrink-0 rounded-full",
                                   item.isRead
                                     ? "bg-transparent"
                                     : "bg-[#6B9080]"
@@ -430,33 +430,18 @@ export function TopNav() {
                                     `/?post=${encodeURIComponent(item.postId)}`
                                   );
                                 }}
-                                className="min-w-0 flex-1 text-left"
+                                className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left"
                               >
-                                <div className="flex items-center justify-between gap-2">
-                                  <span className="truncate text-xs font-semibold text-[#E4E6E1]">
-                                    {item.actorNickname}
-                                  </span>
-                                  <span className="shrink-0 font-mono text-[10px] whitespace-nowrap text-[#8F9691] tabular-nums">
-                                    {formatRelativeNotificationTime(
-                                      item.createdAt
-                                    )}
-                                  </span>
-                                </div>
-                                <p className="mt-0.5 text-[11px] break-keep text-[#C9CFCB]">
+                                <span className="truncate text-xs font-medium text-[#E4E6E1]">
                                   {item.type === "reply"
-                                    ? "내 댓글에 답글을 남겼습니다."
-                                    : "내 게시글에 댓글을 남겼습니다."}
-                                </p>
-                                {item.postTitle && (
-                                  <p className="mt-0.5 truncate text-[11px] text-[#8F9691]">
-                                    {item.postTitle}
-                                  </p>
-                                )}
-                                {item.commentPreview && (
-                                  <p className="mt-0.5 line-clamp-1 text-[11px] text-[#6B9080]">
-                                    “{item.commentPreview}”
-                                  </p>
-                                )}
+                                    ? "내 댓글에 답글이 달렸습니다"
+                                    : "내 게시글에 댓글이 달렸습니다"}
+                                </span>
+                                <span className="shrink-0 font-sans text-[11px] leading-none whitespace-nowrap text-[#8F9691] tabular-nums">
+                                  {formatRelativeNotificationTime(
+                                    item.createdAt
+                                  )}
+                                </span>
                               </button>
 
                               <button
