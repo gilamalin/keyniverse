@@ -426,9 +426,13 @@ export function TopNav() {
                                 onClick={() => {
                                   void markNotificationRead(item.id);
                                   setNotifMenuOpen(false);
-                                  router.push(
-                                    `/?post=${encodeURIComponent(item.postId)}`
-                                  );
+                                  const targetUrl = `/?post=${encodeURIComponent(item.postId)}`;
+                                  if (pathname === "/" && typeof window !== "undefined") {
+                                    window.history.pushState(null, "", targetUrl);
+                                    window.scrollTo({ top: 0, behavior: "smooth" });
+                                  } else {
+                                    router.push(targetUrl);
+                                  }
                                 }}
                                 className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left"
                               >

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowUpRight,
   Calendar,
@@ -160,8 +160,16 @@ function buildCategoryListUrl(category: CommunityFilterTab): string {
   return category === "all" ? "/" : `/?category=${encodeURIComponent(category)}`;
 }
 
+function navigateShallow(url: string, replace = false): void {
+  if (typeof window === "undefined") return;
+  if (replace) {
+    window.history.replaceState(null, "", url);
+  } else {
+    window.history.pushState(null, "", url);
+  }
+}
+
 export function CommunityBoard() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const postParam = searchParams.get("post");
   const modeParam = searchParams.get("mode");
@@ -266,6 +274,17 @@ export function CommunityBoard() {
         : null,
     [effectivePosts, postParam]
   );
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (selectedPost) {
+      document.title = `${selectedPost.title} | KEYNIVERSE`;
+    } else if (activeCategory !== "all") {
+      document.title = `${COMMUNITY_CATEGORY_LABELS[activeCategory]} | KEYNIVERSE`;
+    } else {
+      document.title = "KEYNIVERSE | 공식 하드웨어 커뮤니티 & 스펙 연구소";
+    }
+  }, [selectedPost, activeCategory]);
 
   const editingPost = useMemo(
     () =>
@@ -504,7 +523,7 @@ export function CommunityBoard() {
 
   const handleSelectCategory = (tab: CommunityFilterTab) => {
     setCurrentPage(1);
-    router.replace(buildCategoryListUrl(tab), { scroll: false });
+    navigateShallow(buildCategoryListUrl(tab), true);
   };
 
   const handleOpenPost = (postId: string) => {
@@ -513,16 +532,14 @@ export function CommunityBoard() {
       activeCategory !== "all"
         ? `category=${encodeURIComponent(activeCategory)}&`
         : "";
-    router.push(`/?${categoryQuery}post=${encodeURIComponent(postId)}`, {
-      scroll: true,
-    });
+    navigateShallow(`/?${categoryQuery}post=${encodeURIComponent(postId)}`);
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handleBackToList = () => {
-    router.push(buildCategoryListUrl(activeCategory), { scroll: false });
+    navigateShallow(buildCategoryListUrl(activeCategory));
   };
 
   const handleOpenWritePage = () => {
@@ -534,7 +551,7 @@ export function CommunityBoard() {
       activeCategory !== "all"
         ? `category=${encodeURIComponent(activeCategory)}&`
         : "";
-    router.push(`/?${categoryQuery}mode=write`, { scroll: true });
+    navigateShallow(`/?${categoryQuery}mode=write`);
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -581,30 +598,21 @@ export function CommunityBoard() {
                 );
                 setSortMode("latest");
                 setCurrentPage(1);
-                router.push(
-                  `/?post=${encodeURIComponent(newPost.id)}`,
-                  { scroll: true }
-                );
+                navigateShallow(`/?post=${encodeURIComponent(newPost.id)}`);
                 if (typeof window !== "undefined") {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               }}
               onUpdatePost={(postId, updatedFields) => {
                 updateCommunityPost(postId, updatedFields);
-                router.push(
-                  `/?post=${encodeURIComponent(postId)}`,
-                  { scroll: true }
-                );
+                navigateShallow(`/?post=${encodeURIComponent(postId)}`);
                 if (typeof window !== "undefined") {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               }}
               onClose={() => {
                 if (editingPost) {
-                  router.push(
-                    `/?post=${encodeURIComponent(editingPost.id)}`,
-                    { scroll: true }
-                  );
+                  navigateShallow(`/?post=${encodeURIComponent(editingPost.id)}`);
                 } else {
                   handleBackToList();
                 }
@@ -670,9 +678,8 @@ export function CommunityBoard() {
                   }
                   onOpenUserProfile={(nickname) => setProfileNickname(nickname)}
                   onEditPost={(postId) => {
-                    router.push(
-                      `/?mode=write&edit=${encodeURIComponent(postId)}`,
-                      { scroll: true }
+                    navigateShallow(
+                      `/?mode=write&edit=${encodeURIComponent(postId)}`
                     );
                     if (typeof window !== "undefined") {
                       window.scrollTo({ top: 0, behavior: "smooth" });
