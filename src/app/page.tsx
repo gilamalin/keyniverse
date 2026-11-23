@@ -138,7 +138,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage({
+async function PostJsonLd({
   searchParams,
 }: {
   searchParams: Promise<HomeSearchParams>;
@@ -146,31 +146,40 @@ export default async function HomePage({
   const params = await searchParams;
   const postId = getFirstParam(params.post);
   const post = postId ? await fetchPostForSeo(postId) : null;
+  if (!post) return null;
 
-  const jsonLd = post
-    ? {
-        "@context": "https://schema.org",
-        "@type": "DiscussionForumPosting",
-        headline: post.title,
-        text: stripHtmlForSummary(post.content, 300),
-        author: {
-          "@type": "Person",
-          name: post.author_nickname,
-        },
-        datePublished: post.created_at,
-        ...(post.updated_at ? { dateModified: post.updated_at } : {}),
-        url: `https://keyniverse.vercel.app/?post=${encodeURIComponent(post.id)}`,
-      }
-    : null;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "DiscussionForumPosting",
+    headline: post.title,
+    text: stripHtmlForSummary(post.content, 300),
+    author: {
+      "@type": "Person",
+      name: post.author_nickname,
+    },
+    datePublished: post.created_at,
+    ...(post.updated_at ? { dateModified: post.updated_at } : {}),
+    url: `https://keyniverse.vercel.app/?post=${encodeURIComponent(post.id)}`,
+  };
 
   return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+export default function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<HomeSearchParams>;
+}) {
+  return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
+      <Suspense fallback={null}>
+        <PostJsonLd searchParams={searchParams} />
+      </Suspense>
       <Suspense fallback={null}>
         <CommunityBoard />
       </Suspense>
