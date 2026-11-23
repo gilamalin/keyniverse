@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import {
   AlertTriangle,
   ArrowUpRight,
+  Bell,
+  BellOff,
   Check,
   Coins,
   FileText,
@@ -16,6 +18,13 @@ import {
   User,
   X,
 } from "lucide-react";
+import {
+  getNotificationStoreVersion,
+  getServerNotificationStoreVersion,
+  readNotificationsEnabled,
+  setNotificationsEnabled,
+  subscribeNotificationStore,
+} from "@/lib/notification-store";
 import { INITIAL_MICE, INITIAL_SWITCHES } from "@/data/specs-data";
 import { COMMUNITY_CATEGORY_SHORT_LABELS } from "@/types/community";
 import {
@@ -86,8 +95,15 @@ export function MyPageClient() {
     getActivityStoreVersion,
     getServerActivityStoreVersion
   );
+  const notifVersion = useSyncExternalStore(
+    subscribeNotificationStore,
+    getNotificationStoreVersion,
+    getServerNotificationStoreVersion
+  );
 
   const session = authVersion > 0 ? readGoogleSession() : null;
+  const notificationsEnabled =
+    notifVersion > 0 ? readNotificationsEnabled() : true;
 
   useEffect(() => {
     if (session?.userId) {
@@ -616,7 +632,72 @@ export function MyPageClient() {
           ))}
       </section>
 
-      {/* 4. 하단 계정 관리 (회원 탈퇴) */}
+      {/* 4. 알림 설정 & 계정 관리 */}
+      <section className="rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 sm:p-5">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-3">
+            <div
+              className={cn(
+                "flex size-9 shrink-0 items-center justify-center rounded-lg border",
+                notificationsEnabled
+                  ? "border-[#6B9080]/40 bg-[#222623] text-[#6B9080]"
+                  : "border-[#282D2A] bg-[#151816] text-[#8F9691]"
+              )}
+            >
+              {notificationsEnabled ? (
+                <Bell className="size-4" />
+              ) : (
+                <BellOff className="size-4" />
+              )}
+            </div>
+            <div className="min-w-0">
+              <h3 className="text-sm font-semibold text-[#E4E6E1]">
+                인앱 알림
+              </h3>
+              <p className="mt-0.5 text-xs break-keep text-[#8F9691]">
+                내 게시글 댓글·답글 등록 시 상단 알림으로 안내
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            role="switch"
+            aria-checked={notificationsEnabled}
+            aria-label="인앱 알림 켜기/끄기"
+            onClick={() =>
+              void setNotificationsEnabled(
+                session.userId,
+                !notificationsEnabled
+              )
+            }
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#282D2A] bg-[#151816] px-2.5 py-1.5 transition-colors hover:border-[#6B9080]/60"
+          >
+            <span
+              className={cn(
+                "font-mono text-[11px] font-semibold whitespace-nowrap",
+                notificationsEnabled ? "text-[#6B9080]" : "text-[#8F9691]"
+              )}
+            >
+              {notificationsEnabled ? "ON" : "OFF"}
+            </span>
+            <span
+              className={cn(
+                "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors",
+                notificationsEnabled ? "bg-[#6B9080]" : "bg-[#282D2A]"
+              )}
+            >
+              <span
+                className={cn(
+                  "inline-block size-3.5 rounded-full bg-[#121413] transition-transform",
+                  notificationsEnabled ? "translate-x-4.5" : "translate-x-1"
+                )}
+              />
+            </span>
+          </button>
+        </div>
+      </section>
+
       <div className="flex justify-end">
         <button
           type="button"

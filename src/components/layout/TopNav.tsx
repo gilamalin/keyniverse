@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
+  Bell,
+  BellOff,
   BookOpen,
   Coins,
   Keyboard,
@@ -32,16 +34,33 @@ import {
   readTotalPoints,
   subscribeActivityStore,
 } from "@/lib/activity-store";
+import {
+  deleteNotification,
+  formatRelativeNotificationTime,
+  getNotificationStoreVersion,
+  getServerNotificationStoreVersion,
+  markAllNotificationsRead,
+  markNotificationRead,
+  readNotifications,
+  readNotificationsEnabled,
+  readUnreadNotificationCount,
+  setNotificationsEnabled,
+  subscribeNotificationStore,
+  syncNotificationsFromSupabase,
+} from "@/lib/notification-store";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { NicknameSetupModal } from "@/components/auth/NicknameSetupModal";
 import { cn } from "@/lib/utils";
 
 export function TopNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState<boolean>(false);
+  const [notifMenuOpen, setNotifMenuOpen] = useState<boolean>(false);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
   const profileContainerRef = useRef<HTMLDivElement | null>(null);
+  const notifContainerRef = useRef<HTMLDivElement | null>(null);
 
   const authVersion = useSyncExternalStore(
     subscribeAuthStore,
@@ -53,8 +72,18 @@ export function TopNav() {
     getActivityStoreVersion,
     getServerActivityStoreVersion
   );
+  const notifVersion = useSyncExternalStore(
+    subscribeNotificationStore,
+    getNotificationStoreVersion,
+    getServerNotificationStoreVersion
+  );
 
   const session = authVersion > 0 ? readGoogleSession() : null;
+  const notifications = notifVersion > 0 ? readNotifications() : [];
+  const notificationsEnabled =
+    notifVersion > 0 ? readNotificationsEnabled() : true;
+  const unreadNotifCount =
+    notifVersion > 0 ? readUnreadNotificationCount() : 0;
   const displayPoints =
     session && activityVersion > 0
       ? readPointLogs().length > 0
@@ -67,7 +96,24 @@ export function TopNav() {
   }, []);
 
   useEffect(() => {
-    if (!mobileMenuOpen && !profileMenuOpen) return;
+    void syncNotificationsFromSupabase(session?.userId ?? null);
+  }, [session?.userId, pathname]);
+
+  useEffect(() => {
+    if (!session?.userId) return;
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        void syncNotificationsFromSupabase(session.userId ?? null);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, [session?.userId]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen && !profileMenuOpen && !notifMenuOpen) return;
 
     const handlePointerDown = (e: PointerEvent) => {
       const target = e.target as Node;
@@ -85,12 +131,20 @@ export function TopNav() {
       ) {
         setProfileMenuOpen(false);
       }
+      if (
+        notifMenuOpen &&
+        notifContainerRef.current &&
+        !notifContainerRef.current.contains(target)
+      ) {
+        setNotifMenuOpen(false);
+      }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMobileMenuOpen(false);
         setProfileMenuOpen(false);
+        setNotifMenuOpen(false);
       }
     };
 
@@ -100,7 +154,7 @@ export function TopNav() {
       document.removeEventListener("pointerdown", handlePointerDown);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [mobileMenuOpen, profileMenuOpen]);
+  }, [mobileMenuOpen, profileMenuOpen, notifMenuOpen]);
 
   const isCommunity = pathname === "/" || pathname.startsWith("/community");
   const isSpecs = pathname.startsWith("/specs");
@@ -145,6 +199,7 @@ export function TopNav() {
             onClick={() => {
               setMobileMenuOpen(false);
               setProfileMenuOpen(false);
+              setNotifMenuOpen(false);
             }}
             className="group flex shrink-0 items-center gap-2 focus:outline-none sm:gap-2.5"
           >
@@ -203,13 +258,234 @@ export function TopNav() {
                 <span>로그인</span>
               </button>
             ) : (
-              <div ref={profileContainerRef} className="relative shrink-0">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    setProfileMenuOpen((prev) => !prev);
-                  }}
+              <>
+                {/* 인앱 알림 벨 버튼 + 모바일/PC 반응형 팝오버 */}
+                <div ref={notifContainerRef} className="relative shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setProfileMenuOpen(false);
+                      setNotifMenuOpen((prev) => {
+                        const next = !prev;
+                        if (next) {
+                          void syncNotificationsFromSupabase(
+                            session.userId ?? null
+                          );
+                        }
+                        return next;
+                      });
+                    }}
+                    aria-label={
+                      notificationsEnabled
+                        ? unreadNotifCount > 0
+                          ? `인앱 알림 (읽지 않은 알림 ${unreadNotifCount}건)`
+                          : "인앱 알림"
+                        : "인앱 알림 (꺼짐)"
+                    }
+                    aria-expanded={notifMenuOpen}
+                    aria-haspopup="menu"
+                    className={cn(
+                      "relative flex size-9 items-center justify-center rounded-full border transition-colors",
+                      notifMenuOpen
+                        ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
+                        : notificationsEnabled
+                          ? "border-[#282D2A] bg-[#1A1D1B] text-[#B8BFBA] hover:border-[#6B9080] hover:text-[#E4E6E1]"
+                          : "border-[#282D2A] bg-[#151816] text-[#8F9691]/60 hover:border-[#6B9080]/60 hover:text-[#B8BFBA]"
+                    )}
+                  >
+                    {notificationsEnabled ? (
+                      <Bell className="size-4" />
+                    ) : (
+                      <BellOff className="size-4" />
+                    )}
+                    {notificationsEnabled && unreadNotifCount > 0 && (
+                      <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[#6B9080] px-1 font-mono text-[10px] leading-none font-bold text-[#121413] tabular-nums">
+                        {unreadNotifCount > 9 ? "9+" : unreadNotifCount}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* 알림 팝오버 (모바일: 화면 좌우 12px 여백 고정 / sm+: 벨 우측 정렬 320px) */}
+                  <div
+                    role="menu"
+                    aria-hidden={!notifMenuOpen}
+                    className={cn(
+                      "fixed inset-x-3 top-[68px] z-50 origin-top rounded-xl border border-[#282D2A] bg-[#1A1D1B] shadow-xl transition-all duration-150 ease-out sm:absolute sm:inset-x-auto sm:top-full sm:right-0 sm:mt-2 sm:w-80 sm:origin-top-right",
+                      notifMenuOpen
+                        ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+                        : "pointer-events-none -translate-y-1 scale-95 opacity-0"
+                    )}
+                  >
+                    {/* 상단 헤더: 타이틀 + 모두 읽음 + ON/OFF 토글 */}
+                    <div className="flex items-center justify-between gap-2 border-b border-[#282D2A] bg-[#151816] px-3 py-2.5 rounded-t-xl">
+                      <div className="flex min-w-0 items-center gap-1.5">
+                        <span className="text-xs font-bold whitespace-nowrap text-[#E4E6E1]">
+                          알림
+                        </span>
+                        {notificationsEnabled && unreadNotifCount > 0 && (
+                          <span className="rounded bg-[#6B9080]/20 px-1.5 py-0.5 font-mono text-[10px] font-bold text-[#6B9080] tabular-nums">
+                            {unreadNotifCount}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex shrink-0 items-center gap-2">
+                        {notificationsEnabled && unreadNotifCount > 0 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              void markAllNotificationsRead(session.userId)
+                            }
+                            className="rounded px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap text-[#8F9691] transition-colors hover:bg-[#222623] hover:text-[#E4E6E1]"
+                          >
+                            모두 읽음
+                          </button>
+                        )}
+
+                        <button
+                          type="button"
+                          role="switch"
+                          aria-checked={notificationsEnabled}
+                          aria-label="인앱 알림 켜기/끄기"
+                          onClick={() =>
+                            void setNotificationsEnabled(
+                              session.userId,
+                              !notificationsEnabled
+                            )
+                          }
+                          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#282D2A] bg-[#1A1D1B] px-1.5 py-0.5 transition-colors hover:border-[#6B9080]/60"
+                        >
+                          <span
+                            className={cn(
+                              "font-mono text-[10px] font-semibold whitespace-nowrap",
+                              notificationsEnabled
+                                ? "text-[#6B9080]"
+                                : "text-[#8F9691]"
+                            )}
+                          >
+                            {notificationsEnabled ? "ON" : "OFF"}
+                          </span>
+                          <span
+                            className={cn(
+                              "relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors",
+                              notificationsEnabled
+                                ? "bg-[#6B9080]"
+                                : "bg-[#282D2A]"
+                            )}
+                          >
+                            <span
+                              className={cn(
+                                "inline-block size-3 rounded-full bg-[#121413] transition-transform",
+                                notificationsEnabled
+                                  ? "translate-x-3.5"
+                                  : "translate-x-0.5"
+                              )}
+                            />
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* 알림 꺼짐 안내 배너 */}
+                    {!notificationsEnabled && (
+                      <div className="border-b border-[#282D2A] bg-[#151816]/60 px-3 py-2 text-[11px] leading-relaxed break-keep text-[#8F9691]">
+                        알림이 꺼져 있어 새 댓글·답글 알림이 저장되지 않습니다.
+                      </div>
+                    )}
+
+                    {/* 알림 목록 */}
+                    <div className="max-h-[60vh] overflow-y-auto overscroll-contain sm:max-h-96">
+                      {notifications.length === 0 ? (
+                        <div className="px-4 py-8 text-center text-xs break-keep text-[#8F9691]">
+                          {notificationsEnabled
+                            ? "새로운 알림이 없습니다."
+                            : "표시할 알림이 없습니다."}
+                        </div>
+                      ) : (
+                        <div className="divide-y divide-[#282D2A]">
+                          {notifications.map((item) => (
+                            <div
+                              key={item.id}
+                              className={cn(
+                                "flex items-start gap-2 px-3 py-2.5 transition-colors hover:bg-[#222623]/70",
+                                !item.isRead && "bg-[#6B9080]/[0.05]"
+                              )}
+                            >
+                              <span
+                                className={cn(
+                                  "mt-1.5 size-1.5 shrink-0 rounded-full",
+                                  item.isRead
+                                    ? "bg-transparent"
+                                    : "bg-[#6B9080]"
+                                )}
+                              />
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  void markNotificationRead(item.id);
+                                  setNotifMenuOpen(false);
+                                  router.push(
+                                    `/?post=${encodeURIComponent(item.postId)}`
+                                  );
+                                }}
+                                className="min-w-0 flex-1 text-left"
+                              >
+                                <div className="flex items-center justify-between gap-2">
+                                  <span className="truncate text-xs font-semibold text-[#E4E6E1]">
+                                    {item.actorNickname}
+                                  </span>
+                                  <span className="shrink-0 font-mono text-[10px] whitespace-nowrap text-[#8F9691] tabular-nums">
+                                    {formatRelativeNotificationTime(
+                                      item.createdAt
+                                    )}
+                                  </span>
+                                </div>
+                                <p className="mt-0.5 text-[11px] break-keep text-[#C9CFCB]">
+                                  {item.type === "reply"
+                                    ? "내 댓글에 답글을 남겼습니다."
+                                    : "내 게시글에 댓글을 남겼습니다."}
+                                </p>
+                                {item.postTitle && (
+                                  <p className="mt-0.5 truncate text-[11px] text-[#8F9691]">
+                                    {item.postTitle}
+                                  </p>
+                                )}
+                                {item.commentPreview && (
+                                  <p className="mt-0.5 line-clamp-1 text-[11px] text-[#6B9080]">
+                                    “{item.commentPreview}”
+                                  </p>
+                                )}
+                              </button>
+
+                              <button
+                                type="button"
+                                aria-label="알림 삭제"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  void deleteNotification(item.id);
+                                }}
+                                className="flex size-6 shrink-0 items-center justify-center rounded text-[#8F9691] transition-colors hover:bg-[#282D2A] hover:text-[#E4E6E1]"
+                              >
+                                <X className="size-3.5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div ref={profileContainerRef} className="relative shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setNotifMenuOpen(false);
+                      setProfileMenuOpen((prev) => !prev);
+                    }}
                   aria-label="내 프로필 메뉴"
                   aria-expanded={profileMenuOpen}
                   aria-haspopup="menu"
@@ -306,6 +582,7 @@ export function TopNav() {
                   </div>
                 </div>
               </div>
+              </>
             )}
 
             {/* Mobile / Narrow Window (< 880px) 햄버거 버튼 + 우측 고정폭 팝오버 */}
@@ -314,6 +591,7 @@ export function TopNav() {
                 type="button"
                 onClick={() => {
                   setProfileMenuOpen(false);
+                  setNotifMenuOpen(false);
                   setMobileMenuOpen((prev) => !prev);
                 }}
                 aria-label={mobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
