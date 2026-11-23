@@ -11,9 +11,11 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowUpRight,
+  Check,
   CheckCircle2,
   CornerDownRight,
   ExternalLink,
+  Link2,
   MessageSquare,
   Pencil,
   Send,
@@ -21,6 +23,7 @@ import {
   ThumbsUp,
   Trash2,
 } from "lucide-react";
+import { copyTextToClipboard } from "@/lib/copy-to-clipboard";
 import { INITIAL_MICE, INITIAL_SWITCHES } from "@/data/specs-data";
 import {
   COMMUNITY_CATEGORY_LABELS,
@@ -169,7 +172,31 @@ export function PostDetailModal({
   onClose,
 }: PostDetailModalProps) {
   const [commentText, setCommentText] = useState<string>("");
+  const [copiedPostLink, setCopiedPostLink] = useState<boolean>(false);
+  const copyTimerRef = useRef<number | null>(null);
   const commentTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopyPostLink = async () => {
+    if (!post || typeof window === "undefined") return;
+    const shareUrl = `${window.location.origin}/?post=${encodeURIComponent(post.id)}`;
+    const ok = await copyTextToClipboard(shareUrl);
+    if (!ok) return;
+    setCopiedPostLink(true);
+    if (copyTimerRef.current !== null) {
+      window.clearTimeout(copyTimerRef.current);
+    }
+    copyTimerRef.current = window.setTimeout(() => {
+      setCopiedPostLink(false);
+    }, 1800);
+  };
 
   // 답글(대댓글) 인라인 작성 상태
   const [replyTarget, setReplyTarget] = useState<ReplyTargetState | null>(null);
@@ -431,14 +458,38 @@ export function PostDetailModal({
             )}
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-3 py-1.5 text-xs font-semibold text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1]"
-          >
-            <ArrowLeft className="size-3.5" />
-            <span>목록으로</span>
-          </button>
+          <div className="flex shrink-0 items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => void handleCopyPostLink()}
+              title={copiedPostLink ? "링크 복사됨" : "게시글 링크 복사"}
+              aria-label={copiedPostLink ? "링크 복사됨" : "게시글 링크 복사"}
+              className={cn(
+                "inline-flex h-8 shrink-0 items-center justify-center gap-1.5 rounded-lg border px-2 text-xs font-semibold whitespace-nowrap transition-colors sm:px-2.5",
+                copiedPostLink
+                  ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
+                  : "border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
+              )}
+            >
+              {copiedPostLink ? (
+                <Check className="size-3.5 shrink-0 text-[#6B9080]" />
+              ) : (
+                <Link2 className="size-3.5 shrink-0" />
+              )}
+              <span className="hidden sm:inline">
+                {copiedPostLink ? "복사됨" : "링크 복사"}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs font-semibold whitespace-nowrap text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1] sm:px-3"
+            >
+              <ArrowLeft className="size-3.5 shrink-0" />
+              <span>목록으로</span>
+            </button>
+          </div>
         </div>
 
         <h2 className="text-lg font-bold text-[#F4F6F2] sm:text-xl">

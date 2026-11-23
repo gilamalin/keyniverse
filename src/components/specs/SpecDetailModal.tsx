@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import {
+  Check,
   CheckCircle2,
+  Link2,
   Lock,
   LogIn,
   ShieldCheck,
@@ -12,6 +14,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import { copyTextToClipboard } from "@/lib/copy-to-clipboard";
 import {
   getAuthStoreVersion,
   getServerAuthStoreVersion,
@@ -105,6 +108,31 @@ export function SpecDetailModal({
   );
   const [oneLineReview, setOneLineReview] = useState<string>("");
   const [savedNotice, setSavedNotice] = useState<boolean>(false);
+  const [copiedLink, setCopiedLink] = useState<boolean>(false);
+  const copyTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current !== null) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopySpecLink = async () => {
+    if (!activeKind || !activeSlug || typeof window === "undefined") return;
+    const tabParam = activeKind === "switch" ? "switches" : "mice";
+    const shareUrl = `${window.location.origin}/specs?tab=${tabParam}&open=${encodeURIComponent(activeSlug)}`;
+    const ok = await copyTextToClipboard(shareUrl);
+    if (!ok) return;
+    setCopiedLink(true);
+    if (copyTimerRef.current !== null) {
+      window.clearTimeout(copyTimerRef.current);
+    }
+    copyTimerRef.current = window.setTimeout(() => {
+      setCopiedLink(false);
+    }, 1800);
+  };
 
   const authVersion = useSyncExternalStore(
     subscribeAuthStore,
@@ -256,14 +284,38 @@ export function SpecDetailModal({
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="상세 모달 닫기"
-            className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1]"
-          >
-            <X className="size-4" />
-          </button>
+          <div className="flex shrink-0 items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => void handleCopySpecLink()}
+              title={copiedLink ? "링크 복사됨" : "스펙 링크 복사"}
+              aria-label={copiedLink ? "링크 복사됨" : "스펙 링크 복사"}
+              className={cn(
+                "flex h-8 w-8 shrink-0 items-center justify-center gap-1.5 rounded-lg border text-xs font-medium whitespace-nowrap transition-colors sm:w-auto sm:px-2.5",
+                copiedLink
+                  ? "border-[#6B9080] bg-[#222623] text-[#6B9080]"
+                  : "border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] hover:border-[#6B9080] hover:text-[#E4E6E1]"
+              )}
+            >
+              {copiedLink ? (
+                <Check className="size-3.5 shrink-0 text-[#6B9080]" />
+              ) : (
+                <Link2 className="size-3.5 shrink-0" />
+              )}
+              <span className="hidden sm:inline">
+                {copiedLink ? "복사됨" : "링크 복사"}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="상세 모달 닫기"
+              className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-[#282D2A] bg-[#1A1D1B] text-[#8F9691] transition-colors hover:border-[#6B9080] hover:text-[#E4E6E1]"
+            >
+              <X className="size-4" />
+            </button>
+          </div>
         </div>
 
         {/* 스크롤 본문: ① 공식 스펙 -> ② 유저 지표 & 평가 등록 -> ③ 한줄평 */}

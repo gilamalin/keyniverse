@@ -1,4 +1,6 @@
+import { unstable_cache } from "next/cache";
 import { INITIAL_MICE, INITIAL_SWITCHES } from "@/data/specs-data";
+import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   MouseConnection,
@@ -74,29 +76,24 @@ function formatIsoDate(iso: string): string {
   return iso.slice(0, 10);
 }
 
-/**
- * Supabase `switches`, `mice`, `spec_votes` 테이블에서 도감 데이터를 서버 측 조회
- * - 현재 로그인 유저의 표는 클라이언트 `spec-verification` 스토어에서 실시간 반영하므로
- *   서버 기준 집계에서는 제외해 이중 합산 방지
- */
-export async function fetchCatalogSpecsFromSupabase(): Promise<{
-  switches: SwitchSpec[];
-  mice: MouseSpec[];
-}> {
-  const supabase = await createSupabaseServerClient();
-  if (!supabase) {
-    return { switches: INITIAL_SWITCHES, mice: INITIAL_MICE };
-  }
+const fetchCachedPublicCatalogRows = unstable_cache(
+  async (): Promise<{
+    switchRows: SwitchDbRow[];
+    mouseRows: MouseDbRow[];
+    voteRows: SpecVoteDbRow[];
+  } | null> => {
+    const supabase = createSupabasePublicClient();
+    if (!supabase) return null;
 
-  try {
     const [
-      { data: authData },
       { data: switchRows, error: swErr },
       { data: mouseRows, error: msErr },
       { data: voteRows },
     ] = await Promise.all([
-      supabase.auth.getUser(),
-      supabase.from("switches").select("*").order("created_at", { ascending: true }),
+      supabase
+        .from("switches")
+        .select("*")
+        .order("created_at", { ascending: true }),
       supabase.from("mice").select("*").order("created_at", { ascending: true }),
       supabase
         .from("spec_votes")
@@ -107,13 +104,47 @@ export async function fetchCatalogSpecsFromSupabase(): Promise<{
     ]);
 
     if (swErr || msErr || !switchRows?.length || !mouseRows?.length) {
+      return null;
+    }
+
+    return {
+      switchRows: switchRows as SwitchDbRow[],
+      mouseRows: mouseRows as MouseDbRow[],
+      voteRows: (voteRows ?? []) as SpecVoteDbRow[],
+    };
+  },
+  ["keyniverse-catalog-specs-v1"],
+  { revalidate: 300 }
+);
+
+/**
+ * Supabase `switches`, `mice`, `spec_votes` 테이블에서 도감 데이터를 서버 측 조회
+ * - 공개 도감 행은 5분 서버 캐싱(TTFB 최적화)
+ * - 현재 로그인 유저의 표는 클라이언트 `spec-verification` 스토어에서 실시간 반영하므로
+ *   서버 기준 집계에서는 제외해 이중 합산 방지
+ */
+export async function fetchCatalogSpecsFromSupabase(): Promise<{
+  switches: SwitchSpec[];
+  mice: MouseSpec[];
+}> {
+  try {
+    const [cached, supabase] = await Promise.all([
+      fetchCachedPublicCatalogRows(),
+      createSupabaseServerClient(),
+    ]);
+
+    if (!cached) {
       return { switches: INITIAL_SWITCHES, mice: INITIAL_MICE };
     }
 
-    const currentUserId = authData.user?.id ?? null;
-    const otherVotes = ((voteRows ?? []) as SpecVoteDbRow[]).filter(
-      (v) => v.user_id !== currentUserId
-    );
+    let currentUserId: string | null = null;
+    if (supabase) {
+      const { data: authData } = await supabase.auth.getUser();
+      currentUserId = authData.user?.id ?? null;
+    }
+
+    const { switchRows, mouseRows, voteRows } = cached;
+    const otherVotes = voteRows.filter((v) => v.user_id !== currentUserId);
 
     const baseSwitchMap = new Map(INITIAL_SWITCHES.map((s) => [s.id, s]));
     const baseMouseMap = new Map(INITIAL_MICE.map((m) => [m.id, m]));
