@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Star } from "lucide-react";
 import {
   formatSwitchPins,
@@ -276,16 +276,25 @@ export function SwitchCatalogView({
     return filteredSwitches.slice(startIdx, startIdx + CATALOG_ITEMS_PER_PAGE);
   }, [filteredSwitches, safePage]);
 
+  const resultsRef = useRef<HTMLElement>(null);
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (
+        window.matchMedia("(min-width: 1024px)").matches &&
+        resultsRef.current
+      ) {
+        resultsRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     }
   };
 
   return (
-    <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-      {/* 좌측 스위치 전용 Sticky 필터 사이드바 */}
+    <div className="flex flex-col gap-6 lg:h-[calc(100vh-8rem)] lg:flex-row lg:items-stretch lg:overflow-hidden">
+      {/* 좌측 스위치 전용 독립 스크롤 필터 사이드바 */}
       <CatalogSidebarShell
         title="스위치 필터"
         activeFilterCount={activeFilterCount}
@@ -304,7 +313,7 @@ export function SwitchCatalogView({
               다중 선택
             </span>
           </div>
-          <div className="max-h-32 overflow-y-auto rounded-lg border border-[#282D2A]/70 bg-[#151816]/50 p-1.5">
+          <div className="max-h-32 overflow-y-auto overscroll-contain touch-pan-y rounded-lg border border-[#282D2A]/70 bg-[#151816]/50 p-1.5">
             <div className="flex flex-wrap gap-1">
               {availableBrands.map((brand) => {
                 const active = selectedBrands.includes(brand);
@@ -524,8 +533,11 @@ export function SwitchCatalogView({
         </div>
       </CatalogSidebarShell>
 
-      {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 스위치 스펙 카드 그리드 */}
-      <section className="flex min-w-0 flex-1 flex-col gap-4 lg:min-h-[1360px]">
+      {/* 우측 메인 콘텐츠: 검색·건수·정렬 바 + 3열 스위치 스펙 카드 그리드 (PC 독립 스크롤) */}
+      <section
+        ref={resultsRef}
+        className="flex min-w-0 flex-1 flex-col gap-4 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:pr-1"
+      >
         <CatalogSearchSortBar
           searchQuery={searchQuery}
           onSearchChange={(next) => {

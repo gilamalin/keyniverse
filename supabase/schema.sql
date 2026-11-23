@@ -274,9 +274,9 @@ alter table public.post_upvotes enable row level security;
 alter table public.vs_votes enable row level security;
 alter table public.reports enable row level security;
 
--- profiles: 공개 조회(이메일 제외는 뷰/select 컬럼으로 제어), 본인만 수정
-create policy "profiles_select_public" on public.profiles
-  for select using (true);
+-- profiles: 본인 프로필만 조회 및 수정 (타인 이메일·포인트·권한 외부 노출 차단)
+create policy "profiles_select_own" on public.profiles
+  for select using (auth.uid() = id);
 create policy "profiles_update_own" on public.profiles
   for update using (auth.uid() = id) with check (auth.uid() = id);
 
@@ -308,7 +308,9 @@ create policy "posts_select_public" on public.posts
 create policy "posts_insert_auth" on public.posts
   for insert with check (auth.uid() = author_id and category <> 'notice');
 create policy "posts_update_own" on public.posts
-  for update using (auth.uid() = author_id) with check (auth.uid() = author_id);
+  for update
+  using (auth.uid() = author_id)
+  with check (auth.uid() = author_id and category <> 'notice');
 create policy "posts_delete_own" on public.posts
   for delete using (auth.uid() = author_id);
 
@@ -350,9 +352,8 @@ insert into storage.buckets (id, name, public)
 values ('community-images', 'community-images', true)
 on conflict (id) do nothing;
 
-create policy "community_images_public_read"
-  on storage.objects for select
-  using (bucket_id = 'community-images');
+-- (참고) public = true 버킷은 공개 이미지 URL 조회에 별도 SELECT 정책이 필요하지 않으며,
+-- 광범위한 SELECT 정책을 두면 클라이언트가 버킷 내 전체 파일 목록(list)을 조회할 수 있으므로 생략합니다.
 
 create policy "community_images_auth_upload"
   on storage.objects for insert

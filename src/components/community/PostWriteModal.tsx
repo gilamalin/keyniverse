@@ -149,7 +149,8 @@ export function PostWriteModal({
   const isEditMode = Boolean(editingPost);
 
   const [category, setCategory] = useState<CommunityCategory>(
-    editingPost?.category && editingPost.category !== "notice"
+    editingPost?.category &&
+      (editingPost.category !== "notice" || isSessionAdmin(session))
       ? editingPost.category
       : "diagnosis"
   );

@@ -147,15 +147,31 @@ interface DeviceLookupItem {
 
 const POSTS_PER_PAGE = 10;
 
+const VALID_CATEGORY_TABS = new Set<CommunityFilterTab>([
+  "all",
+  "notice",
+  "diagnosis",
+  "build",
+  "vs",
+  "deal",
+]);
+
+function buildCategoryListUrl(category: CommunityFilterTab): string {
+  return category === "all" ? "/" : `/?category=${encodeURIComponent(category)}`;
+}
+
 export function CommunityBoard() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const postParam = searchParams.get("post");
   const modeParam = searchParams.get("mode");
   const editParam = searchParams.get("edit");
+  const categoryParam = searchParams.get("category");
 
-  const [activeCategory, setActiveCategory] =
-    useState<CommunityFilterTab>("all");
+  const activeCategory: CommunityFilterTab =
+    categoryParam && VALID_CATEGORY_TABS.has(categoryParam as CommunityFilterTab)
+      ? (categoryParam as CommunityFilterTab)
+      : "all";
   const [sortMode, setSortMode] = useState<CommunitySortMode>("latest");
 
   // 검색창 입력값(searchInput)과 엔터/검색 버튼 클릭 시 실제 적용되는 검색어(appliedSearchQuery) 분리
@@ -486,9 +502,18 @@ export function CommunityBoard() {
     return filteredPosts.slice(startIdx, startIdx + POSTS_PER_PAGE);
   }, [filteredPosts, safePage]);
 
+  const handleSelectCategory = (tab: CommunityFilterTab) => {
+    setCurrentPage(1);
+    router.replace(buildCategoryListUrl(tab), { scroll: false });
+  };
+
   const handleOpenPost = (postId: string) => {
     incrementPostView(postId);
-    router.push(`/?post=${encodeURIComponent(postId)}`, {
+    const categoryQuery =
+      activeCategory !== "all"
+        ? `category=${encodeURIComponent(activeCategory)}&`
+        : "";
+    router.push(`/?${categoryQuery}post=${encodeURIComponent(postId)}`, {
       scroll: true,
     });
     if (typeof window !== "undefined") {
@@ -497,7 +522,7 @@ export function CommunityBoard() {
   };
 
   const handleBackToList = () => {
-    router.push("/", { scroll: false });
+    router.push(buildCategoryListUrl(activeCategory), { scroll: false });
   };
 
   const handleOpenWritePage = () => {
@@ -505,7 +530,11 @@ export function CommunityBoard() {
       openAuthModal("게시글 작성은 로그인 후 이용할 수 있습니다.");
       return;
     }
-    router.push("/?mode=write", { scroll: true });
+    const categoryQuery =
+      activeCategory !== "all"
+        ? `category=${encodeURIComponent(activeCategory)}&`
+        : "";
+    router.push(`/?${categoryQuery}mode=write`, { scroll: true });
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -550,7 +579,6 @@ export function CommunityBoard() {
                   "게시글 작성",
                   POINT_REWARDS.CREATE_POST
                 );
-                setActiveCategory("all");
                 setSortMode("latest");
                 setCurrentPage(1);
                 router.push(
@@ -676,10 +704,7 @@ export function CommunityBoard() {
                       <button
                         key={tab.id}
                         type="button"
-                        onClick={() => {
-                          setActiveCategory(tab.id);
-                          setCurrentPage(1);
-                        }}
+                        onClick={() => handleSelectCategory(tab.id)}
                         className={cn(
                           "flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors",
                           active

@@ -169,6 +169,7 @@ function evaluateHighestObjective(values: Array<number | null>): boolean[] {
 
 interface SpecCompareModalProps {
   open: boolean;
+  hasChildModalOpen?: boolean;
   tab: SpecTabType;
   switches: SwitchSpec[];
   mice: MouseSpec[];
@@ -180,6 +181,7 @@ interface SpecCompareModalProps {
 
 export function SpecCompareModal({
   open,
+  hasChildModalOpen = false,
   tab,
   switches,
   mice,
@@ -192,7 +194,7 @@ export function SpecCompareModal({
     if (!open) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && !hasChildModalOpen) {
         onClose();
       }
     };
@@ -203,7 +205,7 @@ export function SpecCompareModal({
       releaseScrollLock();
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [open, onClose]);
+  }, [open, hasChildModalOpen, onClose]);
 
   if (!open) return null;
 
@@ -246,19 +248,13 @@ export function SpecCompareModal({
               <SwitchCompareTable
                 switches={switches}
                 communities={switchCommunities}
-                onSelectDetail={(id) => {
-                  onClose();
-                  onSelectDetail(id);
-                }}
+                onSelectDetail={onSelectDetail}
               />
             ) : (
               <MouseCompareTable
                 mice={mice}
                 communities={mouseCommunities}
-                onSelectDetail={(id) => {
-                  onClose();
-                  onSelectDetail(id);
-                }}
+                onSelectDetail={onSelectDetail}
               />
             )}
           </div>

@@ -350,6 +350,7 @@ export function SpecsCatalog({
       {/* 5. VS 스펙 비교 모달 */}
       <SpecCompareModal
         open={compareModalOpen}
+        hasChildModalOpen={Boolean(effectiveDetailId)}
         tab={activeTab}
         switches={selectedCompareSwitches}
         mice={selectedCompareMice}

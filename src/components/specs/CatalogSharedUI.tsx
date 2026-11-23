@@ -28,7 +28,7 @@ interface CatalogSidebarShellProps {
 
 /**
  * 스펙 도감 공용 필터 컨테이너
- * - PC(lg 이상): 좌측 Sticky 사이드바
+ * - PC(lg 이상): 좌측 독립 스크롤(Split-Pane) 사이드바 (우측 결과 개수 변화와 무관하게 위치 100% 고정)
  * - 모바일/태블릿(lg 미만): 독립 스크롤 오버레이 바텀시트 (배경 목록 높이 변화로 인한 화면 튐 차단)
  */
 export function CatalogSidebarShell({
@@ -61,8 +61,8 @@ export function CatalogSidebarShell({
 
   return (
     <>
-      {/* PC(lg 이상) 좌측 Sticky 사이드바 */}
-      <aside className="hidden w-[280px] shrink-0 rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:overscroll-contain">
+      {/* PC(lg 이상) 좌측 독립 스크롤 사이드바 */}
+      <aside className="hidden w-[280px] shrink-0 rounded-xl border border-[#282D2A] bg-[#1A1D1B] p-4 lg:flex lg:h-full lg:flex-col lg:overflow-y-auto lg:overscroll-contain">
         <div className="mb-3 flex items-center justify-between gap-2 border-b border-[#282D2A] pb-2.5 whitespace-nowrap">
           <div className="flex items-center gap-1.5">
             <Filter className="size-4 shrink-0 text-[#6B9080]" />
