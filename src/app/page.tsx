@@ -13,8 +13,8 @@ interface PostSeoRow {
   category: string;
   title: string;
   content: string;
+  content_html: string | null;
   author_nickname: string;
-  attachments: unknown;
   created_at: string;
   updated_at: string | null;
 }
@@ -50,20 +50,10 @@ function stripHtmlForSummary(raw: string, maxLen = 140): string {
   return `${plain.slice(0, maxLen - 1)}…`;
 }
 
-function extractFirstPublicImageUrl(attachments: unknown): string | null {
-  if (!Array.isArray(attachments)) return null;
-  for (const item of attachments) {
-    if (
-      item &&
-      typeof item === "object" &&
-      "dataUrl" in item &&
-      typeof (item as { dataUrl?: unknown }).dataUrl === "string"
-    ) {
-      const url = (item as { dataUrl: string }).dataUrl;
-      if (url.startsWith("https://")) return url;
-    }
-  }
-  return null;
+function extractFirstPublicImageUrl(contentHtml: string | null): string | null {
+  if (!contentHtml) return null;
+  const match = contentHtml.match(/<img[^>]+src=["'](https:\/\/[^"']+)["']/i);
+  return match?.[1] ?? null;
 }
 
 const fetchPostForSeo = cache(async (postId: string): Promise<PostSeoRow | null> => {
@@ -75,7 +65,7 @@ const fetchPostForSeo = cache(async (postId: string): Promise<PostSeoRow | null>
     const { data, error } = await supabase
       .from("posts")
       .select(
-        "id, category, title, content, author_nickname, attachments, created_at, updated_at"
+        "id, category, title, content, content_html, author_nickname, created_at, updated_at"
       )
       .eq("id", postId)
       .maybeSingle();
@@ -105,7 +95,7 @@ export async function generateMetadata({
         stripHtmlForSummary(post.content) ||
         `KEYNIVERSE ${catLabel} · 작성자 ${post.author_nickname}`;
       const canonicalPath = `/?post=${encodeURIComponent(post.id)}`;
-      const firstImg = extractFirstPublicImageUrl(post.attachments);
+      const firstImg = extractFirstPublicImageUrl(post.content_html);
 
       return {
         title,
