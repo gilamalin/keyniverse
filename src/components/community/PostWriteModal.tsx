@@ -582,10 +582,10 @@ export function PostWriteModal({
   return (
     <article
       aria-label={isEditMode ? "게시글 수정" : "게시글 작성"}
-      className="flex w-full flex-col overflow-hidden rounded-xl border border-[#282D2A] bg-[#1A1D1B]"
+      className="flex w-full flex-col rounded-xl border border-[#282D2A] bg-[#1A1D1B]"
     >
       {/* 상단 헤더 */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#282D2A] bg-[#151816] px-5 py-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-t-xl border-b border-[#282D2A] bg-[#151816] px-5 py-4">
         <div className="flex items-center gap-2.5">
           <PenSquare className="size-4 text-[#6B9080]" />
           <h2 className="text-base font-bold text-[#E4E6E1]">
@@ -966,70 +966,72 @@ export function PostWriteModal({
                   ) : null}
                 </div>
 
-                <input
-                  type="text"
-                  maxLength={40}
-                  value={vsNameA}
-                  onFocus={() => setActiveVsSuggest("A")}
-                  onBlur={() => {
-                    window.setTimeout(() => {
-                      setActiveVsSuggest((cur) => (cur === "A" ? null : cur));
-                    }, 120);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") {
-                      setActiveVsSuggest(null);
-                    }
-                  }}
-                  onChange={(e) => {
-                    const nextVal = e.target.value;
-                    setVsNameA(nextVal);
-                    setActiveVsSuggest("A");
-                    if (vsSlugA) {
-                      const matched = allSpecDevices.find(
-                        (d) => d.slug === vsSlugA
-                      );
-                      if (!matched || matched.name !== nextVal) {
-                        setVsSlugA("");
+                <div className="relative">
+                  <input
+                    type="text"
+                    maxLength={40}
+                    value={vsNameA}
+                    onFocus={() => setActiveVsSuggest("A")}
+                    onBlur={() => {
+                      window.setTimeout(() => {
+                        setActiveVsSuggest((cur) => (cur === "A" ? null : cur));
+                      }, 120);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        setActiveVsSuggest(null);
                       }
-                    }
-                  }}
-                  placeholder="제품명 검색 또는 자유 입력..."
-                  className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] placeholder:text-[#8F9691] focus:border-[#6B9080] focus:outline-none"
-                />
+                    }}
+                    onChange={(e) => {
+                      const nextVal = e.target.value;
+                      setVsNameA(nextVal);
+                      setActiveVsSuggest("A");
+                      if (vsSlugA) {
+                        const matched = allSpecDevices.find(
+                          (d) => d.slug === vsSlugA
+                        );
+                        if (!matched || matched.name !== nextVal) {
+                          setVsSlugA("");
+                        }
+                      }
+                    }}
+                    placeholder="제품명 검색 또는 자유 입력..."
+                    className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] placeholder:text-[#8F9691] focus:border-[#6B9080] focus:outline-none"
+                  />
 
-                {activeVsSuggest === "A" && vsSuggestionsA.length > 0 && (
-                  <div className="mt-1.5 max-h-40 overflow-y-auto overscroll-contain rounded-lg border border-[#282D2A] bg-[#1A1D1B] p-1">
-                    {vsSuggestionsA.map((dev) => (
-                      <button
-                        key={dev.slug}
-                        type="button"
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          setVsSlugA(dev.slug);
-                          setVsNameA(dev.name);
-                          setActiveVsSuggest(null);
-                        }}
-                        className={cn(
-                          "flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors hover:bg-[#222623]",
-                          vsSlugA === dev.slug
-                            ? "bg-[#222623] text-[#6B9080]"
-                            : "text-[#E4E6E1]"
-                        )}
-                      >
-                        <span className="min-w-0 truncate">
-                          <span className="mr-1.5 font-mono text-[10px] text-[#8F9691]">
-                            [{dev.kindLabel}]
+                  {activeVsSuggest === "A" && vsSuggestionsA.length > 0 && (
+                    <div className="absolute inset-x-0 bottom-full z-30 mb-1.5 max-h-44 overflow-y-auto overscroll-contain rounded-lg border border-[#282D2A] bg-[#1A1D1B] p-1 shadow-xl">
+                      {vsSuggestionsA.map((dev) => (
+                        <button
+                          key={dev.slug}
+                          type="button"
+                          onMouseDown={(e) => {
+                            e.preventDefault();
+                            setVsSlugA(dev.slug);
+                            setVsNameA(dev.name);
+                            setActiveVsSuggest(null);
+                          }}
+                          className={cn(
+                            "flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors hover:bg-[#222623]",
+                            vsSlugA === dev.slug
+                              ? "bg-[#222623] text-[#6B9080]"
+                              : "text-[#E4E6E1]"
+                          )}
+                        >
+                          <span className="min-w-0 truncate">
+                            <span className="mr-1.5 font-mono text-[10px] text-[#8F9691]">
+                              [{dev.kindLabel}]
+                            </span>
+                            {dev.name}
                           </span>
-                          {dev.name}
-                        </span>
-                        <span className="shrink-0 font-mono text-[10px] text-[#8F9691]">
-                          {dev.brand}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+                          <span className="shrink-0 font-mono text-[10px] text-[#8F9691]">
+                            {dev.brand}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* OPTION B */}
@@ -1049,70 +1051,72 @@ export function PostWriteModal({
                   ) : null}
                 </div>
 
-                <input
-                  type="text"
-                  maxLength={40}
-                  value={vsNameB}
-                  onFocus={() => setActiveVsSuggest("B")}
-                  onBlur={() => {
-                    window.setTimeout(() => {
-                      setActiveVsSuggest((cur) => (cur === "B" ? null : cur));
-                    }, 120);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") {
-                      setActiveVsSuggest(null);
-                    }
-                  }}
-                  onChange={(e) => {
-                    const nextVal = e.target.value;
-                    setVsNameB(nextVal);
-                    setActiveVsSuggest("B");
-                    if (vsSlugB) {
-                      const matched = allSpecDevices.find(
-                        (d) => d.slug === vsSlugB
-                      );
-                      if (!matched || matched.name !== nextVal) {
-                        setVsSlugB("");
+                <div className="relative">
+                  <input
+                    type="text"
+                    maxLength={40}
+                    value={vsNameB}
+                    onFocus={() => setActiveVsSuggest("B")}
+                    onBlur={() => {
+                      window.setTimeout(() => {
+                        setActiveVsSuggest((cur) => (cur === "B" ? null : cur));
+                      }, 120);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        setActiveVsSuggest(null);
                       }
-                    }
-                  }}
-                  placeholder="제품명 검색 또는 자유 입력..."
-                  className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] placeholder:text-[#8F9691] focus:border-[#D4A373] focus:outline-none"
-                />
+                    }}
+                    onChange={(e) => {
+                      const nextVal = e.target.value;
+                      setVsNameB(nextVal);
+                      setActiveVsSuggest("B");
+                      if (vsSlugB) {
+                        const matched = allSpecDevices.find(
+                          (d) => d.slug === vsSlugB
+                        );
+                        if (!matched || matched.name !== nextVal) {
+                          setVsSlugB("");
+                        }
+                      }
+                    }}
+                    placeholder="제품명 검색 또는 자유 입력..."
+                    className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] placeholder:text-[#8F9691] focus:border-[#D4A373] focus:outline-none"
+                  />
 
-                {activeVsSuggest === "B" && vsSuggestionsB.length > 0 && (
-                  <div className="mt-1.5 max-h-40 overflow-y-auto overscroll-contain rounded-lg border border-[#282D2A] bg-[#1A1D1B] p-1">
-                    {vsSuggestionsB.map((dev) => (
-                      <button
-                        key={dev.slug}
-                        type="button"
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          setVsSlugB(dev.slug);
-                          setVsNameB(dev.name);
-                          setActiveVsSuggest(null);
-                        }}
-                        className={cn(
-                          "flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors hover:bg-[#222623]",
-                          vsSlugB === dev.slug
-                            ? "bg-[#222623] text-[#D4A373]"
-                            : "text-[#E4E6E1]"
-                        )}
-                      >
-                        <span className="min-w-0 truncate">
-                          <span className="mr-1.5 font-mono text-[10px] text-[#8F9691]">
-                            [{dev.kindLabel}]
+                  {activeVsSuggest === "B" && vsSuggestionsB.length > 0 && (
+                    <div className="absolute inset-x-0 bottom-full z-30 mb-1.5 max-h-44 overflow-y-auto overscroll-contain rounded-lg border border-[#282D2A] bg-[#1A1D1B] p-1 shadow-xl">
+                      {vsSuggestionsB.map((dev) => (
+                        <button
+                          key={dev.slug}
+                          type="button"
+                          onMouseDown={(e) => {
+                            e.preventDefault();
+                            setVsSlugB(dev.slug);
+                            setVsNameB(dev.name);
+                            setActiveVsSuggest(null);
+                          }}
+                          className={cn(
+                            "flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors hover:bg-[#222623]",
+                            vsSlugB === dev.slug
+                              ? "bg-[#222623] text-[#D4A373]"
+                              : "text-[#E4E6E1]"
+                          )}
+                        >
+                          <span className="min-w-0 truncate">
+                            <span className="mr-1.5 font-mono text-[10px] text-[#8F9691]">
+                              [{dev.kindLabel}]
+                            </span>
+                            {dev.name}
                           </span>
-                          {dev.name}
-                        </span>
-                        <span className="shrink-0 font-mono text-[10px] text-[#8F9691]">
-                          {dev.brand}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+                          <span className="shrink-0 font-mono text-[10px] text-[#8F9691]">
+                            {dev.brand}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
