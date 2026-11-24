@@ -951,16 +951,16 @@ export function PostWriteModal({
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {/* OPTION A */}
               <div>
-                <div className="mb-1 flex items-center justify-between gap-2">
-                  <label className="font-mono text-[11px] font-semibold text-[#6B9080]">
+                <div className="mb-1 flex h-6 items-center justify-between gap-2">
+                  <label className="font-mono text-[11px] leading-none font-semibold text-[#6B9080]">
                     OPTION A
                   </label>
                   {vsSlugA ? (
-                    <span className="rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#6B9080]">
+                    <span className="inline-flex h-5 shrink-0 items-center rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 font-sans text-[11px] leading-none font-semibold whitespace-nowrap text-[#6B9080]">
                       스펙 연동
                     </span>
                   ) : vsNameA.trim() ? (
-                    <span className="font-mono text-[10px] text-[#8F9691]">
+                    <span className="inline-flex h-5 shrink-0 items-center rounded border border-[#282D2A] bg-[#1A1D1B] px-1.5 font-sans text-[11px] leading-none font-medium whitespace-nowrap text-[#8F9691]">
                       직접 입력
                     </span>
                   ) : null}
@@ -1036,16 +1036,16 @@ export function PostWriteModal({
 
               {/* OPTION B */}
               <div>
-                <div className="mb-1 flex items-center justify-between gap-2">
-                  <label className="font-mono text-[11px] font-semibold text-[#D4A373]">
+                <div className="mb-1 flex h-6 items-center justify-between gap-2">
+                  <label className="font-mono text-[11px] leading-none font-semibold text-[#D4A373]">
                     OPTION B
                   </label>
                   {vsSlugB ? (
-                    <span className="rounded border border-[#D4A373]/40 bg-[#D4A373]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#D4A373]">
+                    <span className="inline-flex h-5 shrink-0 items-center rounded border border-[#D4A373]/40 bg-[#D4A373]/10 px-1.5 font-sans text-[11px] leading-none font-semibold whitespace-nowrap text-[#D4A373]">
                       스펙 연동
                     </span>
                   ) : vsNameB.trim() ? (
-                    <span className="font-mono text-[10px] text-[#8F9691]">
+                    <span className="inline-flex h-5 shrink-0 items-center rounded border border-[#282D2A] bg-[#1A1D1B] px-1.5 font-sans text-[11px] leading-none font-medium whitespace-nowrap text-[#8F9691]">
                       직접 입력
                     </span>
                   ) : null}
