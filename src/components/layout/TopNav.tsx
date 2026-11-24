@@ -34,6 +34,7 @@ import {
   readTotalPoints,
   subscribeActivityStore,
 } from "@/lib/activity-store";
+import { syncCommunityFromSupabase } from "@/lib/community-store";
 import {
   deleteNotification,
   formatRelativeNotificationTime,
@@ -196,10 +197,15 @@ export function TopNav() {
         <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
           <Link
             href="/"
-            onClick={() => {
+            onClick={(e) => {
               setMobileMenuOpen(false);
               setProfileMenuOpen(false);
               setNotifMenuOpen(false);
+              if (pathname === "/" && typeof window !== "undefined") {
+                e.preventDefault();
+                window.history.pushState(null, "", "/");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
             }}
             className="group flex shrink-0 items-center gap-2 focus:outline-none sm:gap-2.5"
           >
@@ -226,6 +232,17 @@ export function TopNav() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={(e) => {
+                      if (
+                        item.href === "/" &&
+                        pathname === "/" &&
+                        typeof window !== "undefined"
+                      ) {
+                        e.preventDefault();
+                        window.history.pushState(null, "", "/");
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
                     className={cn(
                       "relative flex shrink-0 items-center gap-1.5 rounded-lg border px-2 py-2 text-[13px] font-medium whitespace-nowrap transition-colors lg:gap-2 lg:px-2.5 lg:text-sm",
                       item.active
@@ -425,6 +442,9 @@ export function TopNav() {
                                 type="button"
                                 onClick={() => {
                                   void markNotificationRead(item.id);
+                                  void syncCommunityFromSupabase(
+                                    session.userId ?? null
+                                  );
                                   setNotifMenuOpen(false);
                                   const targetUrl = `/?post=${encodeURIComponent(item.postId)}`;
                                   if (pathname === "/" && typeof window !== "undefined") {
@@ -619,7 +639,18 @@ export function TopNav() {
                         key={item.href}
                         href={item.href}
                         tabIndex={mobileMenuOpen ? 0 : -1}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          setMobileMenuOpen(false);
+                          if (
+                            item.href === "/" &&
+                            pathname === "/" &&
+                            typeof window !== "undefined"
+                          ) {
+                            e.preventDefault();
+                            window.history.pushState(null, "", "/");
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }
+                        }}
                         className={cn(
                           "flex items-center justify-between rounded-lg border px-3 py-2 text-xs font-medium transition-colors",
                           item.active
@@ -647,7 +678,18 @@ export function TopNav() {
                         key={item.href}
                         href={item.href}
                         tabIndex={mobileMenuOpen ? 0 : -1}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          setMobileMenuOpen(false);
+                          if (
+                            item.href === "/" &&
+                            pathname === "/" &&
+                            typeof window !== "undefined"
+                          ) {
+                            e.preventDefault();
+                            window.history.pushState(null, "", "/");
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }
+                        }}
                         className={cn(
                           "flex items-center justify-between rounded-lg border px-3 py-2 text-xs font-medium transition-colors",
                           item.active

@@ -355,6 +355,20 @@ export function isCommunitySynced(): boolean {
   return !isSupabaseConfigured() || hasSyncedCommunityFromSupabase;
 }
 
+export function clearSyncedCommunityUser(): void {
+  liveCommunityUserId = null;
+  liveSupabaseUpvotedIds = new Set<string>();
+  liveSupabaseVsChoices = {};
+  if (liveSupabasePosts.length > 0) {
+    liveSupabasePosts = liveSupabasePosts.map((p) => ({
+      ...p,
+      isMyPost: false,
+      comments: p.comments.map((c) => ({ ...c, isMyComment: false })),
+    }));
+  }
+  notifyCommunityListeners();
+}
+
 function notifyCommunityListeners(): void {
   communityStoreVersion += 1;
   for (const listener of communityListeners) {
@@ -440,9 +454,13 @@ export async function syncCommunityFromSupabase(
     supabase
       .from("comments")
       .select("*")
-      .order("created_at", { ascending: true })
-      .limit(500),
-    supabase.from("vs_votes").select("post_id, user_id, choice"),
+      .order("created_at", { ascending: false })
+      .limit(1000),
+    supabase
+      .from("vs_votes")
+      .select("post_id, user_id, choice")
+      .order("updated_at", { ascending: false })
+      .limit(3000),
     supabase.rpc("get_admin_author_ids"),
   ]);
 
@@ -479,16 +497,16 @@ export async function syncCommunityFromSupabase(
     }
   }
 
-  // 댓글 매핑
+  // 댓글 매핑 (DB에서 최신 1,000건 내림차순 조회 후 시간순 오름차순으로 복원해 원댓글→답글 트리 순서 유지)
   const commentsByPost = new Map<string, CommunityComment[]>();
   if (Array.isArray(commentRows)) {
-    for (const row of commentRows) {
+    const chronologicalRows = [...commentRows].reverse();
+    for (const row of chronologicalRows) {
       const pid = String(row.post_id);
       const list = commentsByPost.get(pid) ?? [];
       list.push({
         id: String(row.id),
         author: String(row.author_nickname),
-        authorVerified: Boolean(row.author_verified),
         authorIsAdmin: Boolean(
           row.author_id && adminAuthorIdSet.has(String(row.author_id))
         ),
@@ -532,7 +550,6 @@ export async function syncCommunityFromSupabase(
           ? sanitizePostHtmlContent(String(row.content_html))
           : undefined,
         author: String(row.author_nickname),
-        authorVerified: Boolean(row.author_verified),
         authorIsAdmin: Boolean(
           row.author_id && adminAuthorIdSet.has(String(row.author_id))
         ),
@@ -679,9 +696,11 @@ export function computeEffectiveCommunityPosts(
           ...c,
           content: editedText !== undefined ? editedText : c.content,
           isEdited: Boolean(c.isEdited || editedText !== undefined),
-          isMyComment: Boolean(
-            c.isMyComment || (currentNickname && c.author === currentNickname)
-          ),
+          isMyComment: isDbPost
+            ? Boolean(c.isMyComment)
+            : Boolean(
+                c.isMyComment || (currentNickname && c.author === currentNickname)
+              ),
         };
       });
 
@@ -700,7 +719,7 @@ export function computeEffectiveCommunityPosts(
 
     const nextDealMeta = post.dealMeta
       ? {
-          ...post.dealMeta,
+           ...post.dealMeta,
           status: dealOverride ?? post.dealMeta.status,
         }
       : undefined;
@@ -712,9 +731,11 @@ export function computeEffectiveCommunityPosts(
       vsMeta: nextVsMeta,
       dealMeta: nextDealMeta,
       comments: mergedComments,
-      isMyPost: Boolean(
-        post.isMyPost || (currentNickname && post.author === currentNickname)
-      ),
+      isMyPost: isDbPost
+        ? Boolean(post.isMyPost)
+        : Boolean(
+            post.isMyPost || (currentNickname && post.author === currentNickname)
+          ),
     };
   });
 
@@ -811,16 +832,17 @@ export function togglePostUpvote(postId: string): void {
       void (async () => {
         const userId = await resolveCurrentUserId();
         if (!userId) return;
-        if (wasUpvoted) {
-          await supabase
-            .from("post_upvotes")
-            .delete()
-            .eq("user_id", userId)
-            .eq("post_id", postId);
-        } else {
-          await supabase
-            .from("post_upvotes")
-            .insert({ user_id: userId, post_id: postId });
+        const { error } = wasUpvoted
+          ? await supabase
+              .from("post_upvotes")
+              .delete()
+              .eq("user_id", userId)
+              .eq("post_id", postId)
+          : await supabase
+              .from("post_upvotes")
+              .insert({ user_id: userId, post_id: postId });
+        if (error) {
+          void syncCommunityFromSupabase(userId);
         }
       })();
     }
@@ -865,7 +887,7 @@ export function selectVsPollOption(postId: string, choice: "A" | "B"): void {
       void (async () => {
         const userId = await resolveCurrentUserId();
         if (!userId) return;
-        await supabase.from("vs_votes").upsert(
+        const { error } = await supabase.from("vs_votes").upsert(
           {
             user_id: userId,
             post_id: postId,
@@ -874,6 +896,9 @@ export function selectVsPollOption(postId: string, choice: "A" | "B"): void {
           },
           { onConflict: "user_id,post_id" }
         );
+        if (error) {
+          void syncCommunityFromSupabase(userId);
+        }
       })();
     }
     return;
@@ -952,7 +977,7 @@ export function addCommunityComment(
       void (async () => {
         const userId = await resolveCurrentUserId();
         if (!userId) return;
-        await supabase.from("comments").insert({
+        const { error } = await supabase.from("comments").insert({
           id: isUuid(sanitizedComment.id)
             ? sanitizedComment.id
             : createEntityId("cmt"),
@@ -964,9 +989,12 @@ export function addCommunityComment(
           reply_to_author: sanitizedComment.replyToAuthor ?? null,
           author_id: userId,
           author_nickname: sanitizedComment.author,
-          author_verified: sanitizedComment.authorVerified,
+          author_verified: false,
           content: sanitizedComment.content,
         });
+        if (error) {
+          void syncCommunityFromSupabase(userId);
+        }
       })();
     }
     return;
@@ -1012,6 +1040,7 @@ export function updateCommunityComment(
           .eq("id", commentId);
         if (error) {
           console.error("[KEYNIVERSE] updateCommunityComment failed:", error);
+          void syncCommunityFromSupabase(liveCommunityUserId);
         }
       })();
     }
@@ -1083,7 +1112,7 @@ export function createCommunityPost(newPost: CommunityPost): void {
       void (async () => {
         const userId = await resolveCurrentUserId();
         if (!userId) return;
-        await supabase.from("posts").insert({
+        const { error } = await supabase.from("posts").insert({
           id: isUuid(normalized.id) ? normalized.id : createEntityId("post"),
           category: normalized.category,
           notice_scope: normalized.noticeScope ?? null,
@@ -1092,7 +1121,7 @@ export function createCommunityPost(newPost: CommunityPost): void {
           content_html: normalized.contentHtml ?? null,
           author_id: userId,
           author_nickname: normalized.author,
-          author_verified: normalized.authorVerified,
+          author_verified: false,
           upvotes: 0,
           views: 1,
           tagged_device_slugs: normalized.taggedDeviceSlugs,
@@ -1100,6 +1129,9 @@ export function createCommunityPost(newPost: CommunityPost): void {
           vs_meta: normalized.vsMeta ?? null,
           deal_meta: normalized.dealMeta ?? null,
         });
+        if (error) {
+          void syncCommunityFromSupabase(userId);
+        }
       })();
     }
     return;

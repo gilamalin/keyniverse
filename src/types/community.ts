@@ -34,7 +34,6 @@ export const COMMUNITY_CATEGORY_SHORT_LABELS: Record<
 export interface CommunityComment {
   id: string;
   author: string;
-  authorVerified: boolean;
   authorIsAdmin?: boolean;
   content: string;
   createdAt: string;
@@ -51,13 +50,6 @@ export interface BuildSetupMeta {
   boardName: string;
   plateMaterial: string;
   keycapProfile: string;
-}
-
-export interface DiagnosisSnapshotMeta {
-  deviceType: "keyboard" | "mouse";
-  metricLabel: string; // 예: "채터링 3회 (Min 8.4ms)" 또는 "Peak 7,960Hz · 더블클릭 0회"
-  status: "warning" | "normal";
-  verifiedProofAttached?: boolean;
 }
 
 export interface VsMatchupMeta {
@@ -97,8 +89,6 @@ export interface CommunityPost {
   /** 첨부된 압축 이미지 목록 (최대 5장) */
   attachments?: CommunityImageAttachment[];
   author: string;
-  /** Phase 1 테스터 통과 이력이 있는 유저 여부 ('⚡ 실측러' 배지 표시) */
-  authorVerified: boolean;
   /** 관리자 작성자 여부 (닉네임 포레스트 세이지 색상 표시) */
   authorIsAdmin?: boolean;
   upvotes: number;
@@ -108,7 +98,6 @@ export interface CommunityPost {
   /** 스펙 도감(specs-data.ts)과 연동되는 장비 슬러그 배열 */
   taggedDeviceSlugs: string[];
   buildMeta?: BuildSetupMeta;
-  diagnosisMeta?: DiagnosisSnapshotMeta;
   vsMeta?: VsMatchupMeta;
   dealMeta?: DealInfoMeta;
   comments: CommunityComment[];

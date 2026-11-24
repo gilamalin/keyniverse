@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   ChevronDown,
   ChevronUp,
@@ -48,7 +48,6 @@ export function SpecsCatalog({
   initialSwitches = INITIAL_SWITCHES,
   initialMice = INITIAL_MICE,
 }: SpecsCatalogProps = {}) {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const initialTab: SpecTabType =
@@ -115,19 +114,21 @@ export function SpecsCatalog({
 
   const handleCloseDetail = () => {
     setDetailItemId(null);
-    if (openSlugParam) {
+    if (openSlugParam && typeof window !== "undefined") {
       const params = new URLSearchParams(searchParams.toString());
       params.delete("open");
       const qs = params.toString();
-      router.replace(qs ? `/specs?${qs}` : "/specs", { scroll: false });
+      window.history.replaceState(null, "", qs ? `/specs?${qs}` : "/specs");
     }
   };
 
   const handleTabChange = (nextTab: SpecTabType) => {
     setActiveTab(nextTab);
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("tab", nextTab);
-    router.replace(`/specs?${params.toString()}`, { scroll: false });
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", nextTab);
+      window.history.replaceState(null, "", `/specs?${params.toString()}`);
+    }
   };
 
   const handleSwitchFilterCount = useCallback((count: number) => {

@@ -47,6 +47,7 @@ import { cn } from "@/lib/utils";
 interface PostWriteModalProps {
   open: boolean;
   session: GoogleUserSession | null;
+  initialCategory?: "all" | CommunityCategory;
   editingPost?: CommunityPost | null;
   onCreatePost: (post: CommunityPost) => void;
   onUpdatePost?: (postId: string, updated: Partial<CommunityPost>) => void;
@@ -133,6 +134,7 @@ async function compressImageFile(file: File): Promise<CommunityImageAttachment> 
 export function PostWriteModal({
   open,
   session,
+  initialCategory = "all",
   editingPost = null,
   onCreatePost,
   onUpdatePost,
@@ -140,12 +142,20 @@ export function PostWriteModal({
 }: PostWriteModalProps) {
   const isEditMode = Boolean(editingPost);
 
-  const [category, setCategory] = useState<CommunityCategory>(
-    editingPost?.category &&
-      (editingPost.category !== "notice" || isSessionAdmin(session))
-      ? editingPost.category
-      : "diagnosis"
-  );
+  const [category, setCategory] = useState<CommunityCategory>(() => {
+    if (editingPost?.category) {
+      return editingPost.category !== "notice" || isSessionAdmin(session)
+        ? editingPost.category
+        : "diagnosis";
+    }
+    if (initialCategory === "notice") {
+      return isSessionAdmin(session) ? "notice" : "diagnosis";
+    }
+    if (initialCategory && initialCategory !== "all") {
+      return initialCategory;
+    }
+    return "diagnosis";
+  });
   const [title, setTitle] = useState<string>(editingPost?.title ?? "");
   const [editorEmpty, setEditorEmpty] = useState<boolean>(
     !editingPost?.content && !(editingPost?.attachments?.length ?? 0)
@@ -182,12 +192,21 @@ export function PostWriteModal({
     editingPost?.buildMeta?.keycapProfile ?? ""
   );
 
-  // 3) [투표] 전용 필드
+  // 3) [투표] 전용 필드 (자동완성 검색 + 자유 텍스트 통합 Combobox)
   const [vsSlugA, setVsSlugA] = useState<string>(
-    editingPost?.vsMeta?.optionASlug ?? INITIAL_MICE[0].slug
+    editingPost?.vsMeta?.optionASlug ?? ""
+  );
+  const [vsNameA, setVsNameA] = useState<string>(
+    editingPost?.vsMeta?.optionAName ?? ""
   );
   const [vsSlugB, setVsSlugB] = useState<string>(
-    editingPost?.vsMeta?.optionBSlug ?? INITIAL_MICE[1].slug
+    editingPost?.vsMeta?.optionBSlug ?? ""
+  );
+  const [vsNameB, setVsNameB] = useState<string>(
+    editingPost?.vsMeta?.optionBName ?? ""
+  );
+  const [activeVsSuggest, setActiveVsSuggest] = useState<"A" | "B" | null>(
+    null
   );
 
   // 4) [특가/드랍] 전용 필드
@@ -232,12 +251,14 @@ export function PostWriteModal({
       ...INITIAL_SWITCHES.map((sw) => ({
         slug: sw.slug,
         name: sw.name,
+        nameEn: sw.nameEn,
         brand: sw.brand,
         kindLabel: "SW",
       })),
       ...INITIAL_MICE.map((ms) => ({
         slug: ms.slug,
         name: ms.name,
+        nameEn: ms.nameEn,
         brand: ms.brand,
         kindLabel: "MS",
       })),
@@ -249,9 +270,29 @@ export function PostWriteModal({
     const q = deviceSearch.trim().toLowerCase();
     if (!q) return allSpecDevices;
     return allSpecDevices.filter((d) =>
-      `${d.name} ${d.brand} ${d.kindLabel}`.toLowerCase().includes(q)
+      `${d.name} ${d.nameEn} ${d.brand} ${d.kindLabel}`.toLowerCase().includes(q)
     );
   }, [allSpecDevices, deviceSearch]);
+
+  const vsSuggestionsA = useMemo(() => {
+    const q = vsNameA.trim().toLowerCase();
+    if (!q) return [];
+    return allSpecDevices
+      .filter((d) =>
+        `${d.name} ${d.nameEn} ${d.brand}`.toLowerCase().includes(q)
+      )
+      .slice(0, 7);
+  }, [allSpecDevices, vsNameA]);
+
+  const vsSuggestionsB = useMemo(() => {
+    const q = vsNameB.trim().toLowerCase();
+    if (!q) return [];
+    return allSpecDevices
+      .filter((d) =>
+        `${d.name} ${d.nameEn} ${d.brand}`.toLowerCase().includes(q)
+      )
+      .slice(0, 7);
+  }, [allSpecDevices, vsNameB]);
 
   if (!open || !session) return null;
 
@@ -403,9 +444,21 @@ export function PostWriteModal({
       return;
     }
 
-    if (category === "vs" && vsSlugA === vsSlugB) {
-      setErrorMsg("투표의 장비 A와 장비 B는 서로 다른 제품으로 선택해 주세요.");
-      return;
+    const cleanVsNameA = vsNameA.replace(/\s+/g, " ").trim().slice(0, 40);
+    const cleanVsNameB = vsNameB.replace(/\s+/g, " ").trim().slice(0, 40);
+
+    if (category === "vs") {
+      if (!cleanVsNameA || !cleanVsNameB) {
+        setErrorMsg("투표 후보 A와 후보 B를 모두 입력해 주세요.");
+        return;
+      }
+      if (
+        cleanVsNameA.toLowerCase() === cleanVsNameB.toLowerCase() ||
+        (vsSlugA && vsSlugB && vsSlugA === vsSlugB)
+      ) {
+        setErrorMsg("투표의 후보 A와 후보 B는 서로 다른 항목으로 입력해 주세요.");
+        return;
+      }
     }
 
     const trimmedDealUrl = dealStoreUrl.trim();
@@ -420,8 +473,12 @@ export function PostWriteModal({
       return;
     }
 
-    const optionADev = allSpecDevices.find((d) => d.slug === vsSlugA);
-    const optionBDev = allSpecDevices.find((d) => d.slug === vsSlugB);
+    const resolvedTaggedSlugs =
+      category === "notice"
+        ? []
+        : category === "vs"
+          ? [vsSlugA, vsSlugB].filter(Boolean)
+          : selectedSlugs;
 
     const sanitizedText = sanitizePostContent(rawText) || "(이미지 게시글)";
     const sanitizedHtml = rawHtml
@@ -436,12 +493,7 @@ export function PostWriteModal({
         content: sanitizedText,
         contentHtml: sanitizedHtml,
         attachments: attachments.length > 0 ? attachments : undefined,
-        taggedDeviceSlugs:
-          category === "vs"
-            ? [vsSlugA, vsSlugB]
-            : category === "build"
-              ? selectedSlugs
-              : [],
+        taggedDeviceSlugs: resolvedTaggedSlugs,
         buildMeta:
           category === "build"
             ? {
@@ -451,13 +503,13 @@ export function PostWriteModal({
               }
             : undefined,
         vsMeta:
-          category === "vs" && optionADev && optionBDev
+          category === "vs"
             ? {
-                optionASlug: optionADev.slug,
-                optionAName: optionADev.name,
+                optionASlug: vsSlugA,
+                optionAName: cleanVsNameA,
                 optionAVotes: editingPost.vsMeta?.optionAVotes ?? 0,
-                optionBSlug: optionBDev.slug,
-                optionBName: optionBDev.name,
+                optionBSlug: vsSlugB,
+                optionBName: cleanVsNameB,
                 optionBVotes: editingPost.vsMeta?.optionBVotes ?? 0,
               }
             : undefined,
@@ -486,14 +538,12 @@ export function PostWriteModal({
       contentHtml: sanitizedHtml,
       attachments: attachments.length > 0 ? attachments : undefined,
       author: session.nickname,
-      authorVerified: false,
       authorIsAdmin: isSessionAdmin(session),
       upvotes: 0,
       views: 1,
       createdAt: formatNowClock(),
       sortTimestamp: nowMs,
-      taggedDeviceSlugs:
-        category === "vs" ? [vsSlugA, vsSlugB] : selectedSlugs,
+      taggedDeviceSlugs: resolvedTaggedSlugs,
       buildMeta:
         category === "build"
           ? {
@@ -503,13 +553,13 @@ export function PostWriteModal({
             }
           : undefined,
       vsMeta:
-        category === "vs" && optionADev && optionBDev
+        category === "vs"
           ? {
-              optionASlug: optionADev.slug,
-              optionAName: optionADev.name,
+              optionASlug: vsSlugA,
+              optionAName: cleanVsNameA,
               optionAVotes: 0,
-              optionBSlug: optionBDev.slug,
-              optionBName: optionBDev.name,
+              optionBSlug: vsSlugB,
+              optionBName: cleanVsNameB,
               optionBVotes: 0,
             }
           : undefined,
@@ -885,47 +935,184 @@ export function PostWriteModal({
           </div>
         </div>
 
-        {/* 4. [투표] 본문 하단: 도감 장비 매치업 생성기 */}
+        {/* 4. [투표] 본문 하단: 도감 장비 검색 자동완성 + 자유 텍스트 통합 생성기 */}
         {category === "vs" && (
           <div className="rounded-xl border border-[#282D2A] bg-[#151816] p-3.5">
-            <span className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold text-[#D4A373]">
-              <Swords className="size-3.5" />
-              투표 후보
-            </span>
+            <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-[#D4A373]">
+                <Swords className="size-3.5" />
+                투표 후보
+              </span>
+              <span className="text-[11px] text-[#8F9691]">
+                도감 제품 선택 시 스펙 버튼 자동 연동 · 직접 입력 가능
+              </span>
+            </div>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {/* OPTION A */}
               <div>
-                <label className="mb-1 block font-mono text-[11px] font-semibold text-[#6B9080]">
-                  OPTION A
-                </label>
-                <select
-                  value={vsSlugA}
-                  onChange={(e) => setVsSlugA(e.target.value)}
-                  className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] focus:border-[#6B9080] focus:outline-none"
-                >
-                  {allSpecDevices.map((dev) => (
-                    <option key={dev.slug} value={dev.slug}>
-                      [{dev.kindLabel}] {dev.name} ({dev.brand})
-                    </option>
-                  ))}
-                </select>
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <label className="font-mono text-[11px] font-semibold text-[#6B9080]">
+                    OPTION A
+                  </label>
+                  {vsSlugA ? (
+                    <span className="rounded border border-[#6B9080]/40 bg-[#6B9080]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#6B9080]">
+                      스펙 연동
+                    </span>
+                  ) : vsNameA.trim() ? (
+                    <span className="font-mono text-[10px] text-[#8F9691]">
+                      직접 입력
+                    </span>
+                  ) : null}
+                </div>
+
+                <input
+                  type="text"
+                  maxLength={40}
+                  value={vsNameA}
+                  onFocus={() => setActiveVsSuggest("A")}
+                  onBlur={() => {
+                    window.setTimeout(() => {
+                      setActiveVsSuggest((cur) => (cur === "A" ? null : cur));
+                    }, 120);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      setActiveVsSuggest(null);
+                    }
+                  }}
+                  onChange={(e) => {
+                    const nextVal = e.target.value;
+                    setVsNameA(nextVal);
+                    setActiveVsSuggest("A");
+                    if (vsSlugA) {
+                      const matched = allSpecDevices.find(
+                        (d) => d.slug === vsSlugA
+                      );
+                      if (!matched || matched.name !== nextVal) {
+                        setVsSlugA("");
+                      }
+                    }
+                  }}
+                  placeholder="제품명 검색 또는 자유 입력..."
+                  className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] placeholder:text-[#8F9691] focus:border-[#6B9080] focus:outline-none"
+                />
+
+                {activeVsSuggest === "A" && vsSuggestionsA.length > 0 && (
+                  <div className="mt-1.5 max-h-40 overflow-y-auto overscroll-contain rounded-lg border border-[#282D2A] bg-[#1A1D1B] p-1">
+                    {vsSuggestionsA.map((dev) => (
+                      <button
+                        key={dev.slug}
+                        type="button"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          setVsSlugA(dev.slug);
+                          setVsNameA(dev.name);
+                          setActiveVsSuggest(null);
+                        }}
+                        className={cn(
+                          "flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors hover:bg-[#222623]",
+                          vsSlugA === dev.slug
+                            ? "bg-[#222623] text-[#6B9080]"
+                            : "text-[#E4E6E1]"
+                        )}
+                      >
+                        <span className="min-w-0 truncate">
+                          <span className="mr-1.5 font-mono text-[10px] text-[#8F9691]">
+                            [{dev.kindLabel}]
+                          </span>
+                          {dev.name}
+                        </span>
+                        <span className="shrink-0 font-mono text-[10px] text-[#8F9691]">
+                          {dev.brand}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
+              {/* OPTION B */}
               <div>
-                <label className="mb-1 block font-mono text-[11px] font-semibold text-[#D4A373]">
-                  OPTION B
-                </label>
-                <select
-                  value={vsSlugB}
-                  onChange={(e) => setVsSlugB(e.target.value)}
-                  className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] focus:border-[#D4A373] focus:outline-none"
-                >
-                  {allSpecDevices.map((dev) => (
-                    <option key={dev.slug} value={dev.slug}>
-                      [{dev.kindLabel}] {dev.name} ({dev.brand})
-                    </option>
-                  ))}
-                </select>
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <label className="font-mono text-[11px] font-semibold text-[#D4A373]">
+                    OPTION B
+                  </label>
+                  {vsSlugB ? (
+                    <span className="rounded border border-[#D4A373]/40 bg-[#D4A373]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#D4A373]">
+                      스펙 연동
+                    </span>
+                  ) : vsNameB.trim() ? (
+                    <span className="font-mono text-[10px] text-[#8F9691]">
+                      직접 입력
+                    </span>
+                  ) : null}
+                </div>
+
+                <input
+                  type="text"
+                  maxLength={40}
+                  value={vsNameB}
+                  onFocus={() => setActiveVsSuggest("B")}
+                  onBlur={() => {
+                    window.setTimeout(() => {
+                      setActiveVsSuggest((cur) => (cur === "B" ? null : cur));
+                    }, 120);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      setActiveVsSuggest(null);
+                    }
+                  }}
+                  onChange={(e) => {
+                    const nextVal = e.target.value;
+                    setVsNameB(nextVal);
+                    setActiveVsSuggest("B");
+                    if (vsSlugB) {
+                      const matched = allSpecDevices.find(
+                        (d) => d.slug === vsSlugB
+                      );
+                      if (!matched || matched.name !== nextVal) {
+                        setVsSlugB("");
+                      }
+                    }
+                  }}
+                  placeholder="제품명 검색 또는 자유 입력..."
+                  className="h-9 w-full rounded-lg border border-[#282D2A] bg-[#1A1D1B] px-2.5 text-xs text-[#E4E6E1] placeholder:text-[#8F9691] focus:border-[#D4A373] focus:outline-none"
+                />
+
+                {activeVsSuggest === "B" && vsSuggestionsB.length > 0 && (
+                  <div className="mt-1.5 max-h-40 overflow-y-auto overscroll-contain rounded-lg border border-[#282D2A] bg-[#1A1D1B] p-1">
+                    {vsSuggestionsB.map((dev) => (
+                      <button
+                        key={dev.slug}
+                        type="button"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          setVsSlugB(dev.slug);
+                          setVsNameB(dev.name);
+                          setActiveVsSuggest(null);
+                        }}
+                        className={cn(
+                          "flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left text-xs transition-colors hover:bg-[#222623]",
+                          vsSlugB === dev.slug
+                            ? "bg-[#222623] text-[#D4A373]"
+                            : "text-[#E4E6E1]"
+                        )}
+                      >
+                        <span className="min-w-0 truncate">
+                          <span className="mr-1.5 font-mono text-[10px] text-[#8F9691]">
+                            [{dev.kindLabel}]
+                          </span>
+                          {dev.name}
+                        </span>
+                        <span className="shrink-0 font-mono text-[10px] text-[#8F9691]">
+                          {dev.brand}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>

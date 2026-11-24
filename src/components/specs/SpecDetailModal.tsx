@@ -18,6 +18,7 @@ import { copyTextToClipboard } from "@/lib/copy-to-clipboard";
 import {
   getAuthStoreVersion,
   getServerAuthStoreVersion,
+  isSessionBanned,
   openAuthModal,
   readGoogleSession,
   subscribeAuthStore,
@@ -164,7 +165,7 @@ export function SpecDetailModal({
   const isMouse = activeKind === "mouse" && mouseSpec && mouseCommunity;
 
   const handleSaveVote = () => {
-    if (!session || !proof) return;
+    if (!session || !proof || isSessionBanned(session)) return;
 
     const isFirstVote = !existingVote;
     const cleanedReview = oneLineReview
@@ -731,11 +732,23 @@ export function SpecDetailModal({
                     )}
                     <button
                       type="button"
+                      disabled={isSessionBanned(session)}
                       onClick={handleSaveVote}
-                      className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg border border-[#6B9080] bg-[#6B9080] px-4 py-1.5 text-xs font-bold whitespace-nowrap text-[#121413] transition-colors hover:bg-[#7CA291]"
+                      className={cn(
+                        "inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg border px-4 py-1.5 text-xs font-bold whitespace-nowrap transition-colors",
+                        isSessionBanned(session)
+                          ? "cursor-not-allowed border-[#282D2A] bg-[#151816] text-[#8F9691] opacity-60"
+                          : "border-[#6B9080] bg-[#6B9080] text-[#121413] hover:bg-[#7CA291]"
+                      )}
                     >
                       <CheckCircle2 className="size-3.5" />
-                      <span>{existingVote ? "수정" : "등록"}</span>
+                      <span>
+                        {isSessionBanned(session)
+                          ? "정지됨"
+                          : existingVote
+                            ? "수정"
+                            : "등록"}
+                      </span>
                     </button>
                   </div>
                 </div>

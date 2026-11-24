@@ -18,7 +18,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "안녕하세요, KEYNIVERSE 운영팀입니다.\n\nKEYNIVERSE는 키보드·마우스 하드웨어 매니아들이 정확한 스펙 정보와 빌드 경험을 나누는 공간입니다.\n\n1. 상호 존중 에티켓\n- 특정 브랜드·배열·스위치 취향에 대한 비하 및 회원 간 비방·욕설을 금지합니다.\n\n2. 다계정 어뷰징 및 도배 금지\n- KEYNIVERSE는 쾌적한 커뮤니티 환경과 투표 신뢰도를 위해 Google 단일 계정 인증을 적용하고 있습니다.\n- 상업적 바이럴, 매크로 도배, 무단 홍보 게시물은 무통보 삭제 및 계정 이용이 제한될 수 있습니다.\n\n3. 말머리 준수\n- [자유 게시판], [빌드/셋업], [투표], [특가/드랍] 각 게시판 성격에 맞는 말머리를 선택해 작성해 주세요.",
     author: "공식운영팀",
-    authorVerified: true,
     upvotes: 52,
     views: 1240,
     createdAt: "11.16",
@@ -34,7 +33,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "자유 게시판 이용 안내입니다.\n\n1. 작성 가능 주제\n- 키보드·마우스 관련 일상 수다, 장비 추천 질문, 윤활/스테빌라이저 튜닝 팁, 채터링·더블클릭 증상 질문 등 자유로운 주제를 환영합니다.\n\n2. 도감 장비 태그 기능 활용 (선택사항)\n- 질문하거나 언급하는 스위치·마우스가 스펙 도감(/specs)에 등록된 제품이라면 글 작성 시 장비 태그를 걸어두시면 답변자분들이 스펙을 즉시 확인하는 데 큰 도움이 됩니다.",
     author: "공식운영팀",
-    authorVerified: true,
     upvotes: 28,
     views: 680,
     createdAt: "11.16",
@@ -50,7 +48,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "빌드/셋업 게시판 이용 안내입니다.\n\n1. 빌드 구성 요약 기입\n- 글 작성 시 사용한 [키보드 하우징], [보강판 소재], [키캡 프로파일]과 함께 스펙 도감의 스위치·마우스 태그를 선택해 주시면 본문 하단에 '빌드 스펙 요약' 박스가 자동으로 생성됩니다.\n\n2. 이미지 첨부 안내\n- 데스크셋업 및 빌드 사진은 게시글당 최대 5장(장당 5MB 이하)까지 첨부 가능하며, 업로드 시 고화질 WebP로 자동 최적화됩니다.",
     author: "공식운영팀",
-    authorVerified: true,
     upvotes: 31,
     views: 740,
     createdAt: "11.16",
@@ -66,7 +63,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "투표 게시판 이용 안내입니다.\n\n1. 도감 연동 매치업 생성\n- 구매 고민 중인 두 스위치 또는 마우스를 OPTION A와 OPTION B로 선택하면, 각 장비의 공식 스펙 요약과 실시간 득표율 바가 자동으로 생성됩니다.\n\n2. 1인 1표 원칙\n- 투표는 Google 로그인 계정당 1회 참여 가능하며, 선택 변경 시 기존 표가 이동되어 중복 집계되지 않습니다.",
     author: "공식운영팀",
-    authorVerified: true,
     upvotes: 24,
     views: 590,
     createdAt: "11.16",
@@ -82,7 +78,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "특가/드랍 게시판 이용 규정입니다.\n\n1. 순수 정보 공유 목적\n- 국내외 키보드·스위치·마우스 공동구매(Group Buy), 재입고, 할인 특가 정보를 공유하는 공간입니다.\n- 개인 수익 목적의 어필리에이트(레퍼럴) 링크나 사전 협의되지 않은 업체 바이럴 게시물은 엄격히 금지됩니다.\n\n2. 품절/마감 시 [종료] 상태 전환\n- 작성자분께서는 특가 물량이 소진되거나 공제 기간이 마감되면 게시글 상세 화면에서 [종료로 상태 변경] 버튼을 눌러 상태를 업데이트해 주시기 바랍니다.",
     author: "공식운영팀",
-    authorVerified: true,
     upvotes: 39,
     views: 890,
     createdAt: "11.16",
@@ -97,7 +92,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "하부 폼만 1장 깔고 알루 보강에 HMX 치즈 체결했습니다. 히야신스 V2U보다 고음역 날카로움이 살짝 다듬어져서 장시간 타건하기 훨씬 편하네요. 마우스는 마야 X 8K로 깔맞춤했습니다.",
     author: "보타니컬장인",
-    authorVerified: true,
     upvotes: 34,
     createdAt: "14:42",
     sortTimestamp: new Date("2026-11-18T14:42:00+09:00").getTime(),
@@ -111,15 +105,13 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
       {
         id: "cmt-101",
         author: "로우피치선호",
-        authorVerified: true,
-        content: "네오80에 알루 보강 + 치즈 조합이면 또각거림이 정말 정갈하겠네요!",
+            content: "네오80에 알루 보강 + 치즈 조합이면 또각거림이 정말 정갈하겠네요!",
         createdAt: "14:50",
       },
       {
         id: "cmt-102",
         author: "TKL매니아",
-        authorVerified: false,
-        content: "혹시 스페이스바에도 치즈 그대로 꼽으셨나요?",
+            content: "혹시 스페이스바에도 치즈 그대로 꼽으셨나요?",
         createdAt: "15:02",
       },
     ],
@@ -131,7 +123,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "광학-기계식 하이브리드라 더블클릭 안 난다고 알고 있었는데, 최근에 간헐적으로 좌클릭이 두 번씩 눌리는 느낌입니다. 지허브 옵티컬 전용 모드로 바꾸면 괜찮아지는지 궁금합니다.",
     author: "발로란트불멸",
-    authorVerified: true,
     upvotes: 19,
     createdAt: "13:55",
     sortTimestamp: new Date("2026-11-18T13:55:00+09:00").getTime(),
@@ -140,8 +131,7 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
       {
         id: "cmt-201",
         author: "수리공방",
-        authorVerified: true,
-        content:
+            content:
           "지슈라2 지허브에서 옵티컬 전용 모드 켜져 있는지 먼저 확인해 보세요. 하이브리드 절전 모드일 때 가끔 튀는 경우가 있습니다.",
         createdAt: "14:05",
       },
@@ -154,7 +144,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "둘 다 무선 8,000Hz 지원이고 도감 비교함으로 보니 무게가 54g vs 60g으로 6g 차이 나네요. F10 손 크기 세미클로 기준으로 등 지지력이 어느 쪽이 더 안정적인지 실사용자분들 투표 부탁드립니다.",
     author: "에임고민중",
-    authorVerified: true,
     upvotes: 48,
     createdAt: "12:30",
     sortTimestamp: new Date("2026-11-18T12:30:00+09:00").getTime(),
@@ -171,15 +160,13 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
       {
         id: "cmt-301",
         author: "프로지망",
-        authorVerified: true,
-        content: "F10 클로면 바브삼 프로가 앞코 플레어가 완만해서 약지 걸기가 훨씬 편합니다.",
+            content: "F10 클로면 바브삼 프로가 앞코 플레어가 완만해서 약지 걸기가 훨씬 편합니다.",
         createdAt: "12:48",
       },
       {
         id: "cmt-302",
         author: "국밥쉘",
-        authorVerified: false,
-        content: "배터리 타임이랑 무난함은 여전히 지슈라2가 마음 편해요.",
+            content: "배터리 타임이랑 무난함은 여전히 지슈라2가 마음 편해요.",
         createdAt: "13:10",
       },
     ],
@@ -191,7 +178,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "품절이었던 히야신스 V2U 신금형 버전 90알/110알 벌크팩 재입고되었습니다. 공장 윤활 상태 균일한 최신 배치이고 배송비 제외 개당 280원꼴입니다.",
     author: "핫딜레이더",
-    authorVerified: true,
     upvotes: 41,
     createdAt: "11.17",
     sortTimestamp: new Date("2026-11-17T11:18:00+09:00").getTime(),
@@ -205,8 +191,7 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
       {
         id: "cmt-401",
         author: "스위치수집가",
-        authorVerified: true,
-        content: "기다리던 물량인데 덕분에 110알 탑승했습니다!",
+            content: "기다리던 물량인데 덕분에 110알 탑승했습니다!",
         createdAt: "11:25",
       },
     ],
@@ -218,7 +203,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "메인보드 후면 USB 3.2 직결 포트에 동글 연결하고 일주일째 사용 중인데 스터터링이나 끊김 전혀 없이 쾌적합니다. 마그네슘 타공 쉘인데도 유격 없이 단단하네요.",
     author: "마그네슘홀릭",
-    authorVerified: true,
     upvotes: 27,
     createdAt: "11.17",
     sortTimestamp: new Date("2026-11-17T10:04:00+09:00").getTime(),
@@ -232,7 +216,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "도각거리는 조약돌 소리를 원해서 40gf BSUN 로즈우드에 FR4 보강판, 두꺼운 1.7mm PBT 키캡을 매칭했습니다. 바닥압이 53gf라 구름타법 치기에도 적당합니다.",
     author: "딥사운드",
-    authorVerified: true,
     upvotes: 29,
     createdAt: "11.16",
     sortTimestamp: new Date("2026-11-16T18:00:00+09:00").getTime(),
@@ -246,8 +229,7 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
       {
         id: "cmt-601",
         author: "오일킹유저",
-        authorVerified: false,
-        content: "로즈우드가 오일킹보다 키압이 낮아서 손가락이 훨씬 편하더라고요.",
+            content: "로즈우드가 오일킹보다 키압이 낮아서 손가락이 훨씬 편하더라고요.",
         createdAt: "11.16",
       },
     ],
@@ -259,7 +241,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "래피드 트리거 0.15mm 세팅으로 사용 중입니다. 바닥 막힘 구조인 매그네틱 제이드로 풀교체할지, 개선된 렉커 V2 순정으로 계속 쓸지 타건음과 유격 차이가 체감 큰지 궁금합니다.",
     author: "우팅튜닝러",
-    authorVerified: true,
     upvotes: 36,
     createdAt: "11.14",
     sortTimestamp: new Date("2026-11-14T15:00:00+09:00").getTime(),
@@ -281,7 +262,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "유선 8,000Hz 클릭 레이턴시 1위 OP1 8k 블랙/화이트 모델 주말 한정 할인 진행 중입니다. Kailh GX 기계식 스위치 기본 탑재입니다.",
     author: "유선8K유저",
-    authorVerified: true,
     upvotes: 31,
     createdAt: "11.12",
     sortTimestamp: new Date("2026-11-12T14:00:00+09:00").getTime(),
@@ -300,7 +280,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "다른 키는 전부 정상인데 유독 E키만 가끔 두 번씩 찍힙니다. 스위치를 새 오일킹으로 바꿔 껴봐도 증상이 남는데 핫스왑 소켓 접점 문제일까요?",
     author: "납땜초보",
-    authorVerified: false,
     upvotes: 14,
     createdAt: "11.05",
     sortTimestamp: new Date("2026-11-05T16:00:00+09:00").getTime(),
@@ -309,8 +288,7 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
       {
         id: "cmt-901",
         author: "기판수리점",
-        authorVerified: true,
-        content:
+            content:
           "스위치를 바꿨는데도 동일 키에서 재입력이 뜨면 카일 핫스왑 소켓 날개가 벌어진 경우가 많습니다. 핀셋으로 살짝 모아주시면 해결됩니다.",
         createdAt: "11.05",
       },
@@ -323,7 +301,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "개방형 오피스라 소음에 민감해서 오테뮤 저소음 피치 V3로 87키 전체 빌드했습니다. V3 금형부터 먹먹함이 많이 줄어들고 기본 디퓨저 덕분에 은은합니다.",
     author: "판교개발자",
-    authorVerified: true,
     upvotes: 22,
     createdAt: "10.28",
     sortTimestamp: new Date("2026-10-28T13:00:00+09:00").getTime(),
@@ -342,7 +319,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "타공 없는 솔리드 쉘이면서 PAW3950 센서가 들어간 두 모델 중 고민 중입니다. 손 크기는 F9이고 핑거~세미클로 왔다 갔다 하는데 어느 쪽 마감이 더 탄탄할까요?",
     author: "경량마우스",
-    authorVerified: false,
     upvotes: 25,
     createdAt: "10.12",
     sortTimestamp: new Date("2026-10-12T15:00:00+09:00").getTime(),
@@ -364,7 +340,6 @@ export const INITIAL_COMMUNITY_POSTS: CommunityPost[] = [
     content:
       "체리 2세대 배럴 스프링 적용된 MX2A 흑축 5핀 버전 공동구매 물량 전량 소진되어 마감되었습니다.",
     author: "클래식체리",
-    authorVerified: true,
     upvotes: 18,
     createdAt: "09.25",
     sortTimestamp: new Date("2026-09-25T12:00:00+09:00").getTime(),

@@ -1,4 +1,5 @@
 import { unstable_cache } from "next/cache";
+import { cookies } from "next/headers";
 import { INITIAL_MICE, INITIAL_SWITCHES } from "@/data/specs-data";
 import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -128,9 +129,14 @@ export async function fetchCatalogSpecsFromSupabase(): Promise<{
   mice: MouseSpec[];
 }> {
   try {
+    const cookieStore = await cookies();
+    const hasAuthCookie = cookieStore
+      .getAll()
+      .some((c) => c.name.startsWith("sb-"));
+
     const [cached, supabase] = await Promise.all([
       fetchCachedPublicCatalogRows(),
-      createSupabaseServerClient(),
+      hasAuthCookie ? createSupabaseServerClient() : Promise.resolve(null),
     ]);
 
     if (!cached) {

@@ -14,6 +14,14 @@ export async function proxy(request: NextRequest) {
     return supabaseResponse;
   }
 
+  // 비로그인 트래픽(검색봇·SNS 프리뷰·일반 방문자)은 Supabase 인증 쿠키가 없으므로 원격 getUser() 호출을 즉시 생략해 TTFB 0ms 유지
+  const hasSupabaseAuthCookie = request.cookies
+    .getAll()
+    .some((c) => c.name.startsWith("sb-"));
+  if (!hasSupabaseAuthCookie) {
+    return supabaseResponse;
+  }
+
   const supabase = createServerClient(url, anonKey, {
     cookies: {
       getAll() {

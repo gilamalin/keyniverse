@@ -12,7 +12,10 @@ export async function GET(request: Request) {
   const errorParam = searchParams.get("error") ?? "";
   const errorDesc = searchParams.get("error_description") ?? "";
   const next = searchParams.get("next") ?? "/";
-  const safeNext = next.startsWith("/") ? next : "/";
+  const safeNext =
+    next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/\\")
+      ? next
+      : "/";
 
   const forwardedHost = request.headers.get("x-forwarded-host");
   const forwardedProto = request.headers.get("x-forwarded-proto") ?? "https";

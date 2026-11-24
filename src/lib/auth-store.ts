@@ -6,7 +6,11 @@ import {
   clearSyncedActivity,
   syncActivityFromSupabase,
 } from "@/lib/activity-store";
-import { syncCommunityFromSupabase } from "@/lib/community-store";
+import {
+  clearSyncedCommunityUser,
+  syncCommunityFromSupabase,
+} from "@/lib/community-store";
+import { clearSyncedNotifications } from "@/lib/notification-store";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
@@ -63,7 +67,7 @@ function notifyAuthListeners(): void {
 export function subscribeAuthStore(listener: () => void): () => void {
   authListeners.add(listener);
   const handleStorage = (e: StorageEvent) => {
-    if (!e.key || e.key === AUTH_STORAGE_KEY || e.key.startsWith("verified_")) {
+    if (!e.key || e.key === AUTH_STORAGE_KEY) {
       notifyAuthListeners();
     }
   };
@@ -186,6 +190,8 @@ async function fetchAndCacheSupabaseSession(): Promise<void> {
       liveSupabaseSession = null;
       clearSyncedUserVotes();
       clearSyncedActivity();
+      clearSyncedCommunityUser();
+      clearSyncedNotifications();
     }
     if (needsNotify) {
       notifyAuthListeners();
@@ -328,6 +334,8 @@ export async function signOutGoogle(): Promise<void> {
     liveSupabaseSession = null;
     clearSyncedUserVotes();
     clearSyncedActivity();
+    clearSyncedCommunityUser();
+    clearSyncedNotifications();
     notifyAuthListeners();
     return;
   }
@@ -457,6 +465,8 @@ export async function withdrawAccount(): Promise<{ error: string | null }> {
     liveSupabaseSession = null;
     clearSyncedUserVotes();
     clearSyncedActivity();
+    clearSyncedCommunityUser();
+    clearSyncedNotifications();
   }
   withdrawAccountMock();
   return { error: null };

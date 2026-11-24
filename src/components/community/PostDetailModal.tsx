@@ -173,7 +173,9 @@ export function PostDetailModal({
 }: PostDetailModalProps) {
   const [commentText, setCommentText] = useState<string>("");
   const [copiedPostLink, setCopiedPostLink] = useState<boolean>(false);
+  const [banActionNotice, setBanActionNotice] = useState<string | null>(null);
   const copyTimerRef = useRef<number | null>(null);
+  const banNoticeTimerRef = useRef<number | null>(null);
   const commentTextareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
@@ -181,8 +183,21 @@ export function PostDetailModal({
       if (copyTimerRef.current !== null) {
         window.clearTimeout(copyTimerRef.current);
       }
+      if (banNoticeTimerRef.current !== null) {
+        window.clearTimeout(banNoticeTimerRef.current);
+      }
     };
   }, []);
+
+  const showBannedNotice = () => {
+    setBanActionNotice("활동 정지 기간에는 이용할 수 없습니다.");
+    if (banNoticeTimerRef.current !== null) {
+      window.clearTimeout(banNoticeTimerRef.current);
+    }
+    banNoticeTimerRef.current = window.setTimeout(() => {
+      setBanActionNotice(null);
+    }, 2200);
+  };
 
   const handleCopyPostLink = async () => {
     if (!post || typeof window === "undefined") return;
@@ -347,12 +362,20 @@ export function PostDetailModal({
       openAuthModal("추천은 로그인 후 이용할 수 있습니다.");
       return;
     }
+    if (isSessionBanned(session)) {
+      showBannedNotice();
+      return;
+    }
     onToggleUpvote(post.id);
   };
 
   const handleVsVoteClick = (choice: "A" | "B") => {
     if (!session) {
       openAuthModal("투표는 로그인 후 참여할 수 있습니다.");
+      return;
+    }
+    if (isSessionBanned(session)) {
+      showBannedNotice();
       return;
     }
     onSelectVsOption(post.id, choice);
@@ -363,13 +386,16 @@ export function PostDetailModal({
       openAuthModal("댓글은 로그인 후 작성할 수 있습니다.");
       return;
     }
+    if (isSessionBanned(session)) {
+      showBannedNotice();
+      return;
+    }
     const sanitized = sanitizeCommentContent(commentText);
     if (!sanitized) return;
 
     onAddComment(post.id, {
       id: getCurrentCommentId(),
       author: session.nickname,
-      authorVerified: false,
       authorIsAdmin: isSessionAdmin(session),
       content: sanitized,
       createdAt: formatNowTime(),
@@ -388,6 +414,10 @@ export function PostDetailModal({
       openAuthModal("답글은 로그인 후 작성할 수 있습니다.");
       return;
     }
+    if (isSessionBanned(session)) {
+      showBannedNotice();
+      return;
+    }
     if (!replyTarget) return;
     const sanitized = sanitizeCommentContent(replyText);
     if (!sanitized) return;
@@ -395,7 +425,6 @@ export function PostDetailModal({
     onAddComment(post.id, {
       id: getCurrentCommentId(),
       author: session.nickname,
-      authorVerified: false,
       authorIsAdmin: isSessionAdmin(session),
       content: sanitized,
       createdAt: formatNowTime(),
@@ -410,6 +439,10 @@ export function PostDetailModal({
   };
 
   const submitEditCommentNow = (commentId: string) => {
+    if (isSessionBanned(session)) {
+      showBannedNotice();
+      return;
+    }
     const sanitized = sanitizeCommentContent(editingCommentText);
     if (!sanitized) return;
     onUpdateComment(commentId, sanitized);
@@ -572,6 +605,10 @@ export function PostDetailModal({
                 onClick={() => {
                   if (!session) {
                     openAuthModal("신고는 로그인 후 이용할 수 있습니다.");
+                    return;
+                  }
+                  if (isSessionBanned(session)) {
+                    showBannedNotice();
                     return;
                   }
                   setReportTarget({ targetType: "post", targetId: post.id });
@@ -802,7 +839,7 @@ export function PostDetailModal({
             )}
 
           {/* 게시글 [추천 (N)] 토글 버튼 (따봉 아이콘만 유지, 삼각형 제거) */}
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center gap-2">
             <button
               type="button"
               onClick={handleUpvoteClick}
@@ -816,6 +853,11 @@ export function PostDetailModal({
               <ThumbsUp className="size-3.5" />
               <span>추천 ({post.upvotes})</span>
             </button>
+            {banActionNotice && (
+              <p className="text-xs font-medium text-[#E06C75]">
+                {banActionNotice}
+              </p>
+            )}
           </div>
 
           {/* 하단 댓글/답글 리스트 & 작성 폼 */}
@@ -959,6 +1001,10 @@ export function PostDetailModal({
                               <button
                                 type="button"
                                 onClick={() => {
+                                  if (isSessionBanned(session)) {
+                                    showBannedNotice();
+                                    return;
+                                  }
                                   if (isEditingThis) {
                                     setEditingCommentId(null);
                                     setEditingCommentText("");
@@ -1018,6 +1064,10 @@ export function PostDetailModal({
                                     openAuthModal(
                                       "신고는 로그인 후 이용할 수 있습니다."
                                     );
+                                    return;
+                                  }
+                                  if (isSessionBanned(session)) {
+                                    showBannedNotice();
                                     return;
                                   }
                                   setReportTarget({

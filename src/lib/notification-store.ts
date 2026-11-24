@@ -16,7 +16,7 @@ export interface InAppNotification {
   createdAt: string;
 }
 
-const ENABLED_STORAGE_KEY = "keyniverse:notifications_enabled";
+const ENABLED_STORAGE_KEY_PREFIX = "keyniverse:notifications_enabled";
 
 let notifications: InAppNotification[] = [];
 let notificationsEnabled = true;
@@ -29,10 +29,14 @@ function emit(): void {
   listeners.forEach((fn) => fn());
 }
 
-function readCachedEnabled(): boolean {
+function getEnabledStorageKey(userId: string): string {
+  return `${ENABLED_STORAGE_KEY_PREFIX}:${userId}`;
+}
+
+function readCachedEnabled(userId: string): boolean {
   if (typeof window === "undefined") return true;
   try {
-    const raw = window.localStorage.getItem(ENABLED_STORAGE_KEY);
+    const raw = window.localStorage.getItem(getEnabledStorageKey(userId));
     if (raw === "false") return false;
     return true;
   } catch {
@@ -40,12 +44,24 @@ function readCachedEnabled(): boolean {
   }
 }
 
-function writeCachedEnabled(enabled: boolean): void {
+function writeCachedEnabled(userId: string, enabled: boolean): void {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(ENABLED_STORAGE_KEY, enabled ? "true" : "false");
+    window.localStorage.setItem(
+      getEnabledStorageKey(userId),
+      enabled ? "true" : "false"
+    );
   } catch {
     // storage quota / private mode
+  }
+}
+
+export function clearSyncedNotifications(): void {
+  if (notifications.length > 0 || synced || !notificationsEnabled) {
+    notifications = [];
+    notificationsEnabled = true;
+    synced = false;
+    emit();
   }
 }
 
@@ -99,7 +115,7 @@ export async function syncNotificationsFromSupabase(
   }
 
   if (!synced) {
-    notificationsEnabled = readCachedEnabled();
+    notificationsEnabled = readCachedEnabled(userId);
   }
 
   if (!isSupabaseConfigured()) {
@@ -134,7 +150,7 @@ export async function syncNotificationsFromSupabase(
       typeof profileRes.data.notifications_enabled === "boolean"
     ) {
       notificationsEnabled = profileRes.data.notifications_enabled;
-      writeCachedEnabled(notificationsEnabled);
+      writeCachedEnabled(userId, notificationsEnabled);
     }
 
     if (!notifRes.error && Array.isArray(notifRes.data)) {
@@ -174,7 +190,9 @@ export async function setNotificationsEnabled(
 ): Promise<boolean> {
   const prev = notificationsEnabled;
   notificationsEnabled = enabled;
-  writeCachedEnabled(enabled);
+  if (userId) {
+    writeCachedEnabled(userId, enabled);
+  }
   emit();
 
   if (!userId || !isSupabaseConfigured()) return true;
@@ -189,7 +207,7 @@ export async function setNotificationsEnabled(
 
   if (error) {
     notificationsEnabled = prev;
-    writeCachedEnabled(prev);
+    writeCachedEnabled(userId, prev);
     emit();
     return false;
   }

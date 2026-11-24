@@ -427,8 +427,11 @@ export function CommunityBoard() {
         const deviceNames = post.taggedDeviceSlugs
           .map((slug) => deviceLookupMap.get(slug)?.name ?? slug)
           .join(" ");
+        const vsNames = post.vsMeta
+          ? `${post.vsMeta.optionAName} ${post.vsMeta.optionBName}`
+          : "";
         const haystack =
-          `${post.title} ${post.author} ${COMMUNITY_CATEGORY_LABELS[post.category]} ${deviceNames}`.toLowerCase();
+          `${post.title} ${post.author} ${COMMUNITY_CATEGORY_LABELS[post.category]} ${deviceNames} ${vsNames}`.toLowerCase();
         if (!haystack.includes(q)) return false;
       }
 
@@ -563,9 +566,10 @@ export function CommunityBoard() {
           {isWriteMode ? (
             /* 글쓰기/글수정 페이지 뷰 (좌측 메인 영역 전환 · 우측 사이드바는 그대로 유지) */
             <PostWriteModal
-              key={editingPost?.id ?? "new-post"}
+              key={editingPost?.id ?? `new-post-${activeCategory}`}
               open={true}
               session={session}
+              initialCategory={activeCategory}
               editingPost={editingPost}
               onCreatePost={(newPost) => {
                 createCommunityPost(newPost);
@@ -1153,7 +1157,16 @@ export function CommunityBoard() {
                 </p>
                 <button
                   type="button"
-                  onClick={handleOpenWritePage}
+                  onClick={() => {
+                    if (!session) {
+                      openAuthModal("게시글 작성은 로그인 후 이용할 수 있습니다.");
+                      return;
+                    }
+                    navigateShallow("/?category=vs&mode=write");
+                    if (typeof window !== "undefined") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   className="rounded-md border border-[#282D2A] bg-[#222623] px-3 py-1.5 text-[11px] font-semibold text-[#E4E6E1] transition-colors hover:border-[#6B9080] hover:text-[#6B9080]"
                 >
                   투표 만들기 →
