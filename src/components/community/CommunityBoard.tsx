@@ -26,14 +26,8 @@ import {
   CommunityPost,
 } from "@/types/community";
 import {
-  getServerVoteStoreVersion,
-  getVoteStoreVersion,
-  subscribeVoteStore,
-} from "@/lib/spec-verification";
-import {
   getAuthStoreVersion,
   getServerAuthStoreVersion,
-  getUserVerifiedBadgeStatus,
   openAuthModal,
   readGoogleSession,
   subscribeAuthStore,
@@ -219,13 +213,6 @@ export function CommunityBoard() {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [isDurationMenuOpen]);
 
-  // 로컬 스토리지의 실측 인증/투표 상태 구독 (SSR Hydration-safe)
-  const voteVersion = useSyncExternalStore(
-    subscribeVoteStore,
-    getVoteStoreVersion,
-    getServerVoteStoreVersion
-  );
-
   // Google 로그인 상태 구독
   const authVersion = useSyncExternalStore(
     subscribeAuthStore,
@@ -237,14 +224,6 @@ export function CommunityBoard() {
   useEffect(() => {
     void syncCommunityFromSupabase(session?.userId ?? null);
   }, [session?.userId]);
-
-  const verifiedStatus = useMemo(
-    () =>
-      voteVersion > 0 || authVersion > 0
-        ? getUserVerifiedBadgeStatus()
-        : { isVerifiedTester: false, verifiedCount: 0, latestSnapshot: null },
-    [voteVersion, authVersion]
-  );
 
   // 커뮤니티 게시글/댓글/추천/VS투표 상태 구독
   const communityVersion = useSyncExternalStore(
@@ -587,8 +566,6 @@ export function CommunityBoard() {
               key={editingPost?.id ?? "new-post"}
               open={true}
               session={session}
-              isVerifiedTester={verifiedStatus.isVerifiedTester}
-              latestSnapshot={verifiedStatus.latestSnapshot}
               editingPost={editingPost}
               onCreatePost={(newPost) => {
                 createCommunityPost(newPost);
@@ -653,7 +630,6 @@ export function CommunityBoard() {
                   key={selectedPost.id}
                   post={selectedPost}
                   session={session}
-                  isVerifiedTester={verifiedStatus.isVerifiedTester}
                   isUpvoted={upvotedPostIds.has(selectedPost.id)}
                   userVsChoice={vsChoices[selectedPost.id]}
                   onToggleUpvote={(postId) => togglePostUpvote(postId)}

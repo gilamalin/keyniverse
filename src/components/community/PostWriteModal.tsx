@@ -32,9 +32,11 @@ import {
   POST_HTML_MAX_LENGTH,
   POST_MAX_LINES,
   POST_TITLE_MAX_LENGTH,
+  containsUnsafeEditorHtml,
   countPostLines,
   createEntityId,
   measurePostHtmlLength,
+  sanitizeExternalHttpUrl,
   sanitizePostContent,
   sanitizePostHtmlContent,
   sanitizePostTitle,
@@ -42,18 +44,9 @@ import {
 import { uploadCommunityImage } from "@/lib/community-storage";
 import { cn } from "@/lib/utils";
 
-interface LatestSnapshotInfo {
-  deviceType: "keyboard" | "mouse";
-  deviceSlug: string;
-  deviceName: string;
-  metricLabel: string;
-}
-
 interface PostWriteModalProps {
   open: boolean;
   session: GoogleUserSession | null;
-  isVerifiedTester: boolean;
-  latestSnapshot: LatestSnapshotInfo | null;
   editingPost?: CommunityPost | null;
   onCreatePost: (post: CommunityPost) => void;
   onUpdatePost?: (postId: string, updated: Partial<CommunityPost>) => void;
@@ -140,7 +133,6 @@ async function compressImageFile(file: File): Promise<CommunityImageAttachment> 
 export function PostWriteModal({
   open,
   session,
-  isVerifiedTester,
   editingPost = null,
   onCreatePost,
   onUpdatePost,
@@ -229,7 +221,7 @@ export function PostWriteModal({
     if (initializedPostIdRef.current === editingPost.id) return;
     initializedPostIdRef.current = editingPost.id;
     if (editingPost.contentHtml) {
-      el.innerHTML = editingPost.contentHtml;
+      el.innerHTML = sanitizePostHtmlContent(editingPost.contentHtml);
     } else if (editingPost.content) {
       el.innerText = editingPost.content;
     }
@@ -416,6 +408,18 @@ export function PostWriteModal({
       return;
     }
 
+    const trimmedDealUrl = dealStoreUrl.trim();
+    const safeDealStoreUrl =
+      category === "deal" && trimmedDealUrl
+        ? sanitizeExternalHttpUrl(trimmedDealUrl)
+        : undefined;
+    if (category === "deal" && trimmedDealUrl && !safeDealStoreUrl) {
+      setErrorMsg(
+        "스토어 URL은 http:// 또는 https://로 시작하는 올바른 주소만 입력할 수 있습니다."
+      );
+      return;
+    }
+
     const optionADev = allSpecDevices.find((d) => d.slug === vsSlugA);
     const optionBDev = allSpecDevices.find((d) => d.slug === vsSlugB);
 
@@ -463,7 +467,7 @@ export function PostWriteModal({
                 status: editingPost.dealMeta?.status ?? "active",
                 priceLabel: formattedDealPrice,
                 vendor: dealVendor.trim() || "국내 파트너 스토어",
-                storeUrl: dealStoreUrl.trim() || undefined,
+                storeUrl: safeDealStoreUrl,
               }
             : undefined,
         isEdited: true,
@@ -482,7 +486,7 @@ export function PostWriteModal({
       contentHtml: sanitizedHtml,
       attachments: attachments.length > 0 ? attachments : undefined,
       author: session.nickname,
-      authorVerified: isVerifiedTester,
+      authorVerified: false,
       authorIsAdmin: isSessionAdmin(session),
       upvotes: 0,
       views: 1,
@@ -515,7 +519,7 @@ export function PostWriteModal({
               status: "active",
               priceLabel: formattedDealPrice,
               vendor: dealVendor.trim() || "국내 파트너 스토어",
-              storeUrl: dealStoreUrl.trim() || undefined,
+              storeUrl: safeDealStoreUrl,
             }
           : undefined,
       comments: [],
@@ -824,6 +828,19 @@ export function PostWriteModal({
                   if (imageFiles.length > 0) {
                     e.preventDefault();
                     void handleFilesUpload(imageFiles);
+                    return;
+                  }
+                  const pastedHtml = e.clipboardData?.getData("text/html") ?? "";
+                  if (pastedHtml && containsUnsafeEditorHtml(pastedHtml)) {
+                    e.preventDefault();
+                    const cleanHtml = sanitizePostHtmlContent(pastedHtml);
+                    if (cleanHtml) {
+                      document.execCommand("insertHTML", false, cleanHtml);
+                    } else {
+                      const plainText = e.clipboardData?.getData("text/plain") ?? "";
+                      document.execCommand("insertText", false, plainText);
+                    }
+                    syncEditorEmptyState();
                   }
                 }}
                 className="min-h-[220px] max-h-[600px] w-full overflow-y-auto p-4 text-sm leading-relaxed text-[#E4E6E1] focus:outline-none sm:min-h-[340px] [&_hr]:my-3 [&_hr]:border-[#282D2A] [&_img]:my-2.5 [&_img]:max-h-[420px] [&_img]:w-auto [&_img]:max-w-full [&_img]:rounded-lg [&_img]:border [&_img]:border-[#282D2A] [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5"

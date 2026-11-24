@@ -43,6 +43,8 @@ import {
   clampCommentDraftInput,
   createEntityId,
   sanitizeCommentContent,
+  sanitizeExternalHttpUrl,
+  sanitizePostHtmlContent,
 } from "@/lib/community-store";
 import {
   computeEffectiveMouseCommunity,
@@ -64,7 +66,6 @@ import { cn } from "@/lib/utils";
 interface PostDetailModalProps {
   post: CommunityPost | null;
   session: GoogleUserSession | null;
-  isVerifiedTester: boolean;
   isUpvoted: boolean;
   userVsChoice: "A" | "B" | undefined;
   onToggleUpvote: (postId: string) => void;
@@ -157,7 +158,6 @@ function getClampedCommentView(
 export function PostDetailModal({
   post,
   session,
-  isVerifiedTester,
   isUpvoted,
   userVsChoice,
   onToggleUpvote,
@@ -369,7 +369,7 @@ export function PostDetailModal({
     onAddComment(post.id, {
       id: getCurrentCommentId(),
       author: session.nickname,
-      authorVerified: isVerifiedTester,
+      authorVerified: false,
       authorIsAdmin: isSessionAdmin(session),
       content: sanitized,
       createdAt: formatNowTime(),
@@ -395,7 +395,7 @@ export function PostDetailModal({
     onAddComment(post.id, {
       id: getCurrentCommentId(),
       author: session.nickname,
-      authorVerified: isVerifiedTester,
+      authorVerified: false,
       authorIsAdmin: isSessionAdmin(session),
       content: sanitized,
       createdAt: formatNowTime(),
@@ -642,17 +642,23 @@ export function PostDetailModal({
                     </button>
                   )}
 
-                  {post.dealMeta.storeUrl && (
-                    <a
-                      href={post.dealMeta.storeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4A373]/50 bg-[#222623] px-3 py-1.5 font-mono text-xs font-semibold text-[#D4A373] transition-colors hover:bg-[#D4A373] hover:text-[#121413]"
-                    >
-                      <span>스토어 이동</span>
-                      <ExternalLink className="size-3.5" />
-                    </a>
-                  )}
+                  {(() => {
+                    const safeStoreUrl = sanitizeExternalHttpUrl(
+                      post.dealMeta.storeUrl
+                    );
+                    if (!safeStoreUrl) return null;
+                    return (
+                      <a
+                        href={safeStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-[#D4A373]/50 bg-[#222623] px-3 py-1.5 font-mono text-xs font-semibold text-[#D4A373] transition-colors hover:bg-[#D4A373] hover:text-[#121413]"
+                      >
+                        <span>스토어 이동</span>
+                        <ExternalLink className="size-3.5" />
+                      </a>
+                    );
+                  })()}
 
                   {taggedSwitchSpecs.map((sw) => (
                     <button
@@ -682,11 +688,13 @@ export function PostDetailModal({
             </div>
           )}
 
-          {/* 게시글 본문 텍스트 (반응형 최소 높이 적용 + 리치 서식/인라인 이미지 렌더링) */}
+          {/* 게시글 본문 텍스트 (반응형 최소 높이 적용 + 리치 서식/인라인 이미지 화이트리스트 렌더링) */}
           {post.contentHtml ? (
             <div
               className="min-h-[140px] py-2 text-sm leading-relaxed text-[#E4E6E1] sm:min-h-[220px] lg:min-h-[340px] [&_h3]:my-2 [&_h3]:text-base [&_h3]:font-bold [&_hr]:my-3 [&_hr]:border-[#282D2A] [&_img]:my-3 [&_img]:max-h-[480px] [&_img]:w-auto [&_img]:max-w-full [&_img]:rounded-lg [&_img]:border [&_img]:border-[#282D2A] [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5"
-              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+              dangerouslySetInnerHTML={{
+                __html: sanitizePostHtmlContent(post.contentHtml),
+              }}
             />
           ) : (
             <div className="min-h-[140px] py-2 text-sm leading-relaxed whitespace-pre-line text-[#E4E6E1] sm:min-h-[220px] lg:min-h-[340px]">

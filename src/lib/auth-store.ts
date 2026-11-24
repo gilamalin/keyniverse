@@ -1,8 +1,5 @@
-import { INITIAL_MICE, INITIAL_SWITCHES } from "@/data/specs-data";
 import {
   clearSyncedUserVotes,
-  readStoredVote,
-  readVerificationProof,
   syncUserVotesFromSupabase,
 } from "@/lib/spec-verification";
 import {
@@ -510,76 +507,5 @@ export function getAuthModalState(): {
   return {
     open: authModalOpenState,
     reason: authModalReasonState,
-  };
-}
-
-/**
- * 로컬 스토리지에 키보드 또는 마우스 무결점 실측 인증 통과 기록이 1건 이상 있는지 확인
- */
-export function getUserVerifiedBadgeStatus(): {
-  isVerifiedTester: boolean;
-  verifiedCount: number;
-  latestSnapshot: {
-    deviceType: "keyboard" | "mouse";
-    deviceSlug: string;
-    deviceName: string;
-    metricLabel: string;
-  } | null;
-} {
-  if (typeof window === "undefined") {
-    return {
-      isVerifiedTester: false,
-      verifiedCount: 0,
-      latestSnapshot: null,
-    };
-  }
-
-  let verifiedCount = 0;
-  let latestSnapshot: {
-    deviceType: "keyboard" | "mouse";
-    deviceSlug: string;
-    deviceName: string;
-    metricLabel: string;
-  } | null = null;
-
-  for (const sw of INITIAL_SWITCHES) {
-    const proof = readVerificationProof(sw.slug, "switch");
-    if (proof && proof.kind === "switch") {
-      verifiedCount += 1;
-      latestSnapshot = {
-        deviceType: "keyboard",
-        deviceSlug: sw.slug,
-        deviceName: sw.name,
-        metricLabel: `${proof.totalKeyPresses}타 무결점 인증`,
-      };
-    }
-  }
-
-  for (const ms of INITIAL_MICE) {
-    const proof = readVerificationProof(ms.slug, "mouse");
-    if (proof && proof.kind === "mouse") {
-      verifiedCount += 1;
-      latestSnapshot = {
-        deviceType: "mouse",
-        deviceSlug: ms.slug,
-        deviceName: ms.name,
-        metricLabel: `Peak ${proof.peakHz.toLocaleString()}Hz 무결점`,
-      };
-    }
-  }
-
-  if (verifiedCount === 0) {
-    for (const sw of INITIAL_SWITCHES) {
-      if (readStoredVote(sw.id)) {
-        verifiedCount += 1;
-        break;
-      }
-    }
-  }
-
-  return {
-    isVerifiedTester: verifiedCount > 0,
-    verifiedCount,
-    latestSnapshot,
   };
 }

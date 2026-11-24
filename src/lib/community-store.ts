@@ -80,8 +80,212 @@ export function sanitizePostContent(raw: string): string {
   return lines.join("\n").slice(0, POST_HTML_MAX_LENGTH);
 }
 
+export function sanitizeExternalHttpUrl(
+  rawUrl?: string | null
+): string | undefined {
+  if (!rawUrl) return undefined;
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return undefined;
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      return undefined;
+    }
+    return parsed.toString();
+  } catch {
+    return undefined;
+  }
+}
+
+const BLOCKED_HTML_SUBTREE_TAGS = new Set([
+  "SCRIPT",
+  "STYLE",
+  "IFRAME",
+  "OBJECT",
+  "EMBED",
+  "SVG",
+  "MATH",
+  "NOSCRIPT",
+  "TEMPLATE",
+  "HEAD",
+  "META",
+  "LINK",
+  "BASE",
+  "FORM",
+  "INPUT",
+  "BUTTON",
+  "TEXTAREA",
+  "SELECT",
+]);
+
+const ALLOWED_HTML_TAGS = new Set([
+  "DIV",
+  "P",
+  "BR",
+  "B",
+  "STRONG",
+  "I",
+  "EM",
+  "U",
+  "S",
+  "STRIKE",
+  "DEL",
+  "FONT",
+  "SPAN",
+  "UL",
+  "OL",
+  "LI",
+  "HR",
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "BLOCKQUOTE",
+  "PRE",
+  "CODE",
+  "A",
+  "IMG",
+]);
+
+const SAFE_STYLE_PROPS = new Set([
+  "color",
+  "font-size",
+  "font-weight",
+  "font-style",
+  "text-decoration",
+  "text-decoration-line",
+]);
+
+const SAFE_STYLE_VALUE_REGEX =
+  /^(#[0-9a-fA-F]{3,8}|rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)|xx-small|x-small|small|medium|large|x-large|xx-large|\d+(\.\d+)?(px|rem|em|%)|bold|normal|italic|underline|line-through|none)$/i;
+
+const SAFE_COLOR_ATTR_REGEX =
+  /^(#[0-9a-fA-F]{3,8}|rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\))$/i;
+
+const SAFE_IMAGE_SRC_REGEX =
+  /^(https?:\/\/[^\s"'<>]+|data:image\/(?:webp|png|jpeg|jpg|gif);base64,[a-zA-Z0-9+/=\s]+)$/i;
+
+function sanitizeInlineStyle(rawStyle: string): string {
+  const safeDecls: string[] = [];
+  for (const part of rawStyle.split(";")) {
+    const colonIdx = part.indexOf(":");
+    if (colonIdx <= 0) continue;
+    const prop = part.slice(0, colonIdx).trim().toLowerCase();
+    const val = part.slice(colonIdx + 1).trim();
+    if (SAFE_STYLE_PROPS.has(prop) && SAFE_STYLE_VALUE_REGEX.test(val)) {
+      safeDecls.push(`${prop}: ${val}`);
+    }
+  }
+  return safeDecls.join("; ");
+}
+
+function sanitizeDomSubtree(root: ParentNode, doc: Document): void {
+  const children = Array.from(root.childNodes);
+  for (const node of children) {
+    if (node.nodeType === 8) {
+      // HTML 주석 제거
+      node.parentNode?.removeChild(node);
+      continue;
+    }
+    if (node.nodeType !== 1) {
+      continue;
+    }
+
+    const el = node as Element;
+    const tag = el.tagName.toUpperCase();
+
+    if (BLOCKED_HTML_SUBTREE_TAGS.has(tag)) {
+      el.remove();
+      continue;
+    }
+
+    // 자식 노드를 먼저 재귀 정제
+    sanitizeDomSubtree(el, doc);
+
+    if (!ALLOWED_HTML_TAGS.has(tag)) {
+      // 허용 외 래퍼 태그(table, section 등)는 내부 안전 텍스트/자식만 남기고 언래핑
+      const parent = el.parentNode;
+      if (parent) {
+        while (el.firstChild) {
+          parent.insertBefore(el.firstChild, el);
+        }
+        parent.removeChild(el);
+      }
+      continue;
+    }
+
+    const rawAttrs = Array.from(el.attributes);
+    for (const attr of rawAttrs) {
+      el.removeAttribute(attr.name);
+    }
+
+    if (tag === "IMG") {
+      const rawSrc = rawAttrs.find((a) => a.name.toLowerCase() === "src")?.value.trim() ?? "";
+      if (!SAFE_IMAGE_SRC_REGEX.test(rawSrc)) {
+        el.remove();
+        continue;
+      }
+      el.setAttribute("src", rawSrc);
+      const rawAlt = rawAttrs.find((a) => a.name.toLowerCase() === "alt")?.value ?? "";
+      if (rawAlt) {
+        el.setAttribute("alt", rawAlt.slice(0, 120));
+      }
+      const rawAttId =
+        rawAttrs.find((a) => a.name.toLowerCase() === "data-attachment-id")?.value ?? "";
+      if (/^[a-zA-Z0-9_-]{1,64}$/.test(rawAttId)) {
+        el.setAttribute("data-attachment-id", rawAttId);
+      }
+      continue;
+    }
+
+    if (tag === "A") {
+      const rawHref = rawAttrs.find((a) => a.name.toLowerCase() === "href")?.value;
+      const safeHref = sanitizeExternalHttpUrl(rawHref);
+      if (!safeHref) {
+        const parent = el.parentNode;
+        if (parent) {
+          while (el.firstChild) {
+            parent.insertBefore(el.firstChild, el);
+          }
+          parent.removeChild(el);
+        }
+        continue;
+      }
+      el.setAttribute("href", safeHref);
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener noreferrer");
+    }
+
+    if (tag === "FONT") {
+      const rawSize = rawAttrs.find((a) => a.name.toLowerCase() === "size")?.value ?? "";
+      if (/^[1-7]$/.test(rawSize)) {
+        el.setAttribute("size", rawSize);
+      }
+      const rawColor = rawAttrs.find((a) => a.name.toLowerCase() === "color")?.value.trim() ?? "";
+      if (SAFE_COLOR_ATTR_REGEX.test(rawColor)) {
+        el.setAttribute("color", rawColor);
+      }
+    }
+
+    const rawStyle = rawAttrs.find((a) => a.name.toLowerCase() === "style")?.value;
+    if (rawStyle && tag !== "BR" && tag !== "HR") {
+      const cleanStyle = sanitizeInlineStyle(rawStyle);
+      if (cleanStyle) {
+        el.setAttribute("style", cleanStyle);
+      }
+    }
+  }
+  void doc;
+}
+
+export function containsUnsafeEditorHtml(rawHtml: string): boolean {
+  return /<\s*(?:script|style|iframe|object|embed|svg|math|form|input|button|meta|link|base|table)\b|\bon[a-z]+\s*=|(?:javascript|vbscript|data\s*:\s*(?!image\/(?:webp|png|jpeg|jpg|gif);base64))\s*:|position\s*:\s*(?:fixed|absolute)/i.test(
+    rawHtml
+  );
+}
+
 export function sanitizePostHtmlContent(rawHtml: string): string {
-  return rawHtml
+  const collapsed = rawHtml
     .trim()
     .replace(
       /(?:<div>\s*<br\s*\/?>\s*<\/div>\s*){3,}/gi,
@@ -89,6 +293,24 @@ export function sanitizePostHtmlContent(rawHtml: string): string {
     )
     .replace(/(?:<p>\s*<br\s*\/?>\s*<\/p>\s*){3,}/gi, "<p><br></p><p><br></p>")
     .replace(/(?:<br\s*\/?>\s*){3,}/gi, "<br><br>");
+
+  if (!collapsed) return "";
+
+  if (typeof DOMParser === "undefined") {
+    // SSR 환경 안전 폴백 (위험 블록·이벤트 핸들러·스킴 제거)
+    return collapsed
+      .replace(
+        /<\s*(script|style|iframe|object|embed|svg|math|form)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
+        ""
+      )
+      .replace(/<\s*(script|style|iframe|object|embed|svg|math|form|input|button|meta|link|base)\b[^>]*\/?>/gi, "")
+      .replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+      .replace(/(?:javascript|vbscript)\s*:/gi, "");
+  }
+
+  const doc = new DOMParser().parseFromString(collapsed, "text/html");
+  sanitizeDomSubtree(doc.body, doc);
+  return doc.body.innerHTML.trim();
 }
 
 interface PersistedCommunityState {
@@ -292,13 +514,23 @@ export async function syncCommunityFromSupabase(
       const rawVsMeta = row.vs_meta as CommunityPost["vsMeta"] | null;
       const tally = vsTallies.get(pid);
 
+      const rawDealMeta = (row.deal_meta as CommunityPost["dealMeta"]) ?? undefined;
+      const safeDealMeta = rawDealMeta
+        ? {
+            ...rawDealMeta,
+            storeUrl: sanitizeExternalHttpUrl(rawDealMeta.storeUrl),
+          }
+        : undefined;
+
       return {
         id: pid,
         category: row.category as CommunityCategory,
         noticeScope: row.notice_scope ?? undefined,
         title: String(row.title),
         content: String(row.content),
-        contentHtml: row.content_html ? String(row.content_html) : undefined,
+        contentHtml: row.content_html
+          ? sanitizePostHtmlContent(String(row.content_html))
+          : undefined,
         author: String(row.author_nickname),
         authorVerified: Boolean(row.author_verified),
         authorIsAdmin: Boolean(
@@ -319,7 +551,7 @@ export async function syncCommunityFromSupabase(
               optionBVotes: tally?.b ?? rawVsMeta.optionBVotes ?? 0,
             }
           : undefined,
-        dealMeta: (row.deal_meta as CommunityPost["dealMeta"]) ?? undefined,
+        dealMeta: safeDealMeta,
         comments: commentsByPost.get(pid) ?? [],
         isMyPost: Boolean(
           liveCommunityUserId && row.author_id === liveCommunityUserId
